@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas API Example</title>
+</head>
+<body>
+
+    <canvas id="myCanvas" width="400" height="400" style="border: 2px solid black"></canvas>
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        // Set fill color to blue
+        ctx.fillStyle = "blue";
+        // Draw a filled rectangle
+        ctx.fillRect(20, 20, 300, 100);
+    </script>
+</body>
+</html>

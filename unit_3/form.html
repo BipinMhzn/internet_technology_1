@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Forms Practical Example</title>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form>
+
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label>Full Name:</label><br>
+        <input type="text" placeholder="Enter full name" required autofocus><br><br>
+
+        <label>Email Address:</label><br>
+        <input type="email" placeholder="example@mail.com" required autocomplete="on"><br><br>
+
+        <label>Mobile Number:</label><br>
+        <input type="tel" placeholder="98XXXXXXXX" pattern="[0-9]{10}" required><br><br>
+
+        <label>Date of Birth:</label><br>
+        <input type="date" required><br><br>
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+        <legend>Academic Details</legend>
+
+        <label>College Website:</label><br>
+        <input type="url" placeholder="https://college.edu"><br><br>
+
+        <label>Current Semester:</label><br>
+        <input type="number" min="1" max="8" required><br><br>
+
+        <label>Preferred Study Time:</label><br>
+        <input type="time"><br><br>
+
+        <label>Programming Skill Level:</label><br>
+        <input type="range" min="1" max="5"><br>
+        <small>1 = Beginner, 5 = Advanced</small><br><br>
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+        <legend>System Information</legend>
+
+        <label>Country:</label><br>
+        <input type="text" value="Nepal" readonly><br><br>
+
+        <label>Student ID:</label><br>
+        <input type="text" value="Auto Generated" disabled><br><br>
+    </fieldset>
+
+    <br>
+
+    <input type="submit" value="Register">
+
+</form>
+
+</body>
+</html>

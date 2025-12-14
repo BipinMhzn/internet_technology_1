@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h2>Show Different Images Depending on Browser Width</h2>
+<p>Resize the browser width and the image will change at 600px and 1500px.</p>
+
+<picture>
+<!--    If viewport ≤ 600px Uses: img_smallflower.jpg-->
+    <source srcset="img_smallflower.jpg" media="(max-width: 600px)">
+<!--    Else if viewport ≤ 1500px Uses: img_flowers.jpg-->
+    <source srcset="img_flowers.jpg" media="(max-width: 1500px)">
+    <source srcset="flowers.jpg">
+<!--    Else (larger than 1500px) Uses: flowers.jpg (because the third <source> has no media, it becomes the “default” source inside <picture>)-->
+    <img src="img_flowers.jpg" alt="Flowers" style="width:auto;">
+</picture>
+
+</body>
+</html>
