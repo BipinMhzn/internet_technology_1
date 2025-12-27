@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML5 Website Layout</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header, nav, footer {
+      text-align: center;
+      padding: 15px;
+      border: 1px solid black;
+    }
+
+    header {
+      background-color: #cfe5ff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav {
+      background-color: #d9f0d0;
+      font-size: 18px;
+    }
+
+    .container {
+      width: 100%;
+      margin: auto;
+    }
+
+    aside, section {
+      float: left;
+      height: 200px;
+      background-color: #ffe6b3;
+      text-align: center;
+      padding-top: 80px;
+      border: 1px solid black;
+      box-sizing: border-box;
+    }
+
+    aside {
+      width: 25%;
+    }
+
+    section {
+      width: 50%;
+      font-weight: bold;
+    }
+
+    footer {
+      clear: both;
+      background-color: #cfe5ff;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<header>Header</header>
+
+<nav>Navigation</nav>
+
+<div class="container">
+  <aside>Sidebar 1</aside>
+  <section>Main Content</section>
+  <aside>Sidebar 2</aside>
+</div>
+
+<footer>Footer</footer>
+
+</body>
+</html>
