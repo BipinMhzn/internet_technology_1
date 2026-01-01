@@ -1,0 +1,26 @@
+.site-header h1 {
+    color: #003366;
+}
+
+.site-header p {
+    color: gray;
+}
+
+.site-header {
+    background-color: #e6f2ff;
+    padding: 20px;
+}
+
+.highlight {
+    background-color: #fff3cd;
+    padding: 20px;
+}
+
+.cta-banner {
+    height: 150px;
+    background-image: url("banner.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+}

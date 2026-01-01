@@ -13,9 +13,29 @@
             color: red;
             text-decoration: underline;
         }
+
+        a:active {
+            color: black;
+        }
+
+        a:visited {
+            color: green;
+        }
+
+        a:focus {
+            outline: thin dotted;
+        }
+
+        input:focus {
+            border: 1px solid blue;
+        }
     </style>
 </head>
 <body>
     <a href="#">Hover over this link</a>
+
+    <br>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username"/>
 </body>
 </html>
