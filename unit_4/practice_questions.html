@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4 Practice Questions (4.6 - 4.12)</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2980b9;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .question h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+
+        .answer {
+            background-color: #e8f6e8;
+            padding: 15px;
+            border-left: 4px solid #27ae60;
+            margin-top: 10px;
+        }
+
+        .answer h4 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .demo-box {
+            border: 2px dashed #3498db;
+            padding: 20px;
+            margin: 10px 0;
+            background-color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Unit 4: CSS Practice Questions</h1>
+<p style="text-align: center; color: #7f8c8d;">Topics: 4.6 CSS Properties | 4.7 Text | 4.8 Font | 4.9 Alignment | 4.10 Line Height | 4.11 Box Model | 4.12 Working with Images</p>
+
+<!-- ==================== 4.6 CSS PROPERTIES ==================== -->
+<h2>4.6 CSS Properties</h2>
+
+<!-- 4.6.1 Backgrounds -->
+<div class="question">
+    <h3>Q1. Explain the CSS background properties with examples. (4.6.1 Backgrounds)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>CSS provides several properties to style element backgrounds:</p>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+                <th>Example Values</th>
+            </tr>
+            <tr>
+                <td><code>background-color</code></td>
+                <td>Sets the background color</td>
+                <td>red, #ff0000, rgb(255,0,0)</td>
+            </tr>
+            <tr>
+                <td><code>background-image</code></td>
+                <td>Sets a background image</td>
+                <td>url('image.jpg')</td>
+            </tr>
+            <tr>
+                <td><code>background-repeat</code></td>
+                <td>How image repeats</td>
+                <td>repeat, no-repeat, repeat-x, repeat-y</td>
+            </tr>
+            <tr>
+                <td><code>background-position</code></td>
+                <td>Position of background image</td>
+                <td>center, top left, 50% 50%</td>
+            </tr>
+            <tr>
+                <td><code>background-size</code></td>
+                <td>Size of background image</td>
+                <td>cover, contain, 100px 200px</td>
+            </tr>
+            <tr>
+                <td><code>background-attachment</code></td>
+                <td>Fixed or scrolls with page</td>
+                <td>scroll, fixed, local</td>
+            </tr>
+        </table>
+        <pre>
+.hero-section {
+    background-color: #f0f0f0;
+    background-image: url('banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Shorthand */
+.hero-section {
+    background: #f0f0f0 url('banner.jpg') no-repeat center/cover;
+}</pre>
+        <div class="demo-box">
+            <div style="height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                Background with Gradient
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q2. Write CSS to create a full-screen background image that stays fixed while scrolling.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}</pre>
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><code>background-size: cover</code> - Image covers entire viewport</li>
+            <li><code>background-attachment: fixed</code> - Image stays fixed while content scrolls</li>
+            <li><code>min-height: 100vh</code> - Ensures body is at least full viewport height</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 4.6.2 Border, Margin -->
+<div class="question">
+    <h3>Q3. Explain the CSS border property and its sub-properties. (4.6.2 Border)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>The <code>border</code> property adds a border around elements.</p>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+                <th>Values</th>
+            </tr>
+            <tr>
+                <td><code>border-width</code></td>
+                <td>Thickness of border</td>
+                <td>1px, thin, medium, thick</td>
+            </tr>
+            <tr>
+                <td><code>border-style</code></td>
+                <td>Style of border line</td>
+                <td>solid, dashed, dotted, double, groove, ridge, none</td>
+            </tr>
+            <tr>
+                <td><code>border-color</code></td>
+                <td>Color of border</td>
+                <td>red, #333, rgb(0,0,0)</td>
+            </tr>
+            <tr>
+                <td><code>border-radius</code></td>
+                <td>Rounds the corners</td>
+                <td>5px, 50%, 10px 20px</td>
+            </tr>
+        </table>
+        <pre>
+/* Individual properties */
+.box {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #333;
+    border-radius: 10px;
+}
+
+/* Shorthand: width style color */
+.box {
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+/* Individual sides */
+.box {
+    border-top: 3px solid red;
+    border-bottom: 3px dashed blue;
+}</pre>
+        <div class="demo-box">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div style="padding: 15px; border: 2px solid #333;">Solid</div>
+                <div style="padding: 15px; border: 2px dashed #e74c3c;">Dashed</div>
+                <div style="padding: 15px; border: 2px dotted #27ae60;">Dotted</div>
+                <div style="padding: 15px; border: 4px double #3498db;">Double</div>
+                <div style="padding: 15px; border: 3px groove #9b59b6;">Groove</div>
+                <div style="padding: 15px; border: 2px solid #333; border-radius: 15px;">Rounded</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q4. Explain the CSS margin property with examples. (4.6.2 Margin)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><code>margin</code> creates space <strong>outside</strong> an element's border, separating it from other elements.</p>
+        <pre>
+/* Individual sides */
+.box {
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+/* Shorthand - 4 values (top, right, bottom, left) */
+.box { margin: 10px 20px 10px 20px; }
+
+/* Shorthand - 2 values (top-bottom, left-right) */
+.box { margin: 10px 20px; }
+
+/* Shorthand - 1 value (all sides) */
+.box { margin: 10px; }
+
+/* Auto margin for horizontal centering */
+.centered {
+    width: 300px;
+    margin: 0 auto;
+}</pre>
+        <div class="demo-box">
+            <div style="background-color: #ecf0f1; padding: 10px;">
+                <div style="background-color: #3498db; color: white; padding: 10px; margin: 20px;">
+                    This box has 20px margin on all sides
+                </div>
+            </div>
+            <p><em>The blue box has margin creating space from the gray container</em></p>
+        </div>
+    </div>
+</div>
+
+<!-- 4.6.3 Padding -->
+<div class="question">
+    <h3>Q5. Explain the CSS padding property with examples. (4.6.3 Padding)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><code>padding</code> creates space <strong>inside</strong> an element, between the content and the border.</p>
+        <pre>
+/* Individual sides */
+.box {
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Shorthand - 4 values (top, right, bottom, left - clockwise) */
+.box { padding: 10px 20px 10px 20px; }
+
+/* Shorthand - 3 values (top, left-right, bottom) */
+.box { padding: 10px 20px 15px; }
+
+/* Shorthand - 2 values (top-bottom, left-right) */
+.box { padding: 10px 20px; }
+
+/* Shorthand - 1 value (all sides) */
+.box { padding: 10px; }</pre>
+        <div class="demo-box">
+            <div style="display: flex; gap: 20px;">
+                <div style="background-color: #e74c3c; color: white; padding: 5px; border: 2px solid #333;">
+                    padding: 5px
+                </div>
+                <div style="background-color: #27ae60; color: white; padding: 20px; border: 2px solid #333;">
+                    padding: 20px
+                </div>
+                <div style="background-color: #3498db; color: white; padding: 40px; border: 2px solid #333;">
+                    padding: 40px
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q6. Differentiate between margin and padding with examples.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Margin</th>
+                <th>Padding</th>
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td>Outside the border</td>
+                <td>Inside the border</td>
+            </tr>
+            <tr>
+                <td>Purpose</td>
+                <td>Space between elements</td>
+                <td>Space around content</td>
+            </tr>
+            <tr>
+                <td>Background</td>
+                <td>Does not show background color</td>
+                <td>Shows background color</td>
+            </tr>
+            <tr>
+                <td>Collapse</td>
+                <td>Vertical margins can collapse</td>
+                <td>Padding never collapses</td>
+            </tr>
+            <tr>
+                <td>Negative values</td>
+                <td>Allowed (can overlap elements)</td>
+                <td>Not allowed</td>
+            </tr>
+        </table>
+        <div class="demo-box">
+            <div style="background-color: #f39c12; padding: 5px; display: inline-block;">
+                <span style="font-size: 12px;">Margin (orange)</span>
+                <div style="background-color: #3498db; padding: 5px; margin: 15px;">
+                    <span style="font-size: 12px; color: white;">Padding (blue)</span>
+                    <div style="background-color: #2ecc71; padding: 15px; color: white;">
+                        Content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4.6.4 Height and 4.6.5 Width -->
+<div class="question">
+    <h3>Q7. Explain CSS height and width properties. (4.6.4 Height, 4.6.5 Width)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>The <code>width</code> and <code>height</code> properties set the dimensions of an element's content area.</p>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+                <th>Values</th>
+            </tr>
+            <tr>
+                <td><code>width</code></td>
+                <td>Sets the width</td>
+                <td>200px, 50%, auto</td>
+            </tr>
+            <tr>
+                <td><code>height</code></td>
+                <td>Sets the height</td>
+                <td>100px, 50vh, auto</td>
+            </tr>
+            <tr>
+                <td><code>max-width</code></td>
+                <td>Maximum width limit</td>
+                <td>500px, 100%</td>
+            </tr>
+            <tr>
+                <td><code>min-width</code></td>
+                <td>Minimum width limit</td>
+                <td>200px, 50%</td>
+            </tr>
+            <tr>
+                <td><code>max-height</code></td>
+                <td>Maximum height limit</td>
+                <td>400px, 80vh</td>
+            </tr>
+            <tr>
+                <td><code>min-height</code></td>
+                <td>Minimum height limit</td>
+                <td>100px, 50vh</td>
+            </tr>
+        </table>
+        <pre>
+.fixed-box {
+    width: 300px;
+    height: 200px;
+}
+
+.responsive-box {
+    width: 100%;
+    max-width: 600px;
+    min-height: 200px;
+}
+
+.full-screen {
+    width: 100vw;   /* 100% viewport width */
+    height: 100vh;  /* 100% viewport height */
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q8. What is the difference between width/height and max-width/max-height?</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Behavior</th>
+            </tr>
+            <tr>
+                <td><code>width: 500px</code></td>
+                <td>Element is always exactly 500px wide (fixed)</td>
+            </tr>
+            <tr>
+                <td><code>max-width: 500px</code></td>
+                <td>Element can be smaller than 500px but never larger (flexible)</td>
+            </tr>
+        </table>
+        <pre>
+/* Fixed width - may cause horizontal scroll on small screens */
+.fixed {
+    width: 800px;
+}
+
+/* Responsive - shrinks on small screens, max 800px on large */
+.responsive {
+    width: 100%;
+    max-width: 800px;
+}</pre>
+        <div class="demo-box">
+            <div style="width: 100%; max-width: 400px; background-color: #3498db; color: white; padding: 15px; margin: 0 auto;">
+                This box has max-width: 400px and width: 100%
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4.6.6 Color -->
+<div class="question">
+    <h3>Q9. Explain different ways to specify colors in CSS. (4.6.6 Color)</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>CSS supports multiple color formats:</p>
+        <table>
+            <tr>
+                <th>Format</th>
+                <th>Syntax</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>Color Name</td>
+                <td>Named colors</td>
+                <td>red, blue, green, tomato</td>
+            </tr>
+            <tr>
+                <td>Hexadecimal</td>
+                <td>#RRGGBB or #RGB</td>
+                <td>#ff0000, #f00, #3498db</td>
+            </tr>
+            <tr>
+                <td>RGB</td>
+                <td>rgb(red, green, blue)</td>
+                <td>rgb(255, 0, 0)</td>
+            </tr>
+            <tr>
+                <td>RGBA</td>
+                <td>rgba(r, g, b, alpha)</td>
+                <td>rgba(255, 0, 0, 0.5)</td>
+            </tr>
+            <tr>
+                <td>HSL</td>
+                <td>hsl(hue, saturation, lightness)</td>
+                <td>hsl(0, 100%, 50%)</td>
+            </tr>
+            <tr>
+                <td>HSLA</td>
+                <td>hsla(h, s, l, alpha)</td>
+                <td>hsla(0, 100%, 50%, 0.5)</td>
+            </tr>
+        </table>
+        <pre>
+/* All represent RED */
+.red1 { color: red; }
+.red2 { color: #ff0000; }
+.red3 { color: #f00; }
+.red4 { color: rgb(255, 0, 0); }
+.red5 { color: hsl(0, 100%, 50%); }
+
+/* With transparency (alpha) */
+.transparent-red {
+    background-color: rgba(255, 0, 0, 0.5); /* 50% transparent */
+}</pre>
+        <div class="demo-box">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="padding: 10px; background-color: red; color: white;">red</div>
+                <div style="padding: 10px; background-color: #ff0000; color: white;">#ff0000</div>
+                <div style="padding: 10px; background-color: rgb(255,0,0); color: white;">rgb(255,0,0)</div>
+                <div style="padding: 10px; background-color: rgba(255,0,0,0.5); color: white;">rgba (50%)</div>
+                <div style="padding: 10px; background-color: hsl(0,100%,50%); color: white;">hsl</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q10. What is the color wheel? Explain primary, secondary, and complementary colors.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>The <strong>color wheel</strong> is a circular diagram showing relationships between colors.</p>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td>Primary Colors</td>
+                <td>Base colors that cannot be created by mixing</td>
+                <td>Red, Blue, Yellow (traditional) / Red, Green, Blue (RGB)</td>
+            </tr>
+            <tr>
+                <td>Secondary Colors</td>
+                <td>Created by mixing two primary colors</td>
+                <td>Orange, Green, Purple</td>
+            </tr>
+            <tr>
+                <td>Tertiary Colors</td>
+                <td>Created by mixing primary and secondary</td>
+                <td>Red-Orange, Blue-Green</td>
+            </tr>
+            <tr>
+                <td>Complementary</td>
+                <td>Opposite colors on the wheel (high contrast)</td>
+                <td>Red-Green, Blue-Orange, Yellow-Purple</td>
+            </tr>
+            <tr>
+                <td>Analogous</td>
+                <td>Adjacent colors on the wheel (harmony)</td>
+                <td>Red, Orange, Yellow</td>
+            </tr>
+        </table>
+        <div class="demo-box">
+            <p><strong>Primary Colors (RGB):</strong></p>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="width: 60px; height: 60px; background-color: #ff0000; border-radius: 50%;"></div>
+                <div style="width: 60px; height: 60px; background-color: #00ff00; border-radius: 50%;"></div>
+                <div style="width: 60px; height: 60px; background-color: #0000ff; border-radius: 50%;"></div>
+            </div>
+            <p><strong>Complementary Pair (Blue & Orange):</strong></p>
+            <div style="display: flex; gap: 10px;">
+                <div style="width: 60px; height: 60px; background-color: #3498db; border-radius: 50%;"></div>
+                <div style="width: 60px; height: 60px; background-color: #e67e22; border-radius: 50%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q11. Write CSS to style a card with background color, text color, and border color.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+.card {
+    background-color: #ffffff;
+    color: #333333;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    color: #2c3e50;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.card-link {
+    color: #3498db;
+}
+
+.card-link:hover {
+    color: #2980b9;
+}</pre>
+        <div class="demo-box">
+            <div style="background-color: #ffffff; color: #333333; border: 2px solid #3498db; border-radius: 8px; padding: 20px; max-width: 300px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #2c3e50; border-bottom: 1px solid #ecf0f1; padding-bottom: 10px; margin-top: 0;">Card Title</h4>
+                <p style="margin: 0;">This is a styled card with various color properties applied.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 4.7 TEXT ==================== -->
+<h2>4.7 Text Properties</h2>
+
+<div class="question">
+    <h3>Q12. List and explain any five CSS text properties with examples.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>text-align</code></td>
+                <td>Aligns text horizontally</td>
+                <td>left, right, center, justify</td>
+            </tr>
+            <tr>
+                <td><code>text-decoration</code></td>
+                <td>Adds decoration to text</td>
+                <td>underline, overline, line-through, none</td>
+            </tr>
+            <tr>
+                <td><code>text-transform</code></td>
+                <td>Changes text case</td>
+                <td>uppercase, lowercase, capitalize</td>
+            </tr>
+            <tr>
+                <td><code>text-indent</code></td>
+                <td>Indents first line of text</td>
+                <td>20px, 2em</td>
+            </tr>
+            <tr>
+                <td><code>letter-spacing</code></td>
+                <td>Space between characters</td>
+                <td>2px, 0.1em</td>
+            </tr>
+            <tr>
+                <td><code>word-spacing</code></td>
+                <td>Space between words</td>
+                <td>5px, 1em</td>
+            </tr>
+        </table>
+        <pre>
+p {
+    text-align: justify;
+    text-decoration: underline;
+    text-transform: capitalize;
+    text-indent: 40px;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q13. Write CSS to style a paragraph with justified text, 30px first-line indent, and uppercase transformation.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+p {
+    text-align: justify;
+    text-indent: 30px;
+    text-transform: uppercase;
+}</pre>
+        <div class="demo-box">
+            <p style="text-align: justify; text-indent: 30px; text-transform: uppercase;">
+                This is a sample paragraph demonstrating justified text alignment with first line indentation and uppercase text transformation applied using CSS properties.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q14. Differentiate between text-decoration values: underline, overline, and line-through.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <ul>
+            <li><code>underline</code> - Draws a line below the text</li>
+            <li><code>overline</code> - Draws a line above the text</li>
+            <li><code>line-through</code> - Draws a line through the middle of text (strikethrough)</li>
+        </ul>
+        <div class="demo-box">
+            <p style="text-decoration: underline;">This text has underline decoration</p>
+            <p style="text-decoration: overline;">This text has overline decoration</p>
+            <p style="text-decoration: line-through;">This text has line-through decoration</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 4.8 FONT ==================== -->
+<h2>4.8 Font Properties</h2>
+
+<div class="question">
+    <h3>Q15. Explain the following font properties with syntax: font-family, font-size, font-weight, font-style.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+                <th>Values</th>
+            </tr>
+            <tr>
+                <td><code>font-family</code></td>
+                <td>Specifies the font typeface</td>
+                <td>Arial, Times New Roman, sans-serif, serif</td>
+            </tr>
+            <tr>
+                <td><code>font-size</code></td>
+                <td>Sets the size of the font</td>
+                <td>16px, 1.2em, 1rem, small, large</td>
+            </tr>
+            <tr>
+                <td><code>font-weight</code></td>
+                <td>Sets the boldness of font</td>
+                <td>normal, bold, 100-900</td>
+            </tr>
+            <tr>
+                <td><code>font-style</code></td>
+                <td>Sets font to italic or normal</td>
+                <td>normal, italic, oblique</td>
+            </tr>
+        </table>
+        <pre>
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q16. What is the font shorthand property? Write CSS using font shorthand.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>The <code>font</code> shorthand property allows setting multiple font properties in one declaration.</p>
+        <p><strong>Syntax:</strong> <code>font: font-style font-variant font-weight font-size/line-height font-family;</code></p>
+        <pre>
+/* Using individual properties */
+p {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: Arial, sans-serif;
+}
+
+/* Using shorthand */
+p {
+    font: italic bold 16px/1.5 Arial, sans-serif;
+}</pre>
+        <div class="demo-box">
+            <p style="font: italic bold 18px/1.5 Georgia, serif;">This text uses font shorthand property</p>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q17. Explain the difference between em, rem, and px units for font-size.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Unit</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>px</code></td>
+                <td>Absolute unit, fixed size in pixels</td>
+                <td>font-size: 16px;</td>
+            </tr>
+            <tr>
+                <td><code>em</code></td>
+                <td>Relative to parent element's font-size</td>
+                <td>font-size: 1.5em; (1.5 times parent)</td>
+            </tr>
+            <tr>
+                <td><code>rem</code></td>
+                <td>Relative to root element's font-size (html)</td>
+                <td>font-size: 2rem; (2 times root)</td>
+            </tr>
+        </table>
+        <pre>
+html { font-size: 16px; }  /* Root font-size */
+
+.parent { font-size: 20px; }
+.child-em { font-size: 1.5em; }   /* 30px (1.5 * 20px) */
+.child-rem { font-size: 1.5rem; } /* 24px (1.5 * 16px) */</pre>
+    </div>
+</div>
+
+<!-- ==================== 4.9 ALIGNMENT ==================== -->
+<h2>4.9 Alignment</h2>
+
+<div class="question">
+    <h3>Q18. Explain different values of text-align property with examples.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>left</code></td>
+                <td>Aligns text to the left (default)</td>
+            </tr>
+            <tr>
+                <td><code>right</code></td>
+                <td>Aligns text to the right</td>
+            </tr>
+            <tr>
+                <td><code>center</code></td>
+                <td>Centers the text</td>
+            </tr>
+            <tr>
+                <td><code>justify</code></td>
+                <td>Stretches text to fill full width</td>
+            </tr>
+        </table>
+        <div class="demo-box">
+            <p style="text-align: left; border: 1px solid #ccc; padding: 5px;">Left aligned text</p>
+            <p style="text-align: center; border: 1px solid #ccc; padding: 5px;">Center aligned text</p>
+            <p style="text-align: right; border: 1px solid #ccc; padding: 5px;">Right aligned text</p>
+            <p style="text-align: justify; border: 1px solid #ccc; padding: 5px;">Justified text spreads across the entire width of the container making both edges aligned properly.</p>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q19. How do you center a block element horizontally using CSS?</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>To center a block element horizontally:</p>
+        <ol>
+            <li>Set a specific width to the element</li>
+            <li>Use <code>margin: 0 auto;</code> (auto margins on left and right)</li>
+        </ol>
+        <pre>
+.centered-box {
+    width: 300px;
+    margin: 0 auto;  /* 0 for top/bottom, auto for left/right */
+    background-color: #3498db;
+    padding: 20px;
+    text-align: center;
+}</pre>
+        <div class="demo-box">
+            <div style="width: 300px; margin: 0 auto; background-color: #3498db; color: white; padding: 20px; text-align: center;">
+                This box is centered
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q20. How do you vertically align text inside a container?</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>Methods to vertically align text:</p>
+        <p><strong>Method 1: Using line-height (for single line text)</strong></p>
+        <pre>
+.container {
+    height: 100px;
+    line-height: 100px;  /* Same as height */
+}</pre>
+        <p><strong>Method 2: Using padding</strong></p>
+        <pre>
+.container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}</pre>
+        <p><strong>Method 3: Using Flexbox</strong></p>
+        <pre>
+.container {
+    display: flex;
+    align-items: center;     /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    height: 100px;
+}</pre>
+        <div class="demo-box">
+            <div style="height: 80px; line-height: 80px; background-color: #9b59b6; color: white; text-align: center;">
+                Vertically centered using line-height
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 4.10 LINE HEIGHT ==================== -->
+<h2>4.10 Line Height</h2>
+
+<div class="question">
+    <h3>Q21. Explain the line-height property and its different value types.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><code>line-height</code> sets the height of a line box, controlling the spacing between lines of text.</p>
+        <table>
+            <tr>
+                <th>Value Type</th>
+                <th>Example</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Number (unitless)</td>
+                <td>line-height: 1.5;</td>
+                <td>1.5 times the font-size (recommended)</td>
+            </tr>
+            <tr>
+                <td>Length</td>
+                <td>line-height: 24px;</td>
+                <td>Fixed line height in pixels</td>
+            </tr>
+            <tr>
+                <td>Percentage</td>
+                <td>line-height: 150%;</td>
+                <td>150% of the font-size</td>
+            </tr>
+            <tr>
+                <td>Normal</td>
+                <td>line-height: normal;</td>
+                <td>Browser default (usually 1.2)</td>
+            </tr>
+        </table>
+        <pre>
+p {
+    font-size: 16px;
+    line-height: 1.6;  /* Results in 25.6px line height */
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q22. Write CSS to create readable paragraph text with proper line spacing.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+.readable-text {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    color: #333;
+}</pre>
+        <div class="demo-box">
+            <p style="line-height: 1.2;">Line-height: 1.2 - This paragraph has tight line spacing which can be harder to read especially for longer content blocks.</p>
+            <hr>
+            <p style="line-height: 1.8;">Line-height: 1.8 - This paragraph has comfortable line spacing which improves readability significantly for longer content blocks.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 4.11 BOX MODEL ==================== -->
+<h2>4.11 Box Model</h2>
+
+<div class="question">
+    <h3>Q23. Explain the CSS Box Model with a diagram description.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>The CSS Box Model describes how elements are structured with four areas:</p>
+        <ol>
+            <li><strong>Content</strong> - The actual content (text, images)</li>
+            <li><strong>Padding</strong> - Space between content and border (inside)</li>
+            <li><strong>Border</strong> - The border around the padding</li>
+            <li><strong>Margin</strong> - Space outside the border (between elements)</li>
+        </ol>
+        <div class="demo-box" style="text-align: center;">
+            <div style="background-color: #f39c12; padding: 20px; display: inline-block;">
+                <span style="color: white;">Margin</span>
+                <div style="background-color: #e74c3c; padding: 20px;">
+                    <span style="color: white;">Border</span>
+                    <div style="background-color: #3498db; padding: 20px;">
+                        <span style="color: white;">Padding</span>
+                        <div style="background-color: #2ecc71; padding: 20px;">
+                            <span style="color: white;">Content</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre>
+.box {
+    width: 200px;        /* Content width */
+    height: 100px;       /* Content height */
+    padding: 20px;       /* Inside spacing */
+    border: 5px solid black;
+    margin: 30px;        /* Outside spacing */
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q24. Calculate the total width of an element with: width: 200px, padding: 20px, border: 5px, margin: 10px.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><strong>With default box-sizing (content-box):</strong></p>
+        <ul>
+            <li>Content width: 200px</li>
+            <li>Left padding: 20px + Right padding: 20px = 40px</li>
+            <li>Left border: 5px + Right border: 5px = 10px</li>
+            <li>Left margin: 10px + Right margin: 10px = 20px</li>
+        </ul>
+        <p><strong>Total width = 200 + 40 + 10 + 20 = 270px</strong></p>
+        <p><strong>Element box width (without margin) = 200 + 40 + 10 = 250px</strong></p>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q25. Explain the box-sizing property and its values.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><code>box-sizing</code> determines how the total width and height of an element is calculated.</p>
+        <table>
+            <tr>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>content-box</code></td>
+                <td>Default. Width/height only includes content. Padding and border are added outside.</td>
+            </tr>
+            <tr>
+                <td><code>border-box</code></td>
+                <td>Width/height includes content, padding, and border. More predictable sizing.</td>
+            </tr>
+        </table>
+        <pre>
+/* Recommended for easier layouts */
+* {
+    box-sizing: border-box;
+}
+
+.box {
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+    /* With border-box: total width stays 200px */
+    /* Content area becomes 200 - 40 - 10 = 150px */
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q26. Write CSS shorthand for margin and padding with different values for each side.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+/* Individual properties */
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 30px;
+margin-left: 40px;
+
+/* Shorthand - 4 values (top, right, bottom, left - clockwise) */
+margin: 10px 20px 30px 40px;
+
+/* Shorthand - 3 values (top, left-right, bottom) */
+margin: 10px 20px 30px;
+
+/* Shorthand - 2 values (top-bottom, left-right) */
+margin: 10px 20px;
+
+/* Shorthand - 1 value (all sides) */
+margin: 10px;
+
+/* Same rules apply for padding */
+padding: 10px 20px 30px 40px;</pre>
+    </div>
+</div>
+
+<!-- ==================== 4.12 WORKING WITH IMAGES ==================== -->
+<h2>4.12 Working with Images</h2>
+
+<div class="question">
+    <h3>Q27. How do you make an image responsive using CSS?</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p>A responsive image scales with its container while maintaining aspect ratio.</p>
+        <pre>
+img {
+    max-width: 100%;  /* Never exceed container width */
+    height: auto;     /* Maintain aspect ratio */
+    display: block;   /* Remove bottom gap */
+}</pre>
+        <p><strong>For background images:</strong></p>
+        <pre>
+.responsive-bg {
+    background-image: url('image.jpg');
+    background-size: cover;      /* Cover entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q28. Explain background-size property values: auto, cover, and contain.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <table>
+            <tr>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>auto</code></td>
+                <td>Default. Image displays at its original size.</td>
+            </tr>
+            <tr>
+                <td><code>cover</code></td>
+                <td>Scales image to cover entire container. May crop parts of image.</td>
+            </tr>
+            <tr>
+                <td><code>contain</code></td>
+                <td>Scales image to fit within container. Shows entire image, may have empty space.</td>
+            </tr>
+            <tr>
+                <td><code>100% 100%</code></td>
+                <td>Stretches image to fill container (may distort).</td>
+            </tr>
+        </table>
+        <pre>
+.hero-banner {
+    height: 300px;
+    background-image: url('banner.jpg');
+    background-size: cover;
+    background-position: center;
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q29. Write CSS to center an image horizontally and add a border with shadow.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+img {
+    display: block;
+    margin: 0 auto;          /* Center horizontally */
+    border: 3px solid #333;
+    border-radius: 10px;     /* Rounded corners */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}</pre>
+        <div class="demo-box" style="text-align: center;">
+            <div style="display: inline-block; width: 150px; height: 100px; background: linear-gradient(45deg, #3498db, #9b59b6); border: 3px solid #333; border-radius: 10px; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);"></div>
+            <p><em>Example styled box (representing an image)</em></p>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q30. Explain background-repeat property and its values.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <p><code>background-repeat</code> controls how background images are repeated.</p>
+        <table>
+            <tr>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>repeat</code></td>
+                <td>Default. Repeats both horizontally and vertically.</td>
+            </tr>
+            <tr>
+                <td><code>repeat-x</code></td>
+                <td>Repeats only horizontally.</td>
+            </tr>
+            <tr>
+                <td><code>repeat-y</code></td>
+                <td>Repeats only vertically.</td>
+            </tr>
+            <tr>
+                <td><code>no-repeat</code></td>
+                <td>Image displays only once.</td>
+            </tr>
+            <tr>
+                <td><code>space</code></td>
+                <td>Repeats with equal spacing between images.</td>
+            </tr>
+            <tr>
+                <td><code>round</code></td>
+                <td>Repeats and scales to fit without clipping.</td>
+            </tr>
+        </table>
+        <pre>
+.pattern-bg {
+    background-image: url('pattern.png');
+    background-repeat: repeat;
+}
+
+.banner {
+    background-image: url('banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}</pre>
+    </div>
+</div>
+
+<div class="question">
+    <h3>Q31. Write complete CSS to create an image gallery card with hover effect.</h3>
+    <div class="answer">
+        <h4>Answer:</h4>
+        <pre>
+.gallery-card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.gallery-card .caption {
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+}</pre>
+        <div class="demo-box">
+            <div style="width: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 0 auto;">
+                <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div style="padding: 15px; text-align: center; background-color: #fff;">
+                    <strong>Gallery Card</strong>
+                    <p style="margin: 5px 0 0 0; color: #777; font-size: 14px;">Hover effect demo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr style="margin: 40px 0;">
+<p style="text-align: center; color: #7f8c8d;">
+    <strong>Unit 4: Cascading Style Sheets - Practice Questions</strong><br>
+    Topics Covered: 4.6 CSS Properties (Backgrounds, Border, Margin, Padding, Height, Width, Color) | 4.7 Text | 4.8 Font | 4.9 Alignment | 4.10 Line Height | 4.11 Box Model | 4.12 Working with Images<br>
+    <strong>Total Questions: 31</strong>
+</p>
+
+</body>
+</html>

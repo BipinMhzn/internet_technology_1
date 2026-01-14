@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navigation Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header/Navbar */
+        .navbar {
+            background-color: #808080;
+            padding: 15px 30px;
+            height: 45px;
+        }
+
+        .logo {
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            line-height: 40px;
+        }
+
+        /* Hamburger Icon - Hidden on Desktop */
+        .hamburger {
+            display: none;
+            float: right;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background-color: #000;
+            margin-bottom: 5px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            float: right;
+            list-style: none;
+        }
+
+        .nav-links li {
+            display: inline-block;
+        }
+
+        .nav-links a {
+            display: inherit;
+            text-decoration: none;
+            color: #000;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: #a0a0a0;
+        }
+
+        /* Media Query for Mobile */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                float: none;
+                text-align: center;
+                background-color: #b8b8b8;
+            }
+
+            .nav-links li {
+                display: block;
+            }
+
+            .nav-links a {
+                display: inherit;
+                padding: 25px;
+                font-size: 20px;
+                background-color: #b8b8b8;
+            }
+
+            .nav-links a:hover {
+                color: #666;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">DesignX</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Feedback</a></li>
+        </ul>
+    </nav>
+</header>
+
+</body>
+</html>
