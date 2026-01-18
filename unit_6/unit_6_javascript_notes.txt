@@ -1,0 +1,2039 @@
+================================================================================
+            UNIT 6: CLIENT SIDE SCRIPTING WITH JAVASCRIPT
+                         (8 Hours)
+================================================================================
+
+Course: Internet Technology (CMP 173)
+Program: BCSIT, Pokhara University
+
+================================================================================
+                        TABLE OF CONTENTS
+================================================================================
+
+6.1  Introduction to JavaScript
+6.2  Using JS in HTML
+6.3  JavaScript Output
+6.4  JavaScript Comments
+6.5  Variables and Data Types
+6.6  Operators and Expressions
+6.7  Control Flow and Conditionals
+6.8  Loops
+6.9  Functions
+6.10 Arrays
+6.11 Objects
+
+================================================================================
+                    LEARNING OBJECTIVES
+================================================================================
+
+After completing this unit, students will be able to:
+
+- Understand JavaScript's role in web development and its syntax
+- Declare variables and utilize data types: numbers, strings, Booleans, null,
+  undefined, objects, and arrays
+- Apply arithmetic, comparison, and logical operators to manipulate data
+- Implement control flow through if statements, switch statements, and ternary
+  operators
+- Utilize loops such as while, for, and do-while for iterative processes
+- Define, call, and manage functions, including parameters, arguments, and
+  return values
+- Create and manipulate arrays, using methods like push, pop, shift, unshift,
+  splice, slice, and iteration techniques
+- Work with objects, access properties, employ methods, and understand object
+  constructors and prototypes
+- Develop practical client-side scripting skills using JavaScript to enhance
+  web interactivity and functionality
+
+================================================================================
+6.1 INTRODUCTION TO JAVASCRIPT
+================================================================================
+
+What is JavaScript?
+-------------------
+JavaScript is a high-level, interpreted programming language that is one of the
+core technologies of the World Wide Web, alongside HTML and CSS. It enables
+interactive web pages and is an essential part of web applications.
+
+Key Characteristics:
+- Interpreted language (no compilation needed)
+- Dynamically typed (variable types determined at runtime)
+- Object-oriented programming support
+- Event-driven programming model
+- Cross-platform compatibility
+- Client-side execution in web browsers
+
+History of JavaScript:
+- Created by Brendan Eich at Netscape in 1995
+- Originally named "Mocha", then "LiveScript", finally "JavaScript"
+- Standardized as ECMAScript (ES) by ECMA International
+- Current widely-used versions: ES6 (ES2015) and later
+
+Role in Web Development:
+------------------------
+1. Client-Side Scripting: Runs in the user's browser
+2. Dynamic Content: Modify HTML content and CSS styles dynamically
+3. User Interaction: Handle user events (clicks, inputs, etc.)
+4. Form Validation: Validate user input before server submission
+5. Animations: Create visual effects and transitions
+6. AJAX: Asynchronous communication with servers
+7. Single Page Applications (SPAs): Build modern web applications
+
+JavaScript vs Java:
+-------------------
+Despite similar names, JavaScript and Java are completely different:
+
+| Aspect          | JavaScript              | Java                    |
+|-----------------|-------------------------|-------------------------|
+| Type            | Interpreted             | Compiled                |
+| Typing          | Dynamically typed       | Statically typed        |
+| Execution       | Browser/Node.js         | JVM                     |
+| Syntax          | C-like, flexible        | C-like, strict          |
+| Use Case        | Web development         | Enterprise applications |
+
+================================================================================
+6.2 USING JS IN HTML
+================================================================================
+
+There are three ways to include JavaScript in HTML documents:
+
+1. Inline JavaScript
+--------------------
+JavaScript code written directly in HTML element attributes.
+
+Example:
+    <button onclick="alert('Hello World!')">Click Me</button>
+
+Disadvantages:
+- Mixes HTML with JavaScript
+- Difficult to maintain
+- Cannot be cached
+- Not recommended for large applications
+
+2. Internal JavaScript
+----------------------
+JavaScript code written inside <script> tags within the HTML document.
+
+Example:
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Internal JS Example</title>
+        <script>
+            function greet() {
+                alert('Hello from head section!');
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Internal JavaScript</h1>
+        <button onclick="greet()">Greet</button>
+
+        <script>
+            // JavaScript in body section
+            console.log('Page loaded!');
+        </script>
+    </body>
+    </html>
+
+Script Placement:
+- In <head>: Loads before page content (may slow page rendering)
+- In <body>: Loads with page content
+- At end of <body>: Recommended - ensures HTML is loaded first
+
+3. External JavaScript
+----------------------
+JavaScript code in separate .js files, linked to HTML.
+
+HTML file (index.html):
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>External JS Example</title>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <h1>External JavaScript</h1>
+        <button onclick="greet()">Greet</button>
+
+        <!-- Better: Load at end of body -->
+        <script src="main.js"></script>
+    </body>
+    </html>
+
+JavaScript file (script.js):
+    function greet() {
+        alert('Hello from external file!');
+    }
+
+Advantages of External JavaScript:
+- Separation of concerns (HTML and JS separate)
+- Code reusability across multiple pages
+- Browser caching (faster page loads)
+- Easier maintenance
+- Better organization for large projects
+
+Script Tag Attributes:
+----------------------
+<script src="file.js" defer></script>
+<script src="file.js" async></script>
+
+- defer: Script executes after HTML parsing completes
+- async: Script executes as soon as downloaded (parallel)
+- No attribute: Script blocks HTML parsing until executed
+
+================================================================================
+6.3 JAVASCRIPT OUTPUT
+================================================================================
+
+JavaScript provides several ways to display output:
+
+1. innerHTML
+------------
+Writes content into an HTML element.
+
+    document.getElementById("demo").innerHTML = "Hello World!";
+
+Example:
+    <p id="output"></p>
+    <script>
+        document.getElementById("output").innerHTML = "Content added by JS";
+    </script>
+
+2. document.write()
+-------------------
+Writes directly to the HTML document.
+
+    document.write("Hello World!");
+
+Warning: Using document.write() after the page loads will overwrite the entire
+document. Use only for testing purposes.
+
+Example:
+    <script>
+        document.write("<h1>Hello World!</h1>");
+    </script>
+
+3. window.alert() or alert()
+----------------------------
+Displays a popup alert box.
+
+    alert("Hello World!");
+    window.alert("Same thing!");
+
+Example:
+    <script>
+        alert("Welcome to our website!");
+    </script>
+
+4. console.log()
+----------------
+Writes to the browser's developer console (F12 or Ctrl+Shift+I).
+
+    console.log("Debug message");
+    console.log("Value:", variable);
+
+Other console methods:
+    console.error("Error message");     // Red error text
+    console.warn("Warning message");    // Yellow warning text
+    console.info("Info message");       // Info icon
+    console.table(array);               // Display as table
+    console.clear();                    // Clear console
+
+5. window.print()
+-----------------
+Opens the browser's print dialog.
+
+    window.print();
+
+Example - Comprehensive Output Demo:
+------------------------------------
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <h1>JavaScript Output Methods</h1>
+        <p id="demo"></p>
+        <button onclick="showAll()">Show All Outputs</button>
+
+        <script>
+            function showAll() {
+                // innerHTML
+                document.getElementById("demo").innerHTML = "Changed by innerHTML";
+
+                // alert
+                alert("This is an alert box!");
+
+                // console
+                console.log("Check the console!");
+                console.warn("This is a warning");
+                console.error("This is an error");
+            }
+        </script>
+    </body>
+    </html>
+
+================================================================================
+6.4 JAVASCRIPT COMMENTS
+================================================================================
+
+Comments are used to explain code, make it more readable, and prevent execution
+of code during testing.
+
+1. Single-Line Comments
+-----------------------
+Use // for single-line comments.
+
+    // This is a single-line comment
+    var x = 5;  // This is an inline comment
+
+    // var y = 10;  // This code won't execute
+
+2. Multi-Line Comments
+----------------------
+Use /* */ for multi-line comments.
+
+    /* This is a
+       multi-line comment
+       spanning multiple lines */
+
+    /*
+     * This is a formatted
+     * multi-line comment
+     * often used for documentation
+     */
+
+3. Documentation Comments (JSDoc)
+---------------------------------
+Special comments used for documentation generation.
+
+    /**
+     * Calculates the sum of two numbers
+     * @param {number} a - First number
+     * @param {number} b - Second number
+     * @returns {number} The sum of a and b
+     */
+    function add(a, b) {
+        return a + b;
+    }
+
+Best Practices for Comments:
+----------------------------
+- Write comments to explain WHY, not WHAT (code should be self-explanatory)
+- Keep comments up-to-date with code changes
+- Use comments to explain complex algorithms
+- Avoid obvious comments like: var x = 5; // assigns 5 to x
+- Use JSDoc for function documentation
+
+Example:
+    // BAD: Obvious comment
+    var counter = 0;  // Initialize counter to zero
+
+    // GOOD: Explains purpose
+    var retryCount = 0;  // Track failed API attempts for exponential backoff
+
+================================================================================
+6.5 VARIABLES AND DATA TYPES
+================================================================================
+
+VARIABLES
+---------
+Variables are containers for storing data values.
+
+Declaration Keywords:
+1. var   - Function-scoped, can be redeclared (older way)
+2. let   - Block-scoped, cannot be redeclared (ES6+)
+3. const - Block-scoped, cannot be reassigned (ES6+)
+
+Syntax:
+    var variableName = value;
+    let variableName = value;
+    const variableName = value;
+
+Examples:
+    // Using var (function-scoped)
+    var name = "John";
+    var age = 25;
+    var name = "Jane";  // Allowed (redeclaration)
+
+    // Using let (block-scoped)
+    let city = "Kathmandu";
+    city = "Pokhara";     // Allowed (reassignment)
+    // let city = "Lalitpur";  // Error (no redeclaration)
+
+    // Using const (constant)
+    const PI = 3.14159;
+    const country = "Nepal";
+    // PI = 3.14;  // Error (no reassignment)
+
+Variable Naming Rules:
+- Must begin with letter, underscore (_), or dollar sign ($)
+- Subsequent characters can include digits (0-9)
+- Case-sensitive (myVar and myvar are different)
+- Cannot use reserved keywords (var, let, function, etc.)
+
+Naming Conventions:
+    // camelCase (recommended for variables/functions)
+    let firstName = "John";
+    let totalAmount = 100;
+
+    // PascalCase (for classes/constructors)
+    class UserAccount { }
+
+    // SCREAMING_SNAKE_CASE (for constants)
+    const MAX_SIZE = 100;
+    const API_KEY = "abc123";
+
+DATA TYPES
+----------
+JavaScript has 8 data types:
+
+Primitive Types (7):
+1. String
+2. Number
+3. Boolean
+4. Undefined
+5. Null
+6. Symbol (ES6)
+7. BigInt (ES2020)
+
+Reference Type (1):
+8. Object (includes arrays, functions, dates, etc.)
+
+1. String
+---------
+Text data enclosed in quotes.
+
+    let single = 'Hello';           // Single quotes
+    let double = "World";           // Double quotes
+    let backtick = `Hello World`;   // Template literals (ES6)
+
+    // String concatenation
+    let greeting = single + " " + double;  // "Hello World"
+
+    // Template literals (string interpolation)
+    let name = "John";
+    let message = `Hello, ${name}!`;  // "Hello, John!"
+
+    // String properties and methods
+    let str = "JavaScript";
+    console.log(str.length);        // 10
+    console.log(str.toUpperCase()); // "JAVASCRIPT"
+    console.log(str.toLowerCase()); // "javascript"
+    console.log(str.charAt(0));     // "J"
+    console.log(str.indexOf("S"));  // 4
+    console.log(str.slice(0, 4));   // "Java"
+    console.log(str.split("a"));    // ["J", "v", "Script"]
+
+2. Number
+---------
+Numeric values (integers and floating-point).
+
+    let integer = 42;
+    let float = 3.14;
+    let negative = -10;
+    let exponential = 2.5e6;     // 2,500,000
+
+    // Special numeric values
+    let infinity = Infinity;
+    let negInfinity = -Infinity;
+    let notANumber = NaN;        // Result of invalid math operations
+
+    // Number methods
+    let num = 3.14159;
+    console.log(num.toFixed(2));      // "3.14"
+    console.log(num.toString());      // "3.14159"
+    console.log(parseInt("42"));      // 42
+    console.log(parseFloat("3.14"));  // 3.14
+    console.log(Number("42"));        // 42
+    console.log(isNaN("hello"));      // true
+    console.log(isFinite(100));       // true
+
+3. Boolean
+----------
+Logical values: true or false.
+
+    let isActive = true;
+    let isComplete = false;
+
+    // Boolean expressions
+    let isGreater = 10 > 5;     // true
+    let isEqual = 5 === "5";    // false (strict equality)
+
+    // Truthy and Falsy values
+    // Falsy: false, 0, "", null, undefined, NaN
+    // Truthy: everything else
+
+    if ("hello") {
+        console.log("Truthy!");  // This runs
+    }
+
+    if (0) {
+        console.log("Falsy!");   // This doesn't run
+    }
+
+4. Undefined
+------------
+Variable declared but not assigned a value.
+
+    let x;
+    console.log(x);         // undefined
+    console.log(typeof x);  // "undefined"
+
+    function noReturn() {
+        // no return statement
+    }
+    console.log(noReturn());  // undefined
+
+5. Null
+-------
+Intentional absence of value.
+
+    let empty = null;
+    console.log(empty);         // null
+    console.log(typeof empty);  // "object" (JavaScript quirk)
+
+    // Checking for null
+    if (empty === null) {
+        console.log("Value is null");
+    }
+
+Null vs Undefined:
+    let a;           // undefined (not assigned)
+    let b = null;    // null (intentionally empty)
+
+6. Symbol (ES6)
+---------------
+Unique identifier.
+
+    let sym1 = Symbol("id");
+    let sym2 = Symbol("id");
+    console.log(sym1 === sym2);  // false (always unique)
+
+7. BigInt (ES2020)
+------------------
+For integers larger than Number.MAX_SAFE_INTEGER.
+
+    let bigNum = 9007199254740991n;
+    let anotherBig = BigInt("9007199254740991");
+
+8. Object
+---------
+Collection of key-value pairs.
+
+    let person = {
+        name: "John",
+        age: 30,
+        city: "Kathmandu"
+    };
+
+    console.log(person.name);       // "John"
+    console.log(person["age"]);     // 30
+
+typeof Operator
+---------------
+Check the type of a value.
+
+    console.log(typeof "Hello");    // "string"
+    console.log(typeof 42);         // "number"
+    console.log(typeof true);       // "boolean"
+    console.log(typeof undefined);  // "undefined"
+    console.log(typeof null);       // "object" (known bug)
+    console.log(typeof {});         // "object"
+    console.log(typeof []);         // "object"
+    console.log(typeof function(){}); // "function"
+
+Type Conversion
+---------------
+    // String conversion
+    String(123);        // "123"
+    (123).toString();   // "123"
+
+    // Number conversion
+    Number("123");      // 123
+    parseInt("123");    // 123
+    parseFloat("3.14"); // 3.14
+    +"123";             // 123 (unary plus)
+
+    // Boolean conversion
+    Boolean(1);         // true
+    Boolean(0);         // false
+    Boolean("");        // false
+    Boolean("hello");   // true
+    !!value;            // Convert to boolean
+
+================================================================================
+6.6 OPERATORS AND EXPRESSIONS
+================================================================================
+
+An expression is a combination of values, variables, and operators that computes
+to a value. Operators perform operations on values.
+
+1. Arithmetic Operators
+-----------------------
+Perform mathematical calculations.
+
+    let a = 10, b = 3;
+
+    console.log(a + b);   // 13 (Addition)
+    console.log(a - b);   // 7  (Subtraction)
+    console.log(a * b);   // 30 (Multiplication)
+    console.log(a / b);   // 3.333... (Division)
+    console.log(a % b);   // 1  (Modulus/Remainder)
+    console.log(a ** b);  // 1000 (Exponentiation, ES6)
+
+    // Increment and Decrement
+    let x = 5;
+    console.log(x++);  // 5 (post-increment, returns then increments)
+    console.log(x);    // 6
+    console.log(++x);  // 7 (pre-increment, increments then returns)
+
+    let y = 5;
+    console.log(y--);  // 5 (post-decrement)
+    console.log(--y);  // 3 (pre-decrement)
+
+2. Assignment Operators
+-----------------------
+Assign values to variables.
+
+    let x = 10;      // Basic assignment
+
+    x += 5;   // x = x + 5  -> 15
+    x -= 3;   // x = x - 3  -> 12
+    x *= 2;   // x = x * 2  -> 24
+    x /= 4;   // x = x / 4  -> 6
+    x %= 4;   // x = x % 4  -> 2
+    x **= 3;  // x = x ** 3 -> 8
+
+3. Comparison Operators
+-----------------------
+Compare values and return boolean.
+
+    let a = 5, b = "5", c = 10;
+
+    // Equality
+    console.log(a == b);   // true  (equal value, type coercion)
+    console.log(a === b);  // false (equal value AND type)
+
+    // Inequality
+    console.log(a != c);   // true  (not equal value)
+    console.log(a !== b);  // true  (not equal value OR type)
+
+    // Relational
+    console.log(a > 3);    // true  (greater than)
+    console.log(a < 3);    // false (less than)
+    console.log(a >= 5);   // true  (greater than or equal)
+    console.log(a <= 5);   // true  (less than or equal)
+
+Important: Always prefer === and !== (strict equality) over == and !=
+
+4. Logical Operators
+--------------------
+Combine boolean expressions.
+
+    let a = true, b = false;
+
+    // AND (&&) - true if both are true
+    console.log(a && b);   // false
+    console.log(a && a);   // true
+
+    // OR (||) - true if at least one is true
+    console.log(a || b);   // true
+    console.log(b || b);   // false
+
+    // NOT (!) - inverts boolean value
+    console.log(!a);       // false
+    console.log(!b);       // true
+    console.log(!!a);      // true (double negation, converts to boolean)
+
+    // Short-circuit evaluation
+    let result = false && expensiveFunction();  // Function not called
+    let value = null || "default";              // "default"
+
+    // Nullish coalescing (??) - ES2020
+    let name = null ?? "Anonymous";  // "Anonymous"
+    let count = 0 ?? 10;             // 0 (only null/undefined trigger ??)
+
+5. String Operators
+-------------------
+    let firstName = "John";
+    let lastName = "Doe";
+
+    // Concatenation
+    let fullName = firstName + " " + lastName;  // "John Doe"
+
+    // Concatenation assignment
+    let greeting = "Hello";
+    greeting += " World";  // "Hello World"
+
+    // Template literals (ES6)
+    let message = `${firstName} ${lastName}`;   // "John Doe"
+
+6. Conditional (Ternary) Operator
+---------------------------------
+Shorthand for if-else.
+
+    condition ? valueIfTrue : valueIfFalse
+
+    let age = 20;
+    let status = age >= 18 ? "Adult" : "Minor";  // "Adult"
+
+    // Nested ternary (use sparingly)
+    let grade = 85;
+    let result = grade >= 90 ? "A" :
+                 grade >= 80 ? "B" :
+                 grade >= 70 ? "C" : "F";  // "B"
+
+7. Type Operators
+-----------------
+    // typeof - returns type as string
+    console.log(typeof "Hello");  // "string"
+    console.log(typeof 42);       // "number"
+
+    // instanceof - checks if object is instance of a class
+    let arr = [1, 2, 3];
+    console.log(arr instanceof Array);   // true
+    console.log(arr instanceof Object);  // true
+
+8. Bitwise Operators (Advanced)
+-------------------------------
+Operate on binary representations.
+
+    let a = 5;  // Binary: 0101
+    let b = 3;  // Binary: 0011
+
+    console.log(a & b);   // 1  (AND: 0001)
+    console.log(a | b);   // 7  (OR: 0111)
+    console.log(a ^ b);   // 6  (XOR: 0110)
+    console.log(~a);      // -6 (NOT)
+    console.log(a << 1);  // 10 (Left shift)
+    console.log(a >> 1);  // 2  (Right shift)
+
+Operator Precedence (Highest to Lowest):
+----------------------------------------
+1. () - Grouping
+2. !, ++, --, typeof
+3. **, *, /, %
+4. +, -
+5. <, <=, >, >=
+6. ==, !=, ===, !==
+7. &&
+8. ||
+9. ?:
+10. =, +=, -=, etc.
+
+Example:
+    let result = 2 + 3 * 4;    // 14 (not 20)
+    let result2 = (2 + 3) * 4; // 20 (parentheses first)
+
+================================================================================
+6.7 CONTROL FLOW AND CONDITIONALS
+================================================================================
+
+Control flow statements determine the order in which code executes.
+
+1. if Statement
+---------------
+Execute code if condition is true.
+
+    let age = 18;
+
+    if (age >= 18) {
+        console.log("You are an adult");
+    }
+
+2. if...else Statement
+----------------------
+Execute one block if true, another if false.
+
+    let age = 15;
+
+    if (age >= 18) {
+        console.log("You can vote");
+    } else {
+        console.log("You cannot vote yet");
+    }
+
+3. if...else if...else Statement
+--------------------------------
+Check multiple conditions.
+
+    let score = 75;
+
+    if (score >= 90) {
+        console.log("Grade: A");
+    } else if (score >= 80) {
+        console.log("Grade: B");
+    } else if (score >= 70) {
+        console.log("Grade: C");
+    } else if (score >= 60) {
+        console.log("Grade: D");
+    } else {
+        console.log("Grade: F");
+    }
+
+4. switch Statement
+-------------------
+Select one of many code blocks based on a value.
+
+    let day = 3;
+    let dayName;
+
+    switch (day) {
+        case 1:
+            dayName = "Sunday";
+            break;
+        case 2:
+            dayName = "Monday";
+            break;
+        case 3:
+            dayName = "Tuesday";
+            break;
+        case 4:
+            dayName = "Wednesday";
+            break;
+        case 5:
+            dayName = "Thursday";
+            break;
+        case 6:
+            dayName = "Friday";
+            break;
+        case 7:
+            dayName = "Saturday";
+            break;
+        default:
+            dayName = "Invalid day";
+    }
+    console.log(dayName);  // "Tuesday"
+
+Important: Always include break statements to prevent "fall-through".
+
+Fall-through Example (sometimes useful):
+    let month = 2;
+    let season;
+
+    switch (month) {
+        case 12:
+        case 1:
+        case 2:
+            season = "Winter";
+            break;
+        case 3:
+        case 4:
+        case 5:
+            season = "Spring";
+            break;
+        case 6:
+        case 7:
+        case 8:
+            season = "Summer";
+            break;
+        default:
+            season = "Autumn";
+    }
+
+5. Ternary Operator (Conditional Expression)
+--------------------------------------------
+    let age = 20;
+    let canVote = (age >= 18) ? "Yes" : "No";
+    console.log(canVote);  // "Yes"
+
+    // Can be used inline
+    console.log(`Status: ${age >= 18 ? "Adult" : "Minor"}`);
+
+6. Truthy and Falsy Values
+--------------------------
+JavaScript automatically converts values to boolean in conditions.
+
+Falsy values (evaluate to false):
+- false
+- 0 (and -0)
+- "" (empty string)
+- null
+- undefined
+- NaN
+
+Truthy values (evaluate to true):
+- Everything else
+- "0" (string zero)
+- "false" (string false)
+- [] (empty array)
+- {} (empty object)
+
+Examples:
+    let name = "";
+    if (name) {
+        console.log("Name is set");
+    } else {
+        console.log("Name is empty");  // This runs
+    }
+
+    let count = 0;
+    if (count) {
+        console.log("Count has value");
+    } else {
+        console.log("Count is zero");  // This runs
+    }
+
+    // Common pattern: default values
+    let username = inputName || "Guest";
+
+    // Better with nullish coalescing (ES2020)
+    let port = configPort ?? 3000;  // Only null/undefined triggers default
+
+7. Logical Operators in Conditionals
+------------------------------------
+    let age = 25;
+    let hasLicense = true;
+
+    // AND condition
+    if (age >= 18 && hasLicense) {
+        console.log("You can drive");
+    }
+
+    // OR condition
+    let isWeekend = true;
+    let isHoliday = false;
+    if (isWeekend || isHoliday) {
+        console.log("Day off!");
+    }
+
+    // NOT condition
+    let isLoggedIn = false;
+    if (!isLoggedIn) {
+        console.log("Please log in");
+    }
+
+    // Complex conditions
+    if ((age >= 18 && hasLicense) || isEmergency) {
+        console.log("Can drive");
+    }
+
+================================================================================
+6.8 LOOPS
+================================================================================
+
+Loops execute a block of code repeatedly until a condition is met.
+
+1. for Loop
+-----------
+Best when you know how many iterations.
+
+Syntax:
+    for (initialization; condition; increment) {
+        // code to execute
+    }
+
+Example:
+    // Count from 1 to 5
+    for (let i = 1; i <= 5; i++) {
+        console.log(i);
+    }
+    // Output: 1, 2, 3, 4, 5
+
+    // Count backwards
+    for (let i = 5; i >= 1; i--) {
+        console.log(i);
+    }
+    // Output: 5, 4, 3, 2, 1
+
+    // Skip by 2
+    for (let i = 0; i <= 10; i += 2) {
+        console.log(i);
+    }
+    // Output: 0, 2, 4, 6, 8, 10
+
+    // Iterate over array
+    let fruits = ["Apple", "Banana", "Orange"];
+    for (let i = 0; i < fruits.length; i++) {
+        console.log(fruits[i]);
+    }
+
+2. while Loop
+-------------
+Execute while condition is true. Check condition BEFORE each iteration.
+
+Syntax:
+    while (condition) {
+        // code to execute
+    }
+
+Example:
+    let count = 1;
+    while (count <= 5) {
+        console.log(count);
+        count++;
+    }
+    // Output: 1, 2, 3, 4, 5
+
+    // Unknown number of iterations
+    let input = "";
+    while (input !== "quit") {
+        input = prompt("Enter command (or 'quit' to exit):");
+        console.log("You entered: " + input);
+    }
+
+Warning: Ensure the condition eventually becomes false to avoid infinite loops.
+
+3. do...while Loop
+------------------
+Execute at least once, then while condition is true. Check condition AFTER each
+iteration.
+
+Syntax:
+    do {
+        // code to execute
+    } while (condition);
+
+Example:
+    let count = 1;
+    do {
+        console.log(count);
+        count++;
+    } while (count <= 5);
+    // Output: 1, 2, 3, 4, 5
+
+    // Executes at least once even if condition is false
+    let x = 10;
+    do {
+        console.log("This runs once");  // Runs!
+    } while (x < 5);
+
+Difference between while and do...while:
+    // while - might not execute at all
+    let a = 10;
+    while (a < 5) {
+        console.log("while");  // Never runs
+    }
+
+    // do...while - always executes at least once
+    let b = 10;
+    do {
+        console.log("do-while");  // Runs once!
+    } while (b < 5);
+
+4. for...in Loop
+----------------
+Iterate over object properties (keys).
+
+    let person = {
+        name: "John",
+        age: 30,
+        city: "Kathmandu"
+    };
+
+    for (let key in person) {
+        console.log(key + ": " + person[key]);
+    }
+    // Output:
+    // name: John
+    // age: 30
+    // city: Kathmandu
+
+    // Can be used with arrays (but not recommended)
+    let arr = ["a", "b", "c"];
+    for (let index in arr) {
+        console.log(index, arr[index]);  // 0 "a", 1 "b", 2 "c"
+    }
+
+5. for...of Loop (ES6)
+----------------------
+Iterate over iterable values (arrays, strings, etc.).
+
+    let fruits = ["Apple", "Banana", "Orange"];
+
+    for (let fruit of fruits) {
+        console.log(fruit);
+    }
+    // Output: Apple, Banana, Orange
+
+    // Iterate over string characters
+    let word = "Hello";
+    for (let char of word) {
+        console.log(char);
+    }
+    // Output: H, e, l, l, o
+
+for...in vs for...of:
+    let arr = ["a", "b", "c"];
+
+    // for...in gives INDICES
+    for (let i in arr) {
+        console.log(i);  // 0, 1, 2
+    }
+
+    // for...of gives VALUES
+    for (let v of arr) {
+        console.log(v);  // "a", "b", "c"
+    }
+
+6. Loop Control Statements
+--------------------------
+
+break - Exit loop immediately:
+    for (let i = 1; i <= 10; i++) {
+        if (i === 5) {
+            break;  // Exit when i is 5
+        }
+        console.log(i);
+    }
+    // Output: 1, 2, 3, 4
+
+continue - Skip current iteration:
+    for (let i = 1; i <= 5; i++) {
+        if (i === 3) {
+            continue;  // Skip when i is 3
+        }
+        console.log(i);
+    }
+    // Output: 1, 2, 4, 5
+
+7. Nested Loops
+---------------
+    // Multiplication table
+    for (let i = 1; i <= 3; i++) {
+        for (let j = 1; j <= 3; j++) {
+            console.log(`${i} x ${j} = ${i * j}`);
+        }
+    }
+
+    // 2D array traversal
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            console.log(matrix[i][j]);
+        }
+    }
+
+8. Labeled Statements
+---------------------
+Control nested loops with labels.
+
+    outer: for (let i = 0; i < 3; i++) {
+        inner: for (let j = 0; j < 3; j++) {
+            if (i === 1 && j === 1) {
+                break outer;  // Breaks out of outer loop
+            }
+            console.log(i, j);
+        }
+    }
+    // Output: 0 0, 0 1, 0 2, 1 0
+
+================================================================================
+6.9 FUNCTIONS
+================================================================================
+
+Functions are reusable blocks of code that perform specific tasks.
+
+1. Function Declaration
+-----------------------
+    function functionName(parameters) {
+        // code to execute
+        return value;  // optional
+    }
+
+Example:
+    function greet(name) {
+        return "Hello, " + name + "!";
+    }
+
+    console.log(greet("John"));  // "Hello, John!"
+
+2. Function Expression
+----------------------
+Assign a function to a variable.
+
+    const greet = function(name) {
+        return "Hello, " + name + "!";
+    };
+
+    console.log(greet("Jane"));  // "Hello, Jane!"
+
+3. Arrow Functions (ES6)
+------------------------
+Shorter syntax for function expressions.
+
+    // Basic syntax
+    const greet = (name) => {
+        return "Hello, " + name + "!";
+    };
+
+    // Single parameter - parentheses optional
+    const square = x => {
+        return x * x;
+    };
+
+    // Single expression - implicit return
+    const double = x => x * 2;
+    const add = (a, b) => a + b;
+
+    // No parameters
+    const sayHello = () => "Hello!";
+
+    console.log(double(5));  // 10
+    console.log(add(3, 4));  // 7
+
+4. Parameters and Arguments
+---------------------------
+    // Parameters with default values (ES6)
+    function greet(name = "Guest", greeting = "Hello") {
+        return `${greeting}, ${name}!`;
+    }
+
+    console.log(greet());              // "Hello, Guest!"
+    console.log(greet("John"));        // "Hello, John!"
+    console.log(greet("John", "Hi"));  // "Hi, John!"
+
+    // Rest parameters (ES6) - collect remaining arguments
+    function sum(...numbers) {
+        let total = 0;
+        for (let num of numbers) {
+            total += num;
+        }
+        return total;
+    }
+
+    console.log(sum(1, 2, 3));      // 6
+    console.log(sum(1, 2, 3, 4, 5)); // 15
+
+    // Arguments object (older way, not in arrow functions)
+    function oldSum() {
+        let total = 0;
+        for (let i = 0; i < arguments.length; i++) {
+            total += arguments[i];
+        }
+        return total;
+    }
+
+5. Return Values
+----------------
+    // Single return value
+    function multiply(a, b) {
+        return a * b;
+    }
+
+    // Early return
+    function divide(a, b) {
+        if (b === 0) {
+            return "Cannot divide by zero";
+        }
+        return a / b;
+    }
+
+    // Return object
+    function createPerson(name, age) {
+        return {
+            name: name,
+            age: age
+        };
+    }
+
+    // Return array
+    function getMinMax(arr) {
+        return [Math.min(...arr), Math.max(...arr)];
+    }
+
+    const [min, max] = getMinMax([3, 1, 4, 1, 5]);
+    console.log(min, max);  // 1, 5
+
+6. Function Scope
+-----------------
+    let globalVar = "I'm global";
+
+    function example() {
+        let localVar = "I'm local";
+        console.log(globalVar);  // Accessible
+        console.log(localVar);   // Accessible
+    }
+
+    example();
+    console.log(globalVar);  // Accessible
+    // console.log(localVar);  // Error: not defined
+
+7. Hoisting
+-----------
+Function declarations are hoisted (moved to top).
+
+    // This works:
+    sayHello();  // Can call before declaration
+
+    function sayHello() {
+        console.log("Hello!");
+    }
+
+    // This doesn't work with expressions:
+    // sayBye();  // Error: sayBye is not a function
+
+    const sayBye = function() {
+        console.log("Bye!");
+    };
+
+8. Callback Functions
+---------------------
+Functions passed as arguments to other functions.
+
+    function processArray(arr, callback) {
+        let result = [];
+        for (let item of arr) {
+            result.push(callback(item));
+        }
+        return result;
+    }
+
+    const numbers = [1, 2, 3, 4, 5];
+
+    const doubled = processArray(numbers, x => x * 2);
+    console.log(doubled);  // [2, 4, 6, 8, 10]
+
+    const squared = processArray(numbers, x => x * x);
+    console.log(squared);  // [1, 4, 9, 16, 25]
+
+9. Immediately Invoked Function Expression (IIFE)
+-------------------------------------------------
+Function that runs immediately after definition.
+
+    (function() {
+        console.log("IIFE executed!");
+    })();
+
+    // With parameters
+    (function(name) {
+        console.log("Hello, " + name);
+    })("John");
+
+    // Arrow function IIFE
+    (() => {
+        console.log("Arrow IIFE!");
+    })();
+
+10. Recursive Functions
+-----------------------
+Functions that call themselves.
+
+    // Factorial
+    function factorial(n) {
+        if (n <= 1) return 1;  // Base case
+        return n * factorial(n - 1);  // Recursive case
+    }
+
+    console.log(factorial(5));  // 120 (5*4*3*2*1)
+
+    // Fibonacci
+    function fibonacci(n) {
+        if (n <= 1) return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    console.log(fibonacci(7));  // 13
+
+================================================================================
+6.10 ARRAYS
+================================================================================
+
+Arrays are ordered collections of values.
+
+1. Creating Arrays
+------------------
+    // Array literal (preferred)
+    let fruits = ["Apple", "Banana", "Orange"];
+
+    // Array constructor
+    let numbers = new Array(1, 2, 3, 4, 5);
+
+    // Empty array
+    let empty = [];
+
+    // Array with single value
+    let single = ["alone"];
+
+    // Mixed types (possible but not recommended)
+    let mixed = [1, "hello", true, null, {name: "John"}];
+
+2. Accessing Elements
+---------------------
+Arrays are zero-indexed (first element is at index 0).
+
+    let fruits = ["Apple", "Banana", "Orange"];
+
+    console.log(fruits[0]);   // "Apple"
+    console.log(fruits[1]);   // "Banana"
+    console.log(fruits[2]);   // "Orange"
+    console.log(fruits[3]);   // undefined
+
+    // Last element
+    console.log(fruits[fruits.length - 1]);  // "Orange"
+
+    // Modify element
+    fruits[1] = "Mango";
+    console.log(fruits);  // ["Apple", "Mango", "Orange"]
+
+3. Array Properties
+-------------------
+    let arr = [1, 2, 3, 4, 5];
+
+    // Length
+    console.log(arr.length);  // 5
+
+    // Modify length
+    arr.length = 3;
+    console.log(arr);  // [1, 2, 3]
+
+4. Array Methods - Adding/Removing Elements
+-------------------------------------------
+
+push() - Add to end:
+    let fruits = ["Apple", "Banana"];
+    fruits.push("Orange");
+    console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+    // Push multiple
+    fruits.push("Mango", "Grape");
+
+pop() - Remove from end:
+    let fruits = ["Apple", "Banana", "Orange"];
+    let removed = fruits.pop();
+    console.log(removed);  // "Orange"
+    console.log(fruits);   // ["Apple", "Banana"]
+
+unshift() - Add to beginning:
+    let fruits = ["Banana", "Orange"];
+    fruits.unshift("Apple");
+    console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+shift() - Remove from beginning:
+    let fruits = ["Apple", "Banana", "Orange"];
+    let removed = fruits.shift();
+    console.log(removed);  // "Apple"
+    console.log(fruits);   // ["Banana", "Orange"]
+
+splice() - Add/Remove at any position:
+    let fruits = ["Apple", "Banana", "Orange", "Mango"];
+
+    // Remove 2 elements starting at index 1
+    let removed = fruits.splice(1, 2);
+    console.log(removed);  // ["Banana", "Orange"]
+    console.log(fruits);   // ["Apple", "Mango"]
+
+    // Insert elements at index 1
+    fruits.splice(1, 0, "Grape", "Kiwi");
+    console.log(fruits);  // ["Apple", "Grape", "Kiwi", "Mango"]
+
+    // Replace 1 element at index 2
+    fruits.splice(2, 1, "Cherry");
+    console.log(fruits);  // ["Apple", "Grape", "Cherry", "Mango"]
+
+5. Array Methods - Extracting/Combining
+---------------------------------------
+
+slice() - Extract portion (doesn't modify original):
+    let fruits = ["Apple", "Banana", "Orange", "Mango"];
+
+    let citrus = fruits.slice(1, 3);  // From index 1 to 3 (exclusive)
+    console.log(citrus);   // ["Banana", "Orange"]
+    console.log(fruits);   // ["Apple", "Banana", "Orange", "Mango"] (unchanged)
+
+    let last2 = fruits.slice(-2);  // Last 2 elements
+    console.log(last2);  // ["Orange", "Mango"]
+
+concat() - Merge arrays:
+    let arr1 = [1, 2, 3];
+    let arr2 = [4, 5, 6];
+    let arr3 = arr1.concat(arr2);
+    console.log(arr3);  // [1, 2, 3, 4, 5, 6]
+
+    // Spread operator alternative (ES6)
+    let arr4 = [...arr1, ...arr2];
+
+6. Array Methods - Searching
+----------------------------
+
+indexOf() - Find first index of element:
+    let fruits = ["Apple", "Banana", "Orange", "Banana"];
+    console.log(fruits.indexOf("Banana"));     // 1
+    console.log(fruits.indexOf("Grape"));      // -1 (not found)
+    console.log(fruits.indexOf("Banana", 2));  // 3 (start from index 2)
+
+lastIndexOf() - Find last index of element:
+    console.log(fruits.lastIndexOf("Banana")); // 3
+
+includes() - Check if element exists (ES7):
+    console.log(fruits.includes("Apple"));  // true
+    console.log(fruits.includes("Grape"));  // false
+
+find() - Find first element matching condition (ES6):
+    let numbers = [5, 12, 8, 130, 44];
+    let found = numbers.find(num => num > 10);
+    console.log(found);  // 12
+
+findIndex() - Find index of first element matching condition:
+    let index = numbers.findIndex(num => num > 10);
+    console.log(index);  // 1
+
+7. Array Methods - Iteration
+----------------------------
+
+forEach() - Execute function for each element:
+    let fruits = ["Apple", "Banana", "Orange"];
+
+    fruits.forEach(function(fruit, index) {
+        console.log(index + ": " + fruit);
+    });
+    // 0: Apple
+    // 1: Banana
+    // 2: Orange
+
+    // Arrow function version
+    fruits.forEach((fruit, index) => console.log(`${index}: ${fruit}`));
+
+map() - Create new array by transforming each element:
+    let numbers = [1, 2, 3, 4, 5];
+    let doubled = numbers.map(num => num * 2);
+    console.log(doubled);  // [2, 4, 6, 8, 10]
+
+    let words = ["hello", "world"];
+    let upper = words.map(word => word.toUpperCase());
+    console.log(upper);  // ["HELLO", "WORLD"]
+
+filter() - Create new array with elements that pass test:
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let evens = numbers.filter(num => num % 2 === 0);
+    console.log(evens);  // [2, 4, 6, 8, 10]
+
+    let adults = people.filter(person => person.age >= 18);
+
+reduce() - Reduce array to single value:
+    let numbers = [1, 2, 3, 4, 5];
+
+    // Sum
+    let sum = numbers.reduce((accumulator, current) => {
+        return accumulator + current;
+    }, 0);
+    console.log(sum);  // 15
+
+    // Shorter version
+    let sum2 = numbers.reduce((acc, cur) => acc + cur, 0);
+
+    // Max value
+    let max = numbers.reduce((a, b) => a > b ? a : b);
+    console.log(max);  // 5
+
+every() - Check if all elements pass test:
+    let numbers = [2, 4, 6, 8];
+    let allEven = numbers.every(num => num % 2 === 0);
+    console.log(allEven);  // true
+
+some() - Check if any element passes test:
+    let numbers = [1, 3, 5, 6, 7];
+    let hasEven = numbers.some(num => num % 2 === 0);
+    console.log(hasEven);  // true
+
+8. Array Methods - Sorting and Reversing
+----------------------------------------
+
+sort() - Sort array in place:
+    let fruits = ["Banana", "Apple", "Orange"];
+    fruits.sort();
+    console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+    // Numbers require compare function
+    let numbers = [40, 100, 1, 5, 25];
+    numbers.sort();  // [1, 100, 25, 40, 5] - Wrong! (string comparison)
+
+    numbers.sort((a, b) => a - b);  // Ascending
+    console.log(numbers);  // [1, 5, 25, 40, 100]
+
+    numbers.sort((a, b) => b - a);  // Descending
+    console.log(numbers);  // [100, 40, 25, 5, 1]
+
+reverse() - Reverse array in place:
+    let arr = [1, 2, 3, 4, 5];
+    arr.reverse();
+    console.log(arr);  // [5, 4, 3, 2, 1]
+
+9. Array Methods - Converting
+-----------------------------
+
+join() - Convert array to string:
+    let fruits = ["Apple", "Banana", "Orange"];
+    console.log(fruits.join());       // "Apple,Banana,Orange"
+    console.log(fruits.join(" - "));  // "Apple - Banana - Orange"
+    console.log(fruits.join(""));     // "AppleBananaOrange"
+
+toString() - Convert to comma-separated string:
+    console.log(fruits.toString());  // "Apple,Banana,Orange"
+
+Array.from() - Create array from iterable:
+    let str = "Hello";
+    let chars = Array.from(str);
+    console.log(chars);  // ["H", "e", "l", "l", "o"]
+
+10. Spread Operator with Arrays (ES6)
+-------------------------------------
+    let arr1 = [1, 2, 3];
+    let arr2 = [4, 5, 6];
+
+    // Combine arrays
+    let combined = [...arr1, ...arr2];
+    console.log(combined);  // [1, 2, 3, 4, 5, 6]
+
+    // Copy array
+    let copy = [...arr1];
+
+    // Add elements
+    let extended = [0, ...arr1, 4];
+    console.log(extended);  // [0, 1, 2, 3, 4]
+
+11. Destructuring Arrays (ES6)
+------------------------------
+    let fruits = ["Apple", "Banana", "Orange"];
+
+    let [first, second, third] = fruits;
+    console.log(first);   // "Apple"
+    console.log(second);  // "Banana"
+
+    // Skip elements
+    let [a, , c] = fruits;
+    console.log(a, c);  // "Apple" "Orange"
+
+    // Rest pattern
+    let [head, ...tail] = fruits;
+    console.log(head);  // "Apple"
+    console.log(tail);  // ["Banana", "Orange"]
+
+    // Default values
+    let [x, y, z, w = "Default"] = fruits;
+    console.log(w);  // "Default"
+
+================================================================================
+6.11 OBJECTS
+================================================================================
+
+Objects are collections of key-value pairs (properties and methods).
+
+1. Creating Objects
+-------------------
+
+Object Literal (most common):
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 30,
+        email: "john@example.com"
+    };
+
+Object Constructor:
+    let person = new Object();
+    person.firstName = "John";
+    person.lastName = "Doe";
+
+Object.create():
+    let personPrototype = {
+        greet: function() {
+            return "Hello!";
+        }
+    };
+    let person = Object.create(personPrototype);
+
+2. Accessing Properties
+-----------------------
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 30
+    };
+
+    // Dot notation
+    console.log(person.firstName);  // "John"
+
+    // Bracket notation
+    console.log(person["lastName"]);  // "Doe"
+
+    // Bracket notation with variable
+    let prop = "age";
+    console.log(person[prop]);  // 30
+
+    // Bracket notation required for:
+    // - Property names with spaces or special characters
+    // - Property names that are numbers
+    // - Dynamic property names
+    let obj = {
+        "full name": "John Doe",
+        123: "number key"
+    };
+    console.log(obj["full name"]);  // "John Doe"
+    console.log(obj[123]);          // "number key"
+
+3. Modifying Objects
+--------------------
+    let person = {
+        name: "John",
+        age: 30
+    };
+
+    // Add property
+    person.city = "Kathmandu";
+    person["country"] = "Nepal";
+
+    // Modify property
+    person.age = 31;
+
+    // Delete property
+    delete person.city;
+
+    console.log(person);  // {name: "John", age: 31, country: "Nepal"}
+
+4. Object Methods
+-----------------
+Methods are functions stored as object properties.
+
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        fullName: function() {
+            return this.firstName + " " + this.lastName;
+        },
+        // Shorthand syntax (ES6)
+        greet() {
+            return "Hello, I'm " + this.firstName;
+        }
+    };
+
+    console.log(person.fullName());  // "John Doe"
+    console.log(person.greet());     // "Hello, I'm John"
+
+The 'this' Keyword:
+    // 'this' refers to the object the method belongs to
+    let calculator = {
+        value: 0,
+        add(n) {
+            this.value += n;
+            return this;  // Return for chaining
+        },
+        subtract(n) {
+            this.value -= n;
+            return this;
+        },
+        getResult() {
+            return this.value;
+        }
+    };
+
+    // Method chaining
+    let result = calculator.add(10).subtract(3).add(5).getResult();
+    console.log(result);  // 12
+
+5. Checking Properties
+----------------------
+    let person = {
+        name: "John",
+        age: 30
+    };
+
+    // 'in' operator
+    console.log("name" in person);     // true
+    console.log("email" in person);    // false
+
+    // hasOwnProperty()
+    console.log(person.hasOwnProperty("name"));  // true
+
+    // Check for undefined
+    console.log(person.email === undefined);  // true
+
+6. Iterating Over Objects
+-------------------------
+    let person = {
+        name: "John",
+        age: 30,
+        city: "Kathmandu"
+    };
+
+    // for...in loop
+    for (let key in person) {
+        console.log(key + ": " + person[key]);
+    }
+
+    // Object.keys() - array of keys
+    let keys = Object.keys(person);
+    console.log(keys);  // ["name", "age", "city"]
+
+    // Object.values() - array of values
+    let values = Object.values(person);
+    console.log(values);  // ["John", 30, "Kathmandu"]
+
+    // Object.entries() - array of [key, value] pairs
+    let entries = Object.entries(person);
+    console.log(entries);
+    // [["name", "John"], ["age", 30], ["city", "Kathmandu"]]
+
+    // Using forEach with entries
+    Object.entries(person).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+    });
+
+7. Object Constructors
+----------------------
+Create multiple objects with the same structure.
+
+    // Constructor function
+    function Person(firstName, lastName, age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.fullName = function() {
+            return this.firstName + " " + this.lastName;
+        };
+    }
+
+    // Create instances
+    let person1 = new Person("John", "Doe", 30);
+    let person2 = new Person("Jane", "Smith", 25);
+
+    console.log(person1.fullName());  // "John Doe"
+    console.log(person2.fullName());  // "Jane Smith"
+
+8. Prototypes
+-------------
+Objects inherit properties from their prototype.
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    // Add method to prototype (shared by all instances)
+    Person.prototype.greet = function() {
+        return "Hello, I'm " + this.name;
+    };
+
+    let person1 = new Person("John");
+    let person2 = new Person("Jane");
+
+    console.log(person1.greet());  // "Hello, I'm John"
+    console.log(person2.greet());  // "Hello, I'm Jane"
+
+    // Both instances share the same method
+    console.log(person1.greet === person2.greet);  // true
+
+9. ES6 Classes
+--------------
+Modern syntax for object constructors.
+
+    class Person {
+        constructor(firstName, lastName, age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+        }
+
+        fullName() {
+            return `${this.firstName} ${this.lastName}`;
+        }
+
+        greet() {
+            return `Hello, I'm ${this.firstName}`;
+        }
+
+        // Getter
+        get info() {
+            return `${this.fullName()}, ${this.age} years old`;
+        }
+
+        // Setter
+        set info(value) {
+            [this.firstName, this.lastName] = value.split(" ");
+        }
+
+        // Static method
+        static createAnonymous() {
+            return new Person("Anonymous", "User", 0);
+        }
+    }
+
+    let person = new Person("John", "Doe", 30);
+    console.log(person.fullName());  // "John Doe"
+    console.log(person.info);        // "John Doe, 30 years old"
+
+    // Static method
+    let anon = Person.createAnonymous();
+
+10. Object Spread and Rest (ES6)
+--------------------------------
+    let person = {
+        name: "John",
+        age: 30
+    };
+
+    // Spread - copy object
+    let copy = { ...person };
+
+    // Spread - merge objects
+    let details = { city: "Kathmandu", country: "Nepal" };
+    let fullPerson = { ...person, ...details };
+    console.log(fullPerson);
+    // {name: "John", age: 30, city: "Kathmandu", country: "Nepal"}
+
+    // Override properties
+    let updated = { ...person, age: 31 };
+    console.log(updated);  // {name: "John", age: 31}
+
+    // Rest in destructuring
+    let { name, ...rest } = fullPerson;
+    console.log(name);  // "John"
+    console.log(rest);  // {age: 30, city: "Kathmandu", country: "Nepal"}
+
+11. Object Destructuring (ES6)
+------------------------------
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 30,
+        city: "Kathmandu"
+    };
+
+    // Basic destructuring
+    let { firstName, lastName } = person;
+    console.log(firstName);  // "John"
+
+    // Rename variables
+    let { firstName: fName, lastName: lName } = person;
+    console.log(fName);  // "John"
+
+    // Default values
+    let { firstName, email = "not provided" } = person;
+    console.log(email);  // "not provided"
+
+    // Nested destructuring
+    let user = {
+        name: "John",
+        address: {
+            city: "Kathmandu",
+            country: "Nepal"
+        }
+    };
+    let { address: { city, country } } = user;
+    console.log(city, country);  // "Kathmandu" "Nepal"
+
+    // Function parameter destructuring
+    function greetPerson({ firstName, lastName }) {
+        return `Hello, ${firstName} ${lastName}!`;
+    }
+    console.log(greetPerson(person));  // "Hello, John Doe!"
+
+12. Useful Object Methods
+-------------------------
+    // Object.assign() - copy/merge objects
+    let target = { a: 1 };
+    let source = { b: 2 };
+    Object.assign(target, source);
+    console.log(target);  // {a: 1, b: 2}
+
+    // Object.freeze() - make object immutable
+    let frozen = Object.freeze({ name: "John" });
+    frozen.name = "Jane";  // Silently fails (or error in strict mode)
+    console.log(frozen.name);  // "John"
+
+    // Object.seal() - prevent adding/removing properties
+    let sealed = Object.seal({ name: "John" });
+    sealed.name = "Jane";  // Works
+    sealed.age = 30;       // Fails
+    delete sealed.name;    // Fails
+
+    // Object.isFrozen(), Object.isSealed()
+    console.log(Object.isFrozen(frozen));  // true
+    console.log(Object.isSealed(sealed));  // true
+
+================================================================================
+                           SUMMARY
+================================================================================
+
+Key Topics Covered:
+
+1. JavaScript Introduction: Role in web development, characteristics, history
+
+2. Using JS in HTML: Inline, internal, and external JavaScript
+
+3. JavaScript Output: innerHTML, document.write(), alert(), console.log()
+
+4. Comments: Single-line (//), multi-line (/* */), JSDoc
+
+5. Variables and Data Types:
+   - var, let, const
+   - Primitives: String, Number, Boolean, Undefined, Null, Symbol, BigInt
+   - Reference: Object
+
+6. Operators: Arithmetic, assignment, comparison, logical, ternary
+
+7. Control Flow: if, else, else if, switch, ternary operator
+
+8. Loops: for, while, do...while, for...in, for...of, break, continue
+
+9. Functions: Declaration, expression, arrow functions, parameters, return,
+   callbacks, IIFE, recursion
+
+10. Arrays: Creating, accessing, methods (push, pop, shift, unshift, splice,
+    slice, map, filter, reduce, forEach, find, sort, etc.)
+
+11. Objects: Creating, accessing, methods, constructors, prototypes, classes,
+    destructuring, spread/rest operators
+
+================================================================================
+                      PRACTICE EXERCISES
+================================================================================
+
+Exercise 1: Variables and Data Types
+------------------------------------
+Create variables of each data type and print them with their types.
+
+Exercise 2: Calculator Functions
+--------------------------------
+Write functions for add, subtract, multiply, and divide operations.
+
+Exercise 3: Grade Calculator
+----------------------------
+Write a program that takes marks and returns the grade (A, B, C, D, F).
+
+Exercise 4: Multiplication Table
+--------------------------------
+Use loops to print a multiplication table for a given number.
+
+Exercise 5: Array Operations
+----------------------------
+Create an array of numbers and:
+- Find the sum
+- Find the average
+- Find max and min
+- Filter even numbers
+- Double all numbers
+
+Exercise 6: Student Object
+--------------------------
+Create a student object with:
+- Properties: name, rollNo, marks (array)
+- Methods: getAverage(), getGrade(), displayInfo()
+
+Exercise 7: Todo List
+---------------------
+Create a simple todo list with functions to:
+- Add todo
+- Remove todo
+- Mark as complete
+- Display all todos
+
+================================================================================
+                        REFERENCES
+================================================================================
+
+1. Robbins, J. N. (2018). Learning Web Design: A Beginner's Guide to HTML, CSS,
+   JavaScript, and Web Graphics. O'Reilly Media.
+
+2. MDN Web Docs - JavaScript Guide:
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+
+3. JavaScript.info - The Modern JavaScript Tutorial:
+   https://javascript.info/
+
+================================================================================
+                   END OF UNIT 6 NOTES
+================================================================================

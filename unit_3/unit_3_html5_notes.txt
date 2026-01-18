@@ -1,0 +1,1858 @@
+================================================================================
+                      UNIT 3: HTML5
+                         (7 Hours)
+================================================================================
+
+Course: Internet Technology (CMP 173)
+Program: BCSIT, Pokhara University
+
+================================================================================
+                        TABLE OF CONTENTS
+================================================================================
+
+3.1  HTML5 APIs
+3.2  HTML5 Forms
+3.3  Responsive Web Design
+3.4  HTML5 (New Elements and Features)
+3.5  Semantic Markup
+3.6  Best Practices and Optimization
+
+================================================================================
+                    LEARNING OBJECTIVES
+================================================================================
+
+After completing this unit, students will be able to:
+
+- Create graphics using the HTML5 canvas element
+- Explore new form input types, including email, URL, date, time, and range
+- Master form validation using built-in attributes and placeholder text
+- Adhere to proper code indentation, formatting, and consistent naming
+  conventions
+- Understand and implement HTML5 semantic elements
+- Apply responsive web design principles
+- Implement HTML5 best practices for optimal web development
+
+================================================================================
+3.1 HTML5 APIs
+================================================================================
+
+HTML5 introduced several powerful APIs (Application Programming Interfaces)
+that enable rich web applications without plugins.
+
+CANVAS API
+----------
+The Canvas API provides a means for drawing graphics via JavaScript.
+
+Basic Canvas Setup:
+    <canvas id="myCanvas" width="500" height="300">
+        Your browser does not support the canvas element.
+    </canvas>
+
+    <script>
+        // Get canvas element and context
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+    </script>
+
+Drawing Basic Shapes:
+
+1. Rectangles:
+    // Filled rectangle
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(10, 10, 100, 50);  // x, y, width, height
+
+    // Stroked rectangle (outline)
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(120, 10, 100, 50);
+
+    // Clear rectangle (eraser)
+    ctx.clearRect(15, 15, 30, 20);
+
+2. Lines and Paths:
+    // Simple line
+    ctx.beginPath();
+    ctx.moveTo(50, 100);    // Starting point
+    ctx.lineTo(200, 100);   // End point
+    ctx.stroke();
+
+    // Multiple connected lines
+    ctx.beginPath();
+    ctx.moveTo(50, 150);
+    ctx.lineTo(100, 120);
+    ctx.lineTo(150, 180);
+    ctx.lineTo(200, 150);
+    ctx.stroke();
+
+    // Closed path (triangle)
+    ctx.beginPath();
+    ctx.moveTo(300, 100);
+    ctx.lineTo(350, 180);
+    ctx.lineTo(250, 180);
+    ctx.closePath();
+    ctx.fillStyle = 'green';
+    ctx.fill();
+    ctx.stroke();
+
+3. Circles and Arcs:
+    // Full circle
+    ctx.beginPath();
+    ctx.arc(100, 250, 40, 0, Math.PI * 2);  // x, y, radius, startAngle, endAngle
+    ctx.fillStyle = 'purple';
+    ctx.fill();
+
+    // Semi-circle
+    ctx.beginPath();
+    ctx.arc(200, 250, 40, 0, Math.PI);
+    ctx.stroke();
+
+    // Arc (quarter circle)
+    ctx.beginPath();
+    ctx.arc(300, 250, 40, 0, Math.PI / 2);
+    ctx.stroke();
+
+4. Text:
+    ctx.font = '30px Arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText('Hello Canvas!', 50, 50);  // text, x, y
+
+    ctx.strokeStyle = 'blue';
+    ctx.strokeText('Outlined Text', 50, 100);
+
+    // Text alignment
+    ctx.textAlign = 'center';  // start, end, left, right, center
+    ctx.textBaseline = 'middle';  // top, hanging, middle, alphabetic, bottom
+
+5. Gradients:
+    // Linear gradient
+    const linearGradient = ctx.createLinearGradient(0, 0, 200, 0);
+    linearGradient.addColorStop(0, 'red');
+    linearGradient.addColorStop(0.5, 'yellow');
+    linearGradient.addColorStop(1, 'green');
+    ctx.fillStyle = linearGradient;
+    ctx.fillRect(10, 10, 200, 100);
+
+    // Radial gradient
+    const radialGradient = ctx.createRadialGradient(100, 200, 10, 100, 200, 50);
+    radialGradient.addColorStop(0, 'white');
+    radialGradient.addColorStop(1, 'blue');
+    ctx.fillStyle = radialGradient;
+    ctx.beginPath();
+    ctx.arc(100, 200, 50, 0, Math.PI * 2);
+    ctx.fill();
+
+6. Images:
+    const img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 10, 10);  // x, y
+        ctx.drawImage(img, 10, 10, 100, 100);  // x, y, width, height
+        ctx.drawImage(img, 0, 0, 50, 50, 10, 10, 100, 100);  // crop and draw
+    };
+    img.src = 'image.jpg';
+
+7. Transformations:
+    // Translate (move origin)
+    ctx.translate(100, 100);
+
+    // Rotate
+    ctx.rotate(Math.PI / 4);  // 45 degrees
+
+    // Scale
+    ctx.scale(2, 2);  // double size
+
+    // Save and restore state
+    ctx.save();
+    ctx.translate(50, 50);
+    ctx.fillRect(0, 0, 50, 50);
+    ctx.restore();  // Back to original state
+
+Canvas Animation Example:
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let x = 0;
+
+    function animate() {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw moving circle
+        ctx.beginPath();
+        ctx.arc(x, 100, 20, 0, Math.PI * 2);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+
+        // Update position
+        x += 2;
+        if (x > canvas.width) x = 0;
+
+        // Request next frame
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+GEOLOCATION API
+---------------
+Allows websites to access the user's geographical location.
+
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            // Success callback
+            function(position) {
+                console.log('Latitude:', position.coords.latitude);
+                console.log('Longitude:', position.coords.longitude);
+                console.log('Accuracy:', position.coords.accuracy, 'meters');
+                console.log('Altitude:', position.coords.altitude);
+                console.log('Speed:', position.coords.speed);
+            },
+            // Error callback
+            function(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        console.log('User denied the request.');
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        console.log('Location information unavailable.');
+                        break;
+                    case error.TIMEOUT:
+                        console.log('Request timed out.');
+                        break;
+                }
+            },
+            // Options
+            {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            }
+        );
+
+        // Watch position (continuous tracking)
+        const watchId = navigator.geolocation.watchPosition(successCallback);
+
+        // Stop watching
+        navigator.geolocation.clearWatch(watchId);
+    }
+
+WEB STORAGE API
+---------------
+Provides mechanisms for storing data in the browser.
+
+1. localStorage (persistent):
+    // Store data
+    localStorage.setItem('username', 'John');
+    localStorage.setItem('user', JSON.stringify({name: 'John', age: 30}));
+
+    // Retrieve data
+    const username = localStorage.getItem('username');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Remove data
+    localStorage.removeItem('username');
+
+    // Clear all data
+    localStorage.clear();
+
+    // Check storage length
+    console.log(localStorage.length);
+
+    // Get key by index
+    const key = localStorage.key(0);
+
+2. sessionStorage (cleared when tab closes):
+    // Same methods as localStorage
+    sessionStorage.setItem('sessionData', 'value');
+    sessionStorage.getItem('sessionData');
+    sessionStorage.removeItem('sessionData');
+    sessionStorage.clear();
+
+Storage Capacity:
+- Typically 5-10 MB per origin
+- Synchronous API (can block main thread)
+
+DRAG AND DROP API
+-----------------
+Enables drag-and-drop functionality.
+
+HTML:
+    <div id="dragItem" draggable="true">Drag me!</div>
+    <div id="dropZone">Drop here</div>
+
+JavaScript:
+    const dragItem = document.getElementById('dragItem');
+    const dropZone = document.getElementById('dropZone');
+
+    // Drag events on draggable element
+    dragItem.addEventListener('dragstart', function(e) {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        e.target.style.opacity = '0.5';
+    });
+
+    dragItem.addEventListener('dragend', function(e) {
+        e.target.style.opacity = '1';
+    });
+
+    // Drop events on drop zone
+    dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();  // Required to allow drop
+        e.target.style.background = '#e0e0e0';
+    });
+
+    dropZone.addEventListener('dragleave', function(e) {
+        e.target.style.background = '';
+    });
+
+    dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        const draggedElement = document.getElementById(id);
+        e.target.appendChild(draggedElement);
+        e.target.style.background = '';
+    });
+
+WEB WORKERS API
+---------------
+Run scripts in background threads.
+
+Main Script (main.js):
+    // Create worker
+    const worker = new Worker('worker.js');
+
+    // Send message to worker
+    worker.postMessage({data: [1, 2, 3, 4, 5]});
+
+    // Receive message from worker
+    worker.onmessage = function(e) {
+        console.log('Result from worker:', e.data);
+    };
+
+    // Handle errors
+    worker.onerror = function(e) {
+        console.error('Worker error:', e.message);
+    };
+
+    // Terminate worker
+    worker.terminate();
+
+Worker Script (worker.js):
+    // Receive message from main script
+    self.onmessage = function(e) {
+        const data = e.data.data;
+        const sum = data.reduce((a, b) => a + b, 0);
+
+        // Send result back
+        self.postMessage(sum);
+    };
+
+HISTORY API
+-----------
+Manipulate browser history.
+
+    // Navigate
+    history.back();      // Go back
+    history.forward();   // Go forward
+    history.go(-2);      // Go back 2 pages
+
+    // Push new state (no page reload)
+    history.pushState({page: 1}, 'Page 1', '/page1');
+
+    // Replace current state
+    history.replaceState({page: 2}, 'Page 2', '/page2');
+
+    // Listen for popstate (back/forward)
+    window.addEventListener('popstate', function(e) {
+        console.log('State:', e.state);
+    });
+
+================================================================================
+3.2 HTML5 FORMS
+================================================================================
+
+HTML5 introduced new input types, attributes, and validation features.
+
+NEW INPUT TYPES
+---------------
+
+1. email:
+    <input type="email" name="email" placeholder="Enter email">
+    <!-- Auto-validates email format -->
+
+2. url:
+    <input type="url" name="website" placeholder="https://example.com">
+    <!-- Auto-validates URL format -->
+
+3. tel:
+    <input type="tel" name="phone" placeholder="123-456-7890">
+    <!-- Shows telephone keypad on mobile -->
+
+4. number:
+    <input type="number" name="quantity" min="1" max="100" step="1" value="1">
+    <!-- Shows number spinner -->
+
+5. range:
+    <input type="range" name="volume" min="0" max="100" value="50">
+    <!-- Shows slider control -->
+
+6. date:
+    <input type="date" name="birthday" min="1900-01-01" max="2024-12-31">
+    <!-- Shows date picker -->
+
+7. time:
+    <input type="time" name="appointment">
+    <!-- Shows time picker -->
+
+8. datetime-local:
+    <input type="datetime-local" name="meeting">
+    <!-- Shows date and time picker -->
+
+9. month:
+    <input type="month" name="expiry">
+    <!-- Shows month/year picker -->
+
+10. week:
+    <input type="week" name="week">
+    <!-- Shows week picker -->
+
+11. color:
+    <input type="color" name="favcolor" value="#ff0000">
+    <!-- Shows color picker -->
+
+12. search:
+    <input type="search" name="query" placeholder="Search...">
+    <!-- Search-styled input with clear button -->
+
+NEW FORM ATTRIBUTES
+-------------------
+
+1. placeholder:
+    <input type="text" placeholder="Enter your name">
+    <!-- Hint text that disappears on focus -->
+
+2. required:
+    <input type="text" name="username" required>
+    <!-- Field must be filled before submission -->
+
+3. autofocus:
+    <input type="text" autofocus>
+    <!-- Automatically focuses on page load -->
+
+4. autocomplete:
+    <input type="text" autocomplete="on">
+    <input type="text" autocomplete="off">
+    <input type="email" autocomplete="email">
+    <!-- Browser auto-completion behavior -->
+
+5. pattern:
+    <input type="text" pattern="[A-Za-z]{3}" title="Three letters only">
+    <!-- Regular expression validation -->
+
+6. min, max, step:
+    <input type="number" min="0" max="100" step="5">
+    <input type="date" min="2024-01-01" max="2024-12-31">
+
+7. multiple:
+    <input type="file" multiple>
+    <input type="email" multiple>
+    <!-- Allow multiple values -->
+
+8. list (with datalist):
+    <input type="text" list="browsers">
+    <datalist id="browsers">
+        <option value="Chrome">
+        <option value="Firefox">
+        <option value="Safari">
+        <option value="Edge">
+    </datalist>
+
+9. form attribute:
+    <!-- Link input to form outside of it -->
+    <form id="myForm">
+        <input type="text" name="inside">
+    </form>
+    <input type="text" name="outside" form="myForm">
+
+10. formaction, formmethod, formenctype:
+    <form action="/default" method="get">
+        <input type="submit" value="Submit">
+        <input type="submit" formaction="/other" formmethod="post" value="Other">
+    </form>
+
+FORM VALIDATION
+---------------
+
+Built-in Validation:
+
+1. Required validation:
+    <input type="text" required>
+
+2. Type validation:
+    <input type="email">  <!-- Validates email format -->
+    <input type="url">    <!-- Validates URL format -->
+
+3. Pattern validation:
+    <!-- Phone number pattern -->
+    <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+           title="Format: 123-456-7890">
+
+    <!-- Username pattern -->
+    <input type="text" pattern="[a-zA-Z0-9]{4,12}"
+           title="4-12 alphanumeric characters">
+
+4. Length validation:
+    <input type="text" minlength="3" maxlength="20">
+    <textarea minlength="10" maxlength="500"></textarea>
+
+5. Range validation:
+    <input type="number" min="1" max="100">
+
+Validation CSS Pseudo-classes:
+    /* Valid input */
+    input:valid {
+        border-color: green;
+    }
+
+    /* Invalid input */
+    input:invalid {
+        border-color: red;
+    }
+
+    /* Required field */
+    input:required {
+        border-left: 3px solid red;
+    }
+
+    /* Optional field */
+    input:optional {
+        border-left: 3px solid gray;
+    }
+
+    /* In range */
+    input:in-range {
+        background-color: #dff0d8;
+    }
+
+    /* Out of range */
+    input:out-of-range {
+        background-color: #f2dede;
+    }
+
+Custom Validation Messages:
+    <input type="email" id="email" required
+           oninvalid="this.setCustomValidity('Please enter a valid email address')"
+           oninput="this.setCustomValidity('')">
+
+JavaScript Validation API:
+    const form = document.getElementById('myForm');
+    const email = document.getElementById('email');
+
+    form.addEventListener('submit', function(e) {
+        if (!email.validity.valid) {
+            e.preventDefault();
+
+            if (email.validity.valueMissing) {
+                email.setCustomValidity('Email is required');
+            } else if (email.validity.typeMismatch) {
+                email.setCustomValidity('Please enter a valid email');
+            }
+        }
+    });
+
+    // Validity properties
+    email.validity.valid          // Overall validity
+    email.validity.valueMissing   // Required but empty
+    email.validity.typeMismatch   // Wrong type (email, url)
+    email.validity.patternMismatch // Pattern not matched
+    email.validity.tooLong        // Exceeds maxlength
+    email.validity.tooShort       // Below minlength
+    email.validity.rangeUnderflow // Below min
+    email.validity.rangeOverflow  // Above max
+    email.validity.stepMismatch   // Doesn't match step
+    email.validity.customError    // Custom error set
+
+    // Check validity
+    email.checkValidity();        // Returns true/false
+    email.reportValidity();       // Shows validation message
+
+    // Disable validation
+    <form novalidate>
+    <input formnovalidate type="submit">
+
+NEW FORM ELEMENTS
+-----------------
+
+1. <datalist> - Predefined options:
+    <input type="text" list="countries" name="country">
+    <datalist id="countries">
+        <option value="Nepal">
+        <option value="India">
+        <option value="China">
+        <option value="USA">
+    </datalist>
+
+2. <output> - Calculation result:
+    <form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+        <input type="number" id="a" value="0"> +
+        <input type="number" id="b" value="0"> =
+        <output name="result" for="a b">0</output>
+    </form>
+
+3. <progress> - Progress bar:
+    <progress value="70" max="100">70%</progress>
+
+    <!-- Indeterminate progress -->
+    <progress></progress>
+
+4. <meter> - Measurement gauge:
+    <meter value="0.6" min="0" max="1" low="0.3" high="0.7" optimum="0.8">
+        60%
+    </meter>
+
+    <!-- Fuel gauge example -->
+    <meter value="2" min="0" max="10" low="2" high="8" optimum="5">
+        2 out of 10
+    </meter>
+
+COMPLETE FORM EXAMPLE
+---------------------
+    <form id="registrationForm" action="/register" method="post">
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <div class="form-group">
+                <label for="fullname">Full Name *</label>
+                <input type="text" id="fullname" name="fullname"
+                       required minlength="2" maxlength="50"
+                       placeholder="Enter your full name" autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email"
+                       required placeholder="example@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone"
+                       pattern="[0-9]{10}"
+                       placeholder="9800000000">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob"
+                       min="1950-01-01" max="2010-12-31">
+            </div>
+
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" id="website" name="website"
+                       placeholder="https://yourwebsite.com">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Settings</legend>
+
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <input type="text" id="username" name="username"
+                       required pattern="[a-zA-Z0-9_]{4,16}"
+                       title="4-16 characters, letters, numbers, underscore"
+                       list="suggested-usernames">
+                <datalist id="suggested-usernames">
+                    <option value="user123">
+                    <option value="newuser">
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password"
+                       required minlength="8"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                       title="At least 8 chars with uppercase, lowercase, and number">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age"
+                       min="18" max="120" step="1">
+            </div>
+
+            <div class="form-group">
+                <label for="satisfaction">Satisfaction Level</label>
+                <input type="range" id="satisfaction" name="satisfaction"
+                       min="0" max="10" value="5">
+                <output for="satisfaction">5</output>
+            </div>
+
+            <div class="form-group">
+                <label for="color">Favorite Color</label>
+                <input type="color" id="color" name="color" value="#3498db">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Info</legend>
+
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" rows="4"
+                          maxlength="500" placeholder="Tell us about yourself..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="avatar">Profile Picture</label>
+                <input type="file" id="avatar" name="avatar"
+                       accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="documents">Documents</label>
+                <input type="file" id="documents" name="documents"
+                       multiple accept=".pdf,.doc,.docx">
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit">Register</button>
+            <button type="reset">Clear Form</button>
+        </div>
+    </form>
+
+================================================================================
+3.3 RESPONSIVE WEB DESIGN
+================================================================================
+
+Responsive Web Design (RWD) makes web pages look good on all devices.
+
+VIEWPORT META TAG
+-----------------
+Essential for responsive design on mobile devices.
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+Viewport Properties:
+    width=device-width   - Match screen width
+    initial-scale=1.0    - Initial zoom level (1 = no zoom)
+    maximum-scale=1.0    - Maximum zoom allowed
+    minimum-scale=1.0    - Minimum zoom allowed
+    user-scalable=no     - Disable user zoom (not recommended)
+
+RESPONSIVE IMAGES
+-----------------
+
+1. Fluid Images:
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+2. srcset attribute (resolution switching):
+    <img src="small.jpg"
+         srcset="small.jpg 300w,
+                 medium.jpg 600w,
+                 large.jpg 1200w"
+         sizes="(max-width: 600px) 300px,
+                (max-width: 1200px) 600px,
+                1200px"
+         alt="Responsive image">
+
+3. picture element (art direction):
+    <picture>
+        <source media="(min-width: 1200px)" srcset="large.jpg">
+        <source media="(min-width: 768px)" srcset="medium.jpg">
+        <source media="(min-width: 480px)" srcset="small.jpg">
+        <img src="default.jpg" alt="Responsive image">
+    </picture>
+
+    <!-- Different formats -->
+    <picture>
+        <source type="image/webp" srcset="image.webp">
+        <source type="image/jpeg" srcset="image.jpg">
+        <img src="image.jpg" alt="Image with fallback">
+    </picture>
+
+RESPONSIVE TYPOGRAPHY
+---------------------
+
+1. Relative units:
+    html {
+        font-size: 16px;  /* Base size */
+    }
+
+    body {
+        font-size: 1rem;  /* 16px */
+    }
+
+    h1 {
+        font-size: 2.5rem;  /* 40px */
+    }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 14px;
+        }
+    }
+
+2. Viewport units:
+    h1 {
+        font-size: 5vw;  /* 5% of viewport width */
+    }
+
+3. clamp() function:
+    h1 {
+        font-size: clamp(1.5rem, 4vw, 3rem);
+        /* min: 1.5rem, preferred: 4vw, max: 3rem */
+    }
+
+RESPONSIVE LAYOUT TECHNIQUES
+----------------------------
+
+1. Percentage Widths:
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .column {
+        width: 50%;
+        float: left;
+    }
+
+2. Flexbox:
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .item {
+        flex: 1 1 300px;  /* grow shrink basis */
+    }
+
+3. CSS Grid:
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+MEDIA QUERIES IN HTML5
+----------------------
+Media queries allow different styles for different conditions.
+
+    /* Mobile first approach */
+    /* Base styles for mobile */
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Tablet and up */
+    @media (min-width: 768px) {
+        .container {
+            width: 750px;
+            margin: 0 auto;
+        }
+    }
+
+    /* Desktop and up */
+    @media (min-width: 992px) {
+        .container {
+            width: 970px;
+        }
+    }
+
+    /* Large desktop */
+    @media (min-width: 1200px) {
+        .container {
+            width: 1170px;
+        }
+    }
+
+Common Breakpoints:
+    - Mobile:       < 576px
+    - Small:        >= 576px
+    - Medium:       >= 768px
+    - Large:        >= 992px
+    - Extra Large:  >= 1200px
+
+HTML Responsive Elements:
+
+1. Responsive Video:
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                allowfullscreen></iframe>
+    </div>
+
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;  /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+2. Responsive Tables:
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                    <td>123-456-7890</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+
+================================================================================
+3.4 HTML5 (New Elements and Features)
+================================================================================
+
+HTML5 introduced many new elements for better structure and functionality.
+
+NEW STRUCTURAL ELEMENTS
+-----------------------
+
+1. <header>:
+    Contains introductory content or navigation.
+
+    <header>
+        <h1>Website Title</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+2. <nav>:
+    Contains navigation links.
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+3. <main>:
+    Contains the main content (only one per page).
+
+    <main>
+        <h1>Main Content Title</h1>
+        <p>Main content goes here...</p>
+    </main>
+
+4. <article>:
+    Self-contained content that could stand alone.
+
+    <article>
+        <header>
+            <h2>Article Title</h2>
+            <p>By Author Name | January 1, 2024</p>
+        </header>
+        <p>Article content...</p>
+        <footer>
+            <p>Tags: HTML5, Web Development</p>
+        </footer>
+    </article>
+
+5. <section>:
+    Thematic grouping of content.
+
+    <section>
+        <h2>About Us</h2>
+        <p>Information about the company...</p>
+    </section>
+
+    <section>
+        <h2>Our Services</h2>
+        <p>List of services...</p>
+    </section>
+
+6. <aside>:
+    Content tangentially related to main content.
+
+    <aside>
+        <h3>Related Articles</h3>
+        <ul>
+            <li><a href="#">Article 1</a></li>
+            <li><a href="#">Article 2</a></li>
+        </ul>
+    </aside>
+
+7. <footer>:
+    Footer for document or section.
+
+    <footer>
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
+        <nav>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+        </nav>
+    </footer>
+
+8. <figure> and <figcaption>:
+    Self-contained content with caption.
+
+    <figure>
+        <img src="image.jpg" alt="Description">
+        <figcaption>Figure 1: Image description</figcaption>
+    </figure>
+
+    <figure>
+        <pre><code>
+            function hello() {
+                console.log('Hello');
+            }
+        </code></pre>
+        <figcaption>Code Example: Hello function</figcaption>
+    </figure>
+
+9. <details> and <summary>:
+    Collapsible content.
+
+    <details>
+        <summary>Click to expand</summary>
+        <p>Hidden content that appears when expanded.</p>
+    </details>
+
+    <details open>
+        <summary>Already expanded</summary>
+        <p>This content is visible by default.</p>
+    </details>
+
+10. <mark>:
+    Highlighted/marked text.
+
+    <p>Search results for <mark>HTML5</mark> found.</p>
+
+11. <time>:
+    Machine-readable date/time.
+
+    <time datetime="2024-01-15">January 15, 2024</time>
+    <time datetime="2024-01-15T14:30:00">2:30 PM on January 15</time>
+    <time datetime="PT2H30M">2 hours 30 minutes</time>
+
+12. <address>:
+    Contact information.
+
+    <address>
+        <p>Contact us at:</p>
+        <a href="mailto:info@example.com">info@example.com</a><br>
+        <a href="tel:+1234567890">+1 234 567 890</a>
+    </address>
+
+MULTIMEDIA ELEMENTS
+-------------------
+
+1. <audio>:
+    <audio controls>
+        <source src="audio.mp3" type="audio/mpeg">
+        <source src="audio.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- With all attributes -->
+    <audio controls autoplay muted loop preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+    Audio Attributes:
+    - controls: Show play/pause/volume controls
+    - autoplay: Start playing automatically
+    - muted: Start muted
+    - loop: Loop playback
+    - preload: auto | metadata | none
+
+2. <video>:
+    <video controls width="640" height="360">
+        <source src="video.mp4" type="video/mp4">
+        <source src="video.webm" type="video/webm">
+        <source src="video.ogg" type="video/ogg">
+        Your browser does not support the video element.
+    </video>
+
+    <!-- With poster and all attributes -->
+    <video controls autoplay muted loop
+           poster="thumbnail.jpg"
+           width="640" height="360">
+        <source src="video.mp4" type="video/mp4">
+        <track src="captions.vtt" kind="subtitles"
+               srclang="en" label="English">
+    </video>
+
+    Video Attributes:
+    - controls: Show video controls
+    - autoplay: Start playing automatically
+    - muted: Start muted
+    - loop: Loop playback
+    - poster: Image shown before play
+    - width/height: Dimensions
+    - preload: auto | metadata | none
+    - playsinline: Play inline on mobile
+
+3. <track>:
+    Text tracks for video (subtitles, captions).
+
+    <video controls>
+        <source src="video.mp4" type="video/mp4">
+        <track src="subtitles_en.vtt" kind="subtitles"
+               srclang="en" label="English" default>
+        <track src="subtitles_np.vtt" kind="subtitles"
+               srclang="ne" label="Nepali">
+    </video>
+
+    Track kinds: subtitles, captions, descriptions, chapters, metadata
+
+EMBEDDED CONTENT
+----------------
+
+1. <embed>:
+    <embed src="plugin.swf" type="application/x-shockwave-flash"
+           width="400" height="300">
+
+2. <object>:
+    <object data="document.pdf" type="application/pdf"
+            width="600" height="400">
+        <p>PDF cannot be displayed. <a href="document.pdf">Download</a></p>
+    </object>
+
+3. <iframe>:
+    <iframe src="https://example.com"
+            width="600" height="400"
+            frameborder="0"
+            allowfullscreen
+            sandbox="allow-scripts allow-same-origin">
+    </iframe>
+
+    Sandbox values:
+    - allow-forms: Allow form submission
+    - allow-scripts: Allow scripts
+    - allow-same-origin: Allow same-origin access
+    - allow-popups: Allow popups
+
+OTHER NEW ELEMENTS
+------------------
+
+1. <wbr>: Word break opportunity
+    <p>This is a verylongwordthatmight<wbr>needtobreak</p>
+
+2. <bdi>: Bi-directional isolation
+    <p>User <bdi>إيان</bdi> posted: Hello</p>
+
+3. <ruby>, <rt>, <rp>: Ruby annotations (for East Asian typography)
+    <ruby>
+        漢 <rp>(</rp><rt>かん</rt><rp>)</rp>
+        字 <rp>(</rp><rt>じ</rt><rp>)</rp>
+    </ruby>
+
+NEW GLOBAL ATTRIBUTES
+---------------------
+
+1. contenteditable:
+    <div contenteditable="true">
+        Click to edit this text...
+    </div>
+
+2. data-* (custom data attributes):
+    <div data-user-id="123" data-role="admin">
+        User info
+    </div>
+
+    <script>
+        const div = document.querySelector('div');
+        console.log(div.dataset.userId);  // "123"
+        console.log(div.dataset.role);    // "admin"
+    </script>
+
+3. hidden:
+    <p hidden>This paragraph is hidden.</p>
+
+4. draggable:
+    <div draggable="true">Drag me</div>
+
+5. spellcheck:
+    <textarea spellcheck="true">Check my spelling</textarea>
+
+6. translate:
+    <p translate="no">Brand Name</p>  <!-- Don't translate -->
+
+================================================================================
+3.5 SEMANTIC MARKUP
+================================================================================
+
+Semantic HTML uses elements that clearly describe their meaning to both the
+browser and the developer.
+
+WHY SEMANTIC HTML?
+------------------
+1. Accessibility: Screen readers understand content structure
+2. SEO: Search engines better understand page content
+3. Maintainability: Code is easier to read and maintain
+4. Consistency: Standard structure across websites
+
+NON-SEMANTIC VS SEMANTIC
+------------------------
+
+Non-Semantic (Generic):
+    <div id="header">
+        <div id="nav">
+            <div class="nav-item">Home</div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="post">
+            <div class="post-title">Title</div>
+            <div class="post-content">Content</div>
+        </div>
+    </div>
+    <div id="footer">Footer</div>
+
+Semantic (Meaningful):
+    <header>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1>Title</h1>
+            <p>Content</p>
+        </article>
+    </main>
+    <footer>Footer</footer>
+
+SEMANTIC ELEMENTS REFERENCE
+---------------------------
+
+Structural Elements:
+    <header>    - Introductory content, navigation
+    <nav>       - Navigation links
+    <main>      - Main content (one per page)
+    <article>   - Self-contained content
+    <section>   - Thematic grouping
+    <aside>     - Sidebar, related content
+    <footer>    - Footer content
+
+Text Semantics:
+    <h1>-<h6>   - Headings (hierarchical)
+    <p>         - Paragraph
+    <blockquote>- Block quotation
+    <q>         - Inline quotation
+    <cite>      - Citation/reference
+    <abbr>      - Abbreviation
+    <dfn>       - Definition term
+    <code>      - Code snippet
+    <pre>       - Preformatted text
+    <kbd>       - Keyboard input
+    <samp>      - Sample output
+    <var>       - Variable
+    <mark>      - Highlighted text
+    <small>     - Small print
+    <strong>    - Strong importance
+    <em>        - Emphasis
+    <b>         - Bold (stylistic)
+    <i>         - Italic (stylistic)
+    <u>         - Underline (non-textual annotation)
+    <s>         - Strikethrough (no longer relevant)
+    <del>       - Deleted text
+    <ins>       - Inserted text
+    <sub>       - Subscript
+    <sup>       - Superscript
+
+Interactive Elements:
+    <details>   - Collapsible content
+    <summary>   - Summary for <details>
+    <dialog>    - Dialog box
+
+Grouping:
+    <figure>    - Self-contained content
+    <figcaption>- Caption for <figure>
+    <address>   - Contact information
+    <time>      - Date/time
+
+PROPER HEADING STRUCTURE
+------------------------
+
+    <body>
+        <header>
+            <h1>Website Name</h1>  <!-- Only one h1 per page -->
+        </header>
+
+        <main>
+            <article>
+                <h2>Article Title</h2>
+                <section>
+                    <h3>Section 1</h3>
+                    <p>Content...</p>
+                    <h4>Subsection 1.1</h4>
+                    <p>More content...</p>
+                </section>
+                <section>
+                    <h3>Section 2</h3>
+                    <p>Content...</p>
+                </section>
+            </article>
+        </main>
+
+        <aside>
+            <h2>Related Links</h2>
+            <ul>...</ul>
+        </aside>
+    </body>
+
+Heading Rules:
+- Use only one <h1> per page (main title)
+- Don't skip heading levels (h1 -> h3)
+- Use headings for structure, not styling
+- Keep heading hierarchy logical
+
+ARIA ROLES AND ATTRIBUTES
+-------------------------
+ARIA (Accessible Rich Internet Applications) enhances accessibility.
+
+    <!-- Landmark roles (redundant with semantic elements) -->
+    <header role="banner">...</header>
+    <nav role="navigation">...</nav>
+    <main role="main">...</main>
+    <aside role="complementary">...</aside>
+    <footer role="contentinfo">...</footer>
+
+    <!-- ARIA labels -->
+    <button aria-label="Close menu">X</button>
+    <nav aria-label="Main navigation">...</nav>
+    <div role="alert" aria-live="polite">Message</div>
+
+    <!-- ARIA states -->
+    <button aria-expanded="false">Toggle</button>
+    <input aria-invalid="true">
+    <div aria-hidden="true">Hidden from screen readers</div>
+
+COMPLETE SEMANTIC PAGE EXAMPLE
+------------------------------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Semantic HTML5 Page</title>
+    </head>
+    <body>
+        <header>
+            <h1>Company Name</h1>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <header>
+                    <h2>Article Title</h2>
+                    <p>
+                        By <address><a href="mailto:author@example.com">Author Name</a></address>
+                        on <time datetime="2024-01-15">January 15, 2024</time>
+                    </p>
+                </header>
+
+                <section>
+                    <h3>Introduction</h3>
+                    <p>This is the introduction paragraph with some
+                       <strong>important</strong> and <em>emphasized</em> text.</p>
+                </section>
+
+                <section>
+                    <h3>Main Content</h3>
+                    <p>Main content with a <abbr title="HyperText Markup Language">HTML</abbr>
+                       abbreviation.</p>
+
+                    <figure>
+                        <img src="diagram.png" alt="Process diagram">
+                        <figcaption>Figure 1: Process flow diagram</figcaption>
+                    </figure>
+
+                    <blockquote cite="https://example.com/quote">
+                        <p>This is a quotation from an external source.</p>
+                        <footer>— <cite>Source Name</cite></footer>
+                    </blockquote>
+                </section>
+
+                <section>
+                    <h3>Code Example</h3>
+                    <pre><code>
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+                    </code></pre>
+                </section>
+
+                <footer>
+                    <p>Tags: <a href="/tag/html5">HTML5</a>, <a href="/tag/semantic">Semantic</a></p>
+                </footer>
+            </article>
+
+            <aside>
+                <h2>Related Articles</h2>
+                <ul>
+                    <li><a href="/article-1">Related Article 1</a></li>
+                    <li><a href="/article-2">Related Article 2</a></li>
+                </ul>
+
+                <details>
+                    <summary>More Information</summary>
+                    <p>Additional details that can be expanded.</p>
+                </details>
+            </aside>
+        </main>
+
+        <footer>
+            <nav aria-label="Footer navigation">
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ul>
+            </nav>
+            <p><small>&copy; 2024 Company Name. All rights reserved.</small></p>
+        </footer>
+    </body>
+    </html>
+
+================================================================================
+3.6 BEST PRACTICES AND OPTIMIZATION
+================================================================================
+
+CODE INDENTATION AND FORMATTING
+-------------------------------
+
+1. Consistent Indentation:
+    <!-- Use 2 or 4 spaces consistently -->
+    <div class="container">
+        <header>
+            <h1>Title</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+2. Element Formatting:
+    <!-- Short elements - single line -->
+    <p>Short paragraph.</p>
+
+    <!-- Long elements - multiple lines -->
+    <p>
+        This is a longer paragraph that contains more text
+        and benefits from being on multiple lines for readability.
+    </p>
+
+    <!-- Attributes - multiple lines for many attributes -->
+    <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-input"
+        placeholder="Enter username"
+        required
+        minlength="4"
+        maxlength="20">
+
+3. Proper Nesting:
+    <!-- Correct nesting -->
+    <p>This is <strong>bold and <em>italic</em></strong> text.</p>
+
+    <!-- Incorrect nesting - AVOID -->
+    <p>This is <strong>bold and <em>italic</strong> text.</em></p>
+
+NAMING CONVENTIONS
+------------------
+
+1. File Names:
+    - Use lowercase
+    - Use hyphens for spaces
+    - Be descriptive
+
+    index.html
+    about-us.html
+    contact-form.html
+    product-details.html
+
+2. ID and Class Names:
+    - Use lowercase
+    - Use hyphens (kebab-case) or underscores (snake_case)
+    - Be descriptive and meaningful
+
+    <!-- Good -->
+    <div id="main-navigation" class="nav-container">
+    <button class="btn btn-primary submit-button">
+
+    <!-- Avoid -->
+    <div id="div1" class="x">
+    <button class="b1">
+
+3. BEM Naming Convention:
+    Block__Element--Modifier
+
+    <div class="card">
+        <img class="card__image" src="...">
+        <h3 class="card__title">Title</h3>
+        <p class="card__description">Description</p>
+        <button class="card__button card__button--primary">Click</button>
+    </div>
+
+HTML VALIDATION
+---------------
+
+1. Use Valid HTML:
+    - Always include DOCTYPE
+    - Close all tags properly
+    - Use proper nesting
+    - Include required attributes
+
+2. W3C Validator:
+    https://validator.w3.org/
+
+3. Common Validation Errors:
+    - Missing alt attribute on images
+    - Duplicate IDs
+    - Unclosed tags
+    - Invalid nesting
+    - Missing required attributes
+
+ACCESSIBILITY BEST PRACTICES
+----------------------------
+
+1. Image Alt Text:
+    <!-- Descriptive alt text -->
+    <img src="chart.png" alt="Sales growth chart showing 25% increase in Q4">
+
+    <!-- Decorative images -->
+    <img src="decoration.png" alt="" role="presentation">
+
+2. Form Labels:
+    <!-- Associated label -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+
+    <!-- Implicit label -->
+    <label>
+        Email:
+        <input type="email" name="email">
+    </label>
+
+3. Skip Navigation:
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- ... navigation ... -->
+    <main id="main-content">
+
+4. Language Attribute:
+    <html lang="en">
+    <p lang="ne">नेपाली टेक्स्ट</p>
+
+5. Focus Management:
+    <!-- Visible focus styles -->
+    <style>
+        :focus {
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+    </style>
+
+SEO BEST PRACTICES
+------------------
+
+1. Proper Title:
+    <title>Page Title | Website Name</title>
+    <!-- Keep under 60 characters -->
+
+2. Meta Description:
+    <meta name="description" content="A brief description of the page content.
+          Keep under 160 characters for best results.">
+
+3. Heading Hierarchy:
+    <h1>Main Title (one per page)</h1>
+    <h2>Section Heading</h2>
+    <h3>Subsection Heading</h3>
+
+4. Semantic Structure:
+    <article>, <section>, <nav>, <header>, <footer>
+
+5. Descriptive Links:
+    <!-- Good -->
+    <a href="/products">View our products</a>
+
+    <!-- Avoid -->
+    <a href="/products">Click here</a>
+
+6. Image Optimization:
+    - Use descriptive file names: product-blue-shoe.jpg
+    - Include alt text
+    - Specify dimensions
+
+PERFORMANCE OPTIMIZATION
+------------------------
+
+1. Minimize HTML:
+    - Remove unnecessary comments
+    - Remove whitespace (for production)
+    - Use minification tools
+
+2. Optimize Loading:
+    <!-- CSS in head -->
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <!-- JavaScript at end of body -->
+    <body>
+        <!-- content -->
+        <script src="script.js"></script>
+    </body>
+
+    <!-- Or use defer/async -->
+    <script src="script.js" defer></script>
+    <script src="analytics.js" async></script>
+
+3. Lazy Loading:
+    <img src="image.jpg" loading="lazy" alt="Description">
+    <iframe src="video.html" loading="lazy"></iframe>
+
+4. Preload Critical Resources:
+    <link rel="preload" href="critical.css" as="style">
+    <link rel="preload" href="hero.jpg" as="image">
+    <link rel="preload" href="font.woff2" as="font" crossorigin>
+
+5. Prefetch Future Resources:
+    <link rel="prefetch" href="next-page.html">
+    <link rel="dns-prefetch" href="//api.example.com">
+
+6. Image Optimization:
+    <!-- Use modern formats -->
+    <picture>
+        <source type="image/webp" srcset="image.webp">
+        <source type="image/jpeg" srcset="image.jpg">
+        <img src="image.jpg" alt="Description">
+    </picture>
+
+    <!-- Specify dimensions to prevent layout shift -->
+    <img src="image.jpg" width="800" height="600" alt="Description">
+
+DOCUMENT STRUCTURE TEMPLATE
+---------------------------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <!-- Character encoding -->
+        <meta charset="UTF-8">
+
+        <!-- Viewport for responsive -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- SEO meta tags -->
+        <meta name="description" content="Page description">
+        <meta name="keywords" content="keyword1, keyword2">
+        <meta name="author" content="Author Name">
+
+        <!-- Open Graph for social sharing -->
+        <meta property="og:title" content="Page Title">
+        <meta property="og:description" content="Page description">
+        <meta property="og:image" content="https://example.com/image.jpg">
+        <meta property="og:url" content="https://example.com/page">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+
+        <!-- Favicon -->
+        <link rel="icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <!-- Preconnect to external resources -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="styles.css">
+
+        <!-- Title -->
+        <title>Page Title | Website Name</title>
+    </head>
+    <body>
+        <header>
+            <nav><!-- Navigation --></nav>
+        </header>
+
+        <main>
+            <article><!-- Main content --></article>
+            <aside><!-- Sidebar --></aside>
+        </main>
+
+        <footer>
+            <!-- Footer content -->
+        </footer>
+
+        <!-- JavaScript -->
+        <script src="script.js" defer></script>
+    </body>
+    </html>
+
+================================================================================
+                           SUMMARY
+================================================================================
+
+Key Topics Covered:
+
+1. HTML5 APIs
+   - Canvas API for graphics
+   - Geolocation API
+   - Web Storage (localStorage, sessionStorage)
+   - Drag and Drop API
+   - Web Workers
+   - History API
+
+2. HTML5 Forms
+   - New input types (email, url, date, time, color, range, etc.)
+   - Form validation attributes (required, pattern, min, max)
+   - New form elements (datalist, output, progress, meter)
+   - Validation CSS pseudo-classes
+
+3. Responsive Web Design
+   - Viewport meta tag
+   - Responsive images (srcset, picture)
+   - Responsive typography
+   - Media queries
+
+4. HTML5 New Elements
+   - Structural elements (header, nav, main, article, section, aside, footer)
+   - Multimedia elements (audio, video, track)
+   - Interactive elements (details, summary)
+   - New global attributes (contenteditable, data-*, hidden)
+
+5. Semantic Markup
+   - Why semantic HTML matters
+   - Semantic vs non-semantic elements
+   - Proper heading structure
+   - ARIA roles and attributes
+
+6. Best Practices and Optimization
+   - Code formatting and indentation
+   - Naming conventions
+   - Accessibility best practices
+   - SEO optimization
+   - Performance optimization
+
+================================================================================
+                      PRACTICE EXERCISES
+================================================================================
+
+Exercise 1: Canvas Drawing
+--------------------------
+Create a canvas that draws:
+- A house with a triangular roof
+- A sun in the corner
+- Some clouds
+Use colors and gradients.
+
+Exercise 2: HTML5 Form
+----------------------
+Create a complete registration form using HTML5 features:
+- All appropriate input types
+- Built-in validation
+- Placeholder text
+- Datalist for suggestions
+
+Exercise 3: Responsive Page
+---------------------------
+Create a responsive webpage that:
+- Has proper viewport meta tag
+- Uses responsive images with srcset
+- Changes layout at different breakpoints
+- Works on mobile, tablet, and desktop
+
+Exercise 4: Semantic Blog
+-------------------------
+Create a blog page using semantic HTML5 elements:
+- Proper header with navigation
+- Main content with articles
+- Sidebar with related posts
+- Footer with links
+
+Exercise 5: Multimedia Page
+---------------------------
+Create a page with:
+- Video player with multiple sources and captions
+- Audio player with controls
+- Proper fallback content
+
+Exercise 6: Local Storage App
+-----------------------------
+Create a simple notes app that:
+- Saves notes to localStorage
+- Retrieves and displays saved notes
+- Allows deleting notes
+
+Exercise 7: Accessible Form
+---------------------------
+Create a form that follows all accessibility best practices:
+- Proper labels
+- ARIA attributes where needed
+- Error handling
+- Keyboard navigation
+
+================================================================================
+                        REFERENCES
+================================================================================
+
+1. Robbins, J. N. (2018). Learning Web Design: A Beginner's Guide to HTML, CSS,
+   JavaScript, and Web Graphics. O'Reilly Media.
+
+2. MDN Web Docs - HTML5:
+   https://developer.mozilla.org/en-US/docs/Web/HTML
+
+3. W3Schools HTML5 Tutorial:
+   https://www.w3schools.com/html/
+
+4. HTML5 Specification:
+   https://html.spec.whatwg.org/
+
+5. Web Accessibility Initiative (WAI):
+   https://www.w3.org/WAI/
+
+================================================================================
+                   END OF UNIT 3 NOTES
+================================================================================

@@ -1,0 +1,2088 @@
+================================================================================
+            UNIT 2: HYPER TEXT MARKUP LANGUAGE (HTML)
+                         (8 Hours)
+================================================================================
+
+Course: Internet Technology (CMP 173)
+Program: BCSIT, Pokhara University
+
+================================================================================
+                        TABLE OF CONTENTS
+================================================================================
+
+2.1  Introduction to HTML
+2.2  Document Structure
+2.3  Text Formatting
+2.4  Links and Navigation
+2.5  Hyperlink
+2.6  Images and Multimedia
+2.7  Lists, Tables, Forms and Input
+2.8  Semantic HTML
+
+================================================================================
+                    LEARNING OBJECTIVES
+================================================================================
+
+After completing this unit, students will be able to:
+
+- Understand HTML's role in web development and its key components
+- Comprehend the basic structure of HTML documents, including head and body
+  sections
+- Identify and use tags, elements, and attributes within HTML
+- Apply proper HTML doctype declaration for consistent rendering
+- Utilize meta tags to specify character encoding, viewport, and other metadata
+- Format content using heading, paragraph, strong, em, underline, and
+  strikethrough tags
+- Implement line breaks, horizontal rules, and create hyperlinks with anchor tags
+- Establish navigation menus, lists, and organize content effectively
+- Insert images and multimedia elements, setting attributes like src, alt,
+  width, and height
+- Construct tables, including headers, data cells, merging cells, and adding
+  captions
+- Create interactive forms with input elements, validate user input, and handle
+  form submission
+
+================================================================================
+2.1 INTRODUCTION TO HTML
+================================================================================
+
+WHAT IS HTML?
+-------------
+HTML (HyperText Markup Language) is the standard markup language for creating
+web pages. It describes the structure of a web page using a series of elements
+that tell the browser how to display the content.
+
+Key Terms:
+- HyperText: Text that contains links to other texts
+- Markup: Tags that define the structure and meaning of content
+- Language: A system of syntax and rules for creating documents
+
+History of HTML:
+----------------
+- 1991: HTML 1.0 - Created by Tim Berners-Lee
+- 1995: HTML 2.0 - First standard specification
+- 1997: HTML 3.2 - Added tables, applets, text flow
+- 1999: HTML 4.01 - Improved forms, scripting, stylesheets
+- 2000: XHTML 1.0 - XML-based HTML
+- 2014: HTML5 - Current standard with multimedia, APIs
+
+Role of HTML in Web Development:
+--------------------------------
+HTML is one of three core technologies of the World Wide Web:
+
+    ┌─────────────────────────────────────────────┐
+    │              WEB PAGE                       │
+    │  ┌─────────────────────────────────────┐   │
+    │  │ HTML = Structure (Skeleton)         │   │
+    │  │ - Defines content and layout        │   │
+    │  │ - Headings, paragraphs, lists       │   │
+    │  │ - Images, links, forms              │   │
+    │  └─────────────────────────────────────┘   │
+    │  ┌─────────────────────────────────────┐   │
+    │  │ CSS = Presentation (Skin/Clothes)   │   │
+    │  │ - Colors, fonts, spacing            │   │
+    │  │ - Layout, positioning               │   │
+    │  └─────────────────────────────────────┘   │
+    │  ┌─────────────────────────────────────┐   │
+    │  │ JavaScript = Behavior (Muscles)     │   │
+    │  │ - Interactivity                     │   │
+    │  │ - Dynamic content updates           │   │
+    │  └─────────────────────────────────────┘   │
+    └─────────────────────────────────────────────┘
+
+HTML BASICS
+-----------
+
+1. Elements:
+   An element is a complete unit consisting of opening tag, content, and
+   closing tag.
+
+    <tagname>Content goes here</tagname>
+
+    Example:
+    <p>This is a paragraph.</p>
+    <h1>This is a heading</h1>
+
+2. Tags:
+   Tags are markers that define the start and end of an element.
+
+    Opening tag: <tagname>
+    Closing tag: </tagname>
+
+    Self-closing tags (void elements):
+    <br>      - Line break
+    <hr>      - Horizontal rule
+    <img>     - Image
+    <input>   - Input field
+    <meta>    - Metadata
+    <link>    - External resource
+
+    Note: In XHTML/XML style: <br /> <hr /> <img />
+
+3. Attributes:
+   Attributes provide additional information about elements.
+
+    <tagname attribute="value">Content</tagname>
+
+    Example:
+    <a href="https://example.com">Link</a>
+    <img src="image.jpg" alt="Description" width="300" height="200">
+
+    Common Global Attributes:
+    - id: Unique identifier
+    - class: CSS class name(s)
+    - style: Inline CSS styles
+    - title: Tooltip text
+    - lang: Language code
+    - dir: Text direction (ltr/rtl)
+    - hidden: Hide element
+    - tabindex: Tab order
+
+4. Nesting:
+   Elements can be nested inside other elements.
+
+    <div>
+        <h1>Title</h1>
+        <p>This is a <strong>nested</strong> paragraph.</p>
+    </div>
+
+    Rules for nesting:
+    - Close inner elements before outer elements
+    - Maintain proper indentation for readability
+    - Some elements have nesting restrictions
+
+5. Comments:
+   Comments are not displayed in the browser.
+
+    <!-- This is a comment -->
+
+    <!--
+        This is a
+        multi-line comment
+    -->
+
+HTML FILE STRUCTURE
+-------------------
+    filename.html
+    filename.htm
+
+    - Use lowercase letters
+    - No spaces (use hyphens: my-page.html)
+    - index.html is the default homepage
+
+================================================================================
+2.2 DOCUMENT STRUCTURE
+================================================================================
+
+BASIC HTML DOCUMENT STRUCTURE
+-----------------------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Page Title</title>
+    </head>
+    <body>
+        <!-- Page content goes here -->
+    </body>
+    </html>
+
+DOCUMENT TYPE DECLARATION (DOCTYPE)
+-----------------------------------
+The DOCTYPE declaration tells the browser which version of HTML is being used.
+
+HTML5 (Current Standard):
+    <!DOCTYPE html>
+
+Older DOCTYPEs (for reference):
+    <!-- HTML 4.01 Strict -->
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+    <!-- XHTML 1.0 Strict -->
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+Why DOCTYPE is Important:
+- Ensures standards mode rendering
+- Prevents quirks mode (inconsistent rendering)
+- Required for HTML validation
+
+THE <html> ELEMENT
+------------------
+Root element that contains all other HTML elements.
+
+    <html lang="en" dir="ltr">
+        <!-- All content -->
+    </html>
+
+Attributes:
+- lang: Specifies the language (en, ne, hi, etc.)
+- dir: Text direction (ltr = left-to-right, rtl = right-to-left)
+
+THE <head> ELEMENT
+------------------
+Contains metadata and links to external resources. Not displayed on the page.
+
+    <head>
+        <!-- Metadata -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Page description for SEO">
+        <meta name="keywords" content="keyword1, keyword2">
+        <meta name="author" content="Author Name">
+
+        <!-- Title (shown in browser tab) -->
+        <title>Page Title | Website Name</title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+        <!-- CSS Stylesheets -->
+        <link rel="stylesheet" href="styles.css">
+
+        <!-- Internal CSS -->
+        <style>
+            body { font-family: Arial, sans-serif; }
+        </style>
+
+        <!-- JavaScript (in head with defer) -->
+        <script src="script.js" defer></script>
+    </head>
+
+HEAD ELEMENTS IN DETAIL
+-----------------------
+
+1. <title>:
+   Page title shown in browser tab and search results.
+
+    <title>Home | My Website</title>
+
+    Best practices:
+    - Keep under 60 characters
+    - Include main keyword
+    - Use format: Page Title | Site Name
+
+2. <meta> Tags:
+
+    Character Encoding:
+    <meta charset="UTF-8">
+    <!-- UTF-8 supports all characters including Nepali, Chinese, etc. -->
+
+    Viewport (for responsive design):
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    Description (for SEO):
+    <meta name="description" content="A brief description of the page content.">
+
+    Keywords (less important for SEO now):
+    <meta name="keywords" content="HTML, CSS, JavaScript, web development">
+
+    Author:
+    <meta name="author" content="John Doe">
+
+    Robots (search engine instructions):
+    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, nofollow">
+
+    Refresh/Redirect:
+    <meta http-equiv="refresh" content="5;url=https://example.com">
+
+    Open Graph (for social media sharing):
+    <meta property="og:title" content="Page Title">
+    <meta property="og:description" content="Page description">
+    <meta property="og:image" content="https://example.com/image.jpg">
+    <meta property="og:url" content="https://example.com">
+
+3. <link> Element:
+   Links external resources.
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Preconnect (performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- Preload (performance) -->
+    <link rel="preload" href="font.woff2" as="font" crossorigin>
+
+    <!-- Canonical URL (SEO) -->
+    <link rel="canonical" href="https://example.com/page">
+
+4. <style> Element:
+   Internal CSS styles.
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+
+5. <script> Element:
+   JavaScript code or link.
+
+    <!-- External script -->
+    <script src="script.js"></script>
+
+    <!-- With defer (loads after HTML parsing) -->
+    <script src="script.js" defer></script>
+
+    <!-- With async (loads in parallel) -->
+    <script src="analytics.js" async></script>
+
+    <!-- Internal script -->
+    <script>
+        console.log('Hello, World!');
+    </script>
+
+6. <base> Element:
+   Sets base URL for relative links.
+
+    <base href="https://example.com/" target="_blank">
+
+THE <body> ELEMENT
+------------------
+Contains all visible content of the web page.
+
+    <body>
+        <header>
+            <!-- Header content -->
+        </header>
+
+        <nav>
+            <!-- Navigation -->
+        </nav>
+
+        <main>
+            <!-- Main content -->
+        </main>
+
+        <aside>
+            <!-- Sidebar -->
+        </aside>
+
+        <footer>
+            <!-- Footer content -->
+        </footer>
+
+        <!-- Scripts at end of body -->
+        <script src="script.js"></script>
+    </body>
+
+Body Attributes (deprecated - use CSS instead):
+    <!-- Old way - DON'T USE -->
+    <body bgcolor="white" text="black" link="blue" vlink="purple">
+
+    <!-- Modern way - Use CSS -->
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+        a:link { color: blue; }
+        a:visited { color: purple; }
+    </style>
+
+COMPLETE DOCUMENT TEMPLATE
+--------------------------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Page description here">
+        <meta name="author" content="Author Name">
+
+        <title>Page Title | Website Name</title>
+
+        <link rel="icon" href="favicon.ico">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>Website Title</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <h2>Article Title</h2>
+                <p>Article content goes here...</p>
+            </article>
+        </main>
+
+        <aside>
+            <h3>Sidebar</h3>
+            <p>Related content...</p>
+        </aside>
+
+        <footer>
+            <p>&copy; 2024 Website Name. All rights reserved.</p>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+    </html>
+
+================================================================================
+2.3 TEXT FORMATTING
+================================================================================
+
+HEADINGS
+--------
+HTML provides six levels of headings, from <h1> (most important) to <h6>
+(least important).
+
+    <h1>Heading Level 1</h1>
+    <h2>Heading Level 2</h2>
+    <h3>Heading Level 3</h3>
+    <h4>Heading Level 4</h4>
+    <h5>Heading Level 5</h5>
+    <h6>Heading Level 6</h6>
+
+Visual Representation:
+    ┌────────────────────────────────────┐
+    │ Heading 1 (Largest)                │ ← Main page title
+    │   Heading 2                        │ ← Major sections
+    │     Heading 3                      │ ← Subsections
+    │       Heading 4                    │ ← Sub-subsections
+    │         Heading 5                  │
+    │           Heading 6 (Smallest)     │
+    └────────────────────────────────────┘
+
+Best Practices:
+- Use only ONE <h1> per page
+- Don't skip heading levels (h1 → h3)
+- Use headings for structure, not styling
+- Keep heading hierarchy logical
+
+PARAGRAPHS
+----------
+    <p>This is a paragraph of text. Paragraphs automatically add
+       space above and below.</p>
+
+    <p>This is another paragraph. Each paragraph starts on a new line
+       with vertical spacing.</p>
+
+LINE BREAKS AND HORIZONTAL RULES
+--------------------------------
+
+Line Break <br>:
+    <p>This is line one.<br>
+    This is line two.<br>
+    This is line three.</p>
+
+    Output:
+    This is line one.
+    This is line two.
+    This is line three.
+
+Horizontal Rule <hr>:
+    <p>Content above the line.</p>
+    <hr>
+    <p>Content below the line.</p>
+
+    Output:
+    Content above the line.
+    ────────────────────────
+    Content below the line.
+
+TEXT FORMATTING ELEMENTS
+------------------------
+
+1. Bold/Strong:
+    <b>Bold text</b>           <!-- Visual bold only -->
+    <strong>Strong text</strong> <!-- Bold with semantic importance -->
+
+    Use <strong> for important text (screen readers emphasize it)
+    Use <b> for visual styling only
+
+2. Italic/Emphasis:
+    <i>Italic text</i>         <!-- Visual italic only -->
+    <em>Emphasized text</em>   <!-- Italic with semantic emphasis -->
+
+    Use <em> for emphasized text
+    Use <i> for terms, technical words, foreign phrases
+
+3. Underline:
+    <u>Underlined text</u>
+
+    Note: Avoid for regular text (can be confused with links)
+
+4. Strikethrough:
+    <s>Strikethrough text</s>      <!-- No longer relevant -->
+    <del>Deleted text</del>        <!-- Deleted content -->
+    <strike>Strike</strike>        <!-- Deprecated, use <s> or <del> -->
+
+5. Inserted Text:
+    <ins>Inserted text</ins>       <!-- Shows as underlined -->
+
+6. Marked/Highlighted:
+    <mark>Highlighted text</mark>
+
+7. Small Text:
+    <small>Small text (fine print)</small>
+
+8. Superscript and Subscript:
+    <p>H<sub>2</sub>O (water)</p>           <!-- Subscript -->
+    <p>E = mc<sup>2</sup></p>               <!-- Superscript -->
+
+    Output:
+    H₂O (water)
+    E = mc²
+
+9. Preformatted Text:
+    <pre>
+    This text preserves
+        all whitespace
+            and line breaks.
+    </pre>
+
+10. Code:
+    <code>console.log('Hello');</code>      <!-- Inline code -->
+
+    <pre><code>
+    function greet() {
+        console.log('Hello');
+    }
+    </code></pre>                           <!-- Code block -->
+
+11. Keyboard Input:
+    <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</p>
+
+12. Sample Output:
+    <samp>Error: File not found</samp>
+
+13. Variable:
+    <p>The variable <var>x</var> represents the unknown value.</p>
+
+14. Abbreviation:
+    <abbr title="HyperText Markup Language">HTML</abbr>
+
+    Hover shows full text: HTML (with tooltip "HyperText Markup Language")
+
+15. Citation:
+    <p>According to <cite>The HTML Handbook</cite>, semantics matter.</p>
+
+16. Definition:
+    <p><dfn>HTML</dfn> is a markup language for creating web pages.</p>
+
+17. Quotations:
+    <!-- Inline quote -->
+    <p>She said, <q>HTML is awesome!</q></p>
+
+    <!-- Block quote -->
+    <blockquote cite="https://example.com">
+        <p>This is a longer quotation that spans multiple lines
+           and is indented from the surrounding text.</p>
+    </blockquote>
+
+18. Address:
+    <address>
+        Written by John Doe.<br>
+        Email: john@example.com<br>
+        Phone: 123-456-7890
+    </address>
+
+19. Bidirectional Text:
+    <bdo dir="rtl">This text is reversed</bdo>
+    <!-- Output: desrever si txet sihT -->
+
+    <bdi>User إيان entered</bdi>
+    <!-- Isolates bidirectional text -->
+
+SPECIAL CHARACTERS (HTML ENTITIES)
+----------------------------------
+HTML entities represent special characters.
+
+Common Entities:
+    &nbsp;      Non-breaking space
+    &lt;        < (less than)
+    &gt;        > (greater than)
+    &amp;       & (ampersand)
+    &quot;      " (quotation mark)
+    &apos;      ' (apostrophe)
+    &copy;      © (copyright)
+    &reg;       ® (registered)
+    &trade;     ™ (trademark)
+    &deg;       ° (degree)
+    &plusmn;    ± (plus-minus)
+    &times;     × (multiplication)
+    &divide;    ÷ (division)
+    &euro;      € (euro)
+    &pound;     £ (pound)
+    &yen;       ¥ (yen)
+    &cent;      ¢ (cent)
+    &mdash;     — (em dash)
+    &ndash;     – (en dash)
+    &hellip;    … (ellipsis)
+    &larr;      ← (left arrow)
+    &rarr;      → (right arrow)
+    &uarr;      ↑ (up arrow)
+    &darr;      ↓ (down arrow)
+
+Example:
+    <p>Price: $99.99 &copy; 2024</p>
+    <p>5 &lt; 10 &amp; 10 &gt; 5</p>
+
+Numeric Character References:
+    &#169;      © (copyright - decimal)
+    &#x00A9;    © (copyright - hexadecimal)
+
+================================================================================
+2.4 LINKS AND NAVIGATION
+================================================================================
+
+THE ANCHOR ELEMENT <a>
+----------------------
+The anchor element creates hyperlinks to other pages, files, or locations.
+
+Basic Syntax:
+    <a href="URL">Link Text</a>
+
+LINK TYPES
+----------
+
+1. External Links (to other websites):
+    <a href="https://www.google.com">Visit Google</a>
+    <a href="https://www.example.com">Example Website</a>
+
+2. Internal Links (to pages within same website):
+    <a href="about.html">About Us</a>
+    <a href="pages/contact.html">Contact</a>
+    <a href="../index.html">Back to Home</a>
+
+3. Anchor Links (to specific location on page):
+    <!-- Create anchor target -->
+    <h2 id="section1">Section 1</h2>
+
+    <!-- Link to anchor -->
+    <a href="#section1">Go to Section 1</a>
+
+    <!-- Link to anchor on another page -->
+    <a href="page.html#section1">Section 1 on another page</a>
+
+4. Email Links:
+    <a href="mailto:info@example.com">Email Us</a>
+
+    <!-- With subject and body -->
+    <a href="mailto:info@example.com?subject=Hello&body=Message%20here">
+        Email with Subject
+    </a>
+
+5. Telephone Links:
+    <a href="tel:+9779800000000">Call Us</a>
+    <a href="tel:+1-234-567-8900">+1 (234) 567-8900</a>
+
+6. Download Links:
+    <a href="document.pdf" download>Download PDF</a>
+    <a href="image.png" download="my-image.png">Download Image</a>
+
+ANCHOR ATTRIBUTES
+-----------------
+
+1. href (Hypertext Reference):
+    <a href="https://example.com">Link</a>
+
+2. target (Where to open):
+    <a href="page.html" target="_self">Same window (default)</a>
+    <a href="page.html" target="_blank">New tab/window</a>
+    <a href="page.html" target="_parent">Parent frame</a>
+    <a href="page.html" target="_top">Full window</a>
+    <a href="page.html" target="framename">Named frame</a>
+
+3. rel (Relationship):
+    <!-- For external links with target="_blank" -->
+    <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+        External Link
+    </a>
+
+    <!-- SEO-related -->
+    <a href="page.html" rel="nofollow">Don't pass SEO value</a>
+    <a href="sponsor.html" rel="sponsored">Sponsored link</a>
+    <a href="comment.html" rel="ugc">User-generated content</a>
+
+4. title (Tooltip):
+    <a href="page.html" title="Click to visit the page">Link</a>
+
+5. hreflang (Language of linked page):
+    <a href="page-ne.html" hreflang="ne">नेपालीमा</a>
+
+CREATING A NAVIGATION MENU
+--------------------------
+
+Basic Navigation:
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+Navigation with Current Page:
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+Dropdown Navigation:
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="products.html">Products</a>
+                <ul>
+                    <li><a href="product1.html">Product 1</a></li>
+                    <li><a href="product2.html">Product 2</a></li>
+                    <li><a href="product3.html">Product 3</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+Breadcrumb Navigation:
+    <nav aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/products/electronics">Electronics</a></li>
+            <li aria-current="page">Laptops</li>
+        </ol>
+    </nav>
+
+SKIP NAVIGATION (Accessibility):
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- ... navigation ... -->
+    <main id="main-content">
+        <!-- Main content -->
+    </main>
+
+================================================================================
+2.5 HYPERLINK
+================================================================================
+
+UNDERSTANDING URLs
+------------------
+
+URL (Uniform Resource Locator) Structure:
+    protocol://domain:port/path/filename?query#fragment
+
+    https://www.example.com:443/products/item.html?id=123#reviews
+
+    Components:
+    - Protocol: https (or http, ftp, mailto, tel)
+    - Domain: www.example.com
+    - Port: 443 (optional, default 443 for HTTPS, 80 for HTTP)
+    - Path: /products/
+    - Filename: item.html
+    - Query string: ?id=123
+    - Fragment: #reviews
+
+ABSOLUTE VS RELATIVE URLS
+-------------------------
+
+Absolute URLs (Complete path):
+    <a href="https://www.example.com/pages/about.html">About</a>
+    <img src="https://www.example.com/images/logo.png" alt="Logo">
+
+    Use for:
+    - Links to external websites
+    - When you need the complete URL
+
+Relative URLs (Relative to current location):
+
+    Same directory:
+    <a href="about.html">About</a>
+    <img src="logo.png" alt="Logo">
+
+    Subdirectory:
+    <a href="pages/about.html">About</a>
+    <img src="images/logo.png" alt="Logo">
+
+    Parent directory:
+    <a href="../index.html">Home</a>
+    <img src="../images/logo.png" alt="Logo">
+
+    Root-relative (from website root):
+    <a href="/pages/about.html">About</a>
+    <img src="/images/logo.png" alt="Logo">
+
+PATH NAVIGATION
+---------------
+
+    Website Structure:
+    mywebsite/
+    ├── index.html
+    ├── about.html
+    ├── css/
+    │   └── styles.css
+    ├── images/
+    │   ├── logo.png
+    │   └── banner.jpg
+    └── pages/
+        ├── contact.html
+        └── services/
+            └── web-design.html
+
+    From index.html:
+    - To about.html:        href="about.html"
+    - To contact.html:      href="pages/contact.html"
+    - To web-design.html:   href="pages/services/web-design.html"
+    - To logo.png:          src="images/logo.png"
+
+    From contact.html (in pages/):
+    - To index.html:        href="../index.html"
+    - To about.html:        href="../about.html"
+    - To logo.png:          src="../images/logo.png"
+    - To web-design.html:   href="services/web-design.html"
+
+    From web-design.html (in pages/services/):
+    - To index.html:        href="../../index.html"
+    - To contact.html:      href="../contact.html"
+    - To logo.png:          src="../../images/logo.png"
+
+LINK STATES (CSS)
+-----------------
+    a:link { color: blue; }        /* Unvisited link */
+    a:visited { color: purple; }   /* Visited link */
+    a:hover { color: red; }        /* Mouse over */
+    a:active { color: orange; }    /* Being clicked */
+
+    /* Order matters: LoVe HAte (Link, Visited, Hover, Active) */
+
+IMAGE AS LINK
+-------------
+    <a href="https://example.com">
+        <img src="button.png" alt="Click here">
+    </a>
+
+LINK TO JAVASCRIPT
+------------------
+    <!-- Execute JavaScript -->
+    <a href="javascript:alert('Hello!')">Click for alert</a>
+
+    <!-- Prevent navigation (for JavaScript handling) -->
+    <a href="#" onclick="doSomething(); return false;">Do Something</a>
+
+    <!-- Better approach -->
+    <a href="fallback.html" onclick="doSomething(); return false;">
+        Do Something
+    </a>
+
+================================================================================
+2.6 IMAGES AND MULTIMEDIA
+================================================================================
+
+IMAGES
+------
+
+The <img> Element:
+    <img src="image.jpg" alt="Description of image">
+
+Required Attributes:
+- src: Source (path to image)
+- alt: Alternative text (for accessibility and when image doesn't load)
+
+Optional Attributes:
+    <img src="photo.jpg"
+         alt="A beautiful sunset"
+         width="800"
+         height="600"
+         title="Sunset photo"
+         loading="lazy"
+         decoding="async">
+
+Image Attributes:
+- width: Width in pixels or percentage
+- height: Height in pixels
+- title: Tooltip on hover
+- loading: "lazy" (defer loading) or "eager" (load immediately)
+- decoding: "async" (decode asynchronously)
+
+IMAGE FORMATS
+-------------
+| Format | Best For                    | Features                |
+|--------|-----------------------------| ------------------------|
+| JPEG   | Photos, complex images      | Lossy compression       |
+| PNG    | Graphics, transparency      | Lossless, alpha channel |
+| GIF    | Simple animations           | 256 colors, animation   |
+| WebP   | Modern web (photos/graphics)| Better compression      |
+| SVG    | Icons, logos, vector art    | Scalable, small size    |
+| AVIF   | Modern web (best quality)   | Best compression        |
+
+IMAGE EXAMPLES
+--------------
+
+Basic Image:
+    <img src="photo.jpg" alt="Mountain landscape">
+
+Image with Size:
+    <img src="photo.jpg" alt="Mountain landscape" width="400" height="300">
+
+    <!-- Maintain aspect ratio - specify only one dimension -->
+    <img src="photo.jpg" alt="Mountain landscape" width="400">
+
+Responsive Image:
+    <!-- CSS approach -->
+    <style>
+        img { max-width: 100%; height: auto; }
+    </style>
+    <img src="photo.jpg" alt="Mountain landscape">
+
+    <!-- HTML5 srcset (resolution switching) -->
+    <img src="photo-small.jpg"
+         srcset="photo-small.jpg 300w,
+                 photo-medium.jpg 600w,
+                 photo-large.jpg 1200w"
+         sizes="(max-width: 600px) 300px,
+                (max-width: 1200px) 600px,
+                1200px"
+         alt="Mountain landscape">
+
+Picture Element (art direction):
+    <picture>
+        <source media="(min-width: 1200px)" srcset="photo-large.jpg">
+        <source media="(min-width: 600px)" srcset="photo-medium.jpg">
+        <img src="photo-small.jpg" alt="Mountain landscape">
+    </picture>
+
+    <!-- Different formats -->
+    <picture>
+        <source type="image/avif" srcset="photo.avif">
+        <source type="image/webp" srcset="photo.webp">
+        <img src="photo.jpg" alt="Mountain landscape">
+    </picture>
+
+Figure with Caption:
+    <figure>
+        <img src="chart.png" alt="Sales data chart">
+        <figcaption>Figure 1: Quarterly sales data for 2024</figcaption>
+    </figure>
+
+Image Map (Clickable Areas):
+    <img src="world-map.jpg" alt="World Map" usemap="#worldmap">
+    <map name="worldmap">
+        <area shape="rect" coords="0,0,100,100"
+              href="europe.html" alt="Europe">
+        <area shape="circle" coords="200,150,50"
+              href="asia.html" alt="Asia">
+        <area shape="poly" coords="300,100,350,150,300,200,250,150"
+              href="africa.html" alt="Africa">
+    </map>
+
+AUDIO
+-----
+
+Basic Audio:
+    <audio src="audio.mp3" controls>
+        Your browser does not support the audio element.
+    </audio>
+
+Multiple Sources:
+    <audio controls>
+        <source src="audio.mp3" type="audio/mpeg">
+        <source src="audio.ogg" type="audio/ogg">
+        <source src="audio.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+Audio Attributes:
+    <audio controls autoplay muted loop preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+    - controls: Show play/pause/volume controls
+    - autoplay: Start playing automatically
+    - muted: Start muted
+    - loop: Loop playback
+    - preload: "auto" | "metadata" | "none"
+
+VIDEO
+-----
+
+Basic Video:
+    <video src="video.mp4" controls width="640" height="360">
+        Your browser does not support the video element.
+    </video>
+
+Multiple Sources:
+    <video controls width="640" height="360" poster="thumbnail.jpg">
+        <source src="video.mp4" type="video/mp4">
+        <source src="video.webm" type="video/webm">
+        <source src="video.ogg" type="video/ogg">
+        Your browser does not support the video element.
+    </video>
+
+Video with Captions:
+    <video controls width="640" height="360">
+        <source src="video.mp4" type="video/mp4">
+        <track src="captions-en.vtt" kind="captions"
+               srclang="en" label="English" default>
+        <track src="captions-ne.vtt" kind="captions"
+               srclang="ne" label="Nepali">
+    </video>
+
+Video Attributes:
+    <video controls autoplay muted loop
+           poster="thumbnail.jpg"
+           width="640" height="360"
+           preload="metadata"
+           playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    - controls: Show video controls
+    - autoplay: Start playing automatically (often requires muted)
+    - muted: Start muted
+    - loop: Loop playback
+    - poster: Image shown before play
+    - width/height: Dimensions
+    - preload: "auto" | "metadata" | "none"
+    - playsinline: Play inline on mobile (not fullscreen)
+
+EMBEDDED CONTENT
+----------------
+
+YouTube Video:
+    <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write;
+                   encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+    </iframe>
+
+Google Maps:
+    <iframe src="https://www.google.com/maps/embed?pb=..."
+            width="600" height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+    </iframe>
+
+Generic Embed:
+    <embed src="file.swf" type="application/x-shockwave-flash"
+           width="400" height="300">
+
+Object Element:
+    <object data="document.pdf" type="application/pdf"
+            width="600" height="400">
+        <p>PDF cannot be displayed. <a href="document.pdf">Download</a></p>
+    </object>
+
+================================================================================
+2.7 LISTS, TABLES, FORMS AND INPUT
+================================================================================
+
+LISTS
+-----
+
+1. Unordered List (Bulleted):
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    Output:
+    • Item 1
+    • Item 2
+    • Item 3
+
+    CSS list-style-type values:
+    disc (default), circle, square, none
+
+2. Ordered List (Numbered):
+    <ol>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+    </ol>
+
+    Output:
+    1. First item
+    2. Second item
+    3. Third item
+
+    Ordered List Attributes:
+    <ol type="1">  <!-- 1, 2, 3 (default) -->
+    <ol type="A">  <!-- A, B, C -->
+    <ol type="a">  <!-- a, b, c -->
+    <ol type="I">  <!-- I, II, III -->
+    <ol type="i">  <!-- i, ii, iii -->
+
+    <ol start="5">     <!-- Start from 5 -->
+    <ol reversed>      <!-- Reverse order -->
+
+    <li value="10">    <!-- Set specific value -->
+
+3. Description List (Definition):
+    <dl>
+        <dt>HTML</dt>
+        <dd>HyperText Markup Language - structure of web pages</dd>
+
+        <dt>CSS</dt>
+        <dd>Cascading Style Sheets - styling of web pages</dd>
+
+        <dt>JavaScript</dt>
+        <dd>Programming language for web interactivity</dd>
+    </dl>
+
+    Output:
+    HTML
+        HyperText Markup Language - structure of web pages
+    CSS
+        Cascading Style Sheets - styling of web pages
+
+4. Nested Lists:
+    <ul>
+        <li>Fruits
+            <ul>
+                <li>Apple</li>
+                <li>Banana</li>
+                <li>Orange</li>
+            </ul>
+        </li>
+        <li>Vegetables
+            <ul>
+                <li>Carrot</li>
+                <li>Broccoli</li>
+            </ul>
+        </li>
+    </ul>
+
+TABLES
+------
+
+Basic Table Structure:
+    <table>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+                <td>Row 1, Cell 3</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+                <td>Row 2, Cell 3</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Footer 1</td>
+                <td>Footer 2</td>
+                <td>Footer 3</td>
+            </tr>
+        </tfoot>
+    </table>
+
+Table Elements:
+- <table>: Container for the table
+- <thead>: Table header section
+- <tbody>: Table body section
+- <tfoot>: Table footer section
+- <tr>: Table row
+- <th>: Table header cell (bold, centered by default)
+- <td>: Table data cell
+- <caption>: Table caption/title
+
+Table with Caption:
+    <table>
+        <caption>Monthly Sales Report</caption>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>January</td>
+                <td>$10,000</td>
+            </tr>
+            <tr>
+                <td>February</td>
+                <td>$12,000</td>
+            </tr>
+        </tbody>
+    </table>
+
+Cell Spanning:
+
+    colspan (span multiple columns):
+    <table border="1">
+        <tr>
+            <th colspan="2">Name</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>First</td>
+            <td>Last</td>
+            <td>25</td>
+        </tr>
+    </table>
+
+    Visual:
+    ┌───────────────┬─────┐
+    │     Name      │ Age │
+    ├───────┬───────┼─────┤
+    │ First │ Last  │ 25  │
+    └───────┴───────┴─────┘
+
+    rowspan (span multiple rows):
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <td rowspan="2">John</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+        </tr>
+    </table>
+
+    Visual:
+    ┌──────┬──────┐
+    │ Name │      │
+    ├──────┤ John │
+    │ Age  │      │
+    └──────┴──────┘
+
+Complex Table Example:
+    <table border="1">
+        <caption>Student Grades</caption>
+        <thead>
+            <tr>
+                <th rowspan="2">Student</th>
+                <th colspan="3">Subjects</th>
+                <th rowspan="2">Total</th>
+            </tr>
+            <tr>
+                <th>Math</th>
+                <th>Science</th>
+                <th>English</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>85</td>
+                <td>90</td>
+                <td>88</td>
+                <td>263</td>
+            </tr>
+            <tr>
+                <td>Jane</td>
+                <td>92</td>
+                <td>88</td>
+                <td>95</td>
+                <td>275</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Average</td>
+                <td>88.5</td>
+                <td>89</td>
+                <td>91.5</td>
+                <td>269</td>
+            </tr>
+        </tfoot>
+    </table>
+
+Table Accessibility:
+    <table>
+        <caption>Employee Directory</caption>
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">John Doe</th>
+                <td>Engineering</td>
+                <td>john@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+    scope attribute values: col, row, colgroup, rowgroup
+
+FORMS
+-----
+
+Basic Form Structure:
+    <form action="/submit" method="post">
+        <!-- Form elements -->
+        <input type="text" name="username">
+        <button type="submit">Submit</button>
+    </form>
+
+Form Attributes:
+    <form action="/submit"       <!-- Where to send data -->
+          method="post"          <!-- HTTP method: get or post -->
+          enctype="multipart/form-data"  <!-- For file uploads -->
+          name="myForm"          <!-- Form name -->
+          target="_blank"        <!-- Where to show response -->
+          autocomplete="on"      <!-- Enable autocomplete -->
+          novalidate>            <!-- Disable validation -->
+
+GET vs POST:
+- GET: Data in URL, visible, bookmarkable, limited size
+- POST: Data in body, hidden, not bookmarkable, larger data
+
+INPUT TYPES
+-----------
+
+1. Text Input:
+    <input type="text" name="username" placeholder="Enter username">
+
+2. Password:
+    <input type="password" name="password" placeholder="Enter password">
+
+3. Email:
+    <input type="email" name="email" placeholder="email@example.com">
+
+4. Number:
+    <input type="number" name="age" min="0" max="120" step="1">
+
+5. Tel (Phone):
+    <input type="tel" name="phone" placeholder="123-456-7890">
+
+6. URL:
+    <input type="url" name="website" placeholder="https://example.com">
+
+7. Search:
+    <input type="search" name="query" placeholder="Search...">
+
+8. Date:
+    <input type="date" name="birthday">
+
+9. Time:
+    <input type="time" name="appointment">
+
+10. Datetime-local:
+    <input type="datetime-local" name="meeting">
+
+11. Month:
+    <input type="month" name="expiry">
+
+12. Week:
+    <input type="week" name="week">
+
+13. Color:
+    <input type="color" name="favcolor" value="#ff0000">
+
+14. Range (Slider):
+    <input type="range" name="volume" min="0" max="100" value="50">
+
+15. File:
+    <input type="file" name="document" accept=".pdf,.doc">
+    <input type="file" name="images" accept="image/*" multiple>
+
+16. Hidden:
+    <input type="hidden" name="userId" value="12345">
+
+17. Checkbox:
+    <input type="checkbox" name="agree" id="agree" value="yes">
+    <label for="agree">I agree to terms</label>
+
+    <!-- Multiple checkboxes -->
+    <input type="checkbox" name="hobbies" value="reading"> Reading
+    <input type="checkbox" name="hobbies" value="gaming"> Gaming
+    <input type="checkbox" name="hobbies" value="sports"> Sports
+
+18. Radio Buttons:
+    <input type="radio" name="gender" value="male" id="male">
+    <label for="male">Male</label>
+
+    <input type="radio" name="gender" value="female" id="female">
+    <label for="female">Female</label>
+
+    <input type="radio" name="gender" value="other" id="other">
+    <label for="other">Other</label>
+
+19. Submit Button:
+    <input type="submit" value="Submit Form">
+
+20. Reset Button:
+    <input type="reset" value="Clear Form">
+
+21. Button:
+    <input type="button" value="Click Me" onclick="doSomething()">
+
+    <!-- Preferred: use <button> element -->
+    <button type="button">Click Me</button>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+
+INPUT ATTRIBUTES
+----------------
+    <input type="text"
+           name="username"           <!-- Field name -->
+           id="username"             <!-- Unique ID -->
+           value="default"           <!-- Default value -->
+           placeholder="Enter name"  <!-- Hint text -->
+           required                  <!-- Must be filled -->
+           disabled                  <!-- Cannot be edited -->
+           readonly                  <!-- Can read, can't edit -->
+           autofocus                 <!-- Focus on page load -->
+           autocomplete="off"        <!-- Disable autocomplete -->
+           minlength="3"             <!-- Minimum characters -->
+           maxlength="50"            <!-- Maximum characters -->
+           pattern="[A-Za-z]{3,}"    <!-- Regex pattern -->
+           size="30"                 <!-- Visible width -->
+           list="suggestions">       <!-- Datalist reference -->
+
+OTHER FORM ELEMENTS
+-------------------
+
+1. Label:
+    <!-- Associated by 'for' attribute -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+
+    <!-- Implicit association -->
+    <label>
+        Email:
+        <input type="email" name="email">
+    </label>
+
+2. Textarea:
+    <textarea name="message" rows="5" cols="40"
+              placeholder="Enter your message..."
+              maxlength="500"></textarea>
+
+3. Select (Dropdown):
+    <select name="country">
+        <option value="">Select Country</option>
+        <option value="np">Nepal</option>
+        <option value="in">India</option>
+        <option value="cn">China</option>
+    </select>
+
+    <!-- With optgroup -->
+    <select name="car">
+        <optgroup label="Japanese">
+            <option value="toyota">Toyota</option>
+            <option value="honda">Honda</option>
+        </optgroup>
+        <optgroup label="German">
+            <option value="bmw">BMW</option>
+            <option value="mercedes">Mercedes</option>
+        </optgroup>
+    </select>
+
+    <!-- Multiple selection -->
+    <select name="skills" multiple size="4">
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="js">JavaScript</option>
+        <option value="php">PHP</option>
+    </select>
+
+4. Datalist:
+    <input type="text" list="browsers" name="browser">
+    <datalist id="browsers">
+        <option value="Chrome">
+        <option value="Firefox">
+        <option value="Safari">
+        <option value="Edge">
+    </datalist>
+
+5. Fieldset and Legend:
+    <fieldset>
+        <legend>Personal Information</legend>
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname">
+    </fieldset>
+
+6. Output:
+    <form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+        <input type="number" id="a" value="0"> +
+        <input type="number" id="b" value="0"> =
+        <output name="result" for="a b">0</output>
+    </form>
+
+7. Progress:
+    <progress value="70" max="100">70%</progress>
+
+8. Meter:
+    <meter value="0.7" min="0" max="1" low="0.3" high="0.7" optimum="0.8">
+        70%
+    </meter>
+
+COMPLETE FORM EXAMPLE
+---------------------
+    <form action="/register" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <div>
+                <label for="fullname">Full Name: *</label>
+                <input type="text" id="fullname" name="fullname"
+                       required minlength="2" maxlength="100">
+            </div>
+
+            <div>
+                <label for="email">Email: *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone"
+                       pattern="[0-9]{10}" placeholder="9800000000">
+            </div>
+
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+
+            <div>
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Details</legend>
+
+            <div>
+                <label for="username">Username: *</label>
+                <input type="text" id="username" name="username"
+                       required pattern="[a-zA-Z0-9_]{4,20}">
+            </div>
+
+            <div>
+                <label for="password">Password: *</label>
+                <input type="password" id="password" name="password"
+                       required minlength="8">
+            </div>
+
+            <div>
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="">Select Country</option>
+                    <option value="np">Nepal</option>
+                    <option value="in">India</option>
+                    <option value="us">USA</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Information</legend>
+
+            <div>
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" cols="50"
+                          maxlength="500"></textarea>
+            </div>
+
+            <div>
+                <label for="photo">Profile Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+            </div>
+
+            <div>
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Subscribe to newsletter</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the terms and conditions *</label>
+            </div>
+        </fieldset>
+
+        <div>
+            <button type="submit">Register</button>
+            <button type="reset">Clear Form</button>
+        </div>
+    </form>
+
+================================================================================
+2.8 SEMANTIC HTML
+================================================================================
+
+WHAT IS SEMANTIC HTML?
+----------------------
+Semantic HTML uses elements that clearly describe their meaning to both the
+browser and the developer, improving accessibility, SEO, and maintainability.
+
+NON-SEMANTIC VS SEMANTIC ELEMENTS
+---------------------------------
+
+Non-Semantic Elements (no meaning):
+    <div>   - Generic container
+    <span>  - Generic inline container
+
+Semantic Elements (meaningful):
+    <header>    - Introductory content
+    <nav>       - Navigation links
+    <main>      - Main content
+    <article>   - Self-contained content
+    <section>   - Thematic grouping
+    <aside>     - Sidebar content
+    <footer>    - Footer content
+    <figure>    - Self-contained media
+    <figcaption>- Caption for figure
+
+COMPARISON
+----------
+
+Without Semantic HTML:
+    <div id="header">
+        <div id="nav">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">About</div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="article">
+            <div class="title">Article Title</div>
+            <div class="content">Content here...</div>
+        </div>
+        <div id="sidebar">
+            <div class="widget">Widget content</div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="copyright">© 2024</div>
+    </div>
+
+With Semantic HTML:
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1>Article Title</h1>
+            <p>Content here...</p>
+        </article>
+        <aside>
+            <section class="widget">Widget content</section>
+        </aside>
+    </main>
+    <footer>
+        <p>© 2024</p>
+    </footer>
+
+SEMANTIC ELEMENTS IN DETAIL
+---------------------------
+
+1. <header>:
+   Introductory content, typically contains logo, navigation, search.
+
+    <header>
+        <h1>Website Name</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Can also be used in article/section -->
+    <article>
+        <header>
+            <h2>Article Title</h2>
+            <p>By Author | Date</p>
+        </header>
+        <p>Article content...</p>
+    </article>
+
+2. <nav>:
+   Contains navigation links.
+
+    <nav aria-label="Main navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+3. <main>:
+   The main content of the document (only one per page).
+
+    <main>
+        <h1>Page Title</h1>
+        <p>Main content goes here...</p>
+    </main>
+
+4. <article>:
+   Self-contained content that could be distributed independently.
+
+    <article>
+        <header>
+            <h2>Blog Post Title</h2>
+            <time datetime="2024-01-15">January 15, 2024</time>
+        </header>
+        <p>Blog post content...</p>
+        <footer>
+            <p>Tags: HTML, Web Development</p>
+        </footer>
+    </article>
+
+5. <section>:
+   Thematic grouping of content with a heading.
+
+    <section>
+        <h2>About Us</h2>
+        <p>Information about the company...</p>
+    </section>
+
+    <section>
+        <h2>Our Services</h2>
+        <ul>
+            <li>Web Design</li>
+            <li>Web Development</li>
+        </ul>
+    </section>
+
+6. <aside>:
+   Content tangentially related to the main content (sidebar).
+
+    <aside>
+        <h3>Related Articles</h3>
+        <ul>
+            <li><a href="#">Article 1</a></li>
+            <li><a href="#">Article 2</a></li>
+        </ul>
+    </aside>
+
+7. <footer>:
+   Footer for document or section.
+
+    <footer>
+        <nav>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+        </nav>
+        <p>&copy; 2024 Company Name</p>
+    </footer>
+
+8. <figure> and <figcaption>:
+   Self-contained content with caption.
+
+    <figure>
+        <img src="chart.png" alt="Sales chart">
+        <figcaption>Figure 1: 2024 Sales Data</figcaption>
+    </figure>
+
+    <figure>
+        <pre><code>console.log('Hello');</code></pre>
+        <figcaption>Example: Hello World in JavaScript</figcaption>
+    </figure>
+
+9. <time>:
+   Machine-readable date/time.
+
+    <p>Published on <time datetime="2024-01-15">January 15, 2024</time></p>
+    <p>Event starts at <time datetime="14:00">2:00 PM</time></p>
+
+10. <mark>:
+    Highlighted text.
+
+    <p>Search results for <mark>HTML</mark></p>
+
+11. <details> and <summary>:
+    Collapsible content.
+
+    <details>
+        <summary>Click to see more</summary>
+        <p>Hidden content revealed when expanded.</p>
+    </details>
+
+12. <address>:
+    Contact information.
+
+    <address>
+        <p>Contact us:</p>
+        <a href="mailto:info@example.com">info@example.com</a>
+    </address>
+
+COMPLETE SEMANTIC PAGE STRUCTURE
+--------------------------------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Semantic HTML Example</title>
+    </head>
+    <body>
+        <header>
+            <h1>Website Name</h1>
+            <nav aria-label="Main">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <header>
+                    <h2>Article Title</h2>
+                    <p>
+                        By <address><a href="mailto:author@example.com">Author</a></address>
+                        on <time datetime="2024-01-15">January 15, 2024</time>
+                    </p>
+                </header>
+
+                <section>
+                    <h3>Introduction</h3>
+                    <p>Introduction content with <strong>important</strong> text.</p>
+                </section>
+
+                <section>
+                    <h3>Main Points</h3>
+                    <p>Detailed content here...</p>
+
+                    <figure>
+                        <img src="diagram.png" alt="Process diagram">
+                        <figcaption>Figure 1: Process Flow</figcaption>
+                    </figure>
+                </section>
+
+                <footer>
+                    <p>Tags: <a href="/tag/html">HTML</a>, <a href="/tag/web">Web</a></p>
+                </footer>
+            </article>
+
+            <aside>
+                <section>
+                    <h3>Related Posts</h3>
+                    <ul>
+                        <li><a href="#">Related Post 1</a></li>
+                        <li><a href="#">Related Post 2</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                    </ul>
+                </section>
+            </aside>
+        </main>
+
+        <footer>
+            <nav aria-label="Footer">
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ul>
+            </nav>
+            <p><small>&copy; 2024 Website Name. All rights reserved.</small></p>
+        </footer>
+    </body>
+    </html>
+
+BENEFITS OF SEMANTIC HTML
+-------------------------
+
+1. Accessibility:
+   - Screen readers understand page structure
+   - Users can navigate by landmarks
+   - Better experience for disabled users
+
+2. SEO (Search Engine Optimization):
+   - Search engines understand content better
+   - Improved ranking potential
+   - Rich snippets in search results
+
+3. Maintainability:
+   - Code is self-documenting
+   - Easier for developers to understand
+   - Faster development and debugging
+
+4. Consistency:
+   - Standard structure across websites
+   - Predictable behavior
+   - Better browser compatibility
+
+================================================================================
+                           SUMMARY
+================================================================================
+
+Key Topics Covered:
+
+1. Introduction to HTML
+   - What is HTML and its role
+   - Elements, tags, and attributes
+   - HTML history and versions
+
+2. Document Structure
+   - DOCTYPE declaration
+   - <html>, <head>, <body> elements
+   - Meta tags and their purposes
+
+3. Text Formatting
+   - Headings (h1-h6)
+   - Paragraphs, line breaks, horizontal rules
+   - Text formatting elements (strong, em, mark, etc.)
+   - HTML entities
+
+4. Links and Navigation
+   - Anchor element and attributes
+   - External, internal, and anchor links
+   - Email and telephone links
+   - Navigation menus
+
+5. Hyperlinks
+   - URL structure
+   - Absolute vs relative URLs
+   - Path navigation
+
+6. Images and Multimedia
+   - Image element and attributes
+   - Image formats and responsive images
+   - Audio and video elements
+   - Embedded content
+
+7. Lists, Tables, Forms
+   - Ordered, unordered, and description lists
+   - Table structure and cell spanning
+   - Form elements and input types
+   - Form validation
+
+8. Semantic HTML
+   - Semantic vs non-semantic elements
+   - Header, nav, main, article, section, aside, footer
+   - Benefits of semantic markup
+
+================================================================================
+                      PRACTICE EXERCISES
+================================================================================
+
+Exercise 1: Basic HTML Page
+---------------------------
+Create a complete HTML page with proper document structure including:
+- DOCTYPE, html, head, body
+- Meta tags for charset and viewport
+- Title and description
+- Basic content with headings and paragraphs
+
+Exercise 2: Text Formatting
+---------------------------
+Create a page demonstrating all text formatting elements:
+- All heading levels
+- Bold, italic, underline, strikethrough
+- Subscript, superscript
+- Abbreviations, code blocks
+- Special characters
+
+Exercise 3: Navigation Menu
+---------------------------
+Create a navigation menu with:
+- Main navigation links
+- Dropdown submenu
+- Breadcrumb navigation
+- Links to email and phone
+
+Exercise 4: Image Gallery
+-------------------------
+Create an image gallery page with:
+- Multiple images with alt text
+- Figure elements with captions
+- Responsive image using srcset or picture
+
+Exercise 5: Data Table
+----------------------
+Create a table displaying student grades with:
+- Table caption
+- Header, body, and footer sections
+- Merged cells (colspan, rowspan)
+- Proper accessibility attributes
+
+Exercise 6: Registration Form
+-----------------------------
+Create a complete registration form with:
+- All appropriate input types
+- Labels for all fields
+- Fieldsets for grouping
+- Required field validation
+- File upload
+
+Exercise 7: Semantic Blog Page
+------------------------------
+Create a blog page using all semantic elements:
+- Header with navigation
+- Main content with articles
+- Sidebar with related content
+- Footer with links
+
+================================================================================
+                        REFERENCES
+================================================================================
+
+1. Robbins, J. N. (2018). Learning Web Design: A Beginner's Guide to HTML, CSS,
+   JavaScript, and Web Graphics. O'Reilly Media.
+
+2. MDN Web Docs - HTML:
+   https://developer.mozilla.org/en-US/docs/Web/HTML
+
+3. W3Schools HTML Tutorial:
+   https://www.w3schools.com/html/
+
+4. HTML Living Standard:
+   https://html.spec.whatwg.org/
+
+5. Web Accessibility Initiative:
+   https://www.w3.org/WAI/
+
+================================================================================
+                   END OF UNIT 2 NOTES
+================================================================================

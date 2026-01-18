@@ -1,0 +1,2297 @@
+================================================================================
+            UNIT 7: ADVANCE TOPICS ON JAVASCRIPT
+                         (7 Hours)
+================================================================================
+
+Course: Internet Technology (CMP 173)
+Program: BCSIT, Pokhara University
+
+================================================================================
+                        TABLE OF CONTENTS
+================================================================================
+
+7.1  Scope and Closures
+7.2  Error Handling and Debugging
+7.3  DOM Manipulation
+7.4  Asynchronous JavaScript
+7.5  JSON and AJAX
+7.6  ES6 and Modern JavaScript
+7.7  JavaScript Libraries
+
+================================================================================
+                    LEARNING OBJECTIVES
+================================================================================
+
+After completing this unit, students will be able to:
+
+- Grasp the intricacies of scope, variable visibility, and the concept of
+  closures
+- Manage errors using try-catch blocks, exceptions, and employ debugging
+  techniques
+- Manipulate the Document Object Model (DOM) to interact with HTML elements
+  and handle events
+- Master asynchronous programming, including callback functions, promises,
+  and async/await
+- Work with JSON data and make AJAX requests using fetch API or XMLHttpRequest
+- Explore ES6 features like arrow functions, template literals, let and const
+  keywords, and destructuring assignments
+- Understand modern JavaScript concepts, such as modules and import/export
+  functionality
+- Gain exposure to popular JavaScript libraries/frameworks like React, Angular,
+  or Vue.js for building web applications
+- Elevate JavaScript skills to enable dynamic and interactive web development
+
+================================================================================
+7.1 SCOPE AND CLOSURES
+================================================================================
+
+SCOPE
+-----
+Scope determines the accessibility (visibility) of variables in different parts
+of your code.
+
+Types of Scope:
+1. Global Scope
+2. Function Scope (Local Scope)
+3. Block Scope (ES6)
+4. Lexical Scope
+
+1. Global Scope
+---------------
+Variables declared outside any function have global scope.
+
+    // Global variable
+    var globalVar = "I'm global";
+    let globalLet = "I'm also global";
+
+    function test() {
+        console.log(globalVar);  // Accessible
+        console.log(globalLet);  // Accessible
+    }
+
+    test();
+    console.log(globalVar);  // Accessible everywhere
+
+    // Variables without declaration become global (avoid this!)
+    function badPractice() {
+        undeclaredVar = "I'm accidentally global";  // Don't do this!
+    }
+
+2. Function Scope (Local Scope)
+-------------------------------
+Variables declared inside a function are only accessible within that function.
+
+    function myFunction() {
+        var localVar = "I'm local";
+        let localLet = "I'm also local";
+
+        console.log(localVar);  // Accessible
+        console.log(localLet);  // Accessible
+    }
+
+    myFunction();
+    // console.log(localVar);  // Error: localVar is not defined
+    // console.log(localLet);  // Error: localLet is not defined
+
+3. Block Scope (ES6)
+--------------------
+Variables declared with let and const are limited to the block they're in.
+
+    // Block = code inside { }
+    if (true) {
+        var varVariable = "var is function-scoped";
+        let letVariable = "let is block-scoped";
+        const constVariable = "const is block-scoped";
+    }
+
+    console.log(varVariable);    // Accessible (var ignores block scope)
+    // console.log(letVariable);   // Error: not defined
+    // console.log(constVariable); // Error: not defined
+
+    // Loop example
+    for (var i = 0; i < 3; i++) {
+        // var i is accessible outside the loop
+    }
+    console.log(i);  // 3
+
+    for (let j = 0; j < 3; j++) {
+        // let j is block-scoped
+    }
+    // console.log(j);  // Error: j is not defined
+
+var vs let vs const:
+    | Feature          | var        | let        | const      |
+    |------------------|------------|------------|------------|
+    | Scope            | Function   | Block      | Block      |
+    | Hoisting         | Yes        | Yes*       | Yes*       |
+    | Re-declaration   | Allowed    | Not allowed| Not allowed|
+    | Re-assignment    | Allowed    | Allowed    | Not allowed|
+    | TDZ              | No         | Yes        | Yes        |
+
+    * Hoisted but not initialized (Temporal Dead Zone - TDZ)
+
+4. Lexical Scope (Static Scope)
+-------------------------------
+Inner functions have access to variables in their outer (enclosing) functions.
+
+    function outer() {
+        let outerVar = "I'm from outer";
+
+        function inner() {
+            let innerVar = "I'm from inner";
+            console.log(outerVar);  // Accessible (lexical scope)
+            console.log(innerVar);  // Accessible
+        }
+
+        inner();
+        console.log(outerVar);  // Accessible
+        // console.log(innerVar);  // Error: not defined
+    }
+
+    outer();
+
+Scope Chain:
+    var global = "global";
+
+    function first() {
+        var firstVar = "first";
+
+        function second() {
+            var secondVar = "second";
+
+            function third() {
+                var thirdVar = "third";
+                // Can access: thirdVar, secondVar, firstVar, global
+                console.log(global, firstVar, secondVar, thirdVar);
+            }
+            third();
+        }
+        second();
+    }
+    first();
+
+HOISTING
+--------
+JavaScript moves declarations to the top of their scope before execution.
+
+    // What you write:
+    console.log(x);  // undefined (not error!)
+    var x = 5;
+
+    // How JavaScript interprets it:
+    var x;           // Declaration hoisted
+    console.log(x);  // undefined
+    x = 5;           // Assignment stays
+
+    // Function declarations are fully hoisted
+    sayHello();  // Works!
+    function sayHello() {
+        console.log("Hello!");
+    }
+
+    // Function expressions are NOT hoisted
+    // sayBye();  // Error: sayBye is not a function
+    var sayBye = function() {
+        console.log("Bye!");
+    };
+
+    // let and const - Temporal Dead Zone (TDZ)
+    // console.log(a);  // Error: Cannot access 'a' before initialization
+    let a = 10;
+
+CLOSURES
+--------
+A closure is a function that has access to variables from its outer (enclosing)
+function's scope, even after the outer function has returned.
+
+Basic Closure Example:
+    function outer() {
+        let count = 0;  // Private variable
+
+        function inner() {
+            count++;
+            return count;
+        }
+
+        return inner;
+    }
+
+    const counter = outer();  // outer() returns inner function
+    console.log(counter());   // 1
+    console.log(counter());   // 2
+    console.log(counter());   // 3
+
+    // Each call to outer() creates a new closure
+    const counter2 = outer();
+    console.log(counter2());  // 1 (independent count)
+
+Practical Closure Examples:
+
+1. Data Privacy (Module Pattern):
+    function createBankAccount(initialBalance) {
+        let balance = initialBalance;  // Private variable
+
+        return {
+            deposit(amount) {
+                balance += amount;
+                return balance;
+            },
+            withdraw(amount) {
+                if (amount <= balance) {
+                    balance -= amount;
+                    return balance;
+                }
+                return "Insufficient funds";
+            },
+            getBalance() {
+                return balance;
+            }
+        };
+    }
+
+    const account = createBankAccount(1000);
+    console.log(account.getBalance());  // 1000
+    console.log(account.deposit(500));  // 1500
+    console.log(account.withdraw(200)); // 1300
+    // console.log(account.balance);    // undefined (private!)
+
+2. Function Factory:
+    function multiplier(factor) {
+        return function(number) {
+            return number * factor;
+        };
+    }
+
+    const double = multiplier(2);
+    const triple = multiplier(3);
+
+    console.log(double(5));  // 10
+    console.log(triple(5));  // 15
+
+3. Event Handlers:
+    function setupButtons() {
+        for (var i = 1; i <= 3; i++) {
+            // Problem with var: all buttons show "4"
+            document.getElementById('btn' + i).onclick = function() {
+                alert('Button ' + i);  // i is always 4 (closure over var)
+            };
+        }
+    }
+
+    // Solution 1: Use let (block-scoped)
+    function setupButtonsFixed() {
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById('btn' + i).onclick = function() {
+                alert('Button ' + i);  // Correct: 1, 2, 3
+            };
+        }
+    }
+
+    // Solution 2: Use IIFE to create closure
+    function setupButtonsIIFE() {
+        for (var i = 1; i <= 3; i++) {
+            (function(num) {
+                document.getElementById('btn' + num).onclick = function() {
+                    alert('Button ' + num);
+                };
+            })(i);
+        }
+    }
+
+4. Memoization (Caching):
+    function memoize(fn) {
+        const cache = {};  // Closure over cache
+
+        return function(...args) {
+            const key = JSON.stringify(args);
+            if (key in cache) {
+                console.log('From cache');
+                return cache[key];
+            }
+            console.log('Calculating');
+            const result = fn(...args);
+            cache[key] = result;
+            return result;
+        };
+    }
+
+    const expensiveCalculation = memoize(function(n) {
+        // Simulate expensive operation
+        let result = 0;
+        for (let i = 0; i < n * 1000000; i++) {
+            result += i;
+        }
+        return result;
+    });
+
+    console.log(expensiveCalculation(10));  // Calculating... (slow)
+    console.log(expensiveCalculation(10));  // From cache (instant)
+
+================================================================================
+7.2 ERROR HANDLING AND DEBUGGING
+================================================================================
+
+ERROR TYPES IN JAVASCRIPT
+-------------------------
+
+1. SyntaxError - Invalid code syntax
+    // let x = ;  // SyntaxError: Unexpected token ';'
+
+2. ReferenceError - Accessing undefined variable
+    // console.log(undefinedVar);  // ReferenceError
+
+3. TypeError - Operation on wrong type
+    // null.toString();  // TypeError: Cannot read property of null
+
+4. RangeError - Number out of range
+    // let arr = new Array(-1);  // RangeError: Invalid array length
+
+5. URIError - Invalid URI functions
+    // decodeURIComponent('%');  // URIError
+
+6. EvalError - Error in eval() function (rarely used)
+
+TRY-CATCH-FINALLY
+-----------------
+Handle errors gracefully without crashing the program.
+
+Basic Syntax:
+    try {
+        // Code that might throw an error
+    } catch (error) {
+        // Handle the error
+    } finally {
+        // Always executes (optional)
+    }
+
+Example:
+    function divide(a, b) {
+        try {
+            if (b === 0) {
+                throw new Error("Cannot divide by zero");
+            }
+            return a / b;
+        } catch (error) {
+            console.error("Error:", error.message);
+            return null;
+        } finally {
+            console.log("Division operation completed");
+        }
+    }
+
+    console.log(divide(10, 2));  // 5, "Division operation completed"
+    console.log(divide(10, 0));  // Error message, null, "completed"
+
+Error Object Properties:
+    try {
+        throw new Error("Something went wrong");
+    } catch (error) {
+        console.log(error.name);     // "Error"
+        console.log(error.message);  // "Something went wrong"
+        console.log(error.stack);    // Stack trace
+    }
+
+THROWING ERRORS
+---------------
+Use 'throw' to create custom errors.
+
+    function validateAge(age) {
+        if (typeof age !== 'number') {
+            throw new TypeError("Age must be a number");
+        }
+        if (age < 0) {
+            throw new RangeError("Age cannot be negative");
+        }
+        if (age < 18) {
+            throw new Error("Must be 18 or older");
+        }
+        return true;
+    }
+
+    try {
+        validateAge("twenty");
+    } catch (error) {
+        if (error instanceof TypeError) {
+            console.log("Type error:", error.message);
+        } else if (error instanceof RangeError) {
+            console.log("Range error:", error.message);
+        } else {
+            console.log("Error:", error.message);
+        }
+    }
+
+Custom Error Classes:
+    class ValidationError extends Error {
+        constructor(message) {
+            super(message);
+            this.name = "ValidationError";
+        }
+    }
+
+    class NetworkError extends Error {
+        constructor(message, statusCode) {
+            super(message);
+            this.name = "NetworkError";
+            this.statusCode = statusCode;
+        }
+    }
+
+    function fetchData(url) {
+        throw new NetworkError("Failed to fetch", 404);
+    }
+
+    try {
+        fetchData("https://api.example.com");
+    } catch (error) {
+        if (error instanceof NetworkError) {
+            console.log(`Network Error ${error.statusCode}: ${error.message}`);
+        }
+    }
+
+DEBUGGING TECHNIQUES
+--------------------
+
+1. console Methods:
+    console.log("General output");
+    console.error("Error message");      // Red text
+    console.warn("Warning message");     // Yellow text
+    console.info("Info message");
+    console.table([{a: 1}, {a: 2}]);    // Table format
+    console.dir(document.body);          // Object tree
+    console.time("timer");               // Start timer
+    // ... code ...
+    console.timeEnd("timer");            // End timer, show duration
+    console.count("label");              // Count calls
+    console.group("Group Name");         // Group logs
+    console.log("Inside group");
+    console.groupEnd();
+    console.trace();                     // Stack trace
+    console.assert(1 === 2, "1 is not 2"); // Conditional log
+
+2. Debugger Statement:
+    function problematicFunction(x) {
+        let result = x * 2;
+        debugger;  // Execution pauses here in DevTools
+        result += 10;
+        return result;
+    }
+
+3. Browser DevTools:
+    - Sources panel: Set breakpoints, step through code
+    - Console panel: Execute JavaScript, view logs
+    - Network panel: Monitor API calls
+    - Elements panel: Inspect DOM
+
+4. Breakpoint Types:
+    - Line breakpoint: Pause at specific line
+    - Conditional breakpoint: Pause when condition is true
+    - DOM breakpoint: Pause when DOM changes
+    - XHR breakpoint: Pause on network requests
+    - Event listener breakpoint: Pause on events
+
+5. Step Controls:
+    - Step Over (F10): Execute current line, move to next
+    - Step Into (F11): Enter function call
+    - Step Out (Shift+F11): Exit current function
+    - Resume (F8): Continue until next breakpoint
+
+Common Debugging Strategies:
+    // 1. Check variable values
+    function debug1() {
+        let data = fetchData();
+        console.log("Data received:", data);  // Check data
+        processData(data);
+    }
+
+    // 2. Narrow down the problem
+    function debug2() {
+        console.log("Step 1");
+        step1();
+        console.log("Step 2");  // If this doesn't appear, error is in step1
+        step2();
+        console.log("Step 3");
+        step3();
+    }
+
+    // 3. Check types
+    function debug3(input) {
+        console.log("Type:", typeof input);
+        console.log("Is Array:", Array.isArray(input));
+        console.log("Value:", JSON.stringify(input));
+    }
+
+================================================================================
+7.3 DOM MANIPULATION
+================================================================================
+
+DOCUMENT OBJECT MODEL (DOM)
+---------------------------
+The DOM is a programming interface for HTML documents. It represents the page
+as a tree of objects that can be manipulated with JavaScript.
+
+DOM Tree Structure:
+    document
+    └── html
+        ├── head
+        │   ├── title
+        │   └── meta
+        └── body
+            ├── div
+            │   ├── h1
+            │   └── p
+            └── script
+
+SELECTING ELEMENTS
+------------------
+
+1. getElementById() - Select by ID (returns single element):
+    <div id="myDiv">Hello</div>
+
+    let element = document.getElementById("myDiv");
+    console.log(element);  // <div id="myDiv">Hello</div>
+
+2. getElementsByClassName() - Select by class (returns HTMLCollection):
+    <p class="text">Para 1</p>
+    <p class="text">Para 2</p>
+
+    let elements = document.getElementsByClassName("text");
+    console.log(elements.length);  // 2
+    console.log(elements[0]);      // First paragraph
+
+3. getElementsByTagName() - Select by tag (returns HTMLCollection):
+    let paragraphs = document.getElementsByTagName("p");
+    let divs = document.getElementsByTagName("div");
+
+4. querySelector() - Select first match (CSS selector):
+    // Select by ID
+    let byId = document.querySelector("#myDiv");
+
+    // Select by class
+    let byClass = document.querySelector(".text");
+
+    // Select by tag
+    let byTag = document.querySelector("p");
+
+    // Complex selectors
+    let complex = document.querySelector("div.container > p.first");
+    let nested = document.querySelector("#menu li:first-child");
+
+5. querySelectorAll() - Select all matches (returns NodeList):
+    let allParagraphs = document.querySelectorAll("p");
+    let allLinks = document.querySelectorAll("a[href]");
+    let listItems = document.querySelectorAll("ul.menu > li");
+
+    // NodeList can use forEach
+    allParagraphs.forEach(p => console.log(p.textContent));
+
+MODIFYING ELEMENTS
+------------------
+
+1. Changing Content:
+    let element = document.getElementById("demo");
+
+    // innerHTML - HTML content (can include tags)
+    element.innerHTML = "<strong>Bold text</strong>";
+
+    // textContent - Text only (safer, no HTML parsing)
+    element.textContent = "Plain text";
+
+    // innerText - Visible text only (respects CSS)
+    element.innerText = "Visible text";
+
+2. Changing Attributes:
+    let img = document.querySelector("img");
+
+    // getAttribute / setAttribute
+    let src = img.getAttribute("src");
+    img.setAttribute("src", "new-image.jpg");
+    img.setAttribute("alt", "Description");
+
+    // Direct property access
+    img.src = "another-image.jpg";
+    img.alt = "Another description";
+
+    // Remove attribute
+    img.removeAttribute("title");
+
+    // Check if attribute exists
+    if (img.hasAttribute("alt")) {
+        console.log("Alt text exists");
+    }
+
+3. Changing Styles:
+    let box = document.getElementById("box");
+
+    // Individual style properties (camelCase)
+    box.style.backgroundColor = "blue";
+    box.style.color = "white";
+    box.style.fontSize = "20px";
+    box.style.padding = "10px";
+    box.style.border = "2px solid black";
+
+    // Multiple styles at once
+    box.style.cssText = "background: red; color: white; padding: 20px;";
+
+    // Get computed style
+    let computed = window.getComputedStyle(box);
+    console.log(computed.backgroundColor);
+
+4. Working with Classes:
+    let element = document.getElementById("myElement");
+
+    // classList methods
+    element.classList.add("active");
+    element.classList.remove("hidden");
+    element.classList.toggle("visible");  // Add if absent, remove if present
+    element.classList.replace("old", "new");
+
+    // Check if class exists
+    if (element.classList.contains("active")) {
+        console.log("Element is active");
+    }
+
+    // Multiple classes
+    element.classList.add("class1", "class2", "class3");
+
+    // className (older way - replaces all classes)
+    element.className = "newClass1 newClass2";
+
+CREATING AND REMOVING ELEMENTS
+------------------------------
+
+1. Creating Elements:
+    // Create element
+    let newDiv = document.createElement("div");
+
+    // Set content and attributes
+    newDiv.textContent = "I'm a new div";
+    newDiv.id = "newDiv";
+    newDiv.className = "container";
+
+    // Create text node
+    let textNode = document.createTextNode("Hello World");
+
+    // Create from HTML string
+    let template = `
+        <div class="card">
+            <h2>Title</h2>
+            <p>Content here</p>
+        </div>
+    `;
+
+2. Adding Elements to DOM:
+    let parent = document.getElementById("container");
+    let newElement = document.createElement("p");
+    newElement.textContent = "New paragraph";
+
+    // appendChild - Add at end
+    parent.appendChild(newElement);
+
+    // insertBefore - Add before specific element
+    let reference = document.getElementById("reference");
+    parent.insertBefore(newElement, reference);
+
+    // append() - Add multiple nodes/strings at end (ES6)
+    parent.append(newElement, "text", anotherElement);
+
+    // prepend() - Add at beginning (ES6)
+    parent.prepend(newElement);
+
+    // insertAdjacentHTML - Insert HTML at specific position
+    parent.insertAdjacentHTML("beforebegin", "<p>Before parent</p>");
+    parent.insertAdjacentHTML("afterbegin", "<p>First child</p>");
+    parent.insertAdjacentHTML("beforeend", "<p>Last child</p>");
+    parent.insertAdjacentHTML("afterend", "<p>After parent</p>");
+
+3. Removing Elements:
+    let element = document.getElementById("toRemove");
+
+    // remove() - Modern way
+    element.remove();
+
+    // removeChild() - Older way (need parent reference)
+    let parent = element.parentNode;
+    parent.removeChild(element);
+
+    // Remove all children
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+    // Or simply:
+    parent.innerHTML = "";
+
+4. Cloning Elements:
+    let original = document.getElementById("original");
+
+    // Shallow clone (element only)
+    let shallowClone = original.cloneNode(false);
+
+    // Deep clone (with all descendants)
+    let deepClone = original.cloneNode(true);
+
+    document.body.appendChild(deepClone);
+
+TRAVERSING THE DOM
+------------------
+    <div id="parent">
+        <p id="first">First</p>
+        <p id="second">Second</p>
+        <p id="third">Third</p>
+    </div>
+
+    let parent = document.getElementById("parent");
+    let second = document.getElementById("second");
+
+    // Parent
+    console.log(second.parentNode);       // div#parent
+    console.log(second.parentElement);    // div#parent
+
+    // Children
+    console.log(parent.childNodes);       // All nodes (including text)
+    console.log(parent.children);         // Element children only
+    console.log(parent.firstChild);       // First node (might be text)
+    console.log(parent.firstElementChild);// First element
+    console.log(parent.lastElementChild); // Last element
+
+    // Siblings
+    console.log(second.previousSibling);        // Previous node
+    console.log(second.previousElementSibling); // Previous element
+    console.log(second.nextSibling);            // Next node
+    console.log(second.nextElementSibling);     // Next element
+
+EVENT HANDLING
+--------------
+Events are actions that happen in the browser (clicks, key presses, etc.).
+
+1. Inline Event Handlers (Not Recommended):
+    <button onclick="handleClick()">Click Me</button>
+
+2. Event Handler Properties:
+    let button = document.getElementById("myButton");
+
+    button.onclick = function() {
+        console.log("Button clicked!");
+    };
+
+    // Can only have one handler per event
+    button.onclick = function() {
+        console.log("This replaces the previous handler");
+    };
+
+3. addEventListener() (Recommended):
+    let button = document.getElementById("myButton");
+
+    // Add event listener
+    button.addEventListener("click", function() {
+        console.log("Clicked!");
+    });
+
+    // Named function (for removal)
+    function handleClick() {
+        console.log("Clicked!");
+    }
+    button.addEventListener("click", handleClick);
+
+    // Remove event listener
+    button.removeEventListener("click", handleClick);
+
+    // Options
+    button.addEventListener("click", handleClick, {
+        once: true,      // Remove after first trigger
+        capture: true,   // Use capture phase
+        passive: true    // Won't call preventDefault()
+    });
+
+Common Events:
+    // Mouse events
+    element.addEventListener("click", handler);
+    element.addEventListener("dblclick", handler);
+    element.addEventListener("mouseenter", handler);
+    element.addEventListener("mouseleave", handler);
+    element.addEventListener("mousemove", handler);
+    element.addEventListener("mousedown", handler);
+    element.addEventListener("mouseup", handler);
+
+    // Keyboard events
+    document.addEventListener("keydown", handler);
+    document.addEventListener("keyup", handler);
+    document.addEventListener("keypress", handler);  // Deprecated
+
+    // Form events
+    form.addEventListener("submit", handler);
+    input.addEventListener("change", handler);
+    input.addEventListener("input", handler);
+    input.addEventListener("focus", handler);
+    input.addEventListener("blur", handler);
+
+    // Window events
+    window.addEventListener("load", handler);
+    window.addEventListener("resize", handler);
+    window.addEventListener("scroll", handler);
+    document.addEventListener("DOMContentLoaded", handler);
+
+Event Object:
+    button.addEventListener("click", function(event) {
+        // Event properties
+        console.log(event.type);        // "click"
+        console.log(event.target);      // Element that triggered event
+        console.log(event.currentTarget);// Element with listener
+        console.log(event.timeStamp);   // Time of event
+
+        // Mouse event properties
+        console.log(event.clientX, event.clientY);  // Viewport coordinates
+        console.log(event.pageX, event.pageY);      // Page coordinates
+        console.log(event.button);      // Mouse button (0=left, 2=right)
+
+        // Keyboard event properties
+        console.log(event.key);         // Key value ("Enter", "a", etc.)
+        console.log(event.code);        // Physical key ("KeyA", "Enter")
+        console.log(event.shiftKey);    // Shift held?
+        console.log(event.ctrlKey);     // Ctrl held?
+        console.log(event.altKey);      // Alt held?
+
+        // Prevent default behavior
+        event.preventDefault();
+
+        // Stop propagation
+        event.stopPropagation();
+    });
+
+Event Propagation (Bubbling and Capturing):
+    <div id="outer">
+        <div id="inner">
+            <button id="button">Click</button>
+        </div>
+    </div>
+
+    // Bubbling (default): inner -> outer -> document
+    // Capturing: document -> outer -> inner
+
+    document.getElementById("outer").addEventListener("click", () => {
+        console.log("Outer clicked");
+    });
+
+    document.getElementById("inner").addEventListener("click", () => {
+        console.log("Inner clicked");
+    });
+
+    document.getElementById("button").addEventListener("click", (e) => {
+        console.log("Button clicked");
+        // e.stopPropagation();  // Stops bubbling
+    });
+
+    // Click button output: "Button clicked", "Inner clicked", "Outer clicked"
+
+Event Delegation:
+    // Instead of adding listeners to each item:
+    <ul id="todoList">
+        <li>Task 1</li>
+        <li>Task 2</li>
+        <li>Task 3</li>
+    </ul>
+
+    // Add one listener to parent
+    document.getElementById("todoList").addEventListener("click", (e) => {
+        if (e.target.tagName === "LI") {
+            e.target.classList.toggle("completed");
+        }
+    });
+
+    // Works for dynamically added items too!
+
+================================================================================
+7.4 ASYNCHRONOUS JAVASCRIPT
+================================================================================
+
+JavaScript is single-threaded but can handle asynchronous operations through
+the event loop mechanism.
+
+SYNCHRONOUS VS ASYNCHRONOUS
+---------------------------
+    // Synchronous (blocking)
+    console.log("1");
+    console.log("2");
+    console.log("3");
+    // Output: 1, 2, 3 (in order)
+
+    // Asynchronous (non-blocking)
+    console.log("1");
+    setTimeout(() => console.log("2"), 1000);
+    console.log("3");
+    // Output: 1, 3, 2 (2 appears after 1 second)
+
+CALLBACK FUNCTIONS
+------------------
+Functions passed as arguments to be executed later.
+
+    function fetchData(callback) {
+        setTimeout(() => {
+            const data = { name: "John", age: 30 };
+            callback(data);
+        }, 1000);
+    }
+
+    fetchData(function(data) {
+        console.log("Data received:", data);
+    });
+
+Callback Hell (Pyramid of Doom):
+    // Nested callbacks become hard to read and maintain
+    getUser(userId, function(user) {
+        getOrders(user.id, function(orders) {
+            getOrderDetails(orders[0].id, function(details) {
+                getProduct(details.productId, function(product) {
+                    console.log(product);
+                    // More nesting...
+                });
+            });
+        });
+    });
+
+PROMISES
+--------
+Promises provide a cleaner way to handle asynchronous operations.
+
+Promise States:
+1. Pending - Initial state
+2. Fulfilled - Operation completed successfully
+3. Rejected - Operation failed
+
+Creating a Promise:
+    const myPromise = new Promise((resolve, reject) => {
+        // Asynchronous operation
+        setTimeout(() => {
+            const success = true;
+
+            if (success) {
+                resolve("Operation successful!");
+            } else {
+                reject("Operation failed!");
+            }
+        }, 1000);
+    });
+
+Consuming Promises with then/catch:
+    myPromise
+        .then(result => {
+            console.log("Success:", result);
+            return "Next value";
+        })
+        .then(nextResult => {
+            console.log("Chained:", nextResult);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        })
+        .finally(() => {
+            console.log("Always runs");
+        });
+
+Promise Chaining:
+    function getUser(userId) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({ id: userId, name: "John" });
+            }, 500);
+        });
+    }
+
+    function getOrders(userId) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve([{ id: 1, product: "Laptop" }]);
+            }, 500);
+        });
+    }
+
+    // Clean chain instead of callback hell
+    getUser(1)
+        .then(user => {
+            console.log("User:", user);
+            return getOrders(user.id);
+        })
+        .then(orders => {
+            console.log("Orders:", orders);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+
+Promise Static Methods:
+    // Promise.all - Wait for all promises (fails if any fails)
+    Promise.all([promise1, promise2, promise3])
+        .then(results => {
+            console.log(results);  // Array of all results
+        })
+        .catch(error => {
+            console.error(error);  // First error
+        });
+
+    // Promise.allSettled - Wait for all, regardless of success/failure
+    Promise.allSettled([promise1, promise2, promise3])
+        .then(results => {
+            results.forEach(result => {
+                if (result.status === 'fulfilled') {
+                    console.log("Success:", result.value);
+                } else {
+                    console.log("Failed:", result.reason);
+                }
+            });
+        });
+
+    // Promise.race - First to settle wins
+    Promise.race([promise1, promise2, promise3])
+        .then(result => {
+            console.log("First result:", result);
+        });
+
+    // Promise.any - First to fulfill wins (ignores rejections)
+    Promise.any([promise1, promise2, promise3])
+        .then(result => {
+            console.log("First success:", result);
+        });
+
+    // Promise.resolve / Promise.reject
+    const resolved = Promise.resolve("Immediately resolved");
+    const rejected = Promise.reject("Immediately rejected");
+
+ASYNC/AWAIT (ES2017)
+--------------------
+Syntactic sugar over Promises - makes async code look synchronous.
+
+Basic Syntax:
+    // async function declaration
+    async function fetchData() {
+        // await pauses execution until promise resolves
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        return data;
+    }
+
+    // async arrow function
+    const fetchData = async () => {
+        const data = await someAsyncOperation();
+        return data;
+    };
+
+Error Handling with try/catch:
+    async function getData() {
+        try {
+            const user = await getUser(1);
+            const orders = await getOrders(user.id);
+            console.log("Orders:", orders);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            console.log("Cleanup");
+        }
+    }
+
+Parallel Execution:
+    async function fetchAll() {
+        // Sequential (slower)
+        const user = await getUser();      // Wait
+        const posts = await getPosts();    // Then wait
+
+        // Parallel (faster)
+        const [user, posts] = await Promise.all([
+            getUser(),
+            getPosts()
+        ]);
+
+        console.log(user, posts);
+    }
+
+Real-World Example:
+    async function displayUserData(userId) {
+        try {
+            // Show loading
+            showLoadingSpinner();
+
+            // Fetch data
+            const response = await fetch(`/api/users/${userId}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const user = await response.json();
+
+            // Update UI
+            document.getElementById("userName").textContent = user.name;
+            document.getElementById("userEmail").textContent = user.email;
+
+        } catch (error) {
+            // Show error
+            showErrorMessage(error.message);
+        } finally {
+            // Hide loading
+            hideLoadingSpinner();
+        }
+    }
+
+================================================================================
+7.5 JSON AND AJAX
+================================================================================
+
+JSON (JavaScript Object Notation)
+---------------------------------
+JSON is a lightweight data interchange format, easy for humans to read and
+write, and easy for machines to parse and generate.
+
+JSON Syntax Rules:
+- Data is in name/value pairs
+- Data is separated by commas
+- Curly braces hold objects
+- Square brackets hold arrays
+- Names must be strings in double quotes
+
+JSON Data Types:
+- String: "Hello"
+- Number: 123, 3.14
+- Boolean: true, false
+- Null: null
+- Object: { "key": "value" }
+- Array: [1, 2, 3]
+
+JSON Example:
+    {
+        "name": "John Doe",
+        "age": 30,
+        "isStudent": false,
+        "courses": ["Math", "Science", "English"],
+        "address": {
+            "street": "123 Main St",
+            "city": "Kathmandu",
+            "country": "Nepal"
+        },
+        "spouse": null
+    }
+
+JSON Methods in JavaScript:
+
+1. JSON.parse() - Convert JSON string to JavaScript object:
+    const jsonString = '{"name": "John", "age": 30}';
+    const obj = JSON.parse(jsonString);
+
+    console.log(obj.name);  // "John"
+    console.log(obj.age);   // 30
+
+    // With reviver function
+    const parsed = JSON.parse(jsonString, (key, value) => {
+        if (key === 'age') return value + 1;
+        return value;
+    });
+
+2. JSON.stringify() - Convert JavaScript object to JSON string:
+    const person = {
+        name: "John",
+        age: 30,
+        city: "Kathmandu"
+    };
+
+    const jsonStr = JSON.stringify(person);
+    console.log(jsonStr);
+    // '{"name":"John","age":30,"city":"Kathmandu"}'
+
+    // Pretty print
+    const prettyJson = JSON.stringify(person, null, 2);
+    console.log(prettyJson);
+    /*
+    {
+      "name": "John",
+      "age": 30,
+      "city": "Kathmandu"
+    }
+    */
+
+    // With replacer function
+    const filtered = JSON.stringify(person, ['name', 'age']);
+    // '{"name":"John","age":30}'
+
+    // With replacer function
+    const modified = JSON.stringify(person, (key, value) => {
+        if (typeof value === 'string') return value.toUpperCase();
+        return value;
+    });
+
+AJAX (Asynchronous JavaScript and XML)
+--------------------------------------
+AJAX allows web pages to update asynchronously by exchanging data with a
+server behind the scenes, without reloading the entire page.
+
+1. XMLHttpRequest (Traditional way):
+    // GET request
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'https://api.example.com/data', true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {  // DONE
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                console.log(data);
+            } else {
+                console.error('Error:', xhr.status);
+            }
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error('Network error');
+    };
+
+    xhr.send();
+
+    // POST request
+    const xhr2 = new XMLHttpRequest();
+    xhr2.open('POST', 'https://api.example.com/users', true);
+    xhr2.setRequestHeader('Content-Type', 'application/json');
+
+    xhr2.onload = function() {
+        if (xhr2.status === 201) {
+            console.log('User created:', JSON.parse(xhr2.responseText));
+        }
+    };
+
+    xhr2.send(JSON.stringify({
+        name: 'John',
+        email: 'john@example.com'
+    }));
+
+XMLHttpRequest Ready States:
+    0 - UNSENT: Request not initialized
+    1 - OPENED: Connection established
+    2 - HEADERS_RECEIVED: Request received
+    3 - LOADING: Processing request
+    4 - DONE: Request complete
+
+2. Fetch API (Modern way):
+    // Basic GET request
+    fetch('https://api.example.com/data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    // GET with async/await
+    async function getData() {
+        try {
+            const response = await fetch('https://api.example.com/data');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // POST request
+    async function createUser(userData) {
+        try {
+            const response = await fetch('https://api.example.com/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const newUser = await response.json();
+            console.log('Created user:', newUser);
+            return newUser;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    createUser({ name: 'John', email: 'john@example.com' });
+
+    // PUT request (update)
+    async function updateUser(id, userData) {
+        const response = await fetch(`https://api.example.com/users/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+        return response.json();
+    }
+
+    // DELETE request
+    async function deleteUser(id) {
+        const response = await fetch(`https://api.example.com/users/${id}`, {
+            method: 'DELETE'
+        });
+        return response.ok;
+    }
+
+Fetch Response Methods:
+    response.json()   // Parse JSON
+    response.text()   // Get as text
+    response.blob()   // Get as Blob (binary)
+    response.formData() // Get as FormData
+    response.arrayBuffer() // Get as ArrayBuffer
+
+Fetch with Headers and Options:
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer token123',
+            'X-Custom-Header': 'value'
+        },
+        body: JSON.stringify(data),
+        mode: 'cors',           // cors, no-cors, same-origin
+        credentials: 'include', // include, same-origin, omit
+        cache: 'no-cache'       // default, no-cache, reload, force-cache
+    });
+
+Practical Example - Todo App:
+    const API_URL = 'https://jsonplaceholder.typicode.com/todos';
+
+    // Get all todos
+    async function getTodos() {
+        const response = await fetch(API_URL);
+        return response.json();
+    }
+
+    // Get single todo
+    async function getTodo(id) {
+        const response = await fetch(`${API_URL}/${id}`);
+        return response.json();
+    }
+
+    // Create todo
+    async function createTodo(todo) {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(todo)
+        });
+        return response.json();
+    }
+
+    // Update todo
+    async function updateTodo(id, updates) {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updates)
+        });
+        return response.json();
+    }
+
+    // Delete todo
+    async function deleteTodo(id) {
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    }
+
+    // Usage
+    async function main() {
+        // Get todos
+        const todos = await getTodos();
+        console.log('Todos:', todos.slice(0, 5));
+
+        // Create new todo
+        const newTodo = await createTodo({
+            title: 'Learn JavaScript',
+            completed: false,
+            userId: 1
+        });
+        console.log('Created:', newTodo);
+
+        // Update todo
+        const updated = await updateTodo(1, { completed: true });
+        console.log('Updated:', updated);
+    }
+
+    main();
+
+================================================================================
+7.6 ES6 AND MODERN JAVASCRIPT
+================================================================================
+
+ECMAScript 6 (ES6/ES2015) introduced major improvements to JavaScript.
+
+1. LET AND CONST
+----------------
+Block-scoped variable declarations (covered in 7.1).
+
+    let variable = "can be reassigned";
+    const constant = "cannot be reassigned";
+
+    // const with objects/arrays - contents can change
+    const arr = [1, 2, 3];
+    arr.push(4);  // Allowed
+    // arr = [5, 6];  // Error
+
+2. ARROW FUNCTIONS
+------------------
+Shorter syntax for function expressions.
+
+    // Traditional function
+    function add(a, b) {
+        return a + b;
+    }
+
+    // Arrow function
+    const add = (a, b) => {
+        return a + b;
+    };
+
+    // Implicit return (single expression)
+    const add = (a, b) => a + b;
+
+    // Single parameter (no parentheses needed)
+    const square = x => x * x;
+
+    // No parameters
+    const greet = () => "Hello!";
+
+    // Return object literal (wrap in parentheses)
+    const createPerson = (name, age) => ({ name, age });
+
+Arrow functions and 'this':
+    // Arrow functions don't have their own 'this'
+    const obj = {
+        name: "Object",
+        regularFunc: function() {
+            console.log(this.name);  // "Object"
+        },
+        arrowFunc: () => {
+            console.log(this.name);  // undefined (inherits from outer scope)
+        }
+    };
+
+    // Useful for callbacks
+    const obj2 = {
+        numbers: [1, 2, 3],
+        double() {
+            // 'this' is preserved in arrow function
+            return this.numbers.map(n => n * 2);
+        }
+    };
+
+3. TEMPLATE LITERALS
+--------------------
+String interpolation and multi-line strings.
+
+    const name = "John";
+    const age = 30;
+
+    // String interpolation
+    const greeting = `Hello, ${name}! You are ${age} years old.`;
+
+    // Expressions in templates
+    const message = `Total: ${10 + 20}`;
+    const status = `Status: ${age >= 18 ? 'Adult' : 'Minor'}`;
+
+    // Multi-line strings
+    const html = `
+        <div class="card">
+            <h2>${name}</h2>
+            <p>Age: ${age}</p>
+        </div>
+    `;
+
+    // Tagged templates
+    function highlight(strings, ...values) {
+        return strings.reduce((result, str, i) => {
+            return result + str + (values[i] ? `<mark>${values[i]}</mark>` : '');
+        }, '');
+    }
+
+    const highlighted = highlight`Hello ${name}, you are ${age}!`;
+    // "Hello <mark>John</mark>, you are <mark>30</mark>!"
+
+4. DESTRUCTURING
+----------------
+Extract values from arrays/objects into variables.
+
+Array Destructuring:
+    const colors = ['red', 'green', 'blue'];
+
+    // Basic
+    const [first, second, third] = colors;
+    console.log(first);  // "red"
+
+    // Skip elements
+    const [, , third] = colors;
+    console.log(third);  // "blue"
+
+    // Rest pattern
+    const [head, ...tail] = colors;
+    console.log(tail);  // ["green", "blue"]
+
+    // Default values
+    const [a, b, c, d = 'yellow'] = colors;
+    console.log(d);  // "yellow"
+
+    // Swap variables
+    let x = 1, y = 2;
+    [x, y] = [y, x];
+    console.log(x, y);  // 2, 1
+
+Object Destructuring:
+    const person = {
+        name: 'John',
+        age: 30,
+        city: 'Kathmandu'
+    };
+
+    // Basic
+    const { name, age } = person;
+    console.log(name, age);  // "John", 30
+
+    // Rename variables
+    const { name: personName, age: personAge } = person;
+
+    // Default values
+    const { name, country = 'Nepal' } = person;
+
+    // Rest pattern
+    const { name, ...rest } = person;
+    console.log(rest);  // { age: 30, city: 'Kathmandu' }
+
+    // Nested destructuring
+    const user = {
+        id: 1,
+        profile: {
+            firstName: 'John',
+            lastName: 'Doe'
+        }
+    };
+    const { profile: { firstName, lastName } } = user;
+
+    // Function parameters
+    function greet({ name, age }) {
+        return `Hello ${name}, age ${age}`;
+    }
+    greet(person);
+
+5. SPREAD OPERATOR (...)
+------------------------
+Expand arrays/objects.
+
+    // Array spread
+    const arr1 = [1, 2, 3];
+    const arr2 = [4, 5, 6];
+
+    const combined = [...arr1, ...arr2];  // [1, 2, 3, 4, 5, 6]
+    const copy = [...arr1];               // [1, 2, 3]
+    const withNew = [0, ...arr1, 4];      // [0, 1, 2, 3, 4]
+
+    // Function arguments
+    const numbers = [1, 2, 3];
+    console.log(Math.max(...numbers));    // 3
+
+    // Object spread
+    const obj1 = { a: 1, b: 2 };
+    const obj2 = { c: 3, d: 4 };
+
+    const merged = { ...obj1, ...obj2 };  // { a: 1, b: 2, c: 3, d: 4 }
+    const updated = { ...obj1, b: 10 };   // { a: 1, b: 10 }
+
+6. REST PARAMETERS (...)
+------------------------
+Collect multiple arguments into an array.
+
+    function sum(...numbers) {
+        return numbers.reduce((total, n) => total + n, 0);
+    }
+
+    console.log(sum(1, 2, 3, 4, 5));  // 15
+
+    function greet(greeting, ...names) {
+        return names.map(name => `${greeting}, ${name}!`);
+    }
+
+    greet('Hello', 'John', 'Jane', 'Bob');
+    // ["Hello, John!", "Hello, Jane!", "Hello, Bob!"]
+
+7. DEFAULT PARAMETERS
+---------------------
+    function greet(name = 'Guest', greeting = 'Hello') {
+        return `${greeting}, ${name}!`;
+    }
+
+    greet();              // "Hello, Guest!"
+    greet('John');        // "Hello, John!"
+    greet('John', 'Hi');  // "Hi, John!"
+
+    // Can use expressions
+    function createUser(name, id = Date.now()) {
+        return { name, id };
+    }
+
+8. ENHANCED OBJECT LITERALS
+---------------------------
+    const name = 'John';
+    const age = 30;
+
+    // Shorthand property names
+    const person = { name, age };  // { name: 'John', age: 30 }
+
+    // Shorthand methods
+    const calculator = {
+        add(a, b) {
+            return a + b;
+        },
+        subtract(a, b) {
+            return a - b;
+        }
+    };
+
+    // Computed property names
+    const prop = 'dynamic';
+    const obj = {
+        [prop]: 'value',
+        [`${prop}2`]: 'value2'
+    };
+    // { dynamic: 'value', dynamic2: 'value2' }
+
+9. CLASSES
+----------
+Syntactic sugar over prototype-based inheritance.
+
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        speak() {
+            console.log(`${this.name} makes a sound.`);
+        }
+
+        // Static method
+        static isAnimal(obj) {
+            return obj instanceof Animal;
+        }
+
+        // Getter
+        get info() {
+            return `Animal: ${this.name}`;
+        }
+
+        // Setter
+        set info(value) {
+            this.name = value;
+        }
+    }
+
+    // Inheritance
+    class Dog extends Animal {
+        constructor(name, breed) {
+            super(name);  // Call parent constructor
+            this.breed = breed;
+        }
+
+        speak() {
+            console.log(`${this.name} barks.`);
+        }
+
+        fetch() {
+            console.log(`${this.name} fetches the ball.`);
+        }
+    }
+
+    const dog = new Dog('Buddy', 'Golden Retriever');
+    dog.speak();  // "Buddy barks."
+    dog.fetch();  // "Buddy fetches the ball."
+
+    console.log(Animal.isAnimal(dog));  // true
+
+10. MODULES (import/export)
+---------------------------
+Organize code into separate files.
+
+Named Exports (math.js):
+    // Export individually
+    export const PI = 3.14159;
+
+    export function add(a, b) {
+        return a + b;
+    }
+
+    export function subtract(a, b) {
+        return a - b;
+    }
+
+    // Or export at the end
+    const multiply = (a, b) => a * b;
+    const divide = (a, b) => a / b;
+
+    export { multiply, divide };
+
+Named Imports:
+    // Import specific exports
+    import { PI, add, subtract } from './math.js';
+
+    // Import with alias
+    import { add as sum, subtract as minus } from './math.js';
+
+    // Import all as object
+    import * as math from './math.js';
+    console.log(math.PI);
+    console.log(math.add(2, 3));
+
+Default Export (user.js):
+    // Only one default export per module
+    export default class User {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    // Or
+    const User = class { /* ... */ };
+    export default User;
+
+Default Import:
+    // No curly braces, can use any name
+    import User from './user.js';
+    import MyUser from './user.js';  // Same thing, different name
+
+Mixed Exports:
+    // module.js
+    export default function main() { }
+    export const helper1 = () => { };
+    export const helper2 = () => { };
+
+    // Import
+    import main, { helper1, helper2 } from './module.js';
+
+HTML with Modules:
+    <script type="module" src="main.js"></script>
+
+11. FOR...OF LOOP
+-----------------
+Iterate over iterable objects (arrays, strings, Maps, Sets).
+
+    // Arrays
+    const arr = [1, 2, 3];
+    for (const value of arr) {
+        console.log(value);  // 1, 2, 3
+    }
+
+    // Strings
+    for (const char of 'Hello') {
+        console.log(char);  // H, e, l, l, o
+    }
+
+    // With entries
+    for (const [index, value] of arr.entries()) {
+        console.log(index, value);
+    }
+
+12. MAP AND SET
+---------------
+New data structures.
+
+Map - Key-value pairs with any key type:
+    const map = new Map();
+
+    map.set('name', 'John');
+    map.set(1, 'one');
+    map.set({ id: 1 }, 'object key');
+
+    console.log(map.get('name'));  // "John"
+    console.log(map.has(1));       // true
+    console.log(map.size);         // 3
+
+    map.delete('name');
+    map.clear();
+
+    // Iteration
+    for (const [key, value] of map) {
+        console.log(key, value);
+    }
+
+Set - Unique values:
+    const set = new Set([1, 2, 3, 3, 4]);  // Duplicates removed
+
+    set.add(5);
+    set.delete(1);
+    console.log(set.has(2));  // true
+    console.log(set.size);    // 4
+
+    // Convert to array
+    const arr = [...set];
+
+    // Remove duplicates from array
+    const unique = [...new Set([1, 2, 2, 3, 3, 3])];  // [1, 2, 3]
+
+13. SYMBOL
+----------
+Unique identifiers.
+
+    const sym1 = Symbol('id');
+    const sym2 = Symbol('id');
+    console.log(sym1 === sym2);  // false
+
+    // Use as object property
+    const obj = {
+        [sym1]: 'value'
+    };
+
+14. OPTIONAL CHAINING (?.) - ES2020
+-----------------------------------
+Safely access nested properties.
+
+    const user = {
+        name: 'John',
+        address: {
+            city: 'Kathmandu'
+        }
+    };
+
+    // Without optional chaining
+    const country = user.address && user.address.country;
+
+    // With optional chaining
+    const country = user.address?.country;  // undefined
+    const zip = user.address?.zip?.code;    // undefined
+
+    // With function calls
+    user.greet?.();  // Only calls if greet exists
+
+    // With arrays
+    const first = arr?.[0];
+
+15. NULLISH COALESCING (??) - ES2020
+------------------------------------
+Default value only for null/undefined.
+
+    const value = null ?? 'default';     // 'default'
+    const value2 = undefined ?? 'default'; // 'default'
+    const value3 = 0 ?? 'default';       // 0 (not null/undefined)
+    const value4 = '' ?? 'default';      // '' (not null/undefined)
+
+    // Compare with ||
+    const value5 = 0 || 'default';       // 'default' (0 is falsy)
+
+================================================================================
+7.7 JAVASCRIPT LIBRARIES
+================================================================================
+
+JavaScript libraries and frameworks extend JavaScript's capabilities and
+simplify complex tasks.
+
+JQUERY
+------
+A fast, small, and feature-rich JavaScript library for DOM manipulation,
+event handling, and AJAX.
+
+Including jQuery:
+    <!-- From CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+Basic jQuery:
+    // Document ready
+    $(document).ready(function() {
+        // Code here runs after DOM is loaded
+    });
+
+    // Shorthand
+    $(function() {
+        // Same as above
+    });
+
+    // Selecting elements
+    $('#id')           // By ID
+    $('.class')        // By class
+    $('div')           // By tag
+    $('div.class')     // Combined
+    $('ul > li')       // CSS selectors
+
+    // DOM manipulation
+    $('#element').html('<p>New content</p>');
+    $('#element').text('Plain text');
+    $('#element').val('input value');
+    $('#element').attr('href', 'https://example.com');
+    $('#element').css('color', 'red');
+    $('#element').addClass('active');
+    $('#element').removeClass('hidden');
+    $('#element').toggleClass('visible');
+
+    // Creating elements
+    $('<div>').addClass('new').text('New div').appendTo('body');
+
+    // Events
+    $('#button').click(function() {
+        alert('Clicked!');
+    });
+
+    $('#button').on('click', function() {
+        alert('Clicked!');
+    });
+
+    // AJAX
+    $.ajax({
+        url: '/api/data',
+        method: 'GET',
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
+
+    // Shorthand AJAX
+    $.get('/api/data', function(data) {
+        console.log(data);
+    });
+
+    $.post('/api/users', { name: 'John' }, function(response) {
+        console.log(response);
+    });
+
+    // Effects
+    $('#element').hide();
+    $('#element').show();
+    $('#element').fadeIn();
+    $('#element').fadeOut();
+    $('#element').slideUp();
+    $('#element').slideDown();
+    $('#element').animate({ opacity: 0.5, left: '50px' }, 1000);
+
+INTRODUCTION TO REACT
+---------------------
+React is a JavaScript library for building user interfaces, developed by
+Facebook. It uses a component-based architecture.
+
+Key Concepts:
+
+1. Components - Building blocks of React apps:
+    // Function component
+    function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+    }
+
+    // Arrow function component
+    const Welcome = (props) => {
+        return <h1>Hello, {props.name}</h1>;
+    };
+
+    // Class component
+    class Welcome extends React.Component {
+        render() {
+            return <h1>Hello, {this.props.name}</h1>;
+        }
+    }
+
+2. JSX - JavaScript XML syntax:
+    // JSX (gets compiled to JavaScript)
+    const element = <h1>Hello, World!</h1>;
+
+    // Expressions in JSX
+    const name = 'John';
+    const element = <h1>Hello, {name}</h1>;
+
+    // Attributes
+    const element = <img src={imageUrl} alt="Description" />;
+
+3. Props - Pass data to components:
+    function Greeting(props) {
+        return <p>Hello, {props.name}! You are {props.age} years old.</p>;
+    }
+
+    // Using the component
+    <Greeting name="John" age={30} />
+
+4. State - Component's internal data:
+    import { useState } from 'react';
+
+    function Counter() {
+        const [count, setCount] = useState(0);
+
+        return (
+            <div>
+                <p>Count: {count}</p>
+                <button onClick={() => setCount(count + 1)}>
+                    Increment
+                </button>
+            </div>
+        );
+    }
+
+5. Event Handling:
+    function Button() {
+        const handleClick = () => {
+            alert('Button clicked!');
+        };
+
+        return <button onClick={handleClick}>Click Me</button>;
+    }
+
+INTRODUCTION TO VUE.JS
+----------------------
+Vue.js is a progressive JavaScript framework for building user interfaces.
+
+Basic Vue Example:
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <button @click="reverseMessage">Reverse</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!'
+                };
+            },
+            methods: {
+                reverseMessage() {
+                    this.message = this.message.split('').reverse().join('');
+                }
+            }
+        }).mount('#app');
+    </script>
+
+Key Vue Concepts:
+
+1. Template Syntax:
+    <!-- Text interpolation -->
+    <p>{{ message }}</p>
+
+    <!-- Attribute binding -->
+    <a v-bind:href="url">Link</a>
+    <a :href="url">Link</a>  <!-- Shorthand -->
+
+    <!-- Event handling -->
+    <button v-on:click="handleClick">Click</button>
+    <button @click="handleClick">Click</button>  <!-- Shorthand -->
+
+    <!-- Two-way binding -->
+    <input v-model="inputValue">
+
+    <!-- Conditional rendering -->
+    <p v-if="isVisible">Visible</p>
+    <p v-else>Hidden</p>
+
+    <!-- List rendering -->
+    <ul>
+        <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+    </ul>
+
+2. Components:
+    // Define component
+    const MyComponent = {
+        props: ['title'],
+        template: `<h2>{{ title }}</h2>`
+    };
+
+    // Use in app
+    createApp({
+        components: {
+            MyComponent
+        }
+    }).mount('#app');
+
+INTRODUCTION TO ANGULAR
+-----------------------
+Angular is a TypeScript-based framework developed by Google for building
+single-page applications.
+
+Key Angular Concepts:
+
+1. Components - Basic building block:
+    // app.component.ts
+    import { Component } from '@angular/core';
+
+    @Component({
+        selector: 'app-root',
+        template: `
+            <h1>{{ title }}</h1>
+            <button (click)="handleClick()">Click Me</button>
+        `
+    })
+    export class AppComponent {
+        title = 'My Angular App';
+
+        handleClick() {
+            alert('Button clicked!');
+        }
+    }
+
+2. Data Binding:
+    <!-- Interpolation -->
+    <p>{{ message }}</p>
+
+    <!-- Property binding -->
+    <img [src]="imageUrl">
+
+    <!-- Event binding -->
+    <button (click)="onClick()">Click</button>
+
+    <!-- Two-way binding -->
+    <input [(ngModel)]="name">
+
+3. Directives:
+    <!-- *ngIf -->
+    <p *ngIf="isVisible">Visible</p>
+
+    <!-- *ngFor -->
+    <li *ngFor="let item of items">{{ item.name }}</li>
+
+    <!-- ngClass -->
+    <div [ngClass]="{'active': isActive}">Content</div>
+
+COMPARISON OF FRAMEWORKS
+------------------------
+| Feature     | React          | Vue            | Angular        |
+|-------------|----------------|----------------|----------------|
+| Type        | Library        | Framework      | Framework      |
+| Language    | JavaScript/JSX | JavaScript     | TypeScript     |
+| Data Binding| One-way        | Two-way        | Two-way        |
+| Size        | Small          | Small          | Large          |
+| Learning    | Medium         | Easy           | Steep          |
+| Company     | Facebook       | Independent    | Google         |
+| DOM         | Virtual DOM    | Virtual DOM    | Real DOM       |
+
+When to Use What:
+- jQuery: Simple DOM manipulation, legacy projects
+- React: Large-scale SPAs, component reusability
+- Vue: Gentle learning curve, flexibility
+- Angular: Enterprise applications, full-featured framework
+
+================================================================================
+                           SUMMARY
+================================================================================
+
+Key Topics Covered:
+
+1. Scope and Closures
+   - Global, function, and block scope
+   - Lexical scope and scope chain
+   - Hoisting with var, let, const
+   - Closures for data privacy and function factories
+
+2. Error Handling and Debugging
+   - Error types (SyntaxError, TypeError, etc.)
+   - try-catch-finally blocks
+   - Throwing custom errors
+   - Debugging with console methods and DevTools
+
+3. DOM Manipulation
+   - Selecting elements (getElementById, querySelector)
+   - Modifying content, attributes, and styles
+   - Creating and removing elements
+   - DOM traversal
+   - Event handling and delegation
+
+4. Asynchronous JavaScript
+   - Callbacks and callback hell
+   - Promises (then, catch, finally)
+   - Promise methods (all, race, allSettled)
+   - async/await syntax
+
+5. JSON and AJAX
+   - JSON syntax and data types
+   - JSON.parse() and JSON.stringify()
+   - XMLHttpRequest (traditional)
+   - Fetch API (modern)
+   - CRUD operations with APIs
+
+6. ES6 and Modern JavaScript
+   - let, const, arrow functions
+   - Template literals, destructuring
+   - Spread/rest operators
+   - Classes and modules
+   - Map, Set, Symbol
+   - Optional chaining, nullish coalescing
+
+7. JavaScript Libraries
+   - jQuery for DOM manipulation
+   - React for component-based UIs
+   - Vue.js for progressive framework
+   - Angular for enterprise applications
+
+================================================================================
+                      PRACTICE EXERCISES
+================================================================================
+
+Exercise 1: Closures
+--------------------
+Create a counter function that uses closures to maintain private count variable
+with increment, decrement, and reset methods.
+
+Exercise 2: Error Handling
+--------------------------
+Write a function that fetches user data from an API with proper error handling
+using try-catch and displays appropriate error messages.
+
+Exercise 3: DOM Manipulation
+----------------------------
+Create a todo list application that allows adding, removing, and marking items
+as complete using DOM manipulation.
+
+Exercise 4: Async/Await
+-----------------------
+Fetch data from a public API (like JSONPlaceholder) using async/await and
+display the results on a webpage.
+
+Exercise 5: JSON Operations
+---------------------------
+Create a contact book application that stores contacts in JSON format with
+add, edit, delete, and search functionality.
+
+Exercise 6: ES6 Features
+------------------------
+Refactor a traditional JavaScript code to use ES6 features (arrow functions,
+destructuring, template literals, classes).
+
+Exercise 7: jQuery Slider
+-------------------------
+Create an image slider/carousel using jQuery with next/previous buttons and
+automatic slide transition.
+
+================================================================================
+                        REFERENCES
+================================================================================
+
+1. Robbins, J. N. (2018). Learning Web Design: A Beginner's Guide to HTML, CSS,
+   JavaScript, and Web Graphics. O'Reilly Media.
+
+2. MDN Web Docs - JavaScript Guide:
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+
+3. JavaScript.info - The Modern JavaScript Tutorial:
+   https://javascript.info/
+
+4. React Documentation:
+   https://react.dev/
+
+5. Vue.js Documentation:
+   https://vuejs.org/guide/
+
+6. Angular Documentation:
+   https://angular.io/docs
+
+================================================================================
+                   END OF UNIT 7 NOTES
+================================================================================
