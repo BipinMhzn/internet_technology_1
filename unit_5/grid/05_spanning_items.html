@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 5: Spanning Grid Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Grid container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background-color: #607D8B;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .grid-item {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Span multiple columns */
+        .span-2-cols {
+            grid-column: span 2;
+            background-color: #FFE082;
+        }
+
+        .span-3-cols {
+            grid-column: span 3;
+            background-color: #FFCCBC;
+        }
+
+        .span-4-cols {
+            grid-column: span 4;
+            background-color: #B2DFDB;
+        }
+
+        /* Span multiple rows */
+        .span-2-rows {
+            grid-row: span 2;
+            background-color: #C5CAE9;
+        }
+
+        /* Span both columns and rows */
+        .span-both {
+            grid-column: span 2;
+            grid-row: span 2;
+            background-color: #F8BBD0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 5: Spanning Grid Items</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>grid-column: span n</strong> - Item spans n columns</p>
+        <p><strong>grid-row: span n</strong> - Item spans n rows</p>
+    </div>
+
+    <h2>Column Spanning</h2>
+    <div class="info">
+        <pre>
+.span-2-cols { grid-column: span 2; }
+.span-3-cols { grid-column: span 3; }
+.span-4-cols { grid-column: span 4; }
+        </pre>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item span-4-cols">Spans 4 Columns</div>
+        <div class="grid-item span-2-cols">Spans 2 Columns</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item span-3-cols">Spans 3 Columns</div>
+        <div class="grid-item">Normal</div>
+    </div>
+
+    <h2>Row and Column Spanning</h2>
+    <div class="info">
+        <pre>
+.span-2-rows { grid-row: span 2; }
+.span-both {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+        </pre>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item span-both">Spans 2x2</div>
+        <div class="grid-item span-2-rows">Spans 2 Rows</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: Fractional Units (fr)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Grid with Fractional Units */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 15px;
+            background-color: #4CAF50;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .grid-item {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        /* Equal columns */
+        .grid-equal {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            background-color: #FF9800;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 2: Fractional Units (fr)</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>fr unit</strong> - Represents a fraction of available space</p>
+        <p><strong>1fr 2fr 1fr</strong> - Middle column is twice as wide as side columns</p>
+        <h3>Code Example 1:</h3>
+        <pre>
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;  /* Ratio: 1:2:1 */
+    gap: 15px;
+}
+        </pre>
+    </div>
+
+    <h2>Unequal Columns (1fr 2fr 1fr)</h2>
+    <div class="grid-container">
+        <div class="grid-item">1fr</div>
+        <div class="grid-item">2fr (Wider)</div>
+        <div class="grid-item">1fr</div>
+    </div>
+
+    <div class="info">
+        <h3>Code Example 2:</h3>
+        <pre>
+.grid-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  /* All equal */
+    gap: 15px;
+}
+        </pre>
+    </div>
+
+    <h2>Equal Columns (1fr 1fr 1fr 1fr)</h2>
+    <div class="grid-equal">
+        <div class="grid-item">1fr</div>
+        <div class="grid-item">1fr</div>
+        <div class="grid-item">1fr</div>
+        <div class="grid-item">1fr</div>
+    </div>
+</body>
+</html>

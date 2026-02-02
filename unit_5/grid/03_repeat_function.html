@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 3: Repeat Function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Using repeat() function */
+        .grid-repeat {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background-color: #9C27B0;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Repeat with different sizes */
+        .grid-repeat-mixed {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 15px;
+            background-color: #E91E63;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Auto-fill example */
+        .grid-auto-fill {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            background-color: #009688;
+            padding: 10px;
+        }
+
+        .grid-item {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 3: Repeat Function</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>repeat()</strong> - Shorthand to repeat column/row definitions</p>
+        <p><strong>repeat(4, 1fr)</strong> is same as <strong>1fr 1fr 1fr 1fr</strong></p>
+    </div>
+
+    <h2>repeat(4, 1fr) - Four Equal Columns</h2>
+    <div class="info">
+        <pre>
+grid-template-columns: repeat(4, 1fr);
+        </pre>
+    </div>
+    <div class="grid-repeat">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+        <div class="grid-item">Item 4</div>
+        <div class="grid-item">Item 5</div>
+        <div class="grid-item">Item 6</div>
+        <div class="grid-item">Item 7</div>
+        <div class="grid-item">Item 8</div>
+    </div>
+
+    <h2>repeat(3, 100px) - Three Fixed Width Columns</h2>
+    <div class="info">
+        <pre>
+grid-template-columns: repeat(3, 100px);
+        </pre>
+    </div>
+    <div class="grid-repeat-mixed">
+        <div class="grid-item">100px</div>
+        <div class="grid-item">100px</div>
+        <div class="grid-item">100px</div>
+        <div class="grid-item">100px</div>
+        <div class="grid-item">100px</div>
+        <div class="grid-item">100px</div>
+    </div>
+
+    <h2>Auto-fill with minmax (Responsive!)</h2>
+    <div class="info">
+        <p>This will automatically create as many columns as can fit!</p>
+        <pre>
+grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        </pre>
+        <p><strong>Try resizing the browser window!</strong></p>
+    </div>
+    <div class="grid-auto-fill">
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+        <div class="grid-item">Auto</div>
+    </div>
+</body>
+</html>

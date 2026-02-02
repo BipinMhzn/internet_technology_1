@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 10: Holy Grail Layout with Flexbox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            /* Body is a flex container */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex: 1;  /* Takes remaining space, pushing footer down */
+        }
+
+        /* Navigation Sidebar */
+        .nav {
+            background-color: #263238;
+            color: white;
+            width: 200px;
+            padding: 20px;
+            flex-shrink: 0;  /* Won't shrink */
+        }
+
+        .nav h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav li:hover {
+            background-color: #37474F;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;  /* Takes all available space */
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+
+        .content-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Ads Sidebar */
+        .ads {
+            background-color: #FFF3E0;
+            width: 250px;
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .ad-box {
+            background-color: #FFE0B2;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 2px dashed #FF9800;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #37474F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .nav,
+            .ads {
+                width: 100%;
+            }
+
+            .nav {
+                order: 1;
+            }
+
+            .content {
+                order: 2;
+            }
+
+            .ads {
+                order: 3;
+            }
+        }
+
+        /* Code Display */
+        .code-section {
+            background-color: #263238;
+            color: #A5D6A7;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-section h3 {
+            color: #81C784;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Holy Grail Layout with Flexbox</h1>
+        <p>Classic 3-column layout with header and footer</p>
+    </header>
+
+    <!-- Main Container with 3 Columns -->
+    <div class="main-container">
+        <!-- Left Sidebar (Navigation) -->
+        <nav class="nav">
+            <h2>Navigation</h2>
+            <ul>
+                <li>🏠 Home</li>
+                <li>📰 News</li>
+                <li>💼 Services</li>
+                <li>📞 Contact</li>
+                <li>ℹ️ About</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-box">
+                <h2>The Holy Grail Layout</h2>
+                <p>The "Holy Grail" layout is a classic web design pattern with:</p>
+                <ul style="margin: 15px 0; line-height: 2;">
+                    <li>Header at the top</li>
+                    <li>Three columns in the middle (nav, content, ads)</li>
+                    <li>Footer at the bottom</li>
+                    <li>Footer always at bottom, even with little content</li>
+                    <li>Center column is fluid (grows/shrinks)</li>
+                    <li>Side columns have fixed widths</li>
+                </ul>
+                <p><strong>Before Flexbox,</strong> this layout was difficult to achieve. Now it's simple!</p>
+            </div>
+
+            <div class="content-box">
+                <h2>How It Works</h2>
+                <p style="margin-bottom: 15px;">This layout uses nested flexbox containers:</p>
+
+                <h3>1. Body (Vertical Flex Container)</h3>
+                <div class="code-section">
+                    <pre>
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;        /* Full viewport height */
+}
+
+.main-container {
+    flex: 1;                  /* Takes remaining space */
+}
+                    </pre>
+                </div>
+
+                <h3>2. Main Container (Horizontal Flex Container)</h3>
+                <div class="code-section">
+                    <pre>
+.main-container {
+    display: flex;            /* Horizontal layout */
+}
+
+.nav {
+    width: 200px;
+    flex-shrink: 0;           /* Fixed width, won't shrink */
+}
+
+.content {
+    flex: 1;                  /* Takes all available space */
+}
+
+.ads {
+    width: 250px;
+    flex-shrink: 0;           /* Fixed width, won't shrink */
+}
+                    </pre>
+                </div>
+
+                <h3>3. Responsive Layout</h3>
+                <div class="code-section">
+                    <pre>
+@media (max-width: 968px) {
+    .main-container {
+        flex-direction: column;  /* Stack vertically on mobile */
+    }
+
+    .nav, .ads {
+        width: 100%;             /* Full width */
+    }
+
+    /* Reorder using flexbox order property */
+    .nav { order: 1; }
+    .content { order: 2; }
+    .ads { order: 3; }
+}
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Key Benefits</h2>
+                <ul style="line-height: 2;">
+                    <li>✅ Footer always at bottom (even with minimal content)</li>
+                    <li>✅ Equal height columns automatically</li>
+                    <li>✅ Easy to make responsive</li>
+                    <li>✅ Clean, semantic HTML</li>
+                    <li>✅ No complex calculations or hacks</li>
+                    <li>✅ Easy to reorder columns on mobile</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Try This:</h2>
+                <ol style="line-height: 2; margin-left: 20px;">
+                    <li>Resize your browser window to see responsive behavior</li>
+                    <li>Notice how the footer stays at the bottom</li>
+                    <li>On mobile, columns stack vertically</li>
+                    <li>Content column always takes available space</li>
+                </ol>
+            </div>
+        </main>
+
+        <!-- Right Sidebar (Ads) -->
+        <aside class="ads">
+            <h2 style="margin-bottom: 15px;">Advertisements</h2>
+            <div class="ad-box">
+                <h3>Ad Space 1</h3>
+                <p>300 x 250</p>
+            </div>
+            <div class="ad-box">
+                <h3>Ad Space 2</h3>
+                <p>300 x 250</p>
+            </div>
+            <div class="ad-box">
+                <h3>Ad Space 3</h3>
+                <p>300 x 250</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Holy Grail Layout Example | Built with Flexbox</p>
+        <p style="margin-top: 10px; font-size: 14px;">Notice: Footer is always at the bottom!</p>
+    </footer>
+</body>
+</html>

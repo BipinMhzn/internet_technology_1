@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 7: Animation Properties</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .demo-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes slide {
+            from {
+                transform: translateX(-100px);
+            }
+            to {
+                transform: translateX(100px);
+            }
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            background-color: #2196F3;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        /* animation-duration */
+        .duration-1s {
+            animation: slide 1s infinite alternate;
+        }
+
+        .duration-3s {
+            animation: slide 3s infinite alternate;
+        }
+
+        /* animation-iteration-count */
+        .iteration-3 {
+            animation: slide 2s 3 alternate;
+            background-color: #4CAF50;
+        }
+
+        .iteration-infinite {
+            animation: slide 2s infinite alternate;
+            background-color: #FF9800;
+        }
+
+        /* animation-direction */
+        .direction-normal {
+            animation: slide 2s infinite normal;
+            background-color: #E91E63;
+        }
+
+        .direction-reverse {
+            animation: slide 2s infinite reverse;
+            background-color: #9C27B0;
+        }
+
+        .direction-alternate {
+            animation: slide 2s infinite alternate;
+            background-color: #00BCD4;
+        }
+
+        .direction-alternate-reverse {
+            animation: slide 2s infinite alternate-reverse;
+            background-color: #FF5722;
+        }
+
+        /* animation-fill-mode */
+        @keyframes grow {
+            from {
+                transform: scale(0.5);
+                background-color: #FFC107;
+            }
+            to {
+                transform: scale(1.5);
+                background-color: #8BC34A;
+            }
+        }
+
+        .fillmode-none {
+            animation: grow 2s none;
+        }
+
+        .fillmode-forwards {
+            animation: grow 2s forwards;
+        }
+
+        .fillmode-backwards {
+            animation: grow 2s backwards;
+            animation-delay: 2s;
+        }
+
+        .fillmode-both {
+            animation: grow 2s both;
+            animation-delay: 2s;
+        }
+
+        /* animation-play-state */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .play-state-box {
+            animation: spin 2s linear infinite;
+            background-color: #673AB7;
+        }
+
+        .play-state-box:hover {
+            animation-play-state: paused;
+        }
+
+        /* Control buttons demo */
+        .control-demo {
+            position: relative;
+        }
+
+        .control-box {
+            animation: slide 3s infinite alternate paused;
+            background-color: #3F51B5;
+        }
+
+        .control-box.running {
+            animation-play-state: running;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 7: Animation Properties</h1>
+
+    <div class="info">
+        <h2>Complete Animation Property Reference</h2>
+        <p>CSS animations have many properties that control their behavior:</p>
+    </div>
+
+    <h2>1. animation-duration</h2>
+    <div class="info">
+        <p>Controls how long the animation takes to complete one cycle</p>
+    </div>
+    <div class="demo-container">
+        <div>
+            <div class="box duration-1s">1 second</div>
+            <pre style="margin-top: 10px;">
+animation-duration: 1s;
+            </pre>
+        </div>
+        <div>
+            <div class="box duration-3s">3 seconds</div>
+            <pre style="margin-top: 10px;">
+animation-duration: 3s;
+            </pre>
+        </div>
+    </div>
+
+    <h2>2. animation-iteration-count</h2>
+    <div class="info">
+        <p>How many times the animation should repeat</p>
+    </div>
+    <div class="demo-container">
+        <div>
+            <div class="box iteration-3">3 times</div>
+            <pre style="margin-top: 10px;">
+animation-iteration-count: 3;
+            </pre>
+            <p style="font-size: 12px; color: #666;">Refresh page to see</p>
+        </div>
+        <div>
+            <div class="box iteration-infinite">Infinite</div>
+            <pre style="margin-top: 10px;">
+animation-iteration-count: infinite;
+            </pre>
+        </div>
+    </div>
+
+    <h2>3. animation-direction</h2>
+    <div class="info">
+        <p>Controls the direction of the animation</p>
+    </div>
+    <div class="demo-container">
+        <div>
+            <div class="box direction-normal">normal</div>
+            <pre style="margin-top: 10px;">
+animation-direction: normal;
+/* Forward every time */
+            </pre>
+        </div>
+        <div>
+            <div class="box direction-reverse">reverse</div>
+            <pre style="margin-top: 10px;">
+animation-direction: reverse;
+/* Backward every time */
+            </pre>
+        </div>
+        <div>
+            <div class="box direction-alternate">alternate</div>
+            <pre style="margin-top: 10px;">
+animation-direction: alternate;
+/* Forward, then backward */
+            </pre>
+        </div>
+        <div>
+            <div class="box direction-alternate-reverse">alternate-reverse</div>
+            <pre style="margin-top: 10px;">
+animation-direction: alternate-reverse;
+/* Backward, then forward */
+            </pre>
+        </div>
+    </div>
+
+    <h2>4. animation-fill-mode</h2>
+    <div class="info">
+        <p>Defines styles applied before/after animation runs</p>
+        <p><strong>Refresh page to see the differences!</strong></p>
+    </div>
+    <div class="demo-container">
+        <div>
+            <div class="box fillmode-forwards">forwards</div>
+            <pre style="margin-top: 10px;">
+animation-fill-mode: forwards;
+/* Retains final state */
+            </pre>
+        </div>
+        <div>
+            <div class="box fillmode-backwards">backwards</div>
+            <pre style="margin-top: 10px;">
+animation-fill-mode: backwards;
+animation-delay: 2s;
+/* Applies start state during delay */
+            </pre>
+        </div>
+        <div>
+            <div class="box fillmode-both">both</div>
+            <pre style="margin-top: 10px;">
+animation-fill-mode: both;
+animation-delay: 2s;
+/* Both before and after */
+            </pre>
+        </div>
+    </div>
+
+    <h2>5. animation-play-state</h2>
+    <div class="info">
+        <p>Controls whether animation is running or paused</p>
+        <p><strong>Hover to pause:</strong></p>
+    </div>
+    <div class="demo-container">
+        <div class="box play-state-box">Hover to Pause</div>
+    </div>
+    <div class="info">
+        <pre>
+.box {
+    animation: spin 2s linear infinite;
+}
+
+.box:hover {
+    animation-play-state: paused;
+}
+        </pre>
+    </div>
+
+    <h2>6. Interactive Play Control</h2>
+    <div class="info">
+        <p>You can control animations with JavaScript!</p>
+    </div>
+    <div class="demo-container control-demo">
+        <div class="box control-box" id="controlBox">Controlled</div>
+    </div>
+    <div class="controls">
+        <button class="btn" onclick="playAnimation()">▶ Play</button>
+        <button class="btn" onclick="pauseAnimation()">⏸ Pause</button>
+    </div>
+
+    <div class="info">
+        <h3>Complete Shorthand Syntax:</h3>
+        <pre>
+animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+
+/* Examples */
+animation: slide 2s ease-in-out 0s infinite normal none running;
+
+/* Shorthand (common values) */
+animation: slide 2s infinite;
+animation: pulse 1s ease-in-out infinite alternate;
+        </pre>
+
+        <h3>All Animation Properties:</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #f5f5f5;">
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Property</th>
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Description</th>
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Values</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-name</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">@keyframes name</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">none | keyframe-name</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-duration</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Length of animation</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">0s (default) | time</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-timing-function</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Speed curve</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">ease | linear | ease-in | ease-out | ease-in-out</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-delay</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Start delay</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">0s (default) | time</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-iteration-count</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Repeat count</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">1 (default) | number | infinite</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-direction</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Play direction</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">normal | reverse | alternate | alternate-reverse</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-fill-mode</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Before/after styles</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">none | forwards | backwards | both</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>animation-play-state</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Running or paused</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">running (default) | paused</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function playAnimation() {
+            document.getElementById('controlBox').classList.add('running');
+        }
+
+        function pauseAnimation() {
+            document.getElementById('controlBox').classList.remove('running');
+        }
+    </script>
+</body>
+</html>

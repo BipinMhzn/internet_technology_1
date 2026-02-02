@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 5: Flex Wrap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color: #FF9800;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            max-width: 600px;
+        }
+
+        .no-wrap {
+            flex-wrap: nowrap;
+        }
+
+        .wrap {
+            flex-wrap: wrap;
+        }
+
+        .wrap-reverse {
+            flex-wrap: wrap-reverse;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        /* Demo with align-content */
+        .wrap-with-align {
+            flex-wrap: wrap;
+            align-content: flex-start;
+            height: 300px;
+            background-color: #9C27B0;
+        }
+
+        .wrap-with-align-center {
+            flex-wrap: wrap;
+            align-content: center;
+            height: 300px;
+            background-color: #009688;
+        }
+
+        .wrap-with-align-between {
+            flex-wrap: wrap;
+            align-content: space-between;
+            height: 300px;
+            background-color: #E91E63;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 5: Flex Wrap</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>flex-wrap</strong> - Controls whether items wrap to new lines</p>
+        <p><strong>Default:</strong> nowrap (items shrink to fit one line)</p>
+    </div>
+
+    <h2>flex-wrap: nowrap (Default)</h2>
+    <div class="info">
+        <pre>flex-wrap: nowrap;  /* Items stay on one line and shrink */</pre>
+        <p>Items will shrink to fit in one line</p>
+    </div>
+    <div class="flex-container no-wrap">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <h2>flex-wrap: wrap</h2>
+    <div class="info">
+        <pre>flex-wrap: wrap;  /* Items wrap to new lines if needed */</pre>
+        <p>Items maintain their width and wrap to next line</p>
+    </div>
+    <div class="flex-container wrap">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <h2>flex-wrap: wrap-reverse</h2>
+    <div class="info">
+        <pre>flex-wrap: wrap-reverse;  /* Items wrap in reverse order */</pre>
+        <p>New lines appear above instead of below</p>
+    </div>
+    <div class="flex-container wrap-reverse">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <h2>Combining wrap with align-content</h2>
+
+    <h3>align-content: flex-start</h3>
+    <div class="info">
+        <pre>
+flex-wrap: wrap;
+align-content: flex-start;  /* Lines packed at start */
+        </pre>
+    </div>
+    <div class="flex-container wrap-with-align">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <h3>align-content: center</h3>
+    <div class="info">
+        <pre>
+flex-wrap: wrap;
+align-content: center;  /* Lines centered */
+        </pre>
+    </div>
+    <div class="flex-container wrap-with-align-center">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <h3>align-content: space-between</h3>
+    <div class="info">
+        <pre>
+flex-wrap: wrap;
+align-content: space-between;  /* Equal space between lines */
+        </pre>
+    </div>
+    <div class="flex-container wrap-with-align-between">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+
+    <div class="info">
+        <h3>Important Note:</h3>
+        <p><strong>align-content</strong> only works when there are multiple lines (flex-wrap: wrap)</p>
+        <p><strong>align-items</strong> aligns items within each line</p>
+        <p><strong>align-content</strong> aligns the lines themselves</p>
+    </div>
+</body>
+</html>

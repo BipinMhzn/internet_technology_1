@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: Transition Timing Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .race-track {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .lane {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .label {
+            width: 150px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .track {
+            flex: 1;
+            height: 50px;
+            background-color: #E0E0E0;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .racer {
+            width: 50px;
+            height: 50px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Different timing functions */
+        .track-linear .racer {
+            transition: left 2s linear;
+        }
+
+        .track-ease .racer {
+            transition: left 2s ease;
+        }
+
+        .track-ease-in .racer {
+            transition: left 2s ease-in;
+        }
+
+        .track-ease-out .racer {
+            transition: left 2s ease-out;
+        }
+
+        .track-ease-in-out .racer {
+            transition: left 2s ease-in-out;
+        }
+
+        .track-cubic .racer {
+            transition: left 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* Hover to start race */
+        .race-track:hover .racer {
+            left: calc(100% - 50px);
+        }
+
+        /* Interactive buttons demo */
+        .button-demo {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            transition-duration: 0.3s;
+        }
+
+        .btn-linear {
+            transition-timing-function: linear;
+        }
+
+        .btn-ease {
+            transition-timing-function: ease;
+        }
+
+        .btn-ease-in {
+            transition-timing-function: ease-in;
+        }
+
+        .btn-ease-out {
+            transition-timing-function: ease-out;
+        }
+
+        .btn-ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 2: Transition Timing Functions</h1>
+
+    <div class="info">
+        <h2>What are Timing Functions?</h2>
+        <p><strong>Timing functions</strong> control the pace of the transition over its duration.</p>
+        <p>They define how the animation accelerates and decelerates.</p>
+    </div>
+
+    <h2>Timing Function Race!</h2>
+    <div class="info">
+        <p><strong>Hover over the race track to see different timing functions in action!</strong></p>
+        <p>All racers take 2 seconds, but they move differently.</p>
+    </div>
+
+    <div class="race-track">
+        <div class="lane">
+            <div class="label">linear</div>
+            <div class="track track-linear">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+
+        <div class="lane">
+            <div class="label">ease (default)</div>
+            <div class="track track-ease">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+
+        <div class="lane">
+            <div class="label">ease-in</div>
+            <div class="track track-ease-in">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+
+        <div class="lane">
+            <div class="label">ease-out</div>
+            <div class="track track-ease-out">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+
+        <div class="lane">
+            <div class="label">ease-in-out</div>
+            <div class="track track-ease-in-out">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+
+        <div class="lane">
+            <div class="label">cubic-bezier</div>
+            <div class="track track-cubic">
+                <div class="racer">🚗</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <h3>Timing Function Descriptions:</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #f5f5f5;">
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Function</th>
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Description</th>
+                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Use Case</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>linear</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Constant speed from start to end</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Loading bars, spinners</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>ease</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Slow start, fast middle, slow end (default)</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Most UI interactions</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>ease-in</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Slow start, fast end</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Items leaving the screen</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>ease-out</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Fast start, slow end</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Items entering the screen</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>ease-in-out</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Slow start and end</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Smooth, natural movement</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>cubic-bezier()</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Custom timing curve</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Unique, branded animations</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>Interactive Button Examples</h2>
+    <div class="info">
+        <p>Click and hold these buttons to feel the difference in timing functions:</p>
+    </div>
+
+    <div class="button-demo">
+        <button class="btn btn-linear">linear</button>
+        <button class="btn btn-ease">ease</button>
+        <button class="btn btn-ease-in">ease-in</button>
+        <button class="btn btn-ease-out">ease-out</button>
+        <button class="btn btn-ease-in-out">ease-in-out</button>
+    </div>
+
+    <div class="info">
+        <h3>Code Examples:</h3>
+        <pre>
+/* Linear - constant speed */
+transition: all 0.3s linear;
+
+/* Ease (default) - natural feel */
+transition: all 0.3s ease;
+
+/* Ease-in - accelerates */
+transition: all 0.3s ease-in;
+
+/* Ease-out - decelerates */
+transition: all 0.3s ease-out;
+
+/* Ease-in-out - smooth both ends */
+transition: all 0.3s ease-in-out;
+
+/* Custom cubic-bezier - bouncy effect */
+transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        </pre>
+
+        <h3>Cubic Bezier Tool:</h3>
+        <p>Use <a href="https://cubic-bezier.com" target="_blank">cubic-bezier.com</a> to create custom timing functions!</p>
+    </div>
+</body>
+</html>

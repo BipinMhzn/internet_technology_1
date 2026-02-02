@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 7: Align Self and Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color: #3F51B5;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            height: 250px;
+            align-items: center;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 120px;
+        }
+
+        /* align-self examples */
+        .self-start {
+            align-self: flex-start;
+            background-color: #FFCDD2;
+        }
+
+        .self-end {
+            align-self: flex-end;
+            background-color: #C5CAE9;
+        }
+
+        .self-center {
+            align-self: center;
+            background-color: #C8E6C9;
+        }
+
+        .self-stretch {
+            align-self: stretch;
+            background-color: #FFE082;
+        }
+
+        .self-baseline {
+            align-self: baseline;
+            background-color: #B2DFDB;
+        }
+
+        /* order examples */
+        .order-container {
+            background-color: #009688;
+        }
+
+        .order-1 { order: 1; background-color: #FFCCBC; }
+        .order-2 { order: 2; background-color: #D1C4E9; }
+        .order-3 { order: 3; background-color: #C5E1A5; }
+        .order-minus { order: -1; background-color: #FFE0B2; }
+    </style>
+</head>
+<body>
+    <h1>Example 7: Align Self and Order</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>align-self</strong> - Override align-items for individual flex items</p>
+        <p><strong>order</strong> - Control the visual order of flex items</p>
+    </div>
+
+    <h2>align-self Property</h2>
+    <div class="info">
+        <pre>
+.container { align-items: center; }  /* Default for all items */
+
+.item1 { align-self: flex-start; }   /* Override for this item */
+.item2 { align-self: flex-end; }     /* Override for this item */
+        </pre>
+        <p>Container has align-items: center, but items override it individually</p>
+    </div>
+    <div class="flex-container">
+        <div class="box self-start">align-self:<br>flex-start</div>
+        <div class="box">Default<br>(center)</div>
+        <div class="box self-end">align-self:<br>flex-end</div>
+        <div class="box self-stretch">align-self:<br>stretch</div>
+        <div class="box">Default<br>(center)</div>
+    </div>
+
+    <h2>order Property</h2>
+    <div class="info">
+        <pre>
+/* HTML Order: Box 1, Box 2, Box 3, Box 4 */
+
+.box1 { order: 3; }   /* Appears last */
+.box2 { order: 1; }   /* Appears second */
+.box3 { order: 2; }   /* Appears third */
+.box4 { order: -1; }  /* Appears first (negative values come first) */
+        </pre>
+        <p><strong>Default order is 0.</strong> Lower values appear first.</p>
+    </div>
+    <div class="flex-container order-container">
+        <div class="box order-3">Box 1<br>(order: 3)</div>
+        <div class="box order-1">Box 2<br>(order: 1)</div>
+        <div class="box order-2">Box 3<br>(order: 2)</div>
+        <div class="box order-minus">Box 4<br>(order: -1)</div>
+    </div>
+
+    <div class="info">
+        <h3>Practical Example: Responsive Reordering</h3>
+        <pre>
+/* Desktop: Logo, Nav, Search */
+.logo { order: 1; }
+.nav { order: 2; }
+.search { order: 3; }
+
+/* Mobile: Logo, Search, Nav */
+@media (max-width: 768px) {
+    .logo { order: 1; }
+    .search { order: 2; }
+    .nav { order: 3; }
+}
+        </pre>
+        <p>Change visual order without changing HTML structure!</p>
+    </div>
+
+    <div class="info">
+        <h3>Quick Reference:</h3>
+        <h4>align-self values:</h4>
+        <ul>
+            <li><strong>auto</strong> - Use container's align-items value (default)</li>
+            <li><strong>flex-start</strong> - Align to start of cross axis</li>
+            <li><strong>flex-end</strong> - Align to end of cross axis</li>
+            <li><strong>center</strong> - Center on cross axis</li>
+            <li><strong>baseline</strong> - Align text baselines</li>
+            <li><strong>stretch</strong> - Stretch to fill container</li>
+        </ul>
+
+        <h4>order:</h4>
+        <ul>
+            <li><strong>Default:</strong> 0</li>
+            <li><strong>Negative values:</strong> Appear before 0</li>
+            <li><strong>Positive values:</strong> Appear after 0</li>
+            <li><strong>Same order:</strong> Uses source HTML order</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 4: Multiple Transitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .demo-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        /* Single transition */
+        .card-single {
+            width: 200px;
+            padding: 20px;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card-single:hover {
+            background-color: #1976D2;
+            transform: scale(1.1);
+        }
+
+        /* Multiple transitions - separate */
+        .card-multiple {
+            width: 200px;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition:
+                background-color 0.3s,
+                transform 0.3s,
+                box-shadow 0.3s;
+        }
+
+        .card-multiple:hover {
+            background-color: #388E3C;
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Different durations and timing */
+        .card-complex {
+            width: 200px;
+            padding: 20px;
+            background-color: #FF9800;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition:
+                background-color 0.2s ease-in,
+                transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                box-shadow 0.3s ease-out,
+                border-radius 0.4s;
+        }
+
+        .card-complex:hover {
+            background-color: #F57C00;
+            transform: translateY(-10px) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-radius: 20px;
+        }
+
+        /* Transition delay example */
+        .delay-demo {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .delay-box {
+            width: 80px;
+            height: 80px;
+            background-color: #9C27B0;
+            border-radius: 5px;
+            transition: transform 0.5s;
+        }
+
+        .delay-demo:hover .delay-box:nth-child(1) {
+            transform: translateY(-20px);
+            transition-delay: 0s;
+        }
+
+        .delay-demo:hover .delay-box:nth-child(2) {
+            transform: translateY(-20px);
+            transition-delay: 0.1s;
+        }
+
+        .delay-demo:hover .delay-box:nth-child(3) {
+            transform: translateY(-20px);
+            transition-delay: 0.2s;
+        }
+
+        .delay-demo:hover .delay-box:nth-child(4) {
+            transform: translateY(-20px);
+            transition-delay: 0.3s;
+        }
+
+        .delay-demo:hover .delay-box:nth-child(5) {
+            transform: translateY(-20px);
+            transition-delay: 0.4s;
+        }
+
+        /* Button example with multiple properties */
+        .fancy-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                letter-spacing 0.3s ease;
+        }
+
+        .fancy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .fancy-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 4: Multiple Transitions</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p>You can apply different transitions to multiple properties, each with its own duration, timing function, and delay.</p>
+        <p><strong>Syntax:</strong> Separate multiple transitions with commas</p>
+    </div>
+
+    <h2>Comparison: Single vs Multiple Transitions</h2>
+
+    <div class="demo-container">
+        <div>
+            <h3>Single Transition</h3>
+            <div class="card-single">
+                <h4>Hover Me</h4>
+                <p style="font-size: 12px; margin-top: 10px;">Only background-color transitions smoothly</p>
+            </div>
+            <div class="info" style="margin-top: 10px;">
+                <pre>
+transition: background-color 0.3s;
+
+/* Transform changes instantly! */
+                </pre>
+            </div>
+        </div>
+
+        <div>
+            <h3>Multiple Transitions</h3>
+            <div class="card-multiple">
+                <h4>Hover Me</h4>
+                <p style="font-size: 12px; margin-top: 10px;">Multiple properties transition smoothly</p>
+            </div>
+            <div class="info" style="margin-top: 10px;">
+                <pre>
+transition:
+    background-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s;
+                </pre>
+            </div>
+        </div>
+
+        <div>
+            <h3>Complex Transitions</h3>
+            <div class="card-complex">
+                <h4>Hover Me</h4>
+                <p style="font-size: 12px; margin-top: 10px;">Each property has unique timing!</p>
+            </div>
+            <div class="info" style="margin-top: 10px;">
+                <pre>
+transition:
+    background-color 0.2s ease-in,
+    transform 0.5s cubic-bezier(...),
+    box-shadow 0.3s ease-out,
+    border-radius 0.4s;
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <h2>Transition Delay (Staggered Effect)</h2>
+    <div class="info">
+        <p><strong>Hover over the container</strong> to see boxes animate in sequence!</p>
+        <p>Each box has a different <code>transition-delay</code></p>
+    </div>
+
+    <div class="delay-demo">
+        <div class="delay-box"></div>
+        <div class="delay-box"></div>
+        <div class="delay-box"></div>
+        <div class="delay-box"></div>
+        <div class="delay-box"></div>
+    </div>
+
+    <div class="info">
+        <pre>
+.box:nth-child(1) { transition-delay: 0s; }
+.box:nth-child(2) { transition-delay: 0.1s; }
+.box:nth-child(3) { transition-delay: 0.2s; }
+.box:nth-child(4) { transition-delay: 0.3s; }
+.box:nth-child(5) { transition-delay: 0.4s; }
+        </pre>
+    </div>
+
+    <h2>Practical Example: Fancy Button</h2>
+    <div style="text-align: center; padding: 30px; background-color: #fff; border-radius: 5px; margin-bottom: 20px;">
+        <button class="fancy-button">Click Me!</button>
+        <p style="margin-top: 20px; color: #666;">Try hovering and clicking!</p>
+    </div>
+
+    <div class="info">
+        <pre>
+.fancy-button {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        letter-spacing 0.3s ease;
+}
+
+.fancy-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+}
+
+.fancy-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+        </pre>
+    </div>
+
+    <div class="info">
+        <h3>Full Transition Syntax:</h3>
+        <pre>
+transition: [property] [duration] [timing-function] [delay];
+
+/* Multiple transitions */
+transition:
+    property1 duration1 timing-function1 delay1,
+    property2 duration2 timing-function2 delay2;
+
+/* Examples */
+transition: all 0.3s ease 0s;
+transition: transform 0.5s, opacity 0.3s;
+transition:
+    background-color 0.2s ease-in 0s,
+    transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+        </pre>
+
+        <h3>Properties You Can Transition:</h3>
+        <ul>
+            <li><code>transform</code> - Scale, rotate, translate, etc.</li>
+            <li><code>opacity</code> - Fade in/out</li>
+            <li><code>background-color</code> - Color changes</li>
+            <li><code>color</code> - Text color</li>
+            <li><code>width, height</code> - Size changes</li>
+            <li><code>box-shadow</code> - Shadow effects</li>
+            <li><code>border-radius</code> - Corner rounding</li>
+            <li><code>filter</code> - Blur, brightness, etc.</li>
+            <li><code>letter-spacing, line-height</code> - Typography</li>
+        </ul>
+
+        <h3>Best Practices:</h3>
+        <ul>
+            <li>✅ Use <code>transform</code> and <code>opacity</code> for best performance</li>
+            <li>✅ Keep durations short (0.2s - 0.5s) for UI interactions</li>
+            <li>✅ Use <code>ease-out</code> for elements entering</li>
+            <li>✅ Use <code>ease-in</code> for elements leaving</li>
+            <li>❌ Avoid transitioning <code>width, height, top, left</code> (causes reflow)</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 6: Advanced Keyframes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .demo-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Multi-step keyframes example */
+        @keyframes complexPath {
+            0% {
+                transform: translate(0, 0);
+                background-color: #FF5722;
+                border-radius: 10px;
+            }
+            25% {
+                transform: translate(100px, -50px);
+                background-color: #FFC107;
+                border-radius: 50%;
+            }
+            50% {
+                transform: translate(100px, 50px);
+                background-color: #4CAF50;
+                border-radius: 0;
+            }
+            75% {
+                transform: translate(-100px, 50px);
+                background-color: #2196F3;
+                border-radius: 50%;
+            }
+            100% {
+                transform: translate(0, 0);
+                background-color: #FF5722;
+                border-radius: 10px;
+            }
+        }
+
+        .complex-box {
+            width: 80px;
+            height: 80px;
+            animation: complexPath 4s infinite;
+        }
+
+        /* Walking animation */
+        @keyframes walk {
+            0% {
+                transform: translateX(-200px) scaleX(1);
+            }
+            48% {
+                transform: translateX(200px) scaleX(1);
+            }
+            50% {
+                transform: translateX(200px) scaleX(-1);
+            }
+            98% {
+                transform: translateX(-200px) scaleX(-1);
+            }
+            100% {
+                transform: translateX(-200px) scaleX(1);
+            }
+        }
+
+        .walker {
+            font-size: 50px;
+            animation: walk 6s infinite linear;
+        }
+
+        /* Heartbeat */
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(0.9);
+            }
+            20%, 40%, 60%, 80% {
+                transform: scale(1.1);
+            }
+            50%, 70% {
+                transform: scale(1.05);
+            }
+        }
+
+        .heart {
+            font-size: 60px;
+            color: #E91E63;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* Loading dots */
+        @keyframes loadingDots {
+            0%, 80%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            animation: loadingDots 1.4s infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Text animation */
+        @keyframes typewriter {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                border-right-color: transparent;
+            }
+            50% {
+                border-right-color: #333;
+            }
+        }
+
+        .typewriter-container {
+            background-color: #000;
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        .typewriter-text {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            color: #0F0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #0F0;
+            width: 0;
+            animation:
+                typewriter 4s steps(30) infinite,
+                blink 0.75s step-end infinite;
+        }
+
+        /* Wave animation */
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(-10deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+        }
+
+        .wave-container {
+            display: flex;
+            gap: 5px;
+            font-size: 40px;
+        }
+
+        .wave-container span {
+            display: inline-block;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        .wave-container span:nth-child(1) { animation-delay: 0s; }
+        .wave-container span:nth-child(2) { animation-delay: 0.1s; }
+        .wave-container span:nth-child(3) { animation-delay: 0.2s; }
+        .wave-container span:nth-child(4) { animation-delay: 0.3s; }
+        .wave-container span:nth-child(5) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <h1>Example 6: Advanced Keyframes</h1>
+
+    <div class="info">
+        <h2>What are Keyframes?</h2>
+        <p><strong>Keyframes</strong> define the intermediate steps in an animation sequence.</p>
+        <p>You can specify styles at multiple points (0%, 25%, 50%, 75%, 100%) to create complex animations.</p>
+    </div>
+
+    <h2>Multi-Step Animation</h2>
+    <div class="info">
+        <p>This box moves in a square pattern while changing color and shape!</p>
+    </div>
+    <div class="demo-container">
+        <div class="complex-box"></div>
+    </div>
+    <div class="info">
+        <pre>
+@keyframes complexPath {
+    0% {
+        transform: translate(0, 0);
+        background-color: #FF5722;
+        border-radius: 10px;
+    }
+    25% {
+        transform: translate(100px, -50px);
+        background-color: #FFC107;
+        border-radius: 50%;
+    }
+    50% {
+        transform: translate(100px, 50px);
+        background-color: #4CAF50;
+        border-radius: 0;
+    }
+    75% {
+        transform: translate(-100px, 50px);
+        background-color: #2196F3;
+        border-radius: 50%;
+    }
+    100% {
+        transform: translate(0, 0);
+        background-color: #FF5722;
+        border-radius: 10px;
+    }
+}
+        </pre>
+    </div>
+
+    <h2>Walking Animation (with Direction Change)</h2>
+    <div class="demo-container">
+        <div class="walker">🚶</div>
+    </div>
+    <div class="info">
+        <pre>
+@keyframes walk {
+    0% {
+        transform: translateX(-200px) scaleX(1);
+    }
+    48% {
+        transform: translateX(200px) scaleX(1);
+    }
+    50% {
+        transform: translateX(200px) scaleX(-1);  /* Flip! */
+    }
+    98% {
+        transform: translateX(-200px) scaleX(-1);
+    }
+    100% {
+        transform: translateX(-200px) scaleX(1);
+    }
+}
+        </pre>
+    </div>
+
+    <h2>Heartbeat Effect</h2>
+    <div class="demo-container">
+        <div class="heart">❤️</div>
+    </div>
+    <div class="info">
+        <pre>
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(0.9); }
+    20%, 40%, 60%, 80% { transform: scale(1.1); }
+    50%, 70% { transform: scale(1.05); }
+}
+        </pre>
+        <p>Multiple keyframe points create a realistic heartbeat rhythm!</p>
+    </div>
+
+    <h2>Loading Dots (Staggered Animation)</h2>
+    <div class="demo-container">
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <div class="info">
+        <pre>
+@keyframes loadingDots {
+    0%, 80%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+        </pre>
+    </div>
+
+    <h2>Typewriter Effect</h2>
+    <div class="typewriter-container">
+        <div class="typewriter-text">Hello, I'm a typewriter!</div>
+    </div>
+    <div class="info" style="margin-top: 20px;">
+        <pre>
+@keyframes typewriter {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 100% { border-right-color: transparent; }
+    50% { border-right-color: #333; }
+}
+
+.text {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #0F0;
+    animation:
+        typewriter 4s steps(30) infinite,
+        blink 0.75s step-end infinite;
+}
+        </pre>
+        <p><strong>Note:</strong> <code>steps(30)</code> creates a stepped animation instead of smooth!</p>
+    </div>
+
+    <h2>Wave Text Animation</h2>
+    <div class="demo-container">
+        <div class="wave-container">
+            <span>H</span>
+            <span>E</span>
+            <span>L</span>
+            <span>L</span>
+            <span>O</span>
+        </div>
+    </div>
+    <div class="info">
+        <pre>
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(-10deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(10deg);
+    }
+}
+
+.wave-container span {
+    animation: wave 1.5s ease-in-out infinite;
+}
+
+span:nth-child(1) { animation-delay: 0s; }
+span:nth-child(2) { animation-delay: 0.1s; }
+span:nth-child(3) { animation-delay: 0.2s; }
+        </pre>
+    </div>
+
+    <div class="info">
+        <h3>Keyframe Best Practices:</h3>
+        <ul>
+            <li>✅ Use meaningful percentages (0%, 25%, 50%, 75%, 100%)</li>
+            <li>✅ Can use <code>from</code> (0%) and <code>to</code> (100%) for simple animations</li>
+            <li>✅ Combine with <code>animation-delay</code> for staggered effects</li>
+            <li>✅ Use <code>steps()</code> timing for frame-by-frame animations</li>
+            <li>✅ Test performance - complex keyframes can be resource-intensive</li>
+        </ul>
+
+        <h3>Timing Function in Keyframes:</h3>
+        <pre>
+/* Apply timing to entire animation */
+.element {
+    animation: myAnimation 2s ease-in-out;
+}
+
+/* Apply timing between specific keyframes */
+@keyframes myAnimation {
+    0% {
+        animation-timing-function: ease-in;
+    }
+    50% {
+        animation-timing-function: ease-out;
+    }
+    100% { }
+}
+        </pre>
+    </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 3: Justify Content</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color: #3F51B5;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+
+        .justify-start { justify-content: flex-start; }
+        .justify-end { justify-content: flex-end; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .justify-evenly { justify-content: space-evenly; }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 3: Justify Content</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>justify-content</strong> - Aligns items along the main axis (horizontal if flex-direction: row)</p>
+        <p><strong>Controls:</strong> How extra space is distributed</p>
+    </div>
+
+    <h2>justify-content: flex-start (Default)</h2>
+    <div class="info">
+        <pre>justify-content: flex-start;  /* Items at the start */</pre>
+    </div>
+    <div class="flex-container justify-start">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>justify-content: flex-end</h2>
+    <div class="info">
+        <pre>justify-content: flex-end;  /* Items at the end */</pre>
+    </div>
+    <div class="flex-container justify-end">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>justify-content: center</h2>
+    <div class="info">
+        <pre>justify-content: center;  /* Items centered */</pre>
+    </div>
+    <div class="flex-container justify-center">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>justify-content: space-between</h2>
+    <div class="info">
+        <pre>justify-content: space-between;  /* Equal space BETWEEN items */</pre>
+        <p>First item at start, last item at end, equal space between</p>
+    </div>
+    <div class="flex-container justify-between">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>justify-content: space-around</h2>
+    <div class="info">
+        <pre>justify-content: space-around;  /* Equal space AROUND items */</pre>
+        <p>Space on sides is half of space between items</p>
+    </div>
+    <div class="flex-container justify-around">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>justify-content: space-evenly</h2>
+    <div class="info">
+        <pre>justify-content: space-evenly;  /* Equal space everywhere */</pre>
+        <p>All spaces are equal (including edges)</p>
+    </div>
+    <div class="flex-container justify-evenly">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <div class="info">
+        <h3>Quick Reference:</h3>
+        <ul>
+            <li><strong>flex-start</strong> - Pack items at start</li>
+            <li><strong>flex-end</strong> - Pack items at end</li>
+            <li><strong>center</strong> - Center items</li>
+            <li><strong>space-between</strong> - Space between items only</li>
+            <li><strong>space-around</strong> - Space around items (half on edges)</li>
+            <li><strong>space-evenly</strong> - Equal space everywhere</li>
+        </ul>
+    </div>
+</body>
+</html>

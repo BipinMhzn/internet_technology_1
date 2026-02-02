@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 4: Align Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color: #4CAF50;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            height: 200px;
+        }
+
+        .align-start { align-items: flex-start; }
+        .align-end { align-items: flex-end; }
+        .align-center { align-items: center; }
+        .align-baseline { align-items: baseline; }
+        .align-stretch { align-items: stretch; }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 100px;
+        }
+
+        .box-tall {
+            padding: 40px 20px;
+        }
+
+        .box-short {
+            padding: 10px 20px;
+        }
+
+        /* For baseline example */
+        .baseline-demo .box:nth-child(1) { font-size: 24px; }
+        .baseline-demo .box:nth-child(2) { font-size: 16px; }
+        .baseline-demo .box:nth-child(3) { font-size: 32px; }
+    </style>
+</head>
+<body>
+    <h1>Example 4: Align Items</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>align-items</strong> - Aligns items along the cross axis (vertical if flex-direction: row)</p>
+        <p><strong>Think:</strong> justify-content = horizontal, align-items = vertical (for row direction)</p>
+    </div>
+
+    <h2>align-items: flex-start</h2>
+    <div class="info">
+        <pre>align-items: flex-start;  /* Items at the top */</pre>
+    </div>
+    <div class="flex-container align-start">
+        <div class="box">Box 1</div>
+        <div class="box box-tall">Box 2<br>Tall</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>align-items: flex-end</h2>
+    <div class="info">
+        <pre>align-items: flex-end;  /* Items at the bottom */</pre>
+    </div>
+    <div class="flex-container align-end">
+        <div class="box">Box 1</div>
+        <div class="box box-tall">Box 2<br>Tall</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>align-items: center</h2>
+    <div class="info">
+        <pre>align-items: center;  /* Items centered vertically */</pre>
+        <p><strong>Very useful!</strong> This is the easiest way to center content vertically!</p>
+    </div>
+    <div class="flex-container align-center">
+        <div class="box">Box 1</div>
+        <div class="box box-tall">Box 2<br>Tall</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>align-items: baseline</h2>
+    <div class="info">
+        <pre>align-items: baseline;  /* Items aligned by text baseline */</pre>
+        <p>Notice how text baselines align despite different font sizes</p>
+    </div>
+    <div class="flex-container align-baseline baseline-demo">
+        <div class="box">Big</div>
+        <div class="box">Small</div>
+        <div class="box">Huge</div>
+    </div>
+
+    <h2>align-items: stretch (Default)</h2>
+    <div class="info">
+        <pre>align-items: stretch;  /* Items stretch to fill container */</pre>
+        <p>Items without a height will stretch to fill the container</p>
+    </div>
+    <div class="flex-container align-stretch">
+        <div class="box">Stretched</div>
+        <div class="box">Stretched</div>
+        <div class="box">Stretched</div>
+    </div>
+
+    <div class="info">
+        <h3>Perfect Centering Trick:</h3>
+        <pre>
+.container {
+    display: flex;
+    justify-content: center;  /* Horizontal center */
+    align-items: center;      /* Vertical center */
+    height: 100vh;
+}
+        </pre>
+        <p>This centers content both horizontally and vertically!</p>
+    </div>
+</body>
+</html>

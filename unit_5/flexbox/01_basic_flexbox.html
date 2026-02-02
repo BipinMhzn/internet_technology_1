@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: Basic Flexbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Without Flexbox */
+        .container-normal {
+            background-color: #E0E0E0;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        /* With Flexbox */
+        .container-flex {
+            display: flex;
+            background-color: #2196F3;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 1: Introduction to Flexbox</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>Flexbox</strong> - One-dimensional layout method for arranging items in rows or columns</p>
+        <p><strong>display: flex</strong> - Creates a flex container</p>
+        <p><strong>Flex items</strong> - Direct children of flex container</p>
+    </div>
+
+    <h2>Without Flexbox (Normal Block Elements)</h2>
+    <div class="info">
+        <pre>
+.container-normal {
+    /* No flexbox - default block behavior */
+}
+        </pre>
+    </div>
+    <div class="container-normal">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>With Flexbox (display: flex)</h2>
+    <div class="info">
+        <pre>
+.container-flex {
+    display: flex;  /* Items arranged in a row */
+}
+        </pre>
+        <p><strong>Notice:</strong> Items are now in a row instead of stacked vertically!</p>
+    </div>
+    <div class="container-flex">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <div class="info">
+        <h3>Key Points:</h3>
+        <ul>
+            <li>Flexbox works on a single axis (row or column)</li>
+            <li>By default, items are arranged in a row (left to right)</li>
+            <li>Items are placed side-by-side without needing floats</li>
+            <li>Great for navigation bars, toolbars, and simple layouts</li>
+        </ul>
+    </div>
+</body>
+</html>

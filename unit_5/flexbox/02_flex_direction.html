@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: Flex Direction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            background-color: #607D8B;
+            padding: 10px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            display: flex;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .flex-row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .flex-column {
+            flex-direction: column;
+        }
+
+        .flex-column-reverse {
+            flex-direction: column-reverse;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            min-width: 100px;
+        }
+
+        .box-1 { background-color: #FFCDD2; }
+        .box-2 { background-color: #C5CAE9; }
+        .box-3 { background-color: #C8E6C9; }
+    </style>
+</head>
+<body>
+    <h1>Example 2: Flex Direction</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>flex-direction</strong> - Defines the main axis direction</p>
+        <p><strong>Values:</strong> row | row-reverse | column | column-reverse</p>
+    </div>
+
+    <h2>flex-direction: row (Default)</h2>
+    <div class="info">
+        <pre>
+.flex-container {
+    display: flex;
+    flex-direction: row;  /* Left to right */
+}
+        </pre>
+    </div>
+    <div class="flex-container flex-row">
+        <div class="box box-1">1 First</div>
+        <div class="box box-2">2 Second</div>
+        <div class="box box-3">3 Third</div>
+    </div>
+
+    <h2>flex-direction: row-reverse</h2>
+    <div class="info">
+        <pre>
+.flex-container {
+    display: flex;
+    flex-direction: row-reverse;  /* Right to left */
+}
+        </pre>
+    </div>
+    <div class="flex-container flex-row-reverse">
+        <div class="box box-1">1 First</div>
+        <div class="box box-2">2 Second</div>
+        <div class="box box-3">3 Third</div>
+    </div>
+
+    <h2>flex-direction: column</h2>
+    <div class="info">
+        <pre>
+.flex-container {
+    display: flex;
+    flex-direction: column;  /* Top to bottom */
+}
+        </pre>
+    </div>
+    <div class="flex-container flex-column">
+        <div class="box box-1">1 First</div>
+        <div class="box box-2">2 Second</div>
+        <div class="box box-3">3 Third</div>
+    </div>
+
+    <h2>flex-direction: column-reverse</h2>
+    <div class="info">
+        <pre>
+.flex-container {
+    display: flex;
+    flex-direction: column-reverse;  /* Bottom to top */
+}
+        </pre>
+    </div>
+    <div class="flex-container flex-column-reverse">
+        <div class="box box-1">1 First</div>
+        <div class="box box-2">2 Second</div>
+        <div class="box box-3">3 Third</div>
+    </div>
+
+    <div class="info">
+        <h3>Remember:</h3>
+        <ul>
+            <li><strong>row</strong> - Horizontal axis (default)</li>
+            <li><strong>column</strong> - Vertical axis</li>
+            <li><strong>-reverse</strong> - Reverses the order</li>
+        </ul>
+    </div>
+</body>
+</html>

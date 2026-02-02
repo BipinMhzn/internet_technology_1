@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 7: Grid Alignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Justify items (horizontal alignment) */
+        .grid-justify-start {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #3F51B5;
+            padding: 10px;
+            height: 200px;
+            justify-items: start;
+            margin-bottom: 20px;
+        }
+
+        .grid-justify-center {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #009688;
+            padding: 10px;
+            height: 200px;
+            justify-items: center;
+            margin-bottom: 20px;
+        }
+
+        .grid-justify-end {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #E91E63;
+            padding: 10px;
+            height: 200px;
+            justify-items: end;
+            margin-bottom: 20px;
+        }
+
+        /* Align items (vertical alignment) */
+        .grid-align-start {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #FF9800;
+            padding: 10px;
+            height: 200px;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .grid-align-center {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #4CAF50;
+            padding: 10px;
+            height: 200px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .grid-align-end {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #9C27B0;
+            padding: 10px;
+            height: 200px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+
+        .grid-item {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 7: Grid Alignment Properties</h1>
+
+    <div class="info">
+        <h2>Concept:</h2>
+        <p><strong>justify-items</strong> - Horizontal alignment (start, center, end)</p>
+        <p><strong>align-items</strong> - Vertical alignment (start, center, end)</p>
+    </div>
+
+    <h2>Justify Items (Horizontal Alignment)</h2>
+
+    <h3>justify-items: start</h3>
+    <div class="grid-justify-start">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <h3>justify-items: center</h3>
+    <div class="grid-justify-center">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <h3>justify-items: end</h3>
+    <div class="grid-justify-end">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <h2>Align Items (Vertical Alignment)</h2>
+
+    <h3>align-items: start</h3>
+    <div class="grid-align-start">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <h3>align-items: center</h3>
+    <div class="grid-align-center">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <h3>align-items: end</h3>
+    <div class="grid-align-end">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+    </div>
+
+    <div class="info">
+        <h3>Quick Reference:</h3>
+        <pre>
+/* Horizontal alignment */
+justify-items: start | center | end | stretch;
+
+/* Vertical alignment */
+align-items: start | center | end | stretch;
+
+/* Shorthand for both */
+place-items: &lt;align-items&gt; &lt;justify-items&gt;;
+        </pre>
+    </div>
+</body>
+</html>

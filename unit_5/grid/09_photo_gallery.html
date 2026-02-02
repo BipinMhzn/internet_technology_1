@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 9: Photo Gallery with Grid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Photo gallery grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Featured items span more space */
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        /* Placeholder images with different colors */
+        .photo {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .featured .photo {
+            height: 515px;
+        }
+
+        .tall .photo {
+            height: 515px;
+        }
+
+        .photo1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .photo2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .photo3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .photo4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .photo5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .photo6 { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .photo7 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .photo8 { background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%); }
+        .photo9 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+
+        .caption {
+            padding: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 9: Responsive Photo Gallery</h1>
+
+    <div class="info">
+        <h2>Practical Example: Photo Gallery</h2>
+        <p>This gallery uses:</p>
+        <ul>
+            <li><strong>auto-fill</strong> for responsive columns</li>
+            <li><strong>minmax(250px, 1fr)</strong> for flexible sizing</li>
+            <li><strong>grid-column/row span</strong> for featured images</li>
+            <li><strong>CSS transitions</strong> for hover effects</li>
+        </ul>
+        <h3>Code:</h3>
+        <pre>
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+        </pre>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item featured">
+            <div class="photo photo1">Featured</div>
+            <div class="caption">Beautiful Landscape</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo2">Photo</div>
+            <div class="caption">Mountain View</div>
+        </div>
+        <div class="gallery-item tall">
+            <div class="photo photo3">Tall</div>
+            <div class="caption">City Skyline</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo4">Photo</div>
+            <div class="caption">Ocean Sunset</div>
+        </div>
+        <div class="gallery-item wide">
+            <div class="photo photo5">Wide</div>
+            <div class="caption">Desert Panorama</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo6">Photo</div>
+            <div class="caption">Forest Path</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo7">Photo</div>
+            <div class="caption">Beach Scene</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo8">Photo</div>
+            <div class="caption">Night Sky</div>
+        </div>
+        <div class="gallery-item">
+            <div class="photo photo9">Photo</div>
+            <div class="caption">Autumn Colors</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: Basic CSS Transitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .info {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .demo-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        /* Without Transition */
+        .box-no-transition {
+            width: 150px;
+            height: 150px;
+            background-color: #E91E63;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .box-no-transition:hover {
+            background-color: #C2185B;
+            width: 180px;
+            height: 180px;
+        }
+
+        /* With Transition */
+        .box-with-transition {
+            width: 150px;
+            height: 150px;
+            background-color: #2196F3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+
+            /* Add transition */
+            transition: all 0.3s;
+        }
+
+        .box-with-transition:hover {
+            background-color: #1976D2;
+            width: 180px;
+            height: 180px;
+        }
+
+        /* Different transition durations */
+        .fast {
+            background-color: #4CAF50;
+            transition: all 0.1s;
+        }
+
+        .medium {
+            background-color: #FF9800;
+            transition: all 0.5s;
+        }
+
+        .slow {
+            background-color: #9C27B0;
+            transition: all 1s;
+        }
+
+        .fast:hover,
+        .medium:hover,
+        .slow:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 1: Basic CSS Transitions</h1>
+
+    <div class="info">
+        <h2>What are CSS Transitions?</h2>
+        <p><strong>Transitions</strong> allow property changes to occur smoothly over a specified duration, rather than instantly.</p>
+        <p><strong>Syntax:</strong> <code>transition: property duration timing-function delay;</code></p>
+    </div>
+
+    <h2>Without vs With Transition</h2>
+    <div class="info">
+        <p><strong>Hover over the boxes to see the difference!</strong></p>
+    </div>
+
+    <div class="demo-container">
+        <div>
+            <h3>Without Transition</h3>
+            <div class="box-no-transition">
+                Hover Me<br>(Instant)
+            </div>
+            <div class="info" style="margin-top: 10px;">
+                <pre>
+.box:hover {
+    background-color: #C2185B;
+    width: 180px;
+    height: 180px;
+}
+/* No transition - changes instantly! */
+                </pre>
+            </div>
+        </div>
+
+        <div>
+            <h3>With Transition</h3>
+            <div class="box-with-transition">
+                Hover Me<br>(Smooth)
+            </div>
+            <div class="info" style="margin-top: 10px;">
+                <pre>
+.box {
+    transition: all 0.3s;
+}
+
+.box:hover {
+    background-color: #1976D2;
+    width: 180px;
+    height: 180px;
+}
+/* Changes smoothly over 0.3s */
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <h2>Different Transition Durations</h2>
+    <div class="info">
+        <p>Hover over each box to see different speeds:</p>
+    </div>
+
+    <div class="demo-container">
+        <div>
+            <h3>Fast (0.1s)</h3>
+            <div class="box-with-transition fast">
+                Fast
+            </div>
+        </div>
+
+        <div>
+            <h3>Medium (0.5s)</h3>
+            <div class="box-with-transition medium">
+                Medium
+            </div>
+        </div>
+
+        <div>
+            <h3>Slow (1s)</h3>
+            <div class="box-with-transition slow">
+                Slow
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <h3>Key Points:</h3>
+        <ul>
+            <li><strong>transition: all</strong> - Applies to all properties that change</li>
+            <li><strong>Duration</strong> - Time in seconds (s) or milliseconds (ms)</li>
+            <li><strong>Common durations:</strong> 0.1s to 0.5s for UI interactions</li>
+            <li><strong>Transitions work on hover, focus, active states</strong></li>
+        </ul>
+
+        <h3>Syntax:</h3>
+        <pre>
+/* Shorthand */
+transition: all 0.3s;
+
+/* Full syntax */
+transition: property duration timing-function delay;
+
+/* Examples */
+transition: background-color 0.3s;
+transition: all 0.3s ease-in-out;
+transition: width 0.5s, height 0.5s;
+        </pre>
+    </div>
+</body>
+</html>
