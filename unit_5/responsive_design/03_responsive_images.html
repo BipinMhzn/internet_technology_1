@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Images</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-left: 4px solid #3498db;
+        }
+
+        /* Method 1: Fluid Images */
+        .fluid-image-container {
+            margin: 1rem 0;
+        }
+
+        .fluid-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #ddd;
+        }
+
+        /* Method 2: Background Images with Media Queries */
+        .responsive-background {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid #ddd;
+            margin: 1rem 0;
+
+            /* Mobile background - placeholder */
+            background-color: #e74c3c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (min-width: 768px) {
+            .responsive-background {
+                height: 400px;
+                background-color: #3498db;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .responsive-background {
+                height: 500px;
+                background-color: #2ecc71;
+            }
+        }
+
+        /* Method 3: Art Direction with Picture Element */
+        .picture-container {
+            margin: 1rem 0;
+        }
+
+        .picture-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #ddd;
+        }
+
+        /* Method 4: Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 576px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .image-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        /* Method 5: Object-fit for maintaining aspect ratio */
+        .object-fit-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1rem 0;
+        }
+
+        .object-fit-demo {
+            height: 200px;
+            background: #34495e;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .object-fit-demo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contain { object-fit: contain; }
+        .cover { object-fit: cover; }
+        .fill { object-fit: fill; }
+
+        /* Code display */
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Placeholder images */
+        .placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Responsive Images Techniques</h1>
+        <p>Learn different methods to make images responsive and adapt to various screen sizes.</p>
+
+        <!-- Method 1: Fluid Images -->
+        <div class="section">
+            <h2>Method 1: Fluid/Flexible Images</h2>
+            <p>The most common and simplest method using max-width: 100%</p>
+
+            <div class="fluid-image-container">
+                <div class="placeholder" style="width: 800px; max-width: 100%; height: 300px;">
+                    Fluid Image (800px × 300px)<br>
+                    Scales down automatically
+                </div>
+            </div>
+
+            <pre><code>/* CSS */
+.fluid-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* HTML */
+&lt;img src="image.jpg" alt="Description" class="fluid-image"&gt;</code></pre>
+        </div>
+
+        <!-- Method 2: Background Images -->
+        <div class="section">
+            <h2>Method 2: Responsive Background Images</h2>
+            <p>Different background images for different screen sizes using media queries</p>
+
+            <div class="responsive-background">
+                Mobile: Red (< 768px)<br>
+                Tablet: Blue (768px - 1199px)<br>
+                Desktop: Green (≥ 1200px)
+            </div>
+
+            <pre><code>/* CSS */
+.hero {
+    background-image: url('hero-small.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        background-image: url('hero-medium.jpg');
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero {
+        background-image: url('hero-large.jpg');
+    }
+}</code></pre>
+        </div>
+
+        <!-- Method 3: Picture Element -->
+        <div class="section">
+            <h2>Method 3: Picture Element (Art Direction)</h2>
+            <p>Use different images for different screen sizes with the &lt;picture&gt; element</p>
+
+            <div class="note">
+                <strong>Note:</strong> The picture element allows you to serve different images based on viewport width,
+                providing better optimization and art direction.
+            </div>
+
+            <pre><code>/* HTML */
+&lt;picture&gt;
+    &lt;source media="(min-width: 1200px)" srcset="large.jpg"&gt;
+    &lt;source media="(min-width: 768px)" srcset="medium.jpg"&gt;
+    &lt;img src="small.jpg" alt="Responsive image"&gt;
+&lt;/picture&gt;</code></pre>
+        </div>
+
+        <!-- Method 4: srcset and sizes -->
+        <div class="section">
+            <h2>Method 4: srcset and sizes Attributes</h2>
+            <p>Let the browser choose the best image based on screen resolution and size</p>
+
+            <pre><code>/* HTML */
+&lt;img src="small.jpg"
+     srcset="small.jpg 300w,
+             medium.jpg 600w,
+             large.jpg 1200w"
+     sizes="(max-width: 600px) 300px,
+            (max-width: 1200px) 600px,
+            1200px"
+     alt="Responsive image"&gt;
+
+/* Explanation:
+- srcset: Provides multiple image sources with their widths
+- sizes: Tells browser which image size to use at different viewport widths
+- Browser automatically selects the most appropriate image
+*/</code></pre>
+        </div>
+
+        <!-- Method 5: Responsive Grid -->
+        <div class="section">
+            <h2>Method 5: Responsive Image Grid</h2>
+            <p>Images in a grid that adapts to screen size</p>
+
+            <div class="image-grid">
+                <div class="placeholder">Image 1<br>Grid Item</div>
+                <div class="placeholder">Image 2<br>Grid Item</div>
+                <div class="placeholder">Image 3<br>Grid Item</div>
+                <div class="placeholder">Image 4<br>Grid Item</div>
+                <div class="placeholder">Image 5<br>Grid Item</div>
+                <div class="placeholder">Image 6<br>Grid Item</div>
+            </div>
+
+            <pre><code>/* CSS */
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+    gap: 15px;
+}
+
+@media (min-width: 576px) {
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+    }
+}
+
+@media (min-width: 992px) {
+    .image-grid {
+        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+    }
+}
+
+.image-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}</code></pre>
+        </div>
+
+        <!-- Method 6: Object-fit -->
+        <div class="section">
+            <h2>Method 6: Object-fit Property</h2>
+            <p>Control how images fill their containers</p>
+
+            <div class="object-fit-container">
+                <div class="object-fit-demo">
+                    <div style="padding: 20px; text-align: center;">
+                        object-fit: contain<br>
+                        (Image fits inside, may have empty space)
+                    </div>
+                </div>
+                <div class="object-fit-demo">
+                    <div style="padding: 20px; text-align: center;">
+                        object-fit: cover<br>
+                        (Image covers area, may be cropped)
+                    </div>
+                </div>
+                <div class="object-fit-demo">
+                    <div style="padding: 20px; text-align: center;">
+                        object-fit: fill<br>
+                        (Image stretched to fill)
+                    </div>
+                </div>
+            </div>
+
+            <pre><code>/* CSS */
+.container {
+    width: 300px;
+    height: 200px;
+}
+
+.container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* Fills container, crops if needed */
+    object-fit: contain;      /* Fits inside, maintains aspect ratio */
+    object-fit: fill;         /* Stretches to fill */
+    object-position: center;  /* Position of the image */
+}</code></pre>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li>✓ Always set <code>max-width: 100%</code> and <code>height: auto</code> for basic responsiveness</li>
+                <li>✓ Use srcset and sizes for performance optimization</li>
+                <li>✓ Use picture element for art direction (different crops for different sizes)</li>
+                <li>✓ Optimize images for web (compress, use appropriate formats)</li>
+                <li>✓ Consider using modern formats like WebP with fallbacks</li>
+                <li>✓ Always include alt text for accessibility</li>
+                <li>✓ Use lazy loading for images below the fold</li>
+                <li>✓ Test images on actual devices, not just browser resize</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

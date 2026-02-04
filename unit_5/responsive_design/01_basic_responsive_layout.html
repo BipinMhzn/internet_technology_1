@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Essential viewport meta tag for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Responsive Layout</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Mobile-First Base Styles (for mobile devices) */
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .content {
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .sidebar {
+            background: #e0e0e0;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .main-content {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 20px;
+        }
+
+        /* Tablet styles - 768px and up */
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+                margin: 0 auto;
+            }
+
+            .content-wrapper {
+                display: flex;
+                gap: 20px;
+            }
+
+            .sidebar {
+                flex: 1;
+            }
+
+            .main-content {
+                flex: 2;
+            }
+
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .card {
+                flex: 1 1 calc(50% - 15px);
+            }
+        }
+
+        /* Desktop styles - 992px and up */
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .card {
+                flex: 1 1 calc(33.333% - 15px);
+            }
+        }
+
+        /* Large desktop - 1200px and up */
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            header, footer {
+                background: white;
+                color: black;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Responsive Web Design Example</h1>
+        <p>Resize your browser window to see the responsive layout</p>
+    </header>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <h2>Sidebar</h2>
+                <p>This sidebar appears below the main content on mobile devices.</p>
+                <p>On tablets and larger screens, it appears beside the main content.</p>
+            </aside>
+
+            <main class="main-content">
+                <h2>Main Content</h2>
+                <p>This is the main content area. It takes full width on mobile devices.</p>
+                <p>On larger screens, it shares space with the sidebar using flexbox.</p>
+
+                <h3>Responsive Cards</h3>
+                <div class="card-container">
+                    <div class="card">
+                        <h4>Card 1</h4>
+                        <p>Mobile: 100% width</p>
+                        <p>Tablet: 50% width (2 columns)</p>
+                        <p>Desktop: 33% width (3 columns)</p>
+                    </div>
+                    <div class="card">
+                        <h4>Card 2</h4>
+                        <p>Cards automatically adjust their layout based on screen size.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Card 3</h4>
+                        <p>Using flexbox with media queries creates responsive layouts.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Card 4</h4>
+                        <p>Mobile-first approach starts with mobile styles.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Card 5</h4>
+                        <p>Then adds complexity for larger screens.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Card 6</h4>
+                        <p>This ensures better performance on mobile devices.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Responsive Design Demo - BCSIT Internet Technology</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navigation Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Mobile-First Navigation Styles */
+        .navbar {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Hamburger Menu Button (Mobile) */
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: block;
+        }
+
+        /* Navigation Links - Hidden on Mobile by default */
+        .nav-links {
+            list-style: none;
+            display: none;
+            flex-direction: column;
+            margin-top: 1rem;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0.5rem 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #34495e;
+            border-radius: 4px;
+        }
+
+        /* Tablet and Desktop - 768px and up */
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            .nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: flex !important;
+                flex-direction: row;
+                margin-top: 0;
+            }
+
+            .nav-links li {
+                margin: 0 0.5rem;
+            }
+        }
+
+        /* Demo Content */
+        .content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .demo-section {
+            background: #ecf0f1;
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .breakpoint-info {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Show different messages based on screen size */
+        .mobile-only {
+            display: block;
+        }
+
+        .tablet-up {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+
+            .tablet-up {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-header">
+                <div class="logo">MyWebsite</div>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Responsive Navigation Example</h1>
+
+        <div class="breakpoint-info mobile-only">
+            <h3>📱 Mobile View</h3>
+            <p>Click the hamburger menu (☰) to see navigation</p>
+        </div>
+
+        <div class="breakpoint-info tablet-up">
+            <h3>💻 Desktop/Tablet View</h3>
+            <p>Navigation links are displayed horizontally</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>How It Works</h2>
+            <ul>
+                <li><strong>Mobile (< 768px):</strong> Hamburger menu button shows/hides vertical navigation</li>
+                <li><strong>Tablet/Desktop (≥ 768px):</strong> Horizontal navigation bar, no menu button</li>
+                <li><strong>Mobile-First Approach:</strong> Base styles for mobile, enhanced for larger screens</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>Key Features</h2>
+            <ul>
+                <li>✓ Hamburger menu for mobile devices</li>
+                <li>✓ Horizontal navigation on desktop</li>
+                <li>✓ Smooth transitions and hover effects</li>
+                <li>✓ Accessible and keyboard-friendly</li>
+                <li>✓ Pure CSS responsive design with JavaScript toggle</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>Media Query Breakpoints</h2>
+            <pre>
+/* Mobile: Default base styles */
+
+@media (min-width: 768px) {
+    /* Tablet and Desktop styles */
+    /* Show horizontal navigation */
+    /* Hide hamburger menu */
+}
+            </pre>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
