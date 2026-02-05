@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: Modifying DOM Elements</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #f093fb;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            background-color: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .demo-section h3 {
+            color: #f093fb;
+            margin-bottom: 15px;
+        }
+        button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+        .demo-box {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+        .demo-image {
+            max-width: 200px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ Modifying DOM Elements</h1>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Change element content (innerHTML, textContent, innerText)</li>
+                <li>Modify attributes (src, href, alt, data-*)</li>
+                <li>Change inline styles dynamically</li>
+                <li>Add, remove, and toggle CSS classes</li>
+            </ul>
+        </div>
+
+        <h2>1. Changing Content</h2>
+        <div class="code-block">
+const element = document.getElementById('demo');
+
+// innerHTML - includes HTML tags
+element.innerHTML = '<strong>Bold text</strong>';
+
+// textContent - plain text only (safer)
+element.textContent = 'Plain text';
+
+// innerText - visible text only (respects CSS)
+element.innerText = 'Visible text';
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Change Content</h3>
+            <div id="content-demo" class="demo-box">
+                Original content here
+            </div>
+            <button onclick="changeToHTML()">Set innerHTML (with HTML)</button>
+            <button onclick="changeToText()">Set textContent (plain text)</button>
+            <button onclick="resetContent()">Reset</button>
+        </div>
+
+        <h2>2. Modifying Attributes</h2>
+        <div class="code-block">
+const img = document.querySelector('img');
+
+// Get attribute
+const src = img.getAttribute('src');
+
+// Set attribute
+img.setAttribute('src', 'new-image.jpg');
+img.setAttribute('alt', 'Description');
+
+// Remove attribute
+img.removeAttribute('title');
+
+// Check if attribute exists
+if (img.hasAttribute('alt')) {
+    console.log('Alt text exists');
+}
+
+// Direct property access (for standard attributes)
+img.src = 'another-image.jpg';
+img.alt = 'Another description';
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Modify Image</h3>
+            <img id="demo-img" class="demo-image"
+                 src="https://via.placeholder.com/200/667eea/ffffff?text=Image+1"
+                 alt="Demo Image">
+            <div style="margin-top: 15px;">
+                <input type="url" id="img-url" placeholder="Enter image URL">
+                <button onclick="changeImage()">Change Image</button>
+                <button onclick="changeAlt()">Change Alt Text</button>
+                <button onclick="resetImage()">Reset Image</button>
+            </div>
+            <p id="img-info" style="margin-top: 10px; color: #666;"></p>
+        </div>
+
+        <h2>3. Changing Styles</h2>
+        <div class="code-block">
+const element = document.getElementById('myElement');
+
+// Individual style properties (camelCase)
+element.style.color = 'red';
+element.style.backgroundColor = 'yellow';
+element.style.fontSize = '20px';
+element.style.marginTop = '10px';
+element.style.borderRadius = '10px';
+
+// Multiple styles at once
+element.style.cssText = 'color: red; background: yellow; font-size: 20px;';
+
+// Get computed styles
+const styles = window.getComputedStyle(element);
+console.log(styles.color);
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Change Styles</h3>
+            <div id="style-demo" class="demo-box">
+                Style me with JavaScript!
+            </div>
+            <button onclick="changeColor()">Change Color</button>
+            <button onclick="changeBg()">Change Background</button>
+            <button onclick="changeFontSize()">Change Font Size</button>
+            <button onclick="addBorder()">Add Border</button>
+            <button onclick="resetStyles()">Reset Styles</button>
+        </div>
+
+        <h2>4. Working with Classes</h2>
+        <div class="code-block">
+const element = document.getElementById('myElement');
+
+// classList methods (modern and preferred)
+element.classList.add('active');
+element.classList.remove('inactive');
+element.classList.toggle('visible');      // Add if missing, remove if present
+element.classList.replace('old', 'new');
+element.classList.contains('active');     // Returns true/false
+
+// Add multiple classes
+element.classList.add('class1', 'class2', 'class3');
+
+// className property (replaces all classes)
+element.className = 'newClass';
+element.className = 'class1 class2';
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Toggle Classes</h3>
+            <style>
+                #class-demo {
+                    transition: all 0.3s;
+                }
+                #class-demo.active {
+                    background-color: #4caf50;
+                    color: white;
+                    transform: scale(1.05);
+                }
+                #class-demo.rounded {
+                    border-radius: 25px;
+                }
+                #class-demo.shadow {
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                }
+            </style>
+            <div id="class-demo" class="demo-box">
+                Toggle classes on me!
+            </div>
+            <button onclick="toggleActive()">Toggle "active"</button>
+            <button onclick="toggleRounded()">Toggle "rounded"</button>
+            <button onclick="toggleShadow()">Toggle "shadow"</button>
+            <button onclick="showClasses()">Show Classes</button>
+            <p id="class-info" style="margin-top: 10px; color: #666;"></p>
+        </div>
+
+        <h2>5. Data Attributes</h2>
+        <div class="code-block">
+// HTML: <div id="user" data-user-id="123" data-role="admin"></div>
+
+const element = document.getElementById('user');
+
+// Access data attributes
+const userId = element.dataset.userId;      // "123"
+const role = element.dataset.role;          // "admin"
+
+// Set data attributes
+element.dataset.status = 'active';          // data-status="active"
+element.dataset.lastLogin = '2024-01-15';   // data-last-login="2024-01-15"
+
+// Remove data attributes
+delete element.dataset.role;
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Data Attributes</h3>
+            <div id="data-demo" class="demo-box"
+                 data-user="John Doe"
+                 data-user-id="12345"
+                 data-role="student">
+                Click "Show Data" to see my data attributes
+            </div>
+            <button onclick="showData()">Show Data Attributes</button>
+            <button onclick="addData()">Add New Data</button>
+            <button onclick="removeData()">Remove Data</button>
+            <div id="data-output" style="margin-top: 10px;"></div>
+        </div>
+
+        <h2>6. Practical Example: Card Customizer</h2>
+        <div class="demo-section">
+            <h3>Customize the Card:</h3>
+            <div id="custom-card" class="demo-box" style="max-width: 400px; margin: 20px auto;">
+                <h3 id="card-title">Card Title</h3>
+                <p id="card-text">This is the card description</p>
+            </div>
+
+            <div style="max-width: 400px; margin: 20px auto;">
+                <input type="text" id="title-input" placeholder="Enter card title" value="Card Title">
+                <input type="text" id="text-input" placeholder="Enter card text" value="This is the card description">
+                <button onclick="updateCard()">Update Card</button>
+
+                <h4 style="margin-top: 20px;">Style Options:</h4>
+                <button onclick="setCardStyle('blue')">Blue Theme</button>
+                <button onclick="setCardStyle('green')">Green Theme</button>
+                <button onclick="setCardStyle('purple')">Purple Theme</button>
+                <button onclick="resetCard()">Reset Card</button>
+            </div>
+        </div>
+
+        <h2>⚠️ innerHTML vs textContent</h2>
+        <div class="info-box" style="background-color: #ffebee; border-left-color: #f44336;">
+            <h3>Security Warning:</h3>
+            <ul style="line-height: 2;">
+                <li><strong>innerHTML:</strong> Can execute scripts - XSS vulnerability!
+                    <br><code>element.innerHTML = userInput;</code> ❌ Dangerous!</li>
+                <li><strong>textContent:</strong> Safer - treats as plain text
+                    <br><code>element.textContent = userInput;</code> ✅ Safe!</li>
+            </ul>
+            <strong>Rule:</strong> Use textContent for user-generated content!
+        </div>
+
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
+            <p><strong>Unit 7.3: DOM Manipulation - Modifying Elements</strong></p>
+            <p>Internet Technology (CMP 173) | BCSIT | Pokhara University</p>
+        </footer>
+    </div>
+
+    <script>
+        // Example 1: Changing content
+        function changeToHTML() {
+            const element = document.getElementById('content-demo');
+            element.innerHTML = '<strong style="color: #f093fb;">Bold text</strong> with <em>HTML tags</em>! ✨';
+            console.log('innerHTML:', element.innerHTML);
+        }
+
+        function changeToText() {
+            const element = document.getElementById('content-demo');
+            element.textContent = '<strong>This HTML is treated as text</strong>';
+            console.log('textContent:', element.textContent);
+        }
+
+        function resetContent() {
+            document.getElementById('content-demo').textContent = 'Original content here';
+        }
+
+        // Example 2: Modifying attributes
+        function changeImage() {
+            const img = document.getElementById('demo-img');
+            const newUrl = document.getElementById('img-url').value || 'https://via.placeholder.com/200/f093fb/ffffff?text=New+Image';
+            img.setAttribute('src', newUrl);
+            updateImageInfo();
+        }
+
+        function changeAlt() {
+            const img = document.getElementById('demo-img');
+            const newAlt = prompt('Enter alt text:', 'New demo image');
+            if (newAlt) {
+                img.setAttribute('alt', newAlt);
+                updateImageInfo();
+            }
+        }
+
+        function resetImage() {
+            const img = document.getElementById('demo-img');
+            img.src = 'https://via.placeholder.com/200/667eea/ffffff?text=Image+1';
+            img.alt = 'Demo Image';
+            updateImageInfo();
+        }
+
+        function updateImageInfo() {
+            const img = document.getElementById('demo-img');
+            document.getElementById('img-info').innerHTML =
+                `<strong>Current attributes:</strong><br>
+                src: ${img.getAttribute('src')}<br>
+                alt: ${img.getAttribute('alt')}`;
+        }
+
+        // Example 3: Changing styles
+        function changeColor() {
+            const element = document.getElementById('style-demo');
+            const colors = ['#f093fb', '#4caf50', '#2196f3', '#ff9800', '#e74c3c'];
+            element.style.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function changeBg() {
+            const element = document.getElementById('style-demo');
+            const colors = ['#e8f5e9', '#e3f2fd', '#fff3e0', '#fce4ec'];
+            element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function changeFontSize() {
+            const element = document.getElementById('style-demo');
+            const sizes = ['16px', '20px', '24px', '28px'];
+            element.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
+        }
+
+        function addBorder() {
+            const element = document.getElementById('style-demo');
+            element.style.border = '4px solid #f093fb';
+            element.style.borderRadius = '15px';
+        }
+
+        function resetStyles() {
+            const element = document.getElementById('style-demo');
+            element.style.cssText = '';
+        }
+
+        // Example 4: Working with classes
+        function toggleActive() {
+            document.getElementById('class-demo').classList.toggle('active');
+            showClasses();
+        }
+
+        function toggleRounded() {
+            document.getElementById('class-demo').classList.toggle('rounded');
+            showClasses();
+        }
+
+        function toggleShadow() {
+            document.getElementById('class-demo').classList.toggle('shadow');
+            showClasses();
+        }
+
+        function showClasses() {
+            const element = document.getElementById('class-demo');
+            const classes = Array.from(element.classList).join(', ') || 'none';
+            document.getElementById('class-info').innerHTML =
+                `<strong>Current classes:</strong> ${classes}`;
+        }
+
+        // Example 5: Data attributes
+        function showData() {
+            const element = document.getElementById('data-demo');
+            const output = document.getElementById('data-output');
+
+            output.innerHTML = '<strong>Data Attributes:</strong><br>';
+            for (let key in element.dataset) {
+                output.innerHTML += `data-${key}: ${element.dataset[key]}<br>`;
+            }
+        }
+
+        function addData() {
+            const element = document.getElementById('data-demo');
+            element.dataset.status = 'active';
+            element.dataset.lastModified = new Date().toLocaleString();
+            showData();
+        }
+
+        function removeData() {
+            const element = document.getElementById('data-demo');
+            delete element.dataset.status;
+            delete element.dataset.lastModified;
+            showData();
+        }
+
+        // Example 6: Card customizer
+        function updateCard() {
+            const title = document.getElementById('title-input').value;
+            const text = document.getElementById('text-input').value;
+
+            document.getElementById('card-title').textContent = title;
+            document.getElementById('card-text').textContent = text;
+        }
+
+        function setCardStyle(theme) {
+            const card = document.getElementById('custom-card');
+
+            if (theme === 'blue') {
+                card.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                card.style.color = 'white';
+            } else if (theme === 'green') {
+                card.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+                card.style.color = 'white';
+            } else if (theme === 'purple') {
+                card.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                card.style.color = 'white';
+            }
+            card.style.borderRadius = '15px';
+            card.style.padding = '25px';
+        }
+
+        function resetCard() {
+            const card = document.getElementById('custom-card');
+            card.style.cssText = '';
+            document.getElementById('title-input').value = 'Card Title';
+            document.getElementById('text-input').value = 'This is the card description';
+            updateCard();
+        }
+
+        console.log('%c✏️ Modifying DOM Elements', 'color: #f093fb; font-size: 20px; font-weight: bold;');
+        console.log('Try each example and watch the changes!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 3: Event Handling</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4facfe;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            background-color: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .demo-section h3 {
+            color: #4facfe;
+            margin-bottom: 15px;
+        }
+        button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        .demo-box {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .demo-box:hover {
+            border-color: #4facfe;
+            transform: scale(1.02);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .counter-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4facfe;
+            text-align: center;
+            padding: 20px;
+        }
+        .coords-display {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .list-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .list-item:hover {
+            background-color: #e3f2fd;
+            border-color: #4facfe;
+        }
+        .list-item.selected {
+            background-color: #4facfe;
+            color: white;
+            border-color: #0288d1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Event Handling</h1>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Understand different ways to attach event listeners</li>
+                <li>Work with the event object and its properties</li>
+                <li>Master common events (click, input, mouse, keyboard)</li>
+                <li>Learn event delegation for dynamic elements</li>
+            </ul>
+        </div>
+
+        <h2>1. addEventListener() - Recommended Method</h2>
+        <div class="code-block">
+const button = document.getElementById('myButton');
+
+// Basic syntax
+button.addEventListener('click', function() {
+    console.log('Button clicked!');
+});
+
+// Named function
+function handleClick() {
+    console.log('Clicked!');
+}
+button.addEventListener('click', handleClick);
+
+// Arrow function
+button.addEventListener('click', () => {
+    console.log('Clicked with arrow function!');
+});
+
+// Multiple handlers on same event
+button.addEventListener('click', handler1);
+button.addEventListener('click', handler2);
+
+// Remove event listener
+button.removeEventListener('click', handleClick);
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Click Counter</h3>
+            <div class="counter-display" id="counter">0</div>
+            <button id="increment-btn">Click to Increment</button>
+            <button id="reset-btn">Reset Counter</button>
+        </div>
+
+        <h2>2. The Event Object</h2>
+        <div class="code-block">
+button.addEventListener('click', function(event) {
+    // Event properties
+    console.log(event.type);        // "click"
+    console.log(event.target);      // Element that triggered event
+    console.log(event.currentTarget); // Element with the listener
+    console.log(event.timeStamp);   // When event occurred
+
+    // Mouse coordinates
+    console.log(event.clientX);     // X in viewport
+    console.log(event.clientY);     // Y in viewport
+
+    // Prevent default behavior
+    event.preventDefault();
+
+    // Stop propagation
+    event.stopPropagation();
+});
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Mouse Coordinates</h3>
+            <div id="mouse-area" class="demo-box" style="min-height: 200px; text-align: center; padding-top: 80px;">
+                Move your mouse over this area
+            </div>
+            <div class="coords-display" id="coords">
+                <strong>Mouse Position:</strong><br>
+                X: 0, Y: 0
+            </div>
+        </div>
+
+        <h2>3. Common Events</h2>
+        <div class="code-block">
+// Click events
+element.addEventListener('click', handler);
+element.addEventListener('dblclick', handler);
+
+// Mouse events
+element.addEventListener('mouseenter', handler);
+element.addEventListener('mouseleave', handler);
+element.addEventListener('mousemove', handler);
+
+// Keyboard events
+element.addEventListener('keydown', handler);
+element.addEventListener('keyup', handler);
+
+// Form events
+input.addEventListener('input', handler);  // On every keystroke
+input.addEventListener('change', handler); // On blur after change
+form.addEventListener('submit', handler);
+
+// Focus events
+input.addEventListener('focus', handler);
+input.addEventListener('blur', handler);
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Input Events</h3>
+            <input type="text" id="demo-input" placeholder="Type something...">
+            <div id="input-output" style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;">
+                <strong>Character count:</strong> <span id="char-count">0</span><br>
+                <strong>You typed:</strong> <span id="typed-text">nothing yet</span>
+            </div>
+        </div>
+
+        <h2>4. Keyboard Events</h2>
+        <div class="code-block">
+document.addEventListener('keydown', function(e) {
+    console.log('Key pressed:', e.key);
+    console.log('Key code:', e.code);
+    console.log('Ctrl key:', e.ctrlKey);
+    console.log('Shift key:', e.shiftKey);
+    console.log('Alt key:', e.altKey);
+
+    // Check for specific keys
+    if (e.key === 'Enter') {
+        console.log('Enter pressed');
+    }
+
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault(); // Prevent browser save
+        console.log('Ctrl+S pressed');
+    }
+});
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Key Logger</h3>
+            <input type="text" id="key-input" placeholder="Press keys here...">
+            <div id="key-output" style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px; max-height: 200px; overflow-y: auto;">
+                <strong>Keys pressed:</strong><br>
+                <div id="key-log"></div>
+            </div>
+        </div>
+
+        <h2>5. Event Delegation</h2>
+        <div class="code-block">
+// Instead of adding listeners to each item:
+const list = document.getElementById('myList');
+
+// Add ONE listener to parent
+list.addEventListener('click', function(e) {
+    // Check if clicked element is a list item
+    if (e.target.tagName === 'LI') {
+        console.log('Clicked:', e.target.textContent);
+        e.target.classList.toggle('selected');
+    }
+});
+
+// Works for dynamically added items too!
+const newItem = document.createElement('li');
+newItem.textContent = 'New Item';
+list.appendChild(newItem);  // Click handler already works!
+        </div>
+
+        <div class="demo-section">
+            <h3>Try It: Event Delegation</h3>
+            <div id="delegate-list">
+                <div class="list-item">Item 1 - Click to select</div>
+                <div class="list-item">Item 2 - Click to select</div>
+                <div class="list-item">Item 3 - Click to select</div>
+            </div>
+            <button onclick="addNewItem()">Add New Item</button>
+            <button onclick="clearSelection()">Clear Selection</button>
+        </div>
+
+        <h2>6. Form Handling</h2>
+        <div class="demo-section">
+            <h3>Try It: Form Validation</h3>
+            <form id="demo-form">
+                <input type="text" id="username" placeholder="Username (min 3 chars)" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <button type="submit">Submit Form</button>
+            </form>
+            <div id="form-output" style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;"></div>
+        </div>
+
+        <h2>7. Practical Example: Todo List</h2>
+        <div class="demo-section">
+            <h3>Interactive Todo List</h3>
+            <input type="text" id="todo-input" placeholder="Enter a new task..." onkeypress="if(event.key==='Enter') addTodo()">
+            <button onclick="addTodo()">Add Task</button>
+            <div id="todo-list" style="margin-top: 20px;"></div>
+        </div>
+
+        <h2>⚡ Event Best Practices</h2>
+        <div class="info-box" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>💡 Tips:</h3>
+            <ol style="line-height: 2;">
+                <li><strong>Use addEventListener():</strong> Can attach multiple handlers</li>
+                <li><strong>Named functions:</strong> Easier to remove listeners later</li>
+                <li><strong>Event delegation:</strong> Better performance for many elements</li>
+                <li><strong>preventDefault():</strong> Stop default browser behavior when needed</li>
+                <li><strong>Remove listeners:</strong> Clean up to prevent memory leaks</li>
+            </ol>
+        </div>
+
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
+            <p><strong>Unit 7.3: DOM Manipulation - Event Handling</strong></p>
+            <p>Internet Technology (CMP 173) | BCSIT | Pokhara University</p>
+        </footer>
+    </div>
+
+    <script>
+        // Example 1: Click counter
+        let count = 0;
+        const counterDisplay = document.getElementById('counter');
+        const incrementBtn = document.getElementById('increment-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        incrementBtn.addEventListener('click', function() {
+            count++;
+            counterDisplay.textContent = count;
+            console.log('Count:', count);
+        });
+
+        resetBtn.addEventListener('click', function() {
+            count = 0;
+            counterDisplay.textContent = count;
+            console.log('Counter reset');
+        });
+
+        // Example 2: Mouse coordinates
+        const mouseArea = document.getElementById('mouse-area');
+        const coordsDisplay = document.getElementById('coords');
+
+        mouseArea.addEventListener('mousemove', function(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            coordsDisplay.innerHTML = `
+                <strong>Mouse Position:</strong><br>
+                X: ${x}, Y: ${y}<br>
+                Target: ${event.target.id}
+            `;
+        });
+
+        // Example 3: Input events
+        const demoInput = document.getElementById('demo-input');
+        const charCount = document.getElementById('char-count');
+        const typedText = document.getElementById('typed-text');
+
+        demoInput.addEventListener('input', function(event) {
+            const text = event.target.value;
+            charCount.textContent = text.length;
+            typedText.textContent = text || 'nothing yet';
+            console.log('Input changed:', text);
+        });
+
+        // Example 4: Keyboard events
+        const keyInput = document.getElementById('key-input');
+        const keyLog = document.getElementById('key-log');
+
+        keyInput.addEventListener('keydown', function(event) {
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `Key: "${event.key}" | Code: ${event.code} | Ctrl: ${event.ctrlKey} | Shift: ${event.shiftKey}`;
+            logEntry.style.padding = '5px';
+            logEntry.style.borderBottom = '1px solid #ddd';
+            keyLog.insertBefore(logEntry, keyLog.firstChild);
+
+            // Keep only last 10 entries
+            while (keyLog.children.length > 10) {
+                keyLog.removeChild(keyLog.lastChild);
+            }
+
+            console.log('Key pressed:', event.key);
+        });
+
+        // Example 5: Event delegation
+        const delegateList = document.getElementById('delegate-list');
+
+        delegateList.addEventListener('click', function(event) {
+            if (event.target.classList.contains('list-item')) {
+                event.target.classList.toggle('selected');
+                console.log('Toggled:', event.target.textContent);
+            }
+        });
+
+        let itemCount = 3;
+        function addNewItem() {
+            itemCount++;
+            const newItem = document.createElement('div');
+            newItem.className = 'list-item';
+            newItem.textContent = `Item ${itemCount} - Click to select (dynamically added!)`;
+            delegateList.appendChild(newItem);
+            console.log('New item added');
+        }
+
+        function clearSelection() {
+            const items = document.querySelectorAll('.list-item');
+            items.forEach(item => item.classList.remove('selected'));
+        }
+
+        // Example 6: Form handling
+        const demoForm = document.getElementById('demo-form');
+        const formOutput = document.getElementById('form-output');
+
+        demoForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+
+            if (username.length < 3) {
+                formOutput.innerHTML = '<span style="color: red;">❌ Username must be at least 3 characters</span>';
+                return;
+            }
+
+            formOutput.innerHTML = `
+                <span style="color: green;">✅ Form submitted successfully!</span><br>
+                <strong>Username:</strong> ${username}<br>
+                <strong>Email:</strong> ${email}
+            `;
+
+            console.log('Form submitted:', { username, email });
+            demoForm.reset();
+        });
+
+        // Example 7: Todo list
+        let todos = [];
+
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            todos.push({ id: Date.now(), text, completed: false });
+            input.value = '';
+            renderTodos();
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const container = document.getElementById('todo-list');
+            if (todos.length === 0) {
+                container.innerHTML = '<p style="color: #999;">No tasks yet. Add one above!</p>';
+                return;
+            }
+
+            container.innerHTML = todos.map(todo => `
+                <div class="list-item" style="${todo.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">
+                    <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})" style="margin-right: 10px;">
+                    ${todo.text}
+                    <button onclick="deleteTodo(${todo.id})" style="float: right; padding: 5px 15px; font-size: 14px;">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        renderTodos();
+
+        console.log('%c⚡ Event Handling', 'color: #4facfe; font-size: 20px; font-weight: bold;');
+        console.log('Try each example and watch the console!');
+    </script>
+</body>
+</html>

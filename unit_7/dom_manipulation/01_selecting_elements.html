@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: Selecting DOM Elements</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .demo-section {
+            background-color: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .demo-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .output {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #ff9800;
+            min-height: 80px;
+        }
+        .highlight {
+            background-color: #ffeb3b !important;
+            border: 2px solid #ff9800 !important;
+            transition: all 0.3s;
+        }
+        .demo-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+        .special-class {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Selecting DOM Elements</h1>
+
+        <div class="info-box">
+            <h3>🎓 Learning Objectives:</h3>
+            <ul>
+                <li>Master different methods to select DOM elements</li>
+                <li>Understand when to use each selection method</li>
+                <li>Learn the difference between live and static collections</li>
+                <li>Practice with querySelector and querySelectorAll</li>
+            </ul>
+        </div>
+
+        <h2>📋 Selection Methods Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Returns</th>
+                    <th>Live?</th>
+                    <th>Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>getElementById()</code></td>
+                    <td>Single element</td>
+                    <td>No</td>
+                    <td>Select by unique ID</td>
+                </tr>
+                <tr>
+                    <td><code>getElementsByClassName()</code></td>
+                    <td>HTMLCollection</td>
+                    <td>Yes</td>
+                    <td>Select by class name</td>
+                </tr>
+                <tr>
+                    <td><code>getElementsByTagName()</code></td>
+                    <td>HTMLCollection</td>
+                    <td>Yes</td>
+                    <td>Select by tag name</td>
+                </tr>
+                <tr>
+                    <td><code>querySelector()</code></td>
+                    <td>Single element (first)</td>
+                    <td>No</td>
+                    <td>CSS selector (first match)</td>
+                </tr>
+                <tr>
+                    <td><code>querySelectorAll()</code></td>
+                    <td>NodeList</td>
+                    <td>No</td>
+                    <td>CSS selector (all matches)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Example 1: getElementById()</h2>
+        <div class="code-block">
+// Select by ID (most efficient for single elements)
+const element = document.getElementById('myElement');
+console.log(element);
+        </div>
+
+        <div class="demo-section">
+            <div id="demo1" class="demo-item">
+                <strong>I have ID: "demo1"</strong>
+            </div>
+            <button onclick="example1()">Select by ID</button>
+            <div class="output" id="output1">Click button to select the element above by ID</div>
+        </div>
+
+        <h2>Example 2: getElementsByClassName()</h2>
+        <div class="code-block">
+// Returns HTMLCollection (live - updates automatically)
+const elements = document.getElementsByClassName('special-class');
+console.log(elements.length);
+
+// Iterate through elements
+for (let element of elements) {
+    console.log(element.textContent);
+}
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-item special-class">Item 1 with special-class</div>
+            <div class="demo-item">Item 2 (no special class)</div>
+            <div class="demo-item special-class">Item 3 with special-class</div>
+            <button onclick="example2()">Select by Class Name</button>
+            <div class="output" id="output2">Click to select all elements with "special-class"</div>
+        </div>
+
+        <h2>Example 3: getElementsByTagName()</h2>
+        <div class="code-block">
+// Select all paragraphs
+const paragraphs = document.getElementsByTagName('p');
+
+// Select all divs
+const divs = document.getElementsByTagName('div');
+
+console.log('Total paragraphs:', paragraphs.length);
+        </div>
+
+        <div class="demo-section">
+            <p class="demo-item">Paragraph 1</p>
+            <p class="demo-item">Paragraph 2</p>
+            <p class="demo-item">Paragraph 3</p>
+            <button onclick="example3()">Select by Tag Name</button>
+            <div class="output" id="output3">Click to select all &lt;p&gt; tags</div>
+        </div>
+
+        <h2>Example 4: querySelector() - First Match</h2>
+        <div class="code-block">
+// CSS selectors (returns FIRST match)
+const byId = document.querySelector('#myId');
+const byClass = document.querySelector('.myClass');
+const byTag = document.querySelector('p');
+const byAttribute = document.querySelector('[data-id="123"]');
+const complex = document.querySelector('div.container > p.intro');
+const pseudo = document.querySelector('li:first-child');
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-item" data-role="item">Item with data-role="item" (first)</div>
+            <div class="demo-item" data-role="item">Item with data-role="item" (second)</div>
+            <div class="demo-item" data-role="item">Item with data-role="item" (third)</div>
+            <button onclick="example4()">querySelector (First Match)</button>
+            <div class="output" id="output4">Click to select FIRST element with data-role="item"</div>
+        </div>
+
+        <h2>Example 5: querySelectorAll() - All Matches</h2>
+        <div class="code-block">
+// Returns NodeList (static - snapshot at selection time)
+const allItems = document.querySelectorAll('.item');
+const allButtons = document.querySelectorAll('button.btn');
+
+// Can use forEach directly
+allItems.forEach(item => {
+    console.log(item.textContent);
+});
+
+// Or convert to array
+const itemsArray = Array.from(allItems);
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-item query-item">Query Item 1</div>
+            <div class="demo-item query-item">Query Item 2</div>
+            <div class="demo-item query-item">Query Item 3</div>
+            <div class="demo-item query-item">Query Item 4</div>
+            <button onclick="example5()">querySelectorAll (All Matches)</button>
+            <div class="output" id="output5">Click to select ALL elements with class "query-item"</div>
+        </div>
+
+        <h2>Example 6: Complex Selectors</h2>
+        <div class="code-block">
+// Complex CSS selectors
+const directChild = document.querySelector('div > p');
+const descendant = document.querySelector('div p');
+const adjacent = document.querySelector('h2 + p');
+const attribute = document.querySelector('input[type="text"]');
+const multiClass = document.querySelector('.class1.class2');
+const nthChild = document.querySelector('li:nth-child(2)');
+        </div>
+
+        <div class="demo-section">
+            <ul id="complex-list">
+                <li>First item</li>
+                <li class="highlight-me">Second item (select me!)</li>
+                <li>Third item</li>
+            </ul>
+            <button onclick="example6()">Select Second List Item</button>
+            <div class="output" id="output6">Click to select li:nth-child(2)</div>
+        </div>
+
+        <h2>⚡ Live vs Static Collections</h2>
+        <div class="info-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>Important Difference:</h3>
+            <ul style="line-height: 2;">
+                <li><strong>Live Collections (HTMLCollection):</strong> Automatically updates when DOM changes
+                    <ul>
+                        <li>getElementsByClassName()</li>
+                        <li>getElementsByTagName()</li>
+                    </ul>
+                </li>
+                <li><strong>Static Collections (NodeList):</strong> Snapshot at selection time
+                    <ul>
+                        <li>querySelectorAll()</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <div id="live-demo-container">
+                <div class="live-item">Item 1</div>
+                <div class="live-item">Item 2</div>
+            </div>
+            <button onclick="demonstrateLive()">Add New Item & Test</button>
+            <div class="output" id="output7">Click to see live vs static difference</div>
+        </div>
+
+        <h2>🎯 Best Practices</h2>
+        <div class="info-box" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>When to Use What?</h3>
+            <ol style="line-height: 2;">
+                <li><strong>getElementById():</strong> When you have a unique ID (fastest)</li>
+                <li><strong>querySelector():</strong> When you need first element with complex selector</li>
+                <li><strong>querySelectorAll():</strong> When you need all matching elements (most flexible)</li>
+                <li><strong>getElementsByClassName():</strong> When you need a live collection by class</li>
+                <li><strong>getElementsByTagName():</strong> When you need all elements of specific tag</li>
+            </ol>
+        </div>
+
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
+            <p><strong>Unit 7.3: DOM Manipulation - Selecting Elements</strong></p>
+            <p>Internet Technology (CMP 173) | BCSIT | Pokhara University</p>
+        </footer>
+    </div>
+
+    <script>
+        // Example 1: getElementById
+        function example1() {
+            const element = document.getElementById('demo1');
+            const output = document.getElementById('output1');
+
+            element.classList.add('highlight');
+            output.innerHTML = '<strong>✅ Selected element with ID "demo1"</strong><br>' +
+                'Element tag: ' + element.tagName + '<br>' +
+                'Element text: ' + element.textContent.trim();
+
+            console.log('Example 1 - getElementById:', element);
+
+            setTimeout(() => element.classList.remove('highlight'), 2000);
+        }
+
+        // Example 2: getElementsByClassName
+        function example2() {
+            const elements = document.getElementsByClassName('special-class');
+            const output = document.getElementById('output2');
+
+            // Highlight all
+            for (let element of elements) {
+                element.classList.add('highlight');
+            }
+
+            output.innerHTML = '<strong>✅ Found ' + elements.length + ' elements with class "special-class"</strong><br>';
+            for (let i = 0; i < elements.length; i++) {
+                output.innerHTML += 'Element ' + (i + 1) + ': ' + elements[i].textContent + '<br>';
+            }
+
+            console.log('Example 2 - getElementsByClassName:', elements);
+
+            setTimeout(() => {
+                for (let element of elements) {
+                    element.classList.remove('highlight');
+                }
+            }, 2000);
+        }
+
+        // Example 3: getElementsByTagName
+        function example3() {
+            const paragraphs = document.querySelectorAll('.demo-section p.demo-item');
+            const output = document.getElementById('output3');
+
+            paragraphs.forEach(p => p.classList.add('highlight'));
+
+            output.innerHTML = '<strong>✅ Found ' + paragraphs.length + ' &lt;p&gt; elements in demo section</strong><br>';
+            paragraphs.forEach((p, i) => {
+                output.innerHTML += 'Paragraph ' + (i + 1) + ': ' + p.textContent + '<br>';
+            });
+
+            console.log('Example 3 - getElementsByTagName:', paragraphs);
+
+            setTimeout(() => paragraphs.forEach(p => p.classList.remove('highlight')), 2000);
+        }
+
+        // Example 4: querySelector (first match)
+        function example4() {
+            const element = document.querySelector('[data-role="item"]');
+            const output = document.getElementById('output4');
+
+            element.classList.add('highlight');
+            output.innerHTML = '<strong>✅ Selected FIRST element with data-role="item"</strong><br>' +
+                'Text: ' + element.textContent + '<br>' +
+                'Note: Only the first element is selected!';
+
+            console.log('Example 4 - querySelector:', element);
+
+            setTimeout(() => element.classList.remove('highlight'), 2000);
+        }
+
+        // Example 5: querySelectorAll (all matches)
+        function example5() {
+            const elements = document.querySelectorAll('.query-item');
+            const output = document.getElementById('output5');
+
+            elements.forEach(el => el.classList.add('highlight'));
+
+            output.innerHTML = '<strong>✅ Selected ALL ' + elements.length + ' elements with class "query-item"</strong><br>';
+            elements.forEach((el, i) => {
+                output.innerHTML += 'Item ' + (i + 1) + ': ' + el.textContent + '<br>';
+            });
+
+            console.log('Example 5 - querySelectorAll:', elements);
+
+            setTimeout(() => elements.forEach(el => el.classList.remove('highlight')), 2000);
+        }
+
+        // Example 6: Complex selectors
+        function example6() {
+            const element = document.querySelector('#complex-list li:nth-child(2)');
+            const output = document.getElementById('output6');
+
+            element.classList.add('highlight');
+            output.innerHTML = '<strong>✅ Selected second &lt;li&gt; using :nth-child(2)</strong><br>' +
+                'Text: ' + element.textContent + '<br>' +
+                'Selector: #complex-list li:nth-child(2)';
+
+            console.log('Example 6 - Complex selector:', element);
+
+            setTimeout(() => element.classList.remove('highlight'), 2000);
+        }
+
+        // Demonstrate live vs static
+        function demonstrateLive() {
+            const container = document.getElementById('live-demo-container');
+            const output = document.getElementById('output7');
+
+            // Get collections BEFORE adding new item
+            const liveCollection = container.getElementsByClassName('live-item');
+            const staticCollection = container.querySelectorAll('.live-item');
+
+            output.innerHTML = '<strong>Before adding new item:</strong><br>';
+            output.innerHTML += 'Live collection (getElementsByClassName): ' + liveCollection.length + ' items<br>';
+            output.innerHTML += 'Static collection (querySelectorAll): ' + staticCollection.length + ' items<br><br>';
+
+            // Add new item
+            const newItem = document.createElement('div');
+            newItem.className = 'live-item';
+            newItem.textContent = 'Item 3 (newly added)';
+            newItem.style.backgroundColor = '#fff3e0';
+            container.appendChild(newItem);
+
+            output.innerHTML += '<strong>After adding new item:</strong><br>';
+            output.innerHTML += 'Live collection: ' + liveCollection.length + ' items ✅ (updated!)<br>';
+            output.innerHTML += 'Static collection: ' + staticCollection.length + ' items ❌ (not updated)<br><br>';
+            output.innerHTML += '<em>Live collections automatically reflect DOM changes!</em>';
+
+            console.log('Live vs Static Demo:');
+            console.log('Live collection:', liveCollection.length);
+            console.log('Static collection:', staticCollection.length);
+        }
+
+        console.log('%c🎯 Selecting DOM Elements', 'color: #667eea; font-size: 20px; font-weight: bold;');
+        console.log('Try each example and watch the console!');
+    </script>
+</body>
+</html>
