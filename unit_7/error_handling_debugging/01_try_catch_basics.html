@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: try-catch Basics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #f44336;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #d32f2f;
+        }
+        .output {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ff9800;
+            min-height: 50px;
+        }
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+        }
+        .warning {
+            background-color: #fff9c4;
+            color: #f57c00;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #fbc02d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Error Handling: try-catch Basics</h1>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Understand how to catch and handle errors gracefully</li>
+                <li>Learn the try-catch-finally syntax</li>
+                <li>Prevent application crashes from runtime errors</li>
+            </ul>
+        </div>
+
+        <div class="code-block">
+<strong>Basic Syntax:</strong>
+
+try {
+    // Code that might throw an error
+    riskyOperation();
+} catch (error) {
+    // Code to handle the error
+    console.log("Error:", error.message);
+} finally {
+    // Code that always runs (optional)
+    console.log("Cleanup code");
+}
+        </div>
+
+        <h3>Interactive Examples:</h3>
+
+        <button onclick="example1()">Example 1: Basic try-catch</button>
+        <button onclick="example2()">Example 2: Without Error Handling</button>
+        <button onclick="example3()">Example 3: With Error Handling</button>
+        <button onclick="example4()">Example 4: finally Block</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Click a button to see examples...</strong>
+        </div>
+    </div>
+
+    <script>
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click a button to see examples.</strong>';
+        }
+
+        // Example 1: Basic try-catch
+        function example1() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 1: Basic try-catch</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'try {<br>';
+            output.innerHTML += '    let result = 10 / 0;  // Not an error in JS!<br>';
+            output.innerHTML += '    console.log(result);  // Infinity<br>';
+            output.innerHTML += '    <br>';
+            output.innerHTML += '    // This will cause an error<br>';
+            output.innerHTML += '    undefinedFunction();<br>';
+            output.innerHTML += '} catch (error) {<br>';
+            output.innerHTML += '    console.log("Caught:", error.message);<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            try {
+                let result = 10 / 0;
+                console.log('Division result:', result);
+                output.innerHTML += '<div class="success">✅ Division by 0 = ' + result + ' (Infinity, not an error!)</div>';
+
+                // This will cause an error
+                undefinedFunction();
+                output.innerHTML += '<div class="success">This line will NOT execute</div>';
+
+            } catch (error) {
+                console.log('Caught error:', error);
+                output.innerHTML += '<div class="error">';
+                output.innerHTML += '❌ <strong>Error Caught!</strong><br>';
+                output.innerHTML += '<strong>Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '</div>';
+
+                output.innerHTML += '<div class="success">✅ Application continues running (didn\'t crash!)</div>';
+            }
+
+            console.log('After try-catch - still running');
+            output.innerHTML += '<br><em>Check console for additional logs</em>';
+        }
+
+        // Example 2: WITHOUT error handling (will break)
+        function example2() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 2: Without Error Handling</h4>';
+
+            output.innerHTML += '<div class="warning">';
+            output.innerHTML += '⚠️ <strong>Warning:</strong> This example shows what happens WITHOUT try-catch<br>';
+            output.innerHTML += 'The error would normally crash the script!';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// WITHOUT try-catch<br>';
+            output.innerHTML += 'console.log("Before error");<br>';
+            output.innerHTML += 'nonExistentFunction();  // ❌ CRASH!<br>';
+            output.innerHTML += 'console.log("After error");  // Never runs';
+            output.innerHTML += '</div>';
+
+            console.log('=== Example 2: Without try-catch ===');
+            console.log('Before potential error');
+
+            output.innerHTML += '<div class="error">';
+            output.innerHTML += '❌ If we called nonExistentFunction() here without try-catch:<br>';
+            output.innerHTML += '• The script would crash<br>';
+            output.innerHTML += '• No code after the error would run<br>';
+            output.innerHTML += '• User would see a broken page';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="success">';
+            output.innerHTML += '✅ But we\'re demonstrating safely - no actual crash!';
+            output.innerHTML += '</div>';
+        }
+
+        // Example 3: WITH error handling
+        function example3() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 3: With Proper Error Handling</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'try {<br>';
+            output.innerHTML += '    console.log("Step 1: Start");<br>';
+            output.innerHTML += '    let data = JSON.parse("invalid json");<br>';
+            output.innerHTML += '    console.log("Step 2: Never runs");<br>';
+            output.innerHTML += '} catch (error) {<br>';
+            output.innerHTML += '    console.log("Error handled gracefully");<br>';
+            output.innerHTML += '}<br>';
+            output.innerHTML += 'console.log("Step 3: Continues running");';
+            output.innerHTML += '</div>';
+
+            try {
+                console.log('Step 1: Starting operation...');
+                output.innerHTML += '<div class="success">✅ Step 1: Starting operation</div>';
+
+                // Try to parse invalid JSON
+                let data = JSON.parse('invalid json');
+
+                console.log('Step 2: This will not execute');
+                output.innerHTML += '<div class="success">✅ Step 2: Processing data (won\'t show)</div>';
+
+            } catch (error) {
+                console.error('Error in Step 2:', error);
+                output.innerHTML += '<div class="error">';
+                output.innerHTML += '❌ <strong>Error in Step 2:</strong><br>';
+                output.innerHTML += '<strong>Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '<strong>Action:</strong> Handled gracefully, showing user-friendly message';
+                output.innerHTML += '</div>';
+            }
+
+            console.log('Step 3: Application continues running');
+            output.innerHTML += '<div class="success">✅ Step 3: Application continues normally</div>';
+
+            output.innerHTML += '<br><div class="info-box">';
+            output.innerHTML += '<strong>💡 Key Point:</strong> The error was caught and handled. The application didn\'t crash!';
+            output.innerHTML += '</div>';
+        }
+
+        // Example 4: try-catch-finally
+        function example4() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 4: try-catch-finally Block</h4>';
+
+            output.innerHTML += '<div class="info-box">';
+            output.innerHTML += '<strong>finally block:</strong> Always executes, whether error occurs or not. Perfect for cleanup!';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'try {<br>';
+            output.innerHTML += '    console.log("Opening file...");<br>';
+            output.innerHTML += '    processFile();<br>';
+            output.innerHTML += '} catch (error) {<br>';
+            output.innerHTML += '    console.log("Error:", error.message);<br>';
+            output.innerHTML += '} finally {<br>';
+            output.innerHTML += '    console.log("Closing file...");<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            // Simulate file processing
+            function processFile() {
+                console.log('Processing file...');
+                if (Math.random() > 0.5) {
+                    throw new Error('File processing failed');
+                }
+                return 'File processed successfully';
+            }
+
+            let fileOpened = false;
+
+            try {
+                console.log('📂 Opening file...');
+                output.innerHTML += '<div class="success">✅ Opening file...</div>';
+                fileOpened = true;
+
+                let result = processFile();
+                console.log('✅', result);
+                output.innerHTML += '<div class="success">✅ ' + result + '</div>';
+
+            } catch (error) {
+                console.error('❌ Error:', error.message);
+                output.innerHTML += '<div class="error">';
+                output.innerHTML += '❌ <strong>Error occurred:</strong> ' + error.message;
+                output.innerHTML += '</div>';
+
+            } finally {
+                if (fileOpened) {
+                    console.log('🔒 Closing file...');
+                    output.innerHTML += '<div class="warning">🔒 <strong>finally:</strong> Closing file (cleanup always runs)</div>';
+                }
+                console.log('✅ Cleanup complete');
+                output.innerHTML += '<div class="success">✅ Cleanup complete</div>';
+            }
+
+            output.innerHTML += '<br><div class="info-box">';
+            output.innerHTML += '<strong>💡 Important:</strong> The finally block runs regardless of success or error!<br>';
+            output.innerHTML += 'Perfect for: Closing files, releasing resources, cleanup operations';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<br><div class="warning">';
+            output.innerHTML += '<strong>🔄 Refresh or click again:</strong> The result is random - try multiple times to see both success and error cases!';
+            output.innerHTML += '</div>';
+        }
+
+        console.log('%c=== Error Handling: try-catch Examples ===', 'color: #f44336; font-size: 20px; font-weight: bold;');
+        console.log('Click the buttons to see interactive error handling demonstrations');
+    </script>
+</body>
+</html>

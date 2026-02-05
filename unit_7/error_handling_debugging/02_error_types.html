@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: JavaScript Error Types</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #f44336;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .error-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .error-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .error-card:hover {
+            transform: translateY(-5px);
+        }
+        .error-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .error-card p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #d32f2f;
+        }
+        .output {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ff9800;
+            min-height: 100px;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .error-display {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+            font-family: 'Courier New', monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 JavaScript Error Types</h1>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Understand different types of JavaScript errors</li>
+                <li>Learn when each error type occurs</li>
+                <li>Know how to identify errors by their type</li>
+            </ul>
+        </div>
+
+        <h3>Common JavaScript Error Types:</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Error Type</th>
+                    <th>When It Occurs</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SyntaxError</strong></td>
+                    <td>Invalid JavaScript syntax</td>
+                    <td><code>let x = ;</code></td>
+                </tr>
+                <tr>
+                    <td><strong>ReferenceError</strong></td>
+                    <td>Reference to undefined variable</td>
+                    <td><code>console.log(undefinedVar);</code></td>
+                </tr>
+                <tr>
+                    <td><strong>TypeError</strong></td>
+                    <td>Value is not expected type</td>
+                    <td><code>null.toString();</code></td>
+                </tr>
+                <tr>
+                    <td><strong>RangeError</strong></td>
+                    <td>Number out of valid range</td>
+                    <td><code>new Array(-1);</code></td>
+                </tr>
+                <tr>
+                    <td><strong>URIError</strong></td>
+                    <td>Invalid URI handling</td>
+                    <td><code>decodeURI('%');</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Interactive Examples - Click to Test:</h3>
+
+        <div class="error-grid">
+            <div class="error-card" onclick="testReferenceError()">
+                <h3>ReferenceError</h3>
+                <p>Accessing undefined variable</p>
+            </div>
+            <div class="error-card" onclick="testTypeError()">
+                <h3>TypeError</h3>
+                <p>Wrong type operation</p>
+            </div>
+            <div class="error-card" onclick="testRangeError()">
+                <h3>RangeError</h3>
+                <p>Number out of range</p>
+            </div>
+            <div class="error-card" onclick="testURIError()">
+                <h3>URIError</h3>
+                <p>Invalid URI decoding</p>
+            </div>
+        </div>
+
+        <button onclick="testAllErrors()">Test All Error Types</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Click an error card or button to see examples...</strong>
+        </div>
+    </div>
+
+    <script>
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click a button to see examples.</strong>';
+        }
+
+        function testReferenceError() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>ReferenceError Example</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// Trying to access undefined variable<br>';
+            output.innerHTML += 'console.log(undefinedVariable);';
+            output.innerHTML += '</div>';
+
+            try {
+                console.log(undefinedVariable);
+            } catch (error) {
+                console.error('Caught ReferenceError:', error);
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>Error Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '<strong>Cause:</strong> Trying to use a variable that hasn\'t been declared';
+                output.innerHTML += '</div>';
+
+                output.innerHTML += '<div class="info-box">';
+                output.innerHTML += '<strong>💡 Common Causes:</strong><br>';
+                output.innerHTML += '• Typo in variable name<br>';
+                output.innerHTML += '• Variable used before declaration<br>';
+                output.innerHTML += '• Variable out of scope';
+                output.innerHTML += '</div>';
+            }
+        }
+
+        function testTypeError() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>TypeError Example</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// Trying to call method on null<br>';
+            output.innerHTML += 'let obj = null;<br>';
+            output.innerHTML += 'obj.toString();';
+            output.innerHTML += '</div>';
+
+            try {
+                let obj = null;
+                obj.toString();
+            } catch (error) {
+                console.error('Caught TypeError:', error);
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>Error Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '<strong>Cause:</strong> Trying to perform operation on wrong type';
+                output.innerHTML += '</div>';
+
+                output.innerHTML += '<div class="info-box">';
+                output.innerHTML += '<strong>💡 Common Causes:</strong><br>';
+                output.innerHTML += '• Calling method on null/undefined<br>';
+                output.innerHTML += '• Using non-function as function<br>';
+                output.innerHTML += '• Modifying read-only property';
+                output.innerHTML += '</div>';
+            }
+
+            // More TypeError examples
+            output.innerHTML += '<br><h4>More TypeError Examples:</h4>';
+
+            // Example 2: Calling non-function
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'let number = 42;<br>';
+            output.innerHTML += 'number();  // number is not a function';
+            output.innerHTML += '</div>';
+
+            try {
+                let number = 42;
+                number();
+            } catch (error) {
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>TypeError:</strong> ' + error.message;
+                output.innerHTML += '</div>';
+            }
+        }
+
+        function testRangeError() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>RangeError Example</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// Creating array with invalid length<br>';
+            output.innerHTML += 'new Array(-1);';
+            output.innerHTML += '</div>';
+
+            try {
+                new Array(-1);
+            } catch (error) {
+                console.error('Caught RangeError:', error);
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>Error Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '<strong>Cause:</strong> Value is outside the valid range';
+                output.innerHTML += '</div>';
+
+                output.innerHTML += '<div class="info-box">';
+                output.innerHTML += '<strong>💡 Common Causes:</strong><br>';
+                output.innerHTML += '• Invalid array length<br>';
+                output.innerHTML += '• toFixed() with invalid digits<br>';
+                output.innerHTML += '• Stack overflow (infinite recursion)';
+                output.innerHTML += '</div>';
+            }
+
+            // More RangeError examples
+            output.innerHTML += '<br><h4>More RangeError Examples:</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'let num = 123.456;<br>';
+            output.innerHTML += 'num.toFixed(101);  // digits out of range';
+            output.innerHTML += '</div>';
+
+            try {
+                let num = 123.456;
+                num.toFixed(101);
+            } catch (error) {
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>RangeError:</strong> ' + error.message;
+                output.innerHTML += '</div>';
+            }
+        }
+
+        function testURIError() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>URIError Example</h4>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// Invalid URI decoding<br>';
+            output.innerHTML += 'decodeURIComponent("%");';
+            output.innerHTML += '</div>';
+
+            try {
+                decodeURIComponent('%');
+            } catch (error) {
+                console.error('Caught URIError:', error);
+                output.innerHTML += '<div class="error-display">';
+                output.innerHTML += '<strong>Error Type:</strong> ' + error.name + '<br>';
+                output.innerHTML += '<strong>Message:</strong> ' + error.message + '<br>';
+                output.innerHTML += '<strong>Cause:</strong> Malformed URI component';
+                output.innerHTML += '</div>';
+
+                output.innerHTML += '<div class="info-box">';
+                output.innerHTML += '<strong>💡 Common Causes:</strong><br>';
+                output.innerHTML += '• Invalid percent-encoding in URI<br>';
+                output.innerHTML += '• Malformed URI string<br>';
+                output.innerHTML += '• Using encodeURI/decodeURI incorrectly';
+                output.innerHTML += '</div>';
+            }
+        }
+
+        function testAllErrors() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>All Error Types Summary</h4>';
+
+            const errors = [];
+
+            // Test ReferenceError
+            try {
+                nonExistent;
+            } catch (e) {
+                errors.push({ type: 'ReferenceError', message: e.message });
+            }
+
+            // Test TypeError
+            try {
+                null.toString();
+            } catch (e) {
+                errors.push({ type: 'TypeError', message: e.message });
+            }
+
+            // Test RangeError
+            try {
+                new Array(-5);
+            } catch (e) {
+                errors.push({ type: 'RangeError', message: e.message });
+            }
+
+            // Test URIError
+            try {
+                decodeURIComponent('%');
+            } catch (e) {
+                errors.push({ type: 'URIError', message: e.message });
+            }
+
+            errors.forEach((error, index) => {
+                output.innerHTML += `<div class="error-display">`;
+                output.innerHTML += `<strong>${index + 1}. ${error.type}:</strong><br>`;
+                output.innerHTML += `${error.message}`;
+                output.innerHTML += `</div>`;
+            });
+
+            output.innerHTML += '<div class="info-box">';
+            output.innerHTML += '<strong>✅ All ' + errors.length + ' error types caught and handled!</strong><br>';
+            output.innerHTML += 'Notice how the application continues running despite all these errors.';
+            output.innerHTML += '</div>';
+
+            console.log('All errors tested:', errors);
+        }
+
+        console.log('%c=== JavaScript Error Types ===', 'color: #f44336; font-size: 20px; font-weight: bold;');
+        console.log('Click the error cards to see different error types in action');
+    </script>
+</body>
+</html>

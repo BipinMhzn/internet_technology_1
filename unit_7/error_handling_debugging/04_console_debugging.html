@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 4: Console Debugging Methods</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4facfe;
+            padding-bottom: 10px;
+        }
+        .alert-box {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .method-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-align: center;
+        }
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        .method-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        .output {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #4facfe;
+            min-height: 100px;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4facfe;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐛 Console Debugging Methods</h1>
+
+        <div class="alert-box">
+            ⚠️ IMPORTANT: Open the Browser Console (F12 or Cmd+Option+I) to see the output!
+        </div>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Master different console methods for debugging</li>
+                <li>Learn when to use each console method</li>
+                <li>Understand console formatting and styling</li>
+                <li>Use console for performance measurement</li>
+            </ul>
+        </div>
+
+        <h3>Common Console Methods:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>console.log()</code></td>
+                    <td>General purpose logging</td>
+                    <td><code>console.log("Hello");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.error()</code></td>
+                    <td>Log error messages</td>
+                    <td><code>console.error("Error!");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.warn()</code></td>
+                    <td>Log warning messages</td>
+                    <td><code>console.warn("Warning!");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.info()</code></td>
+                    <td>Log informational messages</td>
+                    <td><code>console.info("Info");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.table()</code></td>
+                    <td>Display data in table format</td>
+                    <td><code>console.table(users);</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.group()</code></td>
+                    <td>Group related logs</td>
+                    <td><code>console.group("Group");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.time()</code></td>
+                    <td>Start a timer</td>
+                    <td><code>console.time("timer");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.count()</code></td>
+                    <td>Count function calls</td>
+                    <td><code>console.count("clicks");</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.trace()</code></td>
+                    <td>Show stack trace</td>
+                    <td><code>console.trace();</code></td>
+                </tr>
+                <tr>
+                    <td><code>console.assert()</code></td>
+                    <td>Log if condition is false</td>
+                    <td><code>console.assert(x > 0);</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Interactive Examples - Click to Test:</h3>
+
+        <div class="method-grid">
+            <div class="method-card" onclick="demoBasicLogging()">
+                <h3>📝 Basic Logging</h3>
+                <p>log, info, warn, error</p>
+            </div>
+            <div class="method-card" onclick="demoTable()">
+                <h3>📊 Table Display</h3>
+                <p>console.table()</p>
+            </div>
+            <div class="method-card" onclick="demoGrouping()">
+                <h3>📂 Grouping</h3>
+                <p>console.group()</p>
+            </div>
+            <div class="method-card" onclick="demoTiming()">
+                <h3>⏱️ Timing</h3>
+                <p>console.time()</p>
+            </div>
+            <div class="method-card" onclick="demoCounting()">
+                <h3>🔢 Counting</h3>
+                <p>console.count()</p>
+            </div>
+            <div class="method-card" onclick="demoTrace()">
+                <h3>🔍 Stack Trace</h3>
+                <p>console.trace()</p>
+            </div>
+            <div class="method-card" onclick="demoAssert()">
+                <h3>✅ Assertions</h3>
+                <p>console.assert()</p>
+            </div>
+            <div class="method-card" onclick="demoStyling()">
+                <h3>🎨 Styling</h3>
+                <p>CSS in console</p>
+            </div>
+        </div>
+
+        <button onclick="runAllDemos()" style="width: 100%; padding: 20px; font-size: 18px;">
+            🚀 Run All Demos (Check Console!)
+        </button>
+
+        <div class="output" id="output">
+            <strong>Click any card or button above. Check the console (F12) to see the output!</strong>
+        </div>
+    </div>
+
+    <script>
+        function updateOutput(message) {
+            document.getElementById('output').innerHTML = '<strong>' + message + '</strong><br><br>' +
+                '<div style="background-color: #fff3e0; padding: 15px; border-radius: 5px; border-left: 4px solid #ff9800;">' +
+                '📺 <strong>Check the browser console (F12) to see the actual output!</strong>' +
+                '</div>';
+        }
+
+        // Demo 1: Basic Logging
+        function demoBasicLogging() {
+            console.log('%c=== Basic Logging Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            console.log('📝 Regular log message');
+            console.info('ℹ️ Information message');
+            console.warn('⚠️ Warning message');
+            console.error('❌ Error message');
+
+            console.log('Multiple values:', 123, true, { name: 'John' }, [1, 2, 3]);
+
+            updateOutput('Basic Logging Demo - Check console for log, info, warn, and error messages');
+        }
+
+        // Demo 2: Table Display
+        function demoTable() {
+            console.log('%c=== Table Display Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            const users = [
+                { id: 1, name: 'John Doe', age: 25, city: 'Kathmandu' },
+                { id: 2, name: 'Jane Smith', age: 30, city: 'Pokhara' },
+                { id: 3, name: 'Bob Johnson', age: 35, city: 'Lalitpur' }
+            ];
+
+            console.log('Users array (normal log):');
+            console.log(users);
+
+            console.log('Users array (table format):');
+            console.table(users);
+
+            console.log('Table with specific columns:');
+            console.table(users, ['name', 'city']);
+
+            updateOutput('Table Display Demo - Check console to see data in table format');
+        }
+
+        // Demo 3: Grouping
+        function demoGrouping() {
+            console.log('%c=== Grouping Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            console.group('📦 User Registration Process');
+            console.log('1. Validating user input...');
+            console.log('2. Checking if email exists...');
+            console.log('3. Hashing password...');
+
+            console.group('💾 Database Operations');
+            console.log('Connecting to database...');
+            console.log('Inserting user record...');
+            console.log('Committing transaction...');
+            console.groupEnd();
+
+            console.log('4. Sending welcome email...');
+            console.groupEnd();
+
+            console.groupCollapsed('📊 System Stats (collapsed by default)');
+            console.log('Memory usage: 45%');
+            console.log('CPU usage: 23%');
+            console.log('Active users: 150');
+            console.groupEnd();
+
+            updateOutput('Grouping Demo - Check console to see grouped logs');
+        }
+
+        // Demo 4: Timing
+        function demoTiming() {
+            console.log('%c=== Timing Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            console.time('Array Loop');
+            const arr = [];
+            for (let i = 0; i < 1000000; i++) {
+                arr.push(i);
+            }
+            console.timeEnd('Array Loop');
+
+            console.time('Sum Calculation');
+            const sum = arr.reduce((a, b) => a + b, 0);
+            console.timeEnd('Sum Calculation');
+
+            console.time('Async Operation');
+            setTimeout(() => {
+                console.timeEnd('Async Operation');
+                console.log('Async operation completed');
+            }, 1000);
+
+            updateOutput('Timing Demo - Check console to see execution times');
+        }
+
+        // Demo 5: Counting
+        function demoCounting() {
+            console.log('%c=== Counting Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            function processItem(item) {
+                console.count('processItem called');
+                console.log('Processing:', item);
+            }
+
+            console.log('Processing multiple items:');
+            processItem('Item 1');
+            processItem('Item 2');
+            processItem('Item 3');
+            processItem('Item 4');
+
+            console.log('Counting with labels:');
+            console.count('clicks');
+            console.count('clicks');
+            console.count('errors');
+            console.count('clicks');
+
+            console.log('Reset counter:');
+            console.countReset('clicks');
+            console.count('clicks');
+
+            updateOutput('Counting Demo - Check console to see counters');
+        }
+
+        // Demo 6: Stack Trace
+        function demoTrace() {
+            console.log('%c=== Stack Trace Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            function level1() {
+                level2();
+            }
+
+            function level2() {
+                level3();
+            }
+
+            function level3() {
+                console.trace('📍 Showing call stack from level3');
+            }
+
+            level1();
+
+            updateOutput('Stack Trace Demo - Check console to see the call stack');
+        }
+
+        // Demo 7: Assertions
+        function demoAssert() {
+            console.log('%c=== Assertions Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            const age = 15;
+            console.assert(age >= 18, '❌ Age must be 18 or older', { age: age });
+
+            const users = ['John', 'Jane'];
+            console.assert(users.length > 5, '❌ Expected more than 5 users', { count: users.length });
+
+            const isValid = false;
+            console.assert(isValid, '❌ Validation failed');
+
+            const correctAssertion = true;
+            console.assert(correctAssertion, 'This won\'t show - assertion passed');
+
+            updateOutput('Assertions Demo - Check console. Only failed assertions are shown!');
+        }
+
+        // Demo 8: Styling
+        function demoStyling() {
+            console.log('%c=== Styling Demo ===', 'color: #4facfe; font-size: 18px; font-weight: bold;');
+
+            console.log('%cStyled text!', 'color: red; font-size: 20px;');
+            console.log('%cSuccess!', 'color: green; font-weight: bold; background-color: #e8f5e9; padding: 5px;');
+            console.log('%cError!', 'color: white; background-color: red; padding: 10px; border-radius: 5px;');
+
+            console.log(
+                '%cMultiple %cStyles %cin %cOne %cLine',
+                'color: red;',
+                'color: blue;',
+                'color: green;',
+                'color: orange; font-weight: bold;',
+                'color: purple; font-size: 20px;'
+            );
+
+            console.log(
+                '%c🎨 Beautiful Console Art',
+                'color: white; background: linear-gradient(to right, #667eea, #764ba2); font-size: 24px; padding: 20px; border-radius: 10px; font-weight: bold;'
+            );
+
+            updateOutput('Styling Demo - Check console to see colorful styled messages!');
+        }
+
+        // Run all demos
+        function runAllDemos() {
+            console.clear();
+            console.log('%c🚀 Running All Console Demos 🚀', 'color: white; background: linear-gradient(to right, #4facfe, #00f2fe); font-size: 24px; padding: 20px; font-weight: bold;');
+
+            demoBasicLogging();
+            setTimeout(() => demoTable(), 100);
+            setTimeout(() => demoGrouping(), 200);
+            setTimeout(() => demoTiming(), 300);
+            setTimeout(() => demoCounting(), 400);
+            setTimeout(() => demoTrace(), 500);
+            setTimeout(() => demoAssert(), 600);
+            setTimeout(() => demoStyling(), 700);
+
+            updateOutput('All Demos Running! - Check console for complete output');
+        }
+
+        // Initial message
+        console.log('%c👋 Welcome to Console Debugging Methods!', 'color: #4facfe; font-size: 20px; font-weight: bold;');
+        console.log('%cClick the cards or buttons to see different console methods in action', 'color: #666; font-size: 14px;');
+    </script>
+</body>
+</html>

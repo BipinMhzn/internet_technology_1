@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 7: Error Handling & Debugging - Examples Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #f44336;
+        }
+        h1 {
+            color: #333;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .university-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .example-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #f44336;
+        }
+        .example-number {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .example-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .example-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .example-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .example-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .topic-tag {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin: 3px;
+        }
+        .section-title {
+            font-size: 28px;
+            color: #f44336;
+            margin: 30px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: "";
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 3px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Error Handling & Debugging</h1>
+            <p class="subtitle">Interactive Practical Examples</p>
+            <div class="university-info">
+                <strong>Course:</strong> Internet Technology (CMP 173) |
+                <strong>Program:</strong> BCSIT |
+                <strong>University:</strong> Pokhara University
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Interactive Examples</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Core Topics</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Debugging Techniques</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>⚡ Quick Start Guide</h3>
+            <ol>
+                <li>Click on any example card below to open it</li>
+                <li>Read the explanation and click "Run Example" button</li>
+                <li>Observe errors being caught and handled gracefully</li>
+                <li>Open browser console (F12) for debugging examples</li>
+                <li>Experiment by modifying the code</li>
+            </ol>
+        </div>
+
+        <h2 class="section-title">📚 Error Handling & Debugging Examples</h2>
+
+        <div class="examples-grid">
+            <div class="example-card" onclick="window.location.href='01_try_catch_basics.html'">
+                <div class="example-number">1</div>
+                <div class="example-title">try-catch Basics</div>
+                <div class="example-description">
+                    Learn the fundamentals of error handling with try-catch-finally blocks. Prevent crashes and handle errors gracefully.
+                </div>
+                <div>
+                    <span class="topic-tag">try-catch</span>
+                    <span class="topic-tag">finally</span>
+                    <span class="topic-tag">Error Handling</span>
+                </div>
+                <a href="01_try_catch_basics.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='02_error_types.html'">
+                <div class="example-number">2</div>
+                <div class="example-title">JavaScript Error Types</div>
+                <div class="example-description">
+                    Explore different types of JavaScript errors: ReferenceError, TypeError, RangeError, and URIError. Learn when each occurs.
+                </div>
+                <div>
+                    <span class="topic-tag">ReferenceError</span>
+                    <span class="topic-tag">TypeError</span>
+                    <span class="topic-tag">RangeError</span>
+                </div>
+                <a href="02_error_types.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='03_throw_custom_errors.html'">
+                <div class="example-number">3</div>
+                <div class="example-title">Throwing Custom Errors</div>
+                <div class="example-description">
+                    Master creating and throwing your own errors. Build custom error classes for better error categorization and handling.
+                </div>
+                <div>
+                    <span class="topic-tag">throw</span>
+                    <span class="topic-tag">Custom Errors</span>
+                    <span class="topic-tag">Validation</span>
+                </div>
+                <a href="03_throw_custom_errors.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='04_console_debugging.html'">
+                <div class="example-number">4</div>
+                <div class="example-title">Console Debugging Methods</div>
+                <div class="example-description">
+                    Master console methods for effective debugging: log, table, group, time, count, trace, assert, and styled output.
+                </div>
+                <div>
+                    <span class="topic-tag">console.log</span>
+                    <span class="topic-tag">console.table</span>
+                    <span class="topic-tag">console.time</span>
+                </div>
+                <a href="04_console_debugging.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='05_debugger_statement.html'">
+                <div class="example-number">5</div>
+                <div class="example-title">Debugger & DevTools</div>
+                <div class="example-description">
+                    Learn to use the debugger statement and browser DevTools to step through code, inspect variables, and find bugs.
+                </div>
+                <div>
+                    <span class="topic-tag">debugger</span>
+                    <span class="topic-tag">DevTools</span>
+                    <span class="topic-tag">Breakpoints</span>
+                </div>
+                <a href="05_debugger_statement.html" class="example-link">Open Example →</a>
+            </div>
+        </div>
+
+        <div class="info-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>🎯 Learning Objectives</h3>
+            <p>After completing these examples, you should be able to:</p>
+            <ul>
+                <li>Handle errors gracefully using try-catch-finally</li>
+                <li>Identify and understand different JavaScript error types</li>
+                <li>Throw custom errors and create custom error classes</li>
+                <li>Use console methods effectively for debugging</li>
+                <li>Debug code using breakpoints and the debugger statement</li>
+                <li>Inspect variables, call stacks, and scope in DevTools</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>💡 Debugging Best Practices</h3>
+            <ol>
+                <li><strong>Use descriptive error messages:</strong> Make errors easy to understand</li>
+                <li><strong>Log at key points:</strong> Track program flow with console.log</li>
+                <li><strong>Use appropriate console methods:</strong> table for arrays, group for organization</li>
+                <li><strong>Set breakpoints strategically:</strong> Pause where issues are likely</li>
+                <li><strong>Inspect the call stack:</strong> Understand how you got to the current state</li>
+                <li><strong>Test error paths:</strong> Make sure error handling actually works</li>
+                <li><strong>Remove debuggers in production:</strong> Clean up before deployment</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h3>📝 Practice Exercises</h3>
+            <p>After completing the examples, try these challenges:</p>
+            <ol>
+                <li>Create a form validator that throws specific errors for each validation rule</li>
+                <li>Build an error logger that categorizes and logs different error types</li>
+                <li>Debug a provided buggy code using DevTools breakpoints</li>
+                <li>Create a wrapper function that catches and logs all errors from API calls</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p><strong>Created for BCSIT Students</strong></p>
+            <p>Internet Technology (CMP 173) - Unit 7.2</p>
+            <p>Pokhara University</p>
+            <p style="margin-top: 15px; color: #999; font-size: 14px;">
+                💻 All examples work offline | 🌐 No internet required | 📱 Mobile friendly
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        console.log('%c🛡️ Error Handling & Debugging Examples', 'color: #f44336; font-size: 24px; font-weight: bold;');
+        console.log('%cMaster the art of handling errors and debugging like a pro!', 'color: #666; font-size: 14px;');
+        console.log('%cHappy Debugging! 🐛', 'color: #4caf50; font-size: 16px;');
+    </script>
+</body>
+</html>

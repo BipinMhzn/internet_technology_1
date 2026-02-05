@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 5: Debugger Statement & DevTools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #43e97b;
+            padding-bottom: 10px;
+        }
+        .alert-box {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .info-box {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);
+        }
+        .output {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #43e97b;
+            min-height: 100px;
+        }
+        .step-card {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+        .step-card h4 {
+            margin: 0 0 10px 0;
+            color: #1976d2;
+        }
+        .warning {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐞 Debugger Statement & DevTools</h1>
+
+        <div class="alert-box">
+            ⚠️ IMPORTANT: Open DevTools (F12) and switch to "Sources" tab to use the debugger!
+        </div>
+
+        <div class="info-box">
+            <h3>🎯 Learning Objectives:</h3>
+            <ul>
+                <li>Understand the <code>debugger</code> statement</li>
+                <li>Learn to set breakpoints in code</li>
+                <li>Step through code execution</li>
+                <li>Inspect variables and call stack</li>
+                <li>Use browser DevTools effectively</li>
+            </ul>
+        </div>
+
+        <div class="code-block">
+<strong>The debugger Statement:</strong>
+
+function calculateTotal(items) {
+    let total = 0;
+
+    for (let item of items) {
+        debugger;  // 🛑 Execution pauses here
+        total += item.price * item.quantity;
+    }
+
+    return total;
+}
+        </div>
+
+        <div class="info-box">
+            <h3>📚 How It Works:</h3>
+            <p>When JavaScript encounters the <code>debugger;</code> statement:</p>
+            <ol>
+                <li>If DevTools is open, execution <strong>pauses</strong> at that line</li>
+                <li>You can inspect variables, call stack, and scope</li>
+                <li>Use controls to step through code line by line</li>
+                <li>If DevTools is closed, the statement is ignored</li>
+            </ol>
+        </div>
+
+        <h3>DevTools Controls:</h3>
+        <div class="step-card">
+            <h4>▶️ Resume (F8)</h4>
+            <p>Continue execution until next breakpoint or debugger statement</p>
+        </div>
+        <div class="step-card">
+            <h4>⤵️ Step Over (F10)</h4>
+            <p>Execute current line and move to the next line (don't enter functions)</p>
+        </div>
+        <div class="step-card">
+            <h4>⬇️ Step Into (F11)</h4>
+            <p>If current line has a function call, step into that function</p>
+        </div>
+        <div class="step-card">
+            <h4>⬆️ Step Out (Shift+F11)</h4>
+            <p>Execute rest of current function and return to caller</p>
+        </div>
+
+        <h3>Interactive Examples:</h3>
+
+        <button onclick="example1()">Example 1: Simple Debugger</button>
+        <button onclick="example2()">Example 2: Loop with Debugger</button>
+        <button onclick="example3()">Example 3: Function Call Stack</button>
+        <button onclick="example4()">Example 4: Bug Hunt Exercise</button>
+
+        <div class="output" id="output">
+            <strong>Click a button to run examples. Make sure DevTools (F12) is open!</strong>
+        </div>
+    </div>
+
+    <script>
+        // Example 1: Simple debugger
+        function example1() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 1: Simple Debugger</h4>';
+
+            output.innerHTML += '<div class="alert-box">⏸️ Code will pause at debugger statement. Check DevTools!</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'function greet(name) {<br>';
+            output.innerHTML += '    debugger;  // 🛑 Pause here<br>';
+            output.innerHTML += '    let greeting = "Hello, " + name + "!";<br>';
+            output.innerHTML += '    return greeting;<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            function greet(name) {
+                debugger;  // Execution pauses here if DevTools is open
+                let greeting = "Hello, " + name + "!";
+                console.log('Greeting created:', greeting);
+                return greeting;
+            }
+
+            const result = greet("Student");
+
+            output.innerHTML += '<div class="success">';
+            output.innerHTML += '✅ <strong>Result:</strong> ' + result + '<br>';
+            output.innerHTML += '<strong>Instructions:</strong><br>';
+            output.innerHTML += '1. Open DevTools (F12) → Sources tab<br>';
+            output.innerHTML += '2. Run this example again<br>';
+            output.innerHTML += '3. Code will pause at debugger statement<br>';
+            output.innerHTML += '4. Inspect variables in the Scope panel<br>';
+            output.innerHTML += '5. Use Step Over (F10) to execute line by line';
+            output.innerHTML += '</div>';
+        }
+
+        // Example 2: Loop with debugger
+        function example2() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 2: Loop with Debugger</h4>';
+
+            output.innerHTML += '<div class="alert-box">⏸️ Code will pause on EACH iteration. Use Resume (F8) to continue!</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'function sumArray(numbers) {<br>';
+            output.innerHTML += '    let sum = 0;<br>';
+            output.innerHTML += '    for (let i = 0; i < numbers.length; i++) {<br>';
+            output.innerHTML += '        debugger;  // Pause on each iteration<br>';
+            output.innerHTML += '        sum += numbers[i];<br>';
+            output.innerHTML += '        console.log(`i=${i}, sum=${sum}`);<br>';
+            output.innerHTML += '    }<br>';
+            output.innerHTML += '    return sum;<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            function sumArray(numbers) {
+                let sum = 0;
+                for (let i = 0; i < numbers.length; i++) {
+                    debugger;  // Pause on each iteration
+                    sum += numbers[i];
+                    console.log(`Iteration ${i}: adding ${numbers[i]}, sum = ${sum}`);
+                }
+                return sum;
+            }
+
+            const numbers = [10, 20, 30, 40, 50];
+            const total = sumArray(numbers);
+
+            output.innerHTML += '<div class="success">';
+            output.innerHTML += '✅ <strong>Array:</strong> [' + numbers.join(', ') + ']<br>';
+            output.innerHTML += '✅ <strong>Total:</strong> ' + total + '<br><br>';
+            output.innerHTML += '<strong>What to observe in DevTools:</strong><br>';
+            output.innerHTML += '• Watch how i and sum change each iteration<br>';
+            output.innerHTML += '• See the loop progress in the call stack<br>';
+            output.innerHTML += '• Press F8 multiple times to step through iterations';
+            output.innerHTML += '</div>';
+        }
+
+        // Example 3: Function call stack
+        function example3() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 3: Function Call Stack</h4>';
+
+            output.innerHTML += '<div class="alert-box">⏸️ Observe the call stack showing the chain of function calls!</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += 'function level1(x) {<br>';
+            output.innerHTML += '    console.log("Level 1");<br>';
+            output.innerHTML += '    return level2(x * 2);<br>';
+            output.innerHTML += '}<br><br>';
+            output.innerHTML += 'function level2(x) {<br>';
+            output.innerHTML += '    console.log("Level 2");<br>';
+            output.innerHTML += '    return level3(x * 2);<br>';
+            output.innerHTML += '}<br><br>';
+            output.innerHTML += 'function level3(x) {<br>';
+            output.innerHTML += '    debugger;  // Pause here<br>';
+            output.innerHTML += '    console.log("Level 3");<br>';
+            output.innerHTML += '    return x * 2;<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            function level1(x) {
+                console.log('📍 Level 1, x =', x);
+                return level2(x * 2);
+            }
+
+            function level2(x) {
+                console.log('📍 Level 2, x =', x);
+                return level3(x * 2);
+            }
+
+            function level3(x) {
+                debugger;  // Pause here to see call stack
+                console.log('📍 Level 3, x =', x);
+                return x * 2;
+            }
+
+            const result = level1(5);
+
+            output.innerHTML += '<div class="success">';
+            output.innerHTML += '✅ <strong>Result:</strong> ' + result + '<br><br>';
+            output.innerHTML += '<strong>In DevTools, check:</strong><br>';
+            output.innerHTML += '• Call Stack panel: shows level3 → level2 → level1<br>';
+            output.innerHTML += '• Click on each function in call stack to see its state<br>';
+            output.innerHTML += '• Scope panel: see local variables for each level';
+            output.innerHTML += '</div>';
+        }
+
+        // Example 4: Bug hunt exercise
+        function example4() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<h4>Example 4: Bug Hunt Exercise 🐛</h4>';
+
+            output.innerHTML += '<div class="warning">';
+            output.innerHTML += '❌ <strong>This code has a bug!</strong> Use the debugger to find it.';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="code-block">';
+            output.innerHTML += '// Calculate average of numbers<br>';
+            output.innerHTML += 'function calculateAverage(numbers) {<br>';
+            output.innerHTML += '    let sum = 0;<br>';
+            output.innerHTML += '    for (let i = 0; i <= numbers.length; i++) {  // 🐛<br>';
+            output.innerHTML += '        sum += numbers[i];<br>';
+            output.innerHTML += '    }<br>';
+            output.innerHTML += '    return sum / numbers.length;<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div>';
+
+            function calculateAverage(numbers) {
+                let sum = 0;
+                debugger;  // Start debugging here
+                for (let i = 0; i <= numbers.length; i++) {  // BUG: Should be i < numbers.length
+                    console.log(`i=${i}, numbers[${i}]=${numbers[i]}, sum=${sum}`);
+                    sum += numbers[i];
+                }
+                return sum / numbers.length;
+            }
+
+            const scores = [85, 90, 78, 92];
+
+            try {
+                const avg = calculateAverage(scores);
+
+                output.innerHTML += '<div class="success">';
+                output.innerHTML += '✅ <strong>Scores:</strong> [' + scores.join(', ') + ']<br>';
+                output.innerHTML += '✅ <strong>Average:</strong> ' + avg + '<br>';
+
+                if (isNaN(avg)) {
+                    output.innerHTML += '<br><span style="color: red;">❌ Result is NaN! There\'s a bug!</span>';
+                }
+                output.innerHTML += '</div>';
+
+            } catch (error) {
+                output.innerHTML += '<div class="warning">';
+                output.innerHTML += '❌ <strong>Error:</strong> ' + error.message;
+                output.innerHTML += '</div>';
+            }
+
+            output.innerHTML += '<div class="info-box">';
+            output.innerHTML += '<h4>🔍 Debugging Exercise:</h4>';
+            output.innerHTML += '<ol>';
+            output.innerHTML += '<li>Open DevTools (F12) → Sources tab</li>';
+            output.innerHTML += '<li>Run this example again</li>';
+            output.innerHTML += '<li>Use Step Over (F10) to step through the loop</li>';
+            output.innerHTML += '<li>Watch the "i" variable and numbers[i]</li>';
+            output.innerHTML += '<li>Find when numbers[i] becomes undefined</li>';
+            output.innerHTML += '<li>Identify the bug (hint: check the loop condition)</li>';
+            output.innerHTML += '</ol>';
+            output.innerHTML += '<strong>🐛 Bug:</strong> Loop condition should be <code>i < numbers.length</code> not <code>i <= numbers.length</code><br>';
+            output.innerHTML += '<strong>Why:</strong> Arrays are 0-indexed, so last valid index is length-1';
+            output.innerHTML += '</div>';
+        }
+
+        console.log('%c🐞 Debugger Statement & DevTools Examples', 'color: #43e97b; font-size: 20px; font-weight: bold;');
+        console.log('%cTip: Open DevTools (F12) → Sources tab to use debugger effectively', 'color: #666; font-size: 14px;');
+    </script>
+</body>
+</html>
