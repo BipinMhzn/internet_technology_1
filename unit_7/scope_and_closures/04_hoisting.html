@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 4: Hoisting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #FF9800;
+            padding-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #FF9800;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        button {
+            background-color: #FF9800;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #F57C00;
+        }
+        .output {
+            background-color: #fff3e0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #FF9800;
+        }
+        .warning {
+            background-color: #fff9c4;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+            border-left: 4px solid #FBC02D;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        .code-example {
+            background-color: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Example 4: Variable Hoisting</h1>
+
+        <h3>Concept:</h3>
+        <p><strong>Hoisting</strong> is JavaScript's behavior of moving variable and function declarations to the top of their scope during compilation.</p>
+        <p>⚠️ Only the <em>declaration</em> is hoisted, not the <em>initialization</em>!</p>
+
+        <div class="code-block">
+            <strong>Learning Objectives:</strong><br>
+            1. Understand how var hoisting works<br>
+            2. Learn about Temporal Dead Zone (TDZ) with let/const<br>
+            3. See practical differences between var, let, and const hoisting
+        </div>
+
+        <button onclick="demonstrateHoisting()">Run Example</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Output will appear here...</strong>
+        </div>
+    </div>
+
+    <script>
+        function demonstrateHoisting() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<strong>Hoisting Examples:</strong><br><br>';
+
+            // Example 1: var hoisting
+            output.innerHTML += '<h4>Example 1: var Hoisting</h4>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += '// What you write:<br>';
+            output.innerHTML += 'console.log(x);  // ???<br>';
+            output.innerHTML += 'var x = 5;<br>';
+            output.innerHTML += 'console.log(x);  // ???<br><br>';
+            output.innerHTML += '// What JavaScript sees:<br>';
+            output.innerHTML += 'var x;           // Declaration hoisted<br>';
+            output.innerHTML += 'console.log(x);  // undefined<br>';
+            output.innerHTML += 'x = 5;           // Assignment stays<br>';
+            output.innerHTML += 'console.log(x);  // 5';
+            output.innerHTML += '</div>';
+
+            console.log('Before declaration - myVar:', myVar);
+            var myVar = 10;
+            console.log('After declaration - myVar:', myVar);
+
+            output.innerHTML += 'Before declaration: undefined<br>';
+            output.innerHTML += 'After declaration: 10<br><br>';
+
+            // Example 2: let/const and Temporal Dead Zone
+            output.innerHTML += '<h4>Example 2: let/const - Temporal Dead Zone (TDZ)</h4>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += '// TDZ starts<br>';
+            output.innerHTML += 'console.log(myLet);  // ❌ ReferenceError<br>';
+            output.innerHTML += '// TDZ continues...<br>';
+            output.innerHTML += 'let myLet = 20;      // TDZ ends<br>';
+            output.innerHTML += 'console.log(myLet);  // ✅ 20';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="error">';
+            output.innerHTML += '❌ Accessing let before declaration causes ReferenceError<br>';
+            output.innerHTML += '(Cannot demonstrate live - would break the script!)';
+            output.innerHTML += '</div><br>';
+
+            // Example 3: Function hoisting
+            output.innerHTML += '<h4>Example 3: Function Hoisting</h4>';
+
+            // Call function before declaration - works!
+            output.innerHTML += 'Calling function BEFORE declaration:<br>';
+            output.innerHTML += greetBefore() + '<br><br>';
+
+            function greetBefore() {
+                return '✅ Function declarations are fully hoisted!';
+            }
+
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += '// This works!<br>';
+            output.innerHTML += 'greet();              // ✅ "Hello!"<br><br>';
+            output.innerHTML += 'function greet() {<br>';
+            output.innerHTML += '    return "Hello!";<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div><br>';
+
+            // Example 4: Function expression NOT hoisted
+            output.innerHTML += '<h4>Example 4: Function Expressions NOT Hoisted</h4>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += '// This fails!<br>';
+            output.innerHTML += 'sayHi();              // ❌ TypeError<br><br>';
+            output.innerHTML += 'var sayHi = function() {<br>';
+            output.innerHTML += '    return "Hi!";<br>';
+            output.innerHTML += '};';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<div class="error">';
+            output.innerHTML += '❌ Function expressions are NOT hoisted<br>';
+            output.innerHTML += 'The variable is hoisted (undefined), but the function assignment is not.';
+            output.innerHTML += '</div><br>';
+
+            // Example 5: Practical comparison
+            output.innerHTML += '<h4>Example 5: Practical Comparison</h4>';
+            output.innerHTML += '<table style="width: 100%; border-collapse: collapse;">';
+            output.innerHTML += '<tr style="background-color: #FF9800; color: white;">';
+            output.innerHTML += '<th style="padding: 10px; border: 1px solid #ddd;">Declaration</th>';
+            output.innerHTML += '<th style="padding: 10px; border: 1px solid #ddd;">Hoisted?</th>';
+            output.innerHTML += '<th style="padding: 10px; border: 1px solid #ddd;">Value Before</th>';
+            output.innerHTML += '<th style="padding: 10px; border: 1px solid #ddd;">TDZ?</th>';
+            output.innerHTML += '</tr>';
+            output.innerHTML += '<tr>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;"><code>var</code></td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">✅ Yes</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">undefined</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">❌ No</td>';
+            output.innerHTML += '</tr>';
+            output.innerHTML += '<tr>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;"><code>let</code></td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">⚠️ Sort of</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">ReferenceError</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">✅ Yes</td>';
+            output.innerHTML += '</tr>';
+            output.innerHTML += '<tr>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;"><code>const</code></td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">⚠️ Sort of</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">ReferenceError</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">✅ Yes</td>';
+            output.innerHTML += '</tr>';
+            output.innerHTML += '<tr>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;"><code>function</code></td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">✅ Fully</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">Function</td>';
+            output.innerHTML += '<td style="padding: 10px; border: 1px solid #ddd;">❌ No</td>';
+            output.innerHTML += '</tr>';
+            output.innerHTML += '</table><br>';
+
+            // Example 6: Common pitfall
+            output.innerHTML += '<h4>Example 6: Common Pitfall</h4>';
+            output.innerHTML += '<div class="warning">';
+            output.innerHTML += '<strong>⚠️ Hoisting Pitfall:</strong><br><br>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += 'var name = "Global";<br><br>';
+            output.innerHTML += 'function displayName() {<br>';
+            output.innerHTML += '    console.log(name);  // What prints?<br>';
+            output.innerHTML += '    var name = "Local";<br>';
+            output.innerHTML += '    console.log(name);  // What prints?<br>';
+            output.innerHTML += '}';
+            output.innerHTML += '</div><br>';
+
+            var name = "Global";
+            function displayName() {
+                console.log('First log:', name);  // undefined (hoisted)
+                var name = "Local";
+                console.log('Second log:', name); // Local
+                return 'First: undefined (hoisted local var), Second: Local';
+            }
+
+            output.innerHTML += 'Result: ' + displayName() + '<br>';
+            output.innerHTML += 'The local "var name" is hoisted, shadowing the global one!';
+            output.innerHTML += '</div><br>';
+
+            output.innerHTML += '<div class="warning">';
+            output.innerHTML += '<strong>💡 Best Practice:</strong><br>';
+            output.innerHTML += '1. Always declare variables at the top of their scope<br>';
+            output.innerHTML += '2. Use <code>let</code> and <code>const</code> to avoid hoisting confusion<br>';
+            output.innerHTML += '3. Declare before use for clearer, more predictable code';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<br><em>Check the browser console (F12) for additional logs!</em>';
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click "Run Example" to see results.</strong>';
+        }
+
+        console.log('=== Hoisting Examples ===');
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 7: Closure Function Factory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+        }
+        .info-box {
+            background-color: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #9c27b0;
+        }
+        .calculator-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .calc-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .calc-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .calc-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .calc-result {
+            background-color: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 15px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            background-color: white;
+            color: #764ba2;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            margin: 5px 0;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .code-section {
+            background-color: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .explanation {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 5px solid #4caf50;
+        }
+        .example-output {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏭 Closure Function Factory</h1>
+
+        <div class="info-box">
+            <h3>🎯 Objective:</h3>
+            <p>Learn how closures can create specialized functions that "remember" configuration values.</p>
+            <p><strong>Function Factory:</strong> A function that creates and returns other customized functions.</p>
+        </div>
+
+        <div class="code-section">
+<strong>// The Factory Function</strong>
+function createMultiplier(factor) {
+    // 'factor' is captured in closure
+    return function(number) {
+        return number * factor;
+    };
+}
+
+<strong>// Creating Specialized Functions</strong>
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+const times10 = createMultiplier(10);
+
+<strong>// Using the Functions</strong>
+double(5);   // 10
+triple(5);   // 15
+times10(5);  // 50
+        </div>
+
+        <div class="calculator-section">
+            <div class="calc-card">
+                <div class="calc-title">Double (×2)</div>
+                <input type="number" class="calc-input" id="input1" placeholder="Enter number" value="5">
+                <div class="calc-result" id="result1">10</div>
+                <button onclick="calculate1()">Calculate</button>
+            </div>
+
+            <div class="calc-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="calc-title">Triple (×3)</div>
+                <input type="number" class="calc-input" id="input2" placeholder="Enter number" value="5">
+                <div class="calc-result" id="result2">15</div>
+                <button onclick="calculate2()" style="color: #f5576c;">Calculate</button>
+            </div>
+
+            <div class="calc-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="calc-title">Times 10 (×10)</div>
+                <input type="number" class="calc-input" id="input3" placeholder="Enter number" value="5">
+                <div class="calc-result" id="result3">50</div>
+                <button onclick="calculate3()" style="color: #00f2fe;">Calculate</button>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h3>💡 How It Works:</h3>
+            <ol>
+                <li><strong>createMultiplier(factor)</strong> returns a new function</li>
+                <li>The returned function "remembers" the <code>factor</code> value</li>
+                <li>Each created function has its own independent closure</li>
+                <li><code>double</code>, <code>triple</code>, and <code>times10</code> are separate functions with different factors</li>
+            </ol>
+        </div>
+
+        <h3>More Function Factory Examples:</h3>
+
+        <div class="code-section">
+<strong>// Example 1: Greeting Factory</strong>
+function createGreeter(greeting) {
+    return function(name) {
+        return greeting + ", " + name + "!";
+    };
+}
+
+const sayHello = createGreeter("Hello");
+const sayNamaste = createGreeter("Namaste");
+
+sayHello("John");      // "Hello, John!"
+sayNamaste("Ram");     // "Namaste, Ram!"
+        </div>
+
+        <button onclick="testGreeter()">Test Greeting Factory</button>
+        <div class="example-output" id="greeterOutput"></div>
+
+        <div class="code-section">
+<strong>// Example 2: Tax Calculator Factory</strong>
+function createTaxCalculator(taxRate) {
+    return function(amount) {
+        return amount * (1 + taxRate);
+    };
+}
+
+const withVAT = createTaxCalculator(0.13);      // 13% VAT
+const withServiceTax = createTaxCalculator(0.10); // 10% Service Tax
+
+withVAT(1000);         // 1130
+withServiceTax(1000);  // 1100
+        </div>
+
+        <button onclick="testTaxCalculator()">Test Tax Calculator Factory</button>
+        <div class="example-output" id="taxOutput"></div>
+
+        <div class="code-section">
+<strong>// Example 3: Power Function Factory</strong>
+function createPowerFunction(exponent) {
+    return function(base) {
+        return Math.pow(base, exponent);
+    };
+}
+
+const square = createPowerFunction(2);
+const cube = createPowerFunction(3);
+
+square(5);  // 25
+cube(3);    // 27
+        </div>
+
+        <button onclick="testPowerFunction()">Test Power Function Factory</button>
+        <div class="example-output" id="powerOutput"></div>
+
+        <div class="info-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>🎓 Key Takeaways:</h3>
+            <ul>
+                <li><strong>Reusability:</strong> Create specialized functions from a general pattern</li>
+                <li><strong>Configuration:</strong> Pre-configure functions with specific parameters</li>
+                <li><strong>Encapsulation:</strong> Each created function has its own private configuration</li>
+                <li><strong>DRY Principle:</strong> Don't Repeat Yourself - define the pattern once, create many variations</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🔬 Practice Exercise:</h3>
+            <p>Open the console (F12) and try creating your own functions:</p>
+            <div class="code-section">
+const times5 = createMultiplier(5);
+times5(10);  // 50
+
+const sayGoodbye = createGreeter("Goodbye");
+sayGoodbye("Friend");  // "Goodbye, Friend!"
+
+const toTheFourth = createPowerFunction(4);
+toTheFourth(2);  // 16
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function Factory: Creates multiplier functions
+        function createMultiplier(factor) {
+            return function(number) {
+                return number * factor;
+            };
+        }
+
+        // Create specialized functions
+        const double = createMultiplier(2);
+        const triple = createMultiplier(3);
+        const times10 = createMultiplier(10);
+
+        // Make them globally accessible for console experimentation
+        window.createMultiplier = createMultiplier;
+        window.double = double;
+        window.triple = triple;
+        window.times10 = times10;
+
+        function calculate1() {
+            const input = parseFloat(document.getElementById('input1').value) || 0;
+            document.getElementById('result1').textContent = double(input);
+        }
+
+        function calculate2() {
+            const input = parseFloat(document.getElementById('input2').value) || 0;
+            document.getElementById('result2').textContent = triple(input);
+        }
+
+        function calculate3() {
+            const input = parseFloat(document.getElementById('input3').value) || 0;
+            document.getElementById('result3').textContent = times10(input);
+        }
+
+        // Greeting Factory
+        function createGreeter(greeting) {
+            return function(name) {
+                return greeting + ", " + name + "!";
+            };
+        }
+
+        window.createGreeter = createGreeter;
+
+        function testGreeter() {
+            const sayHello = createGreeter("Hello");
+            const sayNamaste = createGreeter("Namaste");
+            const sayGoodMorning = createGreeter("Good Morning");
+
+            let output = '<strong>Greeting Factory Results:</strong><br><br>';
+            output += 'sayHello("John"): ' + sayHello("John") + '<br>';
+            output += 'sayNamaste("Ram"): ' + sayNamaste("Ram") + '<br>';
+            output += 'sayGoodMorning("Students"): ' + sayGoodMorning("Students") + '<br>';
+
+            document.getElementById('greeterOutput').innerHTML = output;
+        }
+
+        // Tax Calculator Factory
+        function createTaxCalculator(taxRate) {
+            return function(amount) {
+                const total = amount * (1 + taxRate);
+                return total.toFixed(2);
+            };
+        }
+
+        window.createTaxCalculator = createTaxCalculator;
+
+        function testTaxCalculator() {
+            const withVAT = createTaxCalculator(0.13);
+            const withServiceTax = createTaxCalculator(0.10);
+            const withZeroTax = createTaxCalculator(0);
+
+            let output = '<strong>Tax Calculator Factory Results:</strong><br><br>';
+            output += 'withVAT(1000): Rs. ' + withVAT(1000) + ' (13% VAT)<br>';
+            output += 'withServiceTax(1000): Rs. ' + withServiceTax(1000) + ' (10% Service Tax)<br>';
+            output += 'withZeroTax(1000): Rs. ' + withZeroTax(1000) + ' (No Tax)<br>';
+
+            document.getElementById('taxOutput').innerHTML = output;
+        }
+
+        // Power Function Factory
+        function createPowerFunction(exponent) {
+            return function(base) {
+                return Math.pow(base, exponent);
+            };
+        }
+
+        window.createPowerFunction = createPowerFunction;
+
+        function testPowerFunction() {
+            const square = createPowerFunction(2);
+            const cube = createPowerFunction(3);
+            const toTheFourth = createPowerFunction(4);
+
+            let output = '<strong>Power Function Factory Results:</strong><br><br>';
+            output += 'square(5): ' + square(5) + ' (5²)<br>';
+            output += 'cube(3): ' + cube(3) + ' (3³)<br>';
+            output += 'toTheFourth(2): ' + toTheFourth(2) + ' (2⁴)<br>';
+
+            document.getElementById('powerOutput').innerHTML = output;
+        }
+
+        console.log('%c=== Function Factory Demo ===', 'color: #764ba2; font-size: 20px; font-weight: bold;');
+        console.log('%cTry creating your own functions:', 'color: #9c27b0; font-size: 14px; font-weight: bold;');
+        console.log('const times5 = createMultiplier(5);');
+        console.log('times5(10);  // 50');
+        console.log('');
+        console.log('const sayGoodbye = createGreeter("Goodbye");');
+        console.log('sayGoodbye("Friend");  // "Goodbye, Friend!"');
+    </script>
+</body>
+</html>

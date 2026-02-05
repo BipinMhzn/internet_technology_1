@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: Global Scope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            background-color: #e7f3e7;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Example 1: Global Scope</h1>
+
+        <h3>Concept:</h3>
+        <p>Variables declared outside any function have <strong>global scope</strong> and can be accessed from anywhere in the code.</p>
+
+        <div class="code-block">
+            <strong>Learning Objectives:</strong><br>
+            1. Understand global scope<br>
+            2. Access global variables from functions<br>
+            3. Understand potential issues with global variables
+        </div>
+
+        <button onclick="demonstrateGlobalScope()">Run Example</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Output will appear here...</strong>
+        </div>
+    </div>
+
+    <script>
+        // Global variables - accessible from anywhere
+        var globalVar = "I'm a global variable (var)";
+        let globalLet = "I'm a global variable (let)";
+        const globalConst = "I'm a global variable (const)";
+
+        function demonstrateGlobalScope() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<strong>Global Scope Example:</strong><br><br>';
+
+            // Accessing global variables inside a function
+            output.innerHTML += '--- Inside Function ---<br>';
+            output.innerHTML += 'globalVar: ' + globalVar + '<br>';
+            output.innerHTML += 'globalLet: ' + globalLet + '<br>';
+            output.innerHTML += 'globalConst: ' + globalConst + '<br><br>';
+
+            // Accessing global variables outside function
+            output.innerHTML += '--- Outside Function (in console) ---<br>';
+            console.log('globalVar:', globalVar);
+            console.log('globalLet:', globalLet);
+            console.log('globalConst:', globalConst);
+
+            output.innerHTML += 'Check the browser console (F12) for more output!<br><br>';
+
+            // Modifying global variables
+            globalVar = "Modified global var";
+            globalLet = "Modified global let";
+            // globalConst = "Cannot modify"; // This would cause an error!
+
+            output.innerHTML += '--- After Modification ---<br>';
+            output.innerHTML += 'globalVar: ' + globalVar + '<br>';
+            output.innerHTML += 'globalLet: ' + globalLet + '<br>';
+            output.innerHTML += 'globalConst: ' + globalConst + ' (unchanged - const cannot be reassigned)<br><br>';
+
+            // Warning about global variables
+            output.innerHTML += '<div style="background-color: #fff3cd; padding: 10px; border-radius: 4px;">';
+            output.innerHTML += '<strong>⚠️ Warning:</strong> Avoid excessive use of global variables!<br>';
+            output.innerHTML += 'They can cause naming conflicts and make code harder to maintain.';
+            output.innerHTML += '</div>';
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click "Run Example" to see results.</strong>';
+
+            // Reset global variables
+            globalVar = "I'm a global variable (var)";
+            globalLet = "I'm a global variable (let)";
+        }
+
+        // Example of accessing global variable
+        function anotherFunction() {
+            console.log('From another function:', globalVar);
+        }
+
+        // Log initial state
+        console.log('=== Initial Global Variables ===');
+        console.log('globalVar:', globalVar);
+        console.log('globalLet:', globalLet);
+        console.log('globalConst:', globalConst);
+    </script>
+</body>
+</html>

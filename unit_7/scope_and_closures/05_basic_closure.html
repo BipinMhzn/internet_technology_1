@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 5: Basic Closure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #E91E63;
+            padding-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #E91E63;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        button {
+            background-color: #E91E63;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #C2185B;
+        }
+        .output {
+            background-color: #fce4ec;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #E91E63;
+        }
+        .info {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .code-example {
+            background-color: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Example 5: Basic Closure</h1>
+
+        <h3>Concept:</h3>
+        <p>A <strong>closure</strong> is a function that remembers and can access variables from its outer (enclosing) scope, even after the outer function has finished executing.</p>
+
+        <div class="code-block">
+            <strong>Learning Objectives:</strong><br>
+            1. Understand what a closure is<br>
+            2. See how inner functions access outer variables<br>
+            3. Learn that closures "remember" their environment
+        </div>
+
+        <button onclick="demonstrateBasicClosure()">Run Example</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Output will appear here...</strong>
+        </div>
+    </div>
+
+    <script>
+        function demonstrateBasicClosure() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<strong>Basic Closure Examples:</strong><br><br>';
+
+            // Example 1: Simple closure
+            output.innerHTML += '<h4>Example 1: Simple Closure</h4>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += 'function outerFunction() {<br>';
+            output.innerHTML += '    let message = "Hello from outer!";<br><br>';
+            output.innerHTML += '    function innerFunction() {<br>';
+            output.innerHTML += '        console.log(message);<br>';
+            output.innerHTML += '    }<br><br>';
+            output.innerHTML += '    return innerFunction;<br>';
+            output.innerHTML += '}<br><br>';
+            output.innerHTML += 'const myClosure = outerFunction();<br>';
+            output.innerHTML += 'myClosure();  // "Hello from outer!"';
+            output.innerHTML += '</div>';
+
+            function outerFunction() {
+                let message = "Hello from outer!";
+
+                function innerFunction() {
+                    console.log('Closure says:', message);
+                    return message;
+                }
+
+                return innerFunction;
+            }
+
+            const myClosure = outerFunction();
+            output.innerHTML += 'Result: ' + myClosure() + '<br>';
+            output.innerHTML += '<div class="info">';
+            output.innerHTML += '💡 The inner function still has access to "message" even though outerFunction has finished!';
+            output.innerHTML += '</div><br>';
+
+            // Example 2: Closure with parameters
+            output.innerHTML += '<h4>Example 2: Closure with Parameters</h4>';
+            output.innerHTML += '<div class="code-example">';
+            output.innerHTML += 'function greetingMaker(greeting) {<br>';
+            output.innerHTML += '    return function(name) {<br>';
+            output.innerHTML += '        return greeting + ", " + name + "!";<br>';
+            output.innerHTML += '    };<br>';
+            output.innerHTML += '}<br><br>';
+            output.innerHTML += 'const sayHello = greetingMaker("Hello");<br>';
+            output.innerHTML += 'const sayHi = greetingMaker("Hi");<br><br>';
+            output.innerHTML += 'sayHello("John");  // "Hello, John!"<br>';
+            output.innerHTML += 'sayHi("Jane");     // "Hi, Jane!"';
+            output.innerHTML += '</div>';
+
+            function greetingMaker(greeting) {
+                // greeting is remembered by the returned function
+                return function(name) {
+                    return greeting + ", " + name + "!";
+                };
+            }
+
+            const sayHello = greetingMaker("Hello");
+            const sayHi = greetingMaker("Hi");
+            const sayNamaste = greetingMaker("Namaste");
+
+            output.innerHTML += 'sayHello("John"): ' + sayHello("John") + '<br>';
+            output.innerHTML += 'sayHi("Jane"): ' + sayHi("Jane") + '<br>';
+            output.innerHTML += 'sayNamaste("Ram"): ' + sayNamaste("Ram") + '<br>';
+            output.innerHTML += '<div class="info">';
+            output.innerHTML += '💡 Each closure remembers its own "greeting" value!';
+            output.innerHTML += '</div><br>';
+
+            // Example 3: Multiple variables in closure
+            output.innerHTML += '<h4>Example 3: Multiple Variables in Closure</h4>';
+
+            function createPerson(name, age) {
+                // Private variables
+                let personName = name;
+                let personAge = age;
+
+                // Return object with closures
+                return {
+                    introduce: function() {
+                        return "Hi, I'm " + personName + " and I'm " + personAge + " years old.";
+                    },
+                    haveBirthday: function() {
+                        personAge++;
+                        return personName + " is now " + personAge + " years old!";
+                    }
+                };
+            }
+
+            const john = createPerson("John", 25);
+            const jane = createPerson("Jane", 30);
+
+            output.innerHTML += 'John: ' + john.introduce() + '<br>';
+            output.innerHTML += 'Jane: ' + jane.introduce() + '<br>';
+            output.innerHTML += john.haveBirthday() + '<br>';
+            output.innerHTML += 'John after birthday: ' + john.introduce() + '<br>';
+            output.innerHTML += 'Jane (unchanged): ' + jane.introduce() + '<br><br>';
+
+            // Example 4: Closure in loop (common pitfall)
+            output.innerHTML += '<h4>Example 4: Closure in Loop</h4>';
+            output.innerHTML += '<strong>❌ Problem with var:</strong><br>';
+
+            var functions1 = [];
+            for (var i = 0; i < 3; i++) {
+                functions1[i] = function() {
+                    return 'Index: ' + i;
+                };
+            }
+
+            output.innerHTML += functions1[0]() + ' (expected 0, got ' + i + ')<br>';
+            output.innerHTML += functions1[1]() + ' (expected 1, got ' + i + ')<br>';
+            output.innerHTML += functions1[2]() + ' (expected 2, got ' + i + ')<br><br>';
+
+            output.innerHTML += '<strong>✅ Solution with let:</strong><br>';
+
+            var functions2 = [];
+            for (let j = 0; j < 3; j++) {
+                functions2[j] = function() {
+                    return 'Index: ' + j;
+                };
+            }
+
+            output.innerHTML += functions2[0]() + '<br>';
+            output.innerHTML += functions2[1]() + '<br>';
+            output.innerHTML += functions2[2]() + '<br>';
+            output.innerHTML += '<div class="info">';
+            output.innerHTML += '💡 Using "let" creates a new closure for each iteration!';
+            output.innerHTML += '</div><br>';
+
+            // Example 5: Practical use - Private counter
+            output.innerHTML += '<h4>Example 5: Practical Example - Private Counter</h4>';
+
+            function createCounter(initialValue) {
+                let count = initialValue || 0;  // Private variable
+
+                return {
+                    increment: function() {
+                        count++;
+                        return count;
+                    },
+                    decrement: function() {
+                        count--;
+                        return count;
+                    },
+                    getValue: function() {
+                        return count;
+                    }
+                };
+            }
+
+            const counter1 = createCounter(10);
+            const counter2 = createCounter(0);
+
+            output.innerHTML += '<strong>Counter 1 (starts at 10):</strong><br>';
+            output.innerHTML += 'Increment: ' + counter1.increment() + '<br>';
+            output.innerHTML += 'Increment: ' + counter1.increment() + '<br>';
+            output.innerHTML += 'Decrement: ' + counter1.decrement() + '<br>';
+            output.innerHTML += 'Current: ' + counter1.getValue() + '<br><br>';
+
+            output.innerHTML += '<strong>Counter 2 (starts at 0):</strong><br>';
+            output.innerHTML += 'Increment: ' + counter2.increment() + '<br>';
+            output.innerHTML += 'Current: ' + counter2.getValue() + '<br>';
+            output.innerHTML += '<div class="info">';
+            output.innerHTML += '💡 Each counter maintains its own private "count" variable!<br>';
+            output.innerHTML += 'You cannot access "count" directly - it\'s truly private!';
+            output.innerHTML += '</div><br>';
+
+            output.innerHTML += '<div class="info" style="background-color: #fff9c4; border-left-color: #FBC02D;">';
+            output.innerHTML += '<strong>🎯 Key Points About Closures:</strong><br>';
+            output.innerHTML += '1. Inner functions have access to outer function variables<br>';
+            output.innerHTML += '2. Closures "remember" their environment<br>';
+            output.innerHTML += '3. Each closure is independent with its own environment<br>';
+            output.innerHTML += '4. Closures are useful for data privacy and creating function factories';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<br><em>Check the browser console (F12) for additional logs!</em>';
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click "Run Example" to see results.</strong>';
+        }
+
+        console.log('=== Basic Closure Examples ===');
+    </script>
+</body>
+</html>

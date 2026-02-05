@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2: Function Scope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #2196F3;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0b7dda;
+        }
+        .output {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #2196F3;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Example 2: Function Scope (Local Scope)</h1>
+
+        <h3>Concept:</h3>
+        <p>Variables declared inside a function are <strong>only accessible within that function</strong>. They are not visible outside the function.</p>
+
+        <div class="code-block">
+            <strong>Learning Objectives:</strong><br>
+            1. Understand function (local) scope<br>
+            2. Learn that local variables are not accessible outside functions<br>
+            3. See how local and global variables can have same names
+        </div>
+
+        <button onclick="demonstrateFunctionScope()">Run Example</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div class="output" id="output">
+            <strong>Output will appear here...</strong>
+        </div>
+    </div>
+
+    <script>
+        // Global variable
+        var message = "I'm global";
+
+        function demonstrateFunctionScope() {
+            let output = document.getElementById('output');
+            output.innerHTML = '<strong>Function Scope Example:</strong><br><br>';
+
+            // Example 1: Basic function scope
+            output.innerHTML += '<h4>Example 1: Basic Function Scope</h4>';
+
+            function myFunction() {
+                var functionVar = "I'm local to myFunction";
+                let functionLet = "I'm also local to myFunction";
+                const functionConst = "I'm local too";
+
+                // These are accessible inside the function
+                console.log('Inside function - functionVar:', functionVar);
+                console.log('Inside function - functionLet:', functionLet);
+                console.log('Inside function - functionConst:', functionConst);
+
+                return functionVar;
+            }
+
+            let result = myFunction();
+            output.innerHTML += 'Inside function: ' + result + '<br>';
+
+            // Try to access outside - will fail
+            output.innerHTML += '<div class="error">';
+            output.innerHTML += '❌ Trying to access functionVar outside: ';
+            try {
+                output.innerHTML += functionVar;
+            } catch (error) {
+                output.innerHTML += 'Error - ' + error.message;
+            }
+            output.innerHTML += '</div><br>';
+
+            // Example 2: Same variable name in different scopes
+            output.innerHTML += '<h4>Example 2: Same Name, Different Scopes</h4>';
+
+            function testScope() {
+                var message = "I'm local"; // Different from global 'message'
+                console.log('Inside function:', message);
+                return message;
+            }
+
+            output.innerHTML += 'Global message: ' + message + '<br>';
+            output.innerHTML += 'Local message: ' + testScope() + '<br>';
+            output.innerHTML += 'Global message after function: ' + message + '<br><br>';
+
+            // Example 3: Nested functions
+            output.innerHTML += '<h4>Example 3: Nested Functions (Scope Chain)</h4>';
+
+            function outer() {
+                var outerVar = "Outer variable";
+
+                function inner() {
+                    var innerVar = "Inner variable";
+                    // Can access both inner and outer
+                    console.log('Inner can access:', innerVar, outerVar);
+                    return 'Inner: ' + innerVar + ', Outer: ' + outerVar;
+                }
+
+                // Can only access outer
+                console.log('Outer can access:', outerVar);
+                return inner();
+            }
+
+            output.innerHTML += outer() + '<br><br>';
+
+            // Example 4: Function parameters are also local
+            output.innerHTML += '<h4>Example 4: Function Parameters are Local</h4>';
+
+            function greet(name, age) {
+                // 'name' and 'age' are local to this function
+                return 'Hello ' + name + ', you are ' + age + ' years old';
+            }
+
+            output.innerHTML += greet('John', 25) + '<br>';
+            output.innerHTML += '<div class="error">';
+            output.innerHTML += '❌ Trying to access parameter "name" outside: ';
+            try {
+                output.innerHTML += name;
+            } catch (error) {
+                output.innerHTML += 'Error - ' + error.message;
+            }
+            output.innerHTML += '</div><br>';
+
+            output.innerHTML += '<div style="background-color: #d1ecf1; padding: 10px; border-radius: 4px; margin-top: 10px;">';
+            output.innerHTML += '<strong>💡 Key Point:</strong> Variables declared inside a function are private to that function!';
+            output.innerHTML += '</div>';
+
+            output.innerHTML += '<br><em>Check the browser console (F12) for additional logs!</em>';
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<strong>Output cleared. Click "Run Example" to see results.</strong>';
+        }
+
+        console.log('=== Function Scope Examples ===');
+    </script>
+</body>
+</html>
