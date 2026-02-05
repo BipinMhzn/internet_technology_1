@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5.7: CSS Preprocessors - Examples Index</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        h1 {
+            color: #333;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .university-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .example-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+        .example-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .example-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .example-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .example-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .example-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .topic-tag {
+            background-color: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin: 3px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 CSS Preprocessors (SCSS)</h1>
+            <p class="subtitle">Interactive Practical Examples</p>
+            <div class="university-info">
+                <strong>Course:</strong> Internet Technology (CMP 173) |
+                <strong>Program:</strong> BCSIT |
+                <strong>University:</strong> Pokhara University
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Interactive Examples</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="stat-number">SCSS</div>
+                <div class="stat-label">Sass/SCSS Focused</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Hands-on Learning</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>⚡ Quick Start Guide</h3>
+            <ol>
+                <li>Click on any example card below to open it</li>
+                <li>Read the SCSS code and see the compiled CSS</li>
+                <li>View live demos of the concepts</li>
+                <li>Compare SCSS with plain CSS</li>
+                <li>Try to implement similar patterns in your projects</li>
+            </ol>
+        </div>
+
+        <h2 style="color: #667eea; margin: 30px 0 20px 0;">📚 SCSS Preprocessor Examples</h2>
+
+        <div class="examples-grid">
+            <div class="example-card" onclick="window.location.href='01_variables.html'">
+                <div class="example-number">1</div>
+                <div class="example-title">SCSS Variables</div>
+                <div class="example-description">
+                    Learn to use variables in SCSS to store colors, fonts, and sizes. Make your code maintainable and consistent!
+                </div>
+                <div>
+                    <span class="topic-tag">$variables</span>
+                    <span class="topic-tag">Reusability</span>
+                    <span class="topic-tag">Maintainability</span>
+                </div>
+                <a href="01_variables.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='02_nesting.html'">
+                <div class="example-number">2</div>
+                <div class="example-title">SCSS Nesting</div>
+                <div class="example-description">
+                    Master nesting to mirror HTML structure. Learn to use the parent selector (&) for cleaner, more readable code.
+                </div>
+                <div>
+                    <span class="topic-tag">Nesting</span>
+                    <span class="topic-tag">& Parent Selector</span>
+                    <span class="topic-tag">BEM Methodology</span>
+                </div>
+                <a href="02_nesting.html" class="example-link">Open Example →</a>
+            </div>
+
+            <div class="example-card" onclick="window.location.href='03_mixins.html'">
+                <div class="example-number">3</div>
+                <div class="example-title">SCSS Mixins</div>
+                <div class="example-description">
+                    Understand mixins as reusable CSS functions. Learn to create mixins with parameters and use them effectively.
+                </div>
+                <div>
+                    <span class="topic-tag">@mixin</span>
+                    <span class="topic-tag">@include</span>
+                    <span class="topic-tag">Parameters</span>
+                </div>
+                <a href="03_mixins.html" class="example-link">Open Example →</a>
+            </div>
+        </div>
+
+        <div class="info-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>🎯 Learning Objectives</h3>
+            <p>After completing these examples, you should be able to:</p>
+            <ul>
+                <li>Declare and use variables in SCSS</li>
+                <li>Nest selectors to mirror HTML structure</li>
+                <li>Use the parent selector (&) effectively</li>
+                <li>Create and use mixins with parameters</li>
+                <li>Understand when to use mixins vs extends</li>
+                <li>Write cleaner, more maintainable CSS with SCSS</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📖 What is SCSS/Sass?</h3>
+            <p style="line-height: 1.8;">
+                <strong>Sass (Syntactically Awesome Style Sheets)</strong> is a CSS preprocessor that extends CSS with features like variables, nesting, mixins, and functions.
+                <strong>SCSS</strong> is the CSS-like syntax of Sass that uses braces and semicolons (easier to learn if you know CSS).
+            </p>
+            <h4 style="margin-top: 15px;">Key Benefits:</h4>
+            <ul>
+                <li>✅ <strong>Variables:</strong> Store and reuse values</li>
+                <li>✅ <strong>Nesting:</strong> Mirror HTML structure</li>
+                <li>✅ <strong>Mixins:</strong> Reusable code snippets</li>
+                <li>✅ <strong>Functions:</strong> Calculate values dynamically</li>
+                <li>✅ <strong>Partials & Imports:</strong> Modular code organization</li>
+                <li>✅ <strong>Extends:</strong> Share CSS properties</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>💡 Best Practices</h3>
+            <ol style="line-height: 2;">
+                <li><strong>Use Variables:</strong> For colors, fonts, spacing used multiple times</li>
+                <li><strong>Limit Nesting:</strong> Max 3-4 levels deep to avoid specificity issues</li>
+                <li><strong>Create Mixins:</strong> For reusable patterns with parameters</li>
+                <li><strong>Organize Files:</strong> Use partials (_variables.scss, _mixins.scss)</li>
+                <li><strong>Follow BEM:</strong> Use nesting with BEM methodology for class names</li>
+                <li><strong>Comment Your Code:</strong> Explain complex mixins and functions</li>
+            </ol>
+        </div>
+
+        <div class="info-box" style="background-color: #ffebee; border-left-color: #f44336;">
+            <h3>⚙️ How to Use SCSS in Real Projects?</h3>
+            <ol style="line-height: 2;">
+                <li><strong>Install Sass:</strong> <code>npm install -g sass</code></li>
+                <li><strong>Write SCSS:</strong> Create <code>styles.scss</code> file</li>
+                <li><strong>Compile:</strong> <code>sass styles.scss styles.css</code></li>
+                <li><strong>Watch Mode:</strong> <code>sass --watch styles.scss:styles.css</code></li>
+                <li><strong>Include in HTML:</strong> Link the compiled <code>styles.css</code></li>
+            </ol>
+        </div>
+
+        <footer>
+            <p><strong>Created for BCSIT Students</strong></p>
+            <p>Internet Technology (CMP 173) - Unit 5.7</p>
+            <p>Pokhara University</p>
+            <p style="margin-top: 15px; color: #999; font-size: 14px;">
+                💻 All examples work offline | 🌐 No internet required | 📱 Mobile friendly
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        console.log('%c🎨 CSS Preprocessors (SCSS) Examples', 'color: #667eea; font-size: 24px; font-weight: bold;');
+        console.log('%cLearn to write better CSS with SCSS!', 'color: #666; font-size: 14px;');
+        console.log('%cHappy Styling! 🚀', 'color: #4caf50; font-size: 16px;');
+    </script>
+</body>
+</html>
