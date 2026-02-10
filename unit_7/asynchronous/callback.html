@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Callback Example</title>
+</head>
+<body>
+    <h1>JavaScript Callbacks</h1>
+    <p>A callback is a function passed as an argument to another function.</p>
+
+    <button onclick="startOrder()">Order Food</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Simple callback example
+        function greet(name, callback) {
+            output.innerHTML += "Hello " + name + "<br>";
+            callback();
+        }
+
+        greet("Ram", function () {
+            output.innerHTML += "This runs after greeting!<br>";
+        });
+
+        // Callback with setTimeout (simulating async operation)
+        function orderFood(food, callback) {
+            output.innerHTML += "Ordering " + food + "...<br>";
+
+            // setTimeout simulates a delay (like waiting for server response)
+            setTimeout(function () {
+                output.innerHTML += food + " is ready!<br>";
+                callback(food);
+            }, 2000); // 2 second delay
+        }
+
+        function startOrder() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Placing Order ---<br>";
+
+            orderFood("Momo", function (food) {
+                output.innerHTML += "Eating " + food + ". Yummy!<br>";
+
+                // Callback inside callback (callback hell)
+                orderFood("Tea", function (food) {
+                    output.innerHTML += "Drinking " + food + ". Refreshing!<br>";
+                    output.innerHTML += "--- Done! ---<br>";
+                });
+            });
+
+            // This runs BEFORE the food is ready (asynchronous!)
+            output.innerHTML += "Waiting for food... (this runs first!)<br>";
+        }
+    </script>
+</body>
+</html>

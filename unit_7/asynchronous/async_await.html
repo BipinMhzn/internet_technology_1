@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Async/Await Example</title>
+</head>
+<body>
+    <h1>JavaScript Async/Await</h1>
+    <p><b>async</b> makes a function return a Promise.</p>
+    <p><b>await</b> pauses the function until the Promise resolves.</p>
+
+    <button onclick="startOrder()">Order Food (Success)</button>
+    <button onclick="startFailOrder()">Order Food (Fail)</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // This function returns a Promise (same as promise example)
+        function orderFood(food, shouldFail) {
+            return new Promise(function (resolve, reject) {
+                output.innerHTML += "Ordering " + food + "...<br>";
+                setTimeout(function () {
+                    if (shouldFail) {
+                        reject("Sorry, " + food + " is not available!");
+                    } else {
+                        resolve(food);
+                    }
+                }, 2000);
+            });
+        }
+
+        // async function - uses await instead of .then()
+        async function startOrder() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Placing Order ---<br>";
+
+            // await pauses here until the promise resolves
+            var food1 = await orderFood("Momo", false);
+            output.innerHTML += food1 + " is ready!<br>";
+
+            // This runs AFTER momo is ready (sequential, easy to read!)
+            var food2 = await orderFood("Tea", false);
+            output.innerHTML += food2 + " is ready!<br>";
+
+            output.innerHTML += "--- All Done! ---<br>";
+        }
+
+        // Error handling with try/catch
+        async function startFailOrder() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Placing Order ---<br>";
+
+            try {
+                var food = await orderFood("Pizza", true);
+                output.innerHTML += food + " is ready!<br>"; // This won't run
+            } catch (error) {
+                output.innerHTML += "Error: " + error + "<br>";
+            }
+        }
+    </script>
+</body>
+</html>
