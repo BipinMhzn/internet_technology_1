@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Style Example</title>
+</head>
+<body>
+    <h1>Changing Element Styles</h1>
+
+    <p id="demo">This is a paragraph to style.</p>
+
+    <div id="box">This is a box</div>
+
+    <br>
+    <button onclick="changeColor()">Change Color</button>
+    <button onclick="changeFont()">Change Font</button>
+    <button onclick="styleBox()">Style the Box</button>
+    <button onclick="resetAll()">Reset All</button>
+
+    <script>
+        function changeColor() {
+            var element = document.getElementById("demo");
+
+            // Use element.style.propertyName
+            // CSS property names become camelCase in JavaScript
+            // color -> color
+            // background-color -> backgroundColor
+            element.style.color = "white";
+            element.style.backgroundColor = "darkblue";
+        }
+
+        function changeFont() {
+            var element = document.getElementById("demo");
+
+            // font-size -> fontSize
+            // font-weight -> fontWeight
+            // text-align -> textAlign
+            element.style.fontSize = "24px";
+            element.style.fontWeight = "bold";
+            element.style.fontFamily = "Arial";
+        }
+
+        function styleBox() {
+            var box = document.getElementById("box");
+
+            box.style.width = "300px";
+            box.style.height = "100px";
+            box.style.backgroundColor = "lightgreen";
+            box.style.border = "3px solid green";
+            box.style.padding = "20px";
+            box.style.textAlign = "center";
+            box.style.lineHeight = "60px";
+            box.style.fontSize = "20px";
+        }
+
+        function resetAll() {
+            // Setting style to empty string removes the inline style
+            var demo = document.getElementById("demo");
+            demo.style.cssText = "";
+
+            var box = document.getElementById("box");
+            box.style.cssText = "";
+        }
+    </script>
+</body>
+</html>

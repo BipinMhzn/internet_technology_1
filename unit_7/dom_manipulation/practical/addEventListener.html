@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener() Example</title>
+</head>
+<body>
+    <h1>addEventListener() Example</h1>
+
+    <button id="clickBtn">Click Me</button>
+    <p id="clickCount">Clicked: 0 times</p>
+
+    <br>
+
+    <input type="text" id="nameInput" placeholder="Type your name...">
+    <p id="preview">Preview: </p>
+
+    <br>
+
+    <div id="hoverBox" style="width:200px;height:100px;border:2px solid black;text-align:center;line-height:100px;">
+        Hover over me
+    </div>
+
+    <br>
+
+    <button id="onceBtn">I work only once</button>
+    <p id="onceMsg"></p>
+
+    <script>
+        // 1. Click event
+        var count = 0;
+        var clickBtn = document.getElementById("clickBtn");
+
+        clickBtn.addEventListener("click", function () {
+            count++;
+            document.getElementById("clickCount").textContent = "Clicked: " + count + " times";
+        });
+
+        // 2. Keyup event - fires every time a key is released
+        var nameInput = document.getElementById("nameInput");
+
+        nameInput.addEventListener("keyup", function () {
+            var preview = document.getElementById("preview");
+            preview.textContent = "Preview: " + nameInput.value;
+        });
+
+        // 3. Mouseover and mouseout events
+        var hoverBox = document.getElementById("hoverBox");
+
+        hoverBox.addEventListener("mouseover", function () {
+            hoverBox.style.backgroundColor = "lightblue";
+            hoverBox.textContent = "Mouse is inside!";
+        });
+
+        hoverBox.addEventListener("mouseout", function () {
+            hoverBox.style.backgroundColor = "";
+            hoverBox.textContent = "Hover over me";
+        });
+
+        // 4. Event that fires only once
+        var onceBtn = document.getElementById("onceBtn");
+
+        onceBtn.addEventListener("click", function () {
+            document.getElementById("onceMsg").textContent = "This event fired only once!";
+        }, { once: true });
+    </script>
+</body>
+</html>

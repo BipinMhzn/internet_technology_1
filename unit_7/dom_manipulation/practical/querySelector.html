@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>querySelector() Example</title>
+</head>
+<body>
+    <h1>document.querySelector() Example</h1>
+    <p>querySelector() returns the <strong>first</strong> matching element.</p>
+
+    <div id="box">This is a div with id="box"</div>
+
+    <p class="message">First message</p>
+    <p class="message">Second message (won't be selected)</p>
+
+    <ul>
+        <li>First item</li>
+        <li>Second item</li>
+    </ul>
+
+    <button onclick="selectById()">Select by #id</button>
+    <button onclick="selectByClass()">Select by .class</button>
+    <button onclick="selectByTag()">Select by tag</button>
+    <button onclick="selectNested()">Select nested element</button>
+
+    <script>
+        // querySelector uses CSS selector syntax
+
+        function selectById() {
+            // Select by ID using #
+            var element = document.querySelector("#box");
+            element.style.backgroundColor = "yellow";
+            element.textContent = "I was selected by #box!";
+        }
+
+        function selectByClass() {
+            // Select by class using . (returns FIRST match only)
+            var element = document.querySelector(".message");
+            element.style.color = "blue";
+            element.textContent = "I was selected by .message (first match only)!";
+        }
+
+        function selectByTag() {
+            // Select by tag name (returns FIRST match only)
+            var element = document.querySelector("li");
+            element.style.fontWeight = "bold";
+            element.textContent = "I was selected by li tag!";
+        }
+
+        function selectNested() {
+            // Select nested elements using CSS selectors
+            var element = document.querySelector("ul li:last-child");
+            element.style.color = "red";
+            element.textContent = "I was selected by ul li:last-child!";
+        }
+    </script>
+</body>
+</html>

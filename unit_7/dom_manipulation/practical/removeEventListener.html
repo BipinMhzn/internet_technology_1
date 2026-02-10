@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>removeEventListener() Example</title>
+</head>
+<body>
+    <h1>removeEventListener() Example</h1>
+
+    <button id="clickBtn">Click Me</button>
+    <p id="clickCount">Clicked: 0 times</p>
+    <button id="stopBtn">Stop Listening</button>
+    <button id="startBtn">Start Listening Again</button>
+    <p id="status">Status: Listening</p>
+
+    <script>
+        var count = 0;
+
+        // To use removeEventListener, the function must be a named function
+        // Anonymous functions CANNOT be removed
+        function handleClick() {
+            count++;
+            document.getElementById("clickCount").textContent = "Clicked: " + count + " times";
+        }
+
+        var clickBtn = document.getElementById("clickBtn");
+
+        // Add the event listener
+        clickBtn.addEventListener("click", handleClick);
+
+        // Remove the event listener
+        document.getElementById("stopBtn").addEventListener("click", function () {
+            clickBtn.removeEventListener("click", handleClick);
+            document.getElementById("status").textContent = "Status: Stopped listening";
+            document.getElementById("status").style.color = "red";
+        });
+
+        // Add it back again
+        document.getElementById("startBtn").addEventListener("click", function () {
+            clickBtn.addEventListener("click", handleClick);
+            document.getElementById("status").textContent = "Status: Listening";
+            document.getElementById("status").style.color = "green";
+        });
+    </script>
+</body>
+</html>

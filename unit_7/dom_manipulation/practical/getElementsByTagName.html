@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getElementsByTagName() Example</title>
+</head>
+<body>
+    <h1>document.getElementsByTagName() Example</h1>
+
+    <ul>
+        <li>Item One</li>
+        <li>Item Two</li>
+        <li>Item Three</li>
+        <li>Item Four</li>
+    </ul>
+
+    <p>This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+
+    <button onclick="colorListItems()">Color List Items</button>
+    <button onclick="uppercaseParagraphs()">Uppercase Paragraphs</button>
+    <button onclick="countElements()">Count Elements</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function colorListItems() {
+            var listItems = document.getElementsByTagName("li");
+            console.log(listItems);
+            var colors = ["red", "blue", "green", "orange"];
+
+            for (var i = 0; i < listItems.length; i++) {
+                listItems[i].style.color = colors[i];
+            }
+        }
+
+        function uppercaseParagraphs() {
+            var paragraphs = document.getElementsByTagName("p");
+
+            for (var i = 0; i < paragraphs.length; i++) {
+                paragraphs[i].textContent = paragraphs[i].textContent.toUpperCase();
+            }
+        }
+
+        function countElements() {
+            var lis = document.getElementsByTagName("li").length;
+            var ps = document.getElementsByTagName("p").length;
+            var buttons = document.getElementsByTagName("button").length;
+
+            document.getElementById("result").textContent =
+                "li: " + lis + " | p: " + ps + " | button: " + buttons;
+        }
+    </script>
+</body>
+</html>

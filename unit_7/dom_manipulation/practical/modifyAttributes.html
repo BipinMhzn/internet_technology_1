@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Attributes Example</title>
+</head>
+<body>
+    <h1>Modifying Element Attributes</h1>
+
+    <img id="myImage" src="" alt="No image" width="200">
+    <br><br>
+
+    <a id="myLink" href="https://example.com">Visit Example</a>
+    <br><br>
+
+    <input id="myInput" type="text" placeholder="Type here...">
+    <br><br>
+
+    <button onclick="changeImage()">Change Image (setAttribute)</button>
+    <button onclick="changeLink()">Change Link (direct property)</button>
+    <button onclick="toggleInput()">Disable/Enable Input</button>
+    <button onclick="showAttributes()">Show Attributes (getAttribute)</button>
+
+    <p id="output"></p>
+
+    <script>
+        function changeImage() {
+            var img = document.getElementById("myImage");
+
+            // setAttribute(name, value) - sets any attribute
+            img.setAttribute("src", "https://picsum.photos/200/150");
+            img.setAttribute("alt", "Random image");
+        }
+
+        function changeLink() {
+            var link = document.getElementById("myLink");
+
+            // Direct property access - another way to modify attributes
+            link.href = "https://google.com";
+            link.textContent = "Visit Google";
+            link.target = "_blank";
+        }
+
+        function toggleInput() {
+            var input = document.getElementById("myInput");
+
+            // Toggle the disabled attribute
+            if (input.disabled) {
+                input.removeAttribute("disabled");
+                input.placeholder = "Enabled again!";
+            } else {
+                input.setAttribute("disabled", "true");
+                input.placeholder = "I am disabled";
+            }
+        }
+
+        function showAttributes() {
+            var img = document.getElementById("myImage");
+            var link = document.getElementById("myLink");
+
+            // getAttribute(name) - reads attribute value
+            var output = document.getElementById("output");
+            output.textContent =
+                "Image src: " + img.getAttribute("src") +
+                " | Link href: " + link.getAttribute("href");
+        }
+    </script>
+</body>
+</html>

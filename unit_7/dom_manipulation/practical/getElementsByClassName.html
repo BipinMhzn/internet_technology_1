@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getElementsByClassName() Example</title>
+</head>
+<body>
+    <h1>document.getElementsByClassName() Example</h1>
+
+    <p class="fruit">Apple</p>
+    <p class="fruit">Banana</p>
+    <p class="fruit">Cherry</p>
+    <p class="vegetable">Carrot</p>
+    <p class="vegetable">Broccoli</p>
+
+    <button onclick="highlightFruits()">Highlight Fruits</button>
+    <button onclick="highlightVegetables()">Highlight Vegetables</button>
+
+    <script>
+        function highlightFruits() {
+            var fruits = document.getElementsByClassName("fruit");
+            console.log(fruits);
+            // getElementsByClassName returns an HTMLCollection (array-like)
+            // We need to loop through it
+            for (var i = 0; i < fruits.length; i++) {
+                fruits[i].style.color = "red";
+                fruits[i].style.fontWeight = "bold";
+            }
+        }
+
+        function highlightVegetables() {
+            var vegetables = document.getElementsByClassName("vegetable");
+            console.log(vegetables);
+            for (var i = 0; i < vegetables.length; i++) {
+                vegetables[i].style.color = "green";
+                vegetables[i].style.fontWeight = "bold";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Content Example</title>
+</head>
+<body>
+    <h1>Changing Element Content</h1>
+
+    <p id="text-example">This is plain text content.</p>
+    <div id="html-example">This is <b>HTML</b> content.</div>
+    <input type="text" id="input-example" value="Original value">
+
+    <button onclick="useTextContent()">Change with textContent</button>
+    <button onclick="useInnerHTML()">Change with innerHTML</button>
+    <button onclick="useValue()">Change input value</button>
+
+    <script>
+        function useTextContent() {
+            var element = document.getElementById("text-example");
+
+            // textContent sets plain text (HTML tags are NOT parsed)
+            element.textContent = "Changed using <b>textContent</b> - tags show as text!";
+        }
+
+        function useInnerHTML() {
+            var element = document.getElementById("html-example");
+
+            // innerHTML parses HTML tags
+            element.innerHTML = "Changed using <b>innerHTML</b> - tags are <i>rendered</i>!";
+        }
+
+        function useValue() {
+            var input = document.getElementById("input-example");
+
+            // For input elements, use .value
+            input.value = "New value set by JavaScript";
+        }
+    </script>
+</body>
+</html>

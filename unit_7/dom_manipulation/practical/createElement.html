@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document.createElement() Example</title>
+</head>
+<body>
+    <h1>document.createElement() and appendChild()</h1>
+
+    <div id="container"></div>
+
+    <button onclick="addParagraph()">Add Paragraph</button>
+    <button onclick="addListItem()">Add List Item</button>
+
+    <script>
+        function addParagraph() {
+            // Step 1: Create a new element
+            var newPara = document.createElement("p");
+
+            // Step 2: Add content to it
+            newPara.textContent = "This paragraph was created using JavaScript!";
+
+            // Step 3: Append it to an existing element
+            var container = document.getElementById("container");
+            container.appendChild(newPara);
+        }
+
+        // Create a list and keep adding items to it
+        var list = document.createElement("ul");
+        document.getElementById("container").appendChild(list);
+        var itemCount = 0;
+
+        function addListItem() {
+            itemCount++;
+            var li = document.createElement("li");
+            li.textContent = "Item " + itemCount;
+            list.appendChild(li);
+        }
+    </script>
+</body>
+</html>

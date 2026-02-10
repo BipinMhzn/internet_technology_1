@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>querySelectorAll() Example</title>
+</head>
+<body>
+    <h1>document.querySelectorAll() Example</h1>
+    <p>querySelectorAll() returns <strong>all</strong> matching elements as a NodeList.</p>
+
+    <ul id="student-list">
+        <li>Ram</li>
+        <li>Sita</li>
+        <li>Hari</li>
+        <li>Gita</li>
+    </ul>
+
+    <p class="note">Note 1</p>
+    <p class="note">Note 2</p>
+    <p class="note">Note 3</p>
+
+    <button onclick="highlightAll()">Highlight All Notes</button>
+    <button onclick="numberStudents()">Number Students</button>
+    <button onclick="colorOddItems()">Color Odd Items</button>
+
+    <script>
+        function highlightAll() {
+            // querySelectorAll returns ALL matching elements
+            var notes = document.querySelectorAll(".note");
+
+            // querySelectorAll returns a NodeList which supports forEach
+            notes.forEach(function (note) {
+                note.style.backgroundColor = "yellow";
+                note.style.fontWeight = "bold";
+            });
+        }
+
+        function numberStudents() {
+            var students = document.querySelectorAll("#student-list li");
+
+            students.forEach(function (student, index) {
+                student.textContent = (index + 1) + ". " + student.textContent;
+            });
+        }
+
+        function colorOddItems() {
+            // Using CSS pseudo-selector to select odd items
+            var oddItems = document.querySelectorAll("#student-list li:nth-child(odd)");
+            var evenItems = document.querySelectorAll("#student-list li:nth-child(even)");
+
+            oddItems.forEach(function (item) {
+                item.style.color = "red";
+            });
+
+            evenItems.forEach(function (item) {
+                item.style.color = "blue";
+            });
+        }
+    </script>
+</body>
+</html>

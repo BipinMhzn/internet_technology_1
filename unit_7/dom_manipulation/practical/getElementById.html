@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getElementById() Example</title>
+</head>
+<body>
+    <h1>document.getElementById() Example</h1>
+
+    <p id="greeting">Hello, World!</p>
+    <p id="score">Score: 0</p>
+
+    <button onclick="changeGreeting()">Change Greeting</button>
+    <button onclick="increaseScore()">Increase Score</button>
+
+    <script>
+        var count = 0;
+
+        function changeGreeting() {
+            var element = document.getElementById("greeting");
+            element.textContent = "Welcome to DOM Manipulation!";
+            element.style.color = "blue";
+        }
+
+        function increaseScore() {
+            count++;
+            var scoreElement = document.getElementById("score");
+            scoreElement.textContent = "Score: " + count;
+        }
+    </script>
+</body>
+</html>
