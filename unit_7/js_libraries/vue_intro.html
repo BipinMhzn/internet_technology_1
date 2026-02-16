@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js Introduction Example</title>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <h1>Vue.js Introduction</h1>
+    <p>Vue.js is a progressive JavaScript framework for building user interfaces.</p>
+    <p>Key concepts: <b>Template syntax</b>, <b>Directives (v-bind, v-if, v-for)</b>, <b>Reactive data</b></p>
+    <hr>
+
+    <!-- Example 1: Basic Vue app with data binding -->
+    <h3>Example 1: Data Binding</h3>
+    <div id="app1">
+        <p>Hello, <b>{{ name }}</b>!</p>
+        <p>College: {{ college }}</p>
+        <p>Message: {{ greeting }}</p>
+        <!-- v-model: two-way data binding with input -->
+        <input v-model="name" placeholder="Type your name...">
+    </div>
+
+    <!-- Example 2: Directives (v-if, v-for) -->
+    <h3>Example 2: Directives</h3>
+    <div id="app2">
+        <!-- v-for: loop through a list -->
+        <p>Student List:</p>
+        <ol>
+            <li v-for="student in students">
+                {{ student.name }} (Age: {{ student.age }})
+                <!-- v-if: conditional rendering -->
+                <span v-if="student.age >= 21"> - Senior</span>
+                <span v-else> - Junior</span>
+            </li>
+        </ol>
+        <button v-on:click="addStudent">Add Student</button>
+        <p>Total: {{ students.length }} students</p>
+    </div>
+
+    <!-- Example 3: Counter with methods and events -->
+    <h3>Example 3: Counter (Reactivity)</h3>
+    <div id="app3">
+        <p>Count: <b>{{ count }}</b></p>
+        <!-- v-on:click or @click: handle click events -->
+        <button @click="increase">Increase</button>
+        <button @click="decrease">Decrease</button>
+        <button @click="reset">Reset</button>
+        <p v-if="count > 5" style="color: red;">Count is getting high!</p>
+        <p v-if="count < 0" style="color: blue;">Count is negative!</p>
+    </div>
+
+    <script>
+        // Example 1: Basic data binding
+        const app1 = Vue.createApp({
+            data() {
+                return {
+                    name: "Ram",
+                    college: "Uniglobe College"
+                };
+            },
+            // Computed properties: auto-update when data changes
+            computed: {
+                greeting() {
+                    return "Welcome to Vue.js, " + this.name + "!";
+                }
+            }
+        });
+        app1.mount("#app1");
+
+        // Example 2: Directives and lists
+        const app2 = Vue.createApp({
+            data() {
+                return {
+                    students: [
+                        { name: "Ram", age: 20 },
+                        { name: "Sita", age: 21 },
+                        { name: "Hari", age: 22 }
+                    ]
+                };
+            },
+            methods: {
+                addStudent() {
+                    const names = ["Gita", "Krishna", "Laxmi", "Bikash"];
+                    const randomName = names[Math.floor(Math.random() * names.length)];
+                    const randomAge = 19 + Math.floor(Math.random() * 5);
+                    this.students.push({ name: randomName, age: randomAge });
+                }
+            }
+        });
+        app2.mount("#app2");
+
+        // Example 3: Counter with reactivity
+        const app3 = Vue.createApp({
+            data() {
+                return {
+                    count: 0
+                };
+            },
+            methods: {
+                increase() {
+                    this.count++;
+                },
+                decrease() {
+                    this.count--;
+                },
+                reset() {
+                    this.count = 0;
+                }
+            }
+        });
+        app3.mount("#app3");
+    </script>
+</body>
+</html>

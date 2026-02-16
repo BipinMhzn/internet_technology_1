@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX with Fetch API Example</title>
+</head>
+<body>
+    <h1>AJAX with Fetch API</h1>
+    <p>AJAX (Asynchronous JavaScript and XML) lets us fetch data from a server without reloading the page.</p>
+    <p>The <b>fetch()</b> API is the modern way to make AJAX requests. It returns a <b>Promise</b>.</p>
+
+    <button onclick="fetchUser()">Fetch User (Success)</button>
+    <button onclick="fetchError()">Fetch User (Error)</button>
+    <button onclick="fetchMultiple()">Fetch Multiple Users</button>
+    <button onclick="addUser()">Add User (POST)</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Simple GET request using fetch
+        function fetchUser() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching User Data ---<br>";
+            output.innerHTML += "Sending request...<br>";
+
+            // fetch() returns a Promise
+            fetch("https://jsonplaceholder.typicode.com/users/1", {
+                method: "GET"
+            })
+                .then(function (response) {
+                    output.innerHTML += "Response received! Status: " + response.status + "<br>";
+                    // response.json() also returns a Promise
+                    return response.json();
+                })
+                .then(function (data) {
+                    // data is now a JavaScript object (parsed from JSON)
+                    output.innerHTML += "<br>--- User Details ---<br>";
+                    output.innerHTML += "Name: " + data.name + "<br>";
+                    output.innerHTML += "Email: " + data.email + "<br>";
+                    output.innerHTML += "City: " + data.address.city + "<br>";
+                    output.innerHTML += "Company: " + data.company.name + "<br>";
+                })
+                .catch(function (error) {
+                    output.innerHTML += "Error: " + error.message + "<br>";
+                });
+
+            // This runs before fetch completes (asynchronous!)
+            output.innerHTML += "Waiting for server... (this runs first!)<br>";
+        }
+
+        // Example 2: Handling errors
+        function fetchError() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching Invalid URL ---<br>";
+
+            fetch("https://jsonplaceholder.typicode.com/users/9999")
+                .then(function (response) {
+                    // Check if response is ok (status 200-299)
+                    if (!response.ok) {
+                        throw new Error("User not found! Status: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    output.innerHTML += "Name: " + data.name + "<br>";
+                })
+                .catch(function (error) {
+                    output.innerHTML += "Error: " + error.message + "<br>";
+                });
+        }
+
+        // Example 3: POST request - Add a new user
+        function addUser() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Adding New User (POST Request) ---<br>";
+            output.innerHTML += "Sending data to server...<br>";
+
+            // Create a new user object to send
+            var newUser = {
+                name: "John Doe",
+                username: "john123",
+                email: "john@example.com",
+                phone: "9841000000",
+                website: "john.com.np"
+            };
+
+            // fetch() with POST method
+            fetch("https://jsonplaceholder.typicode.com/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newUser)  // Convert JS object to JSON string
+            })
+                .then(function (response) {
+                    output.innerHTML += "Response Status: " + response.status + "<br>";
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Server returns the created user with an id
+                    output.innerHTML += "<br>--- User Added Successfully ---<br>";
+                    output.innerHTML += "ID (from server): " + data.id + "<br>";
+                    output.innerHTML += "Name: " + data.name + "<br>";
+                    output.innerHTML += "Username: " + data.username + "<br>";
+                    output.innerHTML += "Email: " + data.email + "<br>";
+                    output.innerHTML += "Phone: " + data.phone + "<br>";
+                })
+                .catch(function (error) {
+                    output.innerHTML += "Error: " + error.message + "<br>";
+                });
+        }
+
+        // Example 4: Fetch a list of users
+        function fetchMultiple() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching All Users ---<br>";
+
+            fetch("https://jsonplaceholder.typicode.com/users")
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (users) {
+                    output.innerHTML += "Found " + users.length + " users:<br><br>";
+
+                    for (var i = 0; i < users.length; i++) {
+                        output.innerHTML += (i + 1) + ". " + users[i].name + " (" + users[i].email + ")<br>";
+                    }
+                })
+                .catch(function (error) {
+                    output.innerHTML += "Error: " + error.message + "<br>";
+                });
+        }
+    </script>
+</body>
+</html>

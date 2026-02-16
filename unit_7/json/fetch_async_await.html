@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch with Async/Await Example</title>
+</head>
+<body>
+    <h1>Fetch API with Async/Await</h1>
+    <p>Using <b>async/await</b> with fetch makes AJAX code cleaner and easier to read.</p>
+    <p>The <b>await</b> keyword pauses execution until the Promise resolves.</p>
+
+    <button onclick="getUser()">Get User</button>
+    <button onclick="getUserWithError()">Get User (Error)</button>
+    <button onclick="getTodo()">Get Todo</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Fetch with async/await
+        async function getUser() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching User (async/await) ---<br>";
+
+            try {
+                // await pauses here until fetch completes
+                var response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+
+                // await pauses here until JSON parsing completes
+                var user = await response.json();
+
+                output.innerHTML += "Name: " + user.name + "<br>";
+                output.innerHTML += "Email: " + user.email + "<br>";
+                output.innerHTML += "Phone: " + user.phone + "<br>";
+                output.innerHTML += "Website: " + user.website + "<br>";
+                output.innerHTML += "--- Done! ---<br>";
+            } catch (error) {
+                output.innerHTML += "Error: " + error.message + "<br>";
+            }
+        }
+
+        // Example 2: Error handling with async/await
+        async function getUserWithError() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching Invalid User ---<br>";
+
+            try {
+                var response = await fetch("https://jsonplaceholder.typicode.com/users/9999");
+
+                if (!response.ok) {
+                    throw new Error("User not found! Status: " + response.status);
+                }
+
+                var user = await response.json();
+                output.innerHTML += "Name: " + user.name + "<br>";
+            } catch (error) {
+                // catch block handles both network errors and our thrown errors
+                output.innerHTML += "Caught error: " + error.message + "<br>";
+            }
+        }
+
+        // Example 3: Fetching and displaying a todo item
+        async function getTodo() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching Todo ---<br>";
+
+            try {
+                var response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+                var todo = await response.json();
+
+                output.innerHTML += "Todo ID: " + todo.id + "<br>";
+                output.innerHTML += "Title: " + todo.title + "<br>";
+                output.innerHTML += "Completed: " + todo.completed + "<br>";
+
+                // Fetch the user who owns this todo
+                var userResponse = await fetch("https://jsonplaceholder.typicode.com/users/" + todo.userId);
+                var user = await userResponse.json();
+
+                output.innerHTML += "Assigned to: " + user.name + "<br>";
+                output.innerHTML += "--- Done! ---<br>";
+            } catch (error) {
+                output.innerHTML += "Error: " + error.message + "<br>";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX with XMLHttpRequest Example</title>
+</head>
+<body>
+    <h1>AJAX with XMLHttpRequest</h1>
+    <p>XMLHttpRequest (XHR) is the older way to make AJAX requests.</p>
+    <p>Steps: Create XHR → Open connection → Set callback → Send request</p>
+
+    <button onclick="fetchPost()">Fetch Post (GET)</button>
+    <button onclick="sendData()">Send Data (POST)</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: GET request using XMLHttpRequest
+        function fetchPost() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Fetching Post using XHR ---<br>";
+
+            // Step 1: Create XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Step 2: Open a connection (method, url, async)
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+
+            // Step 3: Set up callback for when response is received
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Parse the JSON response
+                    var post = JSON.parse(xhr.responseText);
+
+                    output.innerHTML += "Status: " + xhr.status + " OK<br><br>";
+                    output.innerHTML += "--- Post Details ---<br>";
+                    output.innerHTML += "Title: " + post.title + "<br>";
+                    output.innerHTML += "Body: " + post.body + "<br>";
+                } else {
+                    output.innerHTML += "Error! Status: " + xhr.status + "<br>";
+                }
+            };
+
+            // Handle network errors
+            xhr.onerror = function () {
+                output.innerHTML += "Network error occurred!<br>";
+            };
+
+            // Step 4: Send the request
+            xhr.send();
+
+            // This runs before response arrives (asynchronous!)
+            output.innerHTML += "Request sent! Waiting... (this runs first!)<br>";
+        }
+
+        // Example 2: POST request using XMLHttpRequest
+        function sendData() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Sending Data using XHR POST ---<br>";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+
+            // Set the content type to JSON
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                if (xhr.status === 201) {
+                    var response = JSON.parse(xhr.responseText);
+
+                    output.innerHTML += "Data sent successfully!<br><br>";
+                    output.innerHTML += "--- Server Response ---<br>";
+                    output.innerHTML += "ID: " + response.id + "<br>";
+                    output.innerHTML += "Title: " + response.title + "<br>";
+                    output.innerHTML += "Body: " + response.body + "<br>";
+                }
+            };
+
+            // Create data to send as JSON
+            var data = {
+                title: "Hello from JavaScript",
+                body: "This is a test post from AJAX",
+                userId: 1
+            };
+
+            // Convert object to JSON string and send
+            xhr.send(JSON.stringify(data));
+
+            output.innerHTML += "Sending data... (this runs first!)<br>";
+        }
+    </script>
+</body>
+</html>

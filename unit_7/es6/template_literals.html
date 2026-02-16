@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template Literals Example</title>
+</head>
+<body>
+    <h1>Template Literals</h1>
+    <p>Template literals use <b>backticks (`)</b> instead of quotes, and allow embedded expressions with <b>${}</b></p>
+
+    <button onclick="showBasic()">Basic Template Literals</button>
+    <button onclick="showMultiline()">Multiline Strings</button>
+    <button onclick="showExpressions()">Expressions in Templates</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Basic template literal usage
+        function showBasic() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Template Literals vs String Concatenation ---<br><br>";
+
+            const name = "Ram";
+            const age = 20;
+            const college = "Uniglobe College";
+
+            // OLD way: string concatenation with +
+            const oldWay = "My name is " + name + ". I am " + age + " years old. I study at " + college + ".";
+            output.innerHTML += "Old way:<br>" + oldWay + "<br><br>";
+
+            // NEW way: template literal with ${}
+            const newWay = `My name is ${name}. I am ${age} years old. I study at ${college}.`;
+            output.innerHTML += "New way:<br>" + newWay + "<br><br>";
+
+            // Much cleaner and easier to read!
+            output.innerHTML += "Both produce the same result!<br>";
+        }
+
+        // Example 2: Multiline strings
+        function showMultiline() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Multiline Strings ---<br><br>";
+
+            // OLD way: multiline with \n and +
+            const oldPoem = "Roses are red,\n" +
+                            "Violets are blue,\n" +
+                            "JavaScript is fun,\n" +
+                            "And so are you!";
+            output.innerHTML += "Old way:<br><pre>" + oldPoem + "</pre><br>";
+
+            // NEW way: template literal (just press Enter!)
+            const newPoem = `Roses are red,
+Violets are blue,
+JavaScript is fun,
+And so are you!`;
+            output.innerHTML += "New way:<br><pre>" + newPoem + "</pre><br>";
+
+            // Useful for creating HTML strings
+            const student = { name: "Sita", age: 21, grade: "A" };
+            const html = `
+                <div>
+                    <h3>${student.name}</h3>
+                    <p>Age: ${student.age}</p>
+                    <p>Grade: ${student.grade}</p>
+                </div>
+            `;
+            output.innerHTML += "HTML template:<br>" + html;
+        }
+
+        // Example 3: Expressions inside ${}
+        function showExpressions() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Expressions in Templates ---<br><br>";
+
+            const price = 500;
+            const quantity = 3;
+
+            // Math expressions
+            output.innerHTML += `Total: Rs. ${price * quantity}<br>`;
+            output.innerHTML += `With 13% VAT: Rs. ${(price * quantity * 1.13).toFixed(2)}<br><br>`;
+
+            // Ternary operator inside template
+            const age = 20;
+            output.innerHTML += `Status: ${age >= 18 ? "Adult" : "Minor"}<br>`;
+
+            // Function calls inside template
+            const name = "ram bahadur";
+            output.innerHTML += `Uppercase: ${name.toUpperCase()}<br>`;
+            output.innerHTML += `Length: ${name.length} characters<br><br>`;
+
+            // Array methods inside template
+            const fruits = ["Apple", "Mango", "Banana"];
+            output.innerHTML += `Fruits: ${fruits.join(", ")}<br>`;
+            output.innerHTML += `First: ${fruits[0]}, Last: ${fruits[fruits.length - 1]}<br>`;
+        }
+    </script>
+</body>
+</html>

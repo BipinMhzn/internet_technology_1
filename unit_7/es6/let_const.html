@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let and const Example</title>
+</head>
+<body>
+    <h1>let and const</h1>
+    <p>ES6 introduced <b>let</b> (block-scoped variable) and <b>const</b> (block-scoped constant) to replace <b>var</b>.</p>
+
+    <button onclick="showVarProblem()">var Problem</button>
+    <button onclick="showLetFix()">let Fix</button>
+    <button onclick="showConst()">const Example</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Problem with var (function-scoped, not block-scoped)
+        function showVarProblem() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Problem with var ---<br><br>";
+
+            // var is NOT block-scoped, it leaks out of the block
+            for (var i = 0; i < 3; i++) {
+                // i is accessible here
+            }
+            // i is STILL accessible here (leaked out of the for loop!)
+            output.innerHTML += "After loop, var i = " + i + " (leaked!)<br><br>";
+
+            // var can be redeclared (can cause bugs)
+            var name = "Ram";
+            var name = "Sita"; // No error, silently overwrites
+            output.innerHTML += "Redeclared var name = " + name + "<br>";
+
+            // var is hoisted (can use before declaration)
+            output.innerHTML += "Hoisted var x = " + x + " (undefined, not error)<br>";
+            var x = 10;
+        }
+
+        // Example 2: let fixes the var problems
+        function showLetFix() {
+            output.innerHTML = "";
+            output.innerHTML += "--- let (Block Scoped) ---<br><br>";
+
+            // let is block-scoped
+            for (let i = 0; i < 3; i++) {
+                output.innerHTML += "Inside loop: i = " + i + "<br>";
+            }
+            // i is NOT accessible here (block-scoped!)
+            // output.innerHTML += i; // This would cause ReferenceError
+
+            output.innerHTML += "After loop: i is not accessible (block-scoped)<br><br>";
+
+            // let cannot be redeclared in the same scope
+            let city = "Pokhara";
+            // let city = "Kathmandu"; // This would cause SyntaxError
+            city = "Kathmandu"; // But reassignment is OK
+            output.innerHTML += "Reassigned let city = " + city + "<br>";
+
+            // let in different blocks is fine
+            let fruit = "Apple";
+            if (true) {
+                let fruit = "Mango"; // Different block, different variable
+                output.innerHTML += "Inside block: fruit = " + fruit + "<br>";
+            }
+            output.innerHTML += "Outside block: fruit = " + fruit + "<br>";
+        }
+
+        // Example 3: const (cannot be reassigned)
+        function showConst() {
+            output.innerHTML = "";
+            output.innerHTML += "--- const (Constant) ---<br><br>";
+
+            // const must be initialized when declared
+            const PI = 3.14159;
+            const COLLEGE = "Uniglobe College";
+            output.innerHTML += "PI = " + PI + "<br>";
+            output.innerHTML += "COLLEGE = " + COLLEGE + "<br><br>";
+
+            // const cannot be reassigned
+            // PI = 3.14; // This would cause TypeError
+            output.innerHTML += "Cannot reassign: PI = 3.14 would cause error<br><br>";
+
+            // But const objects/arrays CAN be modified (the reference is constant, not the value)
+            const student = { name: "Ram", age: 20 };
+            student.age = 21; // This is OK! We're modifying the object, not reassigning
+            output.innerHTML += "const object modified: age = " + student.age + "<br>";
+
+            const colors = ["red", "green"];
+            colors.push("blue"); // This is OK! We're modifying the array
+            output.innerHTML += "const array modified: " + colors.join(", ") + "<br>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery AJAX Example</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>jQuery AJAX</h1>
+    <p>jQuery simplifies AJAX requests with methods like <b>$.get()</b>, <b>$.post()</b>, and <b>$.ajax()</b></p>
+
+    <button id="btnGet">$.get() - Fetch User</button>
+    <button id="btnPost">$.post() - Send Data</button>
+    <button id="btnAjax">$.ajax() - Fetch Posts</button>
+    <p id="output"></p>
+
+    <script>
+        $(document).ready(function () {
+
+            // Example 1: $.get() — simple GET request
+            $("#btnGet").click(function () {
+                $("#output").html("--- Fetching User with $.get() ---<br>");
+
+                $.get("https://jsonplaceholder.typicode.com/users/1", function (data) {
+                    // data is already parsed as a JavaScript object!
+                    $("#output").append("<br>--- User Details ---<br>");
+                    $("#output").append("Name: " + data.name + "<br>");
+                    $("#output").append("Email: " + data.email + "<br>");
+                    $("#output").append("City: " + data.address.city + "<br>");
+                    $("#output").append("Company: " + data.company.name + "<br>");
+                }).fail(function (error) {
+                    $("#output").append("Error: " + error.statusText + "<br>");
+                });
+
+                $("#output").append("Waiting... (this runs first!)<br>");
+            });
+
+            // Example 2: $.post() — simple POST request
+            $("#btnPost").click(function () {
+                $("#output").html("--- Sending Data with $.post() ---<br>");
+
+                var postData = {
+                    title: "Hello from jQuery",
+                    body: "This is a test post",
+                    userId: 1
+                };
+
+                $.post("https://jsonplaceholder.typicode.com/posts", postData, function (response) {
+                    $("#output").append("<br>--- Server Response ---<br>");
+                    $("#output").append("ID: " + response.id + "<br>");
+                    $("#output").append("Title: " + response.title + "<br>");
+                    $("#output").append("Body: " + response.body + "<br>");
+                    $("#output").append("Data sent successfully!<br>");
+                }).fail(function (error) {
+                    $("#output").append("Error: " + error.statusText + "<br>");
+                });
+
+                $("#output").append("Sending data... (this runs first!)<br>");
+            });
+
+            // Example 3: $.ajax() — full control over the request
+            $("#btnAjax").click(function () {
+                $("#output").html("--- Fetching Posts with $.ajax() ---<br>");
+
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts",
+                    method: "GET",
+                    dataType: "json",
+                    success: function (posts) {
+                        // Show first 5 posts
+                        $("#output").append("<br>Found " + posts.length + " posts. Showing first 5:<br><br>");
+
+                        for (var i = 0; i < 5; i++) {
+                            $("#output").append((i + 1) + ". " + posts[i].title + "<br>");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $("#output").append("Error: " + error + "<br>");
+                        $("#output").append("Status: " + status + "<br>");
+                    },
+                    complete: function () {
+                        // Runs after success or error
+                        $("#output").append("<br>--- Request Complete ---<br>");
+                    }
+                });
+
+                $("#output").append("Loading... (this runs first!)<br>");
+            });
+        });
+    </script>
+</body>
+</html>

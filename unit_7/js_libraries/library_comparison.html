@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Libraries Comparison</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .lib { font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Libraries/Frameworks Comparison</h1>
+    <p>Understanding the difference between a <b>library</b> and a <b>framework</b>, and when to use each.</p>
+
+    <button onclick="showComparison()">Show Comparison Table</button>
+    <button onclick="showDifference()">Library vs Framework</button>
+    <button onclick="showWhenToUse()">When to Use What?</button>
+    <button onclick="showCodeComparison()">Code Comparison</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Comparison table
+        function showComparison() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Comparison Table ---<br><br>";
+
+            output.innerHTML += "<table>";
+            output.innerHTML += "<tr><th>Feature</th><th>jQuery</th><th>React</th><th>Vue.js</th><th>Angular</th></tr>";
+
+            output.innerHTML += "<tr><td class='lib'>Type</td><td>Library</td><td>Library</td><td>Framework</td><td>Framework</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Created by</td><td>John Resig</td><td>Facebook</td><td>Evan You</td><td>Google</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Year</td><td>2006</td><td>2013</td><td>2014</td><td>2016</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Language</td><td>JavaScript</td><td>JavaScript/JSX</td><td>JavaScript</td><td>TypeScript</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Learning Curve</td><td>Easy</td><td>Medium</td><td>Easy</td><td>Hard</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Size</td><td>~87KB</td><td>~42KB</td><td>~33KB</td><td>~500KB+</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>DOM</td><td>Real DOM</td><td>Virtual DOM</td><td>Virtual DOM</td><td>Real DOM</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Architecture</td><td>-</td><td>Component</td><td>Component</td><td>MVC/Component</td></tr>";
+            output.innerHTML += "<tr><td class='lib'>Best For</td><td>Simple sites</td><td>SPAs, UI</td><td>SPAs, UI</td><td>Large enterprise apps</td></tr>";
+            output.innerHTML += "</table>";
+        }
+
+        // Example 2: Library vs Framework
+        function showDifference() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Library vs Framework ---<br><br>";
+
+            output.innerHTML += "<b>Library (e.g., jQuery, React)</b><br>";
+            output.innerHTML += "- YOU call the library when you need it<br>";
+            output.innerHTML += "- You are in control of the flow<br>";
+            output.innerHTML += "- Pick and choose what you use<br>";
+            output.innerHTML += "- Like a toolbox: use any tool you want<br><br>";
+
+            output.innerHTML += "<b>Framework (e.g., Angular, Vue.js)</b><br>";
+            output.innerHTML += "- The FRAMEWORK calls your code<br>";
+            output.innerHTML += "- The framework controls the flow<br>";
+            output.innerHTML += "- Follow the framework's structure/rules<br>";
+            output.innerHTML += "- Like a blueprint: build within the structure<br><br>";
+
+            output.innerHTML += "<b>Analogy:</b><br>";
+            output.innerHTML += "Library = You cook using recipe books (your kitchen, your rules)<br>";
+            output.innerHTML += "Framework = You cook in a restaurant kitchen (follow their rules and setup)<br>";
+        }
+
+        // Example 3: When to use
+        function showWhenToUse() {
+            output.innerHTML = "";
+            output.innerHTML += "--- When to Use What? ---<br><br>";
+
+            output.innerHTML += "<b>Use jQuery when:</b><br>";
+            output.innerHTML += "- Building simple websites<br>";
+            output.innerHTML += "- Adding quick interactivity to existing pages<br>";
+            output.innerHTML += "- DOM manipulation and animations<br>";
+            output.innerHTML += "- Working with older projects<br><br>";
+
+            output.innerHTML += "<b>Use React when:</b><br>";
+            output.innerHTML += "- Building interactive single-page apps (SPAs)<br>";
+            output.innerHTML += "- Need reusable UI components<br>";
+            output.innerHTML += "- Working with large teams<br>";
+            output.innerHTML += "- Examples: Facebook, Instagram, Netflix<br><br>";
+
+            output.innerHTML += "<b>Use Vue.js when:</b><br>";
+            output.innerHTML += "- Want an easy-to-learn framework<br>";
+            output.innerHTML += "- Building small to medium SPAs<br>";
+            output.innerHTML += "- Gradual adoption (can add to existing project)<br>";
+            output.innerHTML += "- Examples: Alibaba, GitLab<br><br>";
+
+            output.innerHTML += "<b>Use Angular when:</b><br>";
+            output.innerHTML += "- Building large enterprise applications<br>";
+            output.innerHTML += "- Need everything built-in (routing, forms, HTTP)<br>";
+            output.innerHTML += "- Team prefers TypeScript<br>";
+            output.innerHTML += "- Examples: Google apps, Microsoft Office Online<br>";
+        }
+
+        // Example 4: Same feature in different libraries
+        function showCodeComparison() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Counter in Different Libraries ---<br><br>";
+
+            output.innerHTML += "<b>Vanilla JavaScript:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "let count = 0;\n";
+            output.innerHTML += "document.getElementById('btn').onclick = function() {\n";
+            output.innerHTML += "    count++;\n";
+            output.innerHTML += "    document.getElementById('display').textContent = count;\n";
+            output.innerHTML += "};\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>jQuery:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "let count = 0;\n";
+            output.innerHTML += "$('#btn').click(function() {\n";
+            output.innerHTML += "    count++;\n";
+            output.innerHTML += "    $('#display').text(count);\n";
+            output.innerHTML += "});\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>React:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "function Counter() {\n";
+            output.innerHTML += "    const [count, setCount] = React.useState(0);\n";
+            output.innerHTML += "    return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;;\n";
+            output.innerHTML += "}\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>Vue.js:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// Template: &lt;button @click=\"count++\"&gt;{{ count }}&lt;/button&gt;\n";
+            output.innerHTML += "// Data:     data() { return { count: 0 } }\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>Angular:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// Template: &lt;button (click)=\"count = count + 1\"&gt;{{ count }}&lt;/button&gt;\n";
+            output.innerHTML += "// Class:    count: number = 0;\n";
+            output.innerHTML += "</pre>";
+        }
+    </script>
+</body>
+</html>

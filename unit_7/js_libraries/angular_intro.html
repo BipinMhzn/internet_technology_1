@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Introduction (Concept Overview)</title>
+    <style>
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .section { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Angular Introduction</h1>
+    <p>Angular is a full <b>framework</b> (not just a library) built by Google for building single-page applications (SPAs).</p>
+    <p><b>Note:</b> Angular requires Node.js and CLI tools to run. This page shows the key concepts with code examples.</p>
+
+    <button onclick="showSetup()">Setup & CLI</button>
+    <button onclick="showComponent()">Components</button>
+    <button onclick="showBinding()">Data Binding</button>
+    <button onclick="showDirectives()">Directives</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Angular setup
+        function showSetup() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Angular Setup ---<br><br>";
+
+            output.innerHTML += "<b>Step 1: Install Angular CLI</b><br>";
+            output.innerHTML += "<pre>npm install -g @angular/cli</pre>";
+
+            output.innerHTML += "<b>Step 2: Create a new project</b><br>";
+            output.innerHTML += "<pre>ng new my-app</pre>";
+
+            output.innerHTML += "<b>Step 3: Run the project</b><br>";
+            output.innerHTML += "<pre>cd my-app\nng serve</pre>";
+
+            output.innerHTML += "<b>Step 4: Open in browser</b><br>";
+            output.innerHTML += "<pre>http://localhost:4200</pre><br>";
+
+            output.innerHTML += "<b>Project Structure:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "my-app/\n";
+            output.innerHTML += "  src/\n";
+            output.innerHTML += "    app/\n";
+            output.innerHTML += "      app.component.ts    (main component logic)\n";
+            output.innerHTML += "      app.component.html  (main component template)\n";
+            output.innerHTML += "      app.component.css   (main component styles)\n";
+            output.innerHTML += "    index.html             (entry HTML file)\n";
+            output.innerHTML += "    main.ts                (entry point)\n";
+            output.innerHTML += "</pre>";
+        }
+
+        // Example 2: Angular Component
+        function showComponent() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Angular Components ---<br><br>";
+
+            output.innerHTML += "Components are the building blocks of Angular apps.<br>";
+            output.innerHTML += "Each component has: <b>TypeScript class</b> + <b>HTML template</b> + <b>CSS styles</b><br><br>";
+
+            output.innerHTML += "<b>File: student.component.ts</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "import { Component } from '@angular/core';\n\n";
+            output.innerHTML += "@Component({\n";
+            output.innerHTML += "  selector: 'app-student',\n";
+            output.innerHTML += "  templateUrl: './student.component.html',\n";
+            output.innerHTML += "  styleUrls: ['./student.component.css']\n";
+            output.innerHTML += "})\n";
+            output.innerHTML += "export class StudentComponent {\n";
+            output.innerHTML += "  name: string = 'Ram';\n";
+            output.innerHTML += "  age: number = 20;\n";
+            output.innerHTML += "  college: string = 'Uniglobe';\n\n";
+            output.innerHTML += "  greet() {\n";
+            output.innerHTML += "    return `Hello, I am ${this.name}`;\n";
+            output.innerHTML += "  }\n";
+            output.innerHTML += "}\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>File: student.component.html</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "&lt;div&gt;\n";
+            output.innerHTML += "  &lt;h2&gt;{{ name }}&lt;/h2&gt;\n";
+            output.innerHTML += "  &lt;p&gt;Age: {{ age }}&lt;/p&gt;\n";
+            output.innerHTML += "  &lt;p&gt;College: {{ college }}&lt;/p&gt;\n";
+            output.innerHTML += "  &lt;p&gt;{{ greet() }}&lt;/p&gt;\n";
+            output.innerHTML += "&lt;/div&gt;\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>Usage in HTML:</b><br>";
+            output.innerHTML += "<pre>&lt;app-student&gt;&lt;/app-student&gt;</pre>";
+        }
+
+        // Example 3: Data Binding
+        function showBinding() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Angular Data Binding ---<br><br>";
+
+            output.innerHTML += "Angular has 4 types of data binding:<br><br>";
+
+            output.innerHTML += "<b>1. Interpolation (one-way: class → template)</b><br>";
+            output.innerHTML += "<pre>{{ name }}    →  displays the value of 'name'</pre><br>";
+
+            output.innerHTML += "<b>2. Property Binding (one-way: class → template)</b><br>";
+            output.innerHTML += "<pre>&lt;img [src]=\"imageUrl\"&gt;    →  binds 'imageUrl' to src attribute</pre><br>";
+
+            output.innerHTML += "<b>3. Event Binding (one-way: template → class)</b><br>";
+            output.innerHTML += "<pre>&lt;button (click)=\"save()\"&gt;Save&lt;/button&gt;    →  calls save() on click</pre><br>";
+
+            output.innerHTML += "<b>4. Two-Way Binding (both directions)</b><br>";
+            output.innerHTML += "<pre>&lt;input [(ngModel)]=\"name\"&gt;    →  input and variable stay in sync</pre><br>";
+
+            output.innerHTML += "<b>Example component:</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// TypeScript\n";
+            output.innerHTML += "export class AppComponent {\n";
+            output.innerHTML += "  name: string = 'Ram';\n";
+            output.innerHTML += "  count: number = 0;\n\n";
+            output.innerHTML += "  increase() {\n";
+            output.innerHTML += "    this.count++;\n";
+            output.innerHTML += "  }\n";
+            output.innerHTML += "}\n\n";
+            output.innerHTML += "// HTML Template\n";
+            output.innerHTML += "// &lt;p&gt;Hello, {{ name }}&lt;/p&gt;\n";
+            output.innerHTML += "// &lt;input [(ngModel)]=\"name\"&gt;\n";
+            output.innerHTML += "// &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n";
+            output.innerHTML += "// &lt;button (click)=\"increase()\"&gt;+1&lt;/button&gt;\n";
+            output.innerHTML += "</pre>";
+        }
+
+        // Example 4: Directives
+        function showDirectives() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Angular Directives ---<br><br>";
+
+            output.innerHTML += "<b>*ngIf — Conditional rendering</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "&lt;p *ngIf=\"isLoggedIn\"&gt;Welcome, {{ name }}!&lt;/p&gt;\n";
+            output.innerHTML += "&lt;p *ngIf=\"!isLoggedIn\"&gt;Please log in.&lt;/p&gt;\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>*ngFor — Loop through a list</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// TypeScript\n";
+            output.innerHTML += "students = ['Ram', 'Sita', 'Hari'];\n\n";
+            output.innerHTML += "// HTML\n";
+            output.innerHTML += "&lt;ul&gt;\n";
+            output.innerHTML += "  &lt;li *ngFor=\"let student of students; let i = index\"&gt;\n";
+            output.innerHTML += "    {{ i + 1 }}. {{ student }}\n";
+            output.innerHTML += "  &lt;/li&gt;\n";
+            output.innerHTML += "&lt;/ul&gt;\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>[ngClass] — Dynamic CSS classes</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "&lt;p [ngClass]=\"{ 'active': isActive, 'highlight': isSpecial }\"&gt;\n";
+            output.innerHTML += "  Styled text\n";
+            output.innerHTML += "&lt;/p&gt;\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>[ngStyle] — Dynamic inline styles</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "&lt;p [ngStyle]=\"{ 'color': isError ? 'red' : 'green' }\"&gt;\n";
+            output.innerHTML += "  Status message\n";
+            output.innerHTML += "&lt;/p&gt;\n";
+            output.innerHTML += "</pre>";
+        }
+    </script>
+</body>
+</html>

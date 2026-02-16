@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrow Functions Example</title>
+</head>
+<body>
+    <h1>Arrow Functions</h1>
+    <p>Arrow functions provide a shorter syntax for writing functions using <b>=></b></p>
+
+    <button onclick="showBasic()">Basic Arrow Functions</button>
+    <button onclick="showWithArrays()">Arrow Functions with Arrays</button>
+    <button onclick="showComparison()">Old vs New Comparison</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Basic arrow function syntax
+        function showBasic() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Arrow Function Syntax ---<br><br>";
+
+            // Traditional function
+            const greet1 = function(name) {
+                return "Hello " + name;
+            };
+
+            // Arrow function (shorter!)
+            const greet2 = (name) => {
+                return "Hello " + name;
+            };
+
+            // Even shorter: one parameter = no parentheses, one line = no braces/return
+            const greet3 = name => "Hello " + name;
+
+            output.innerHTML += "Traditional: " + greet1("Ram") + "<br>";
+            output.innerHTML += "Arrow: " + greet2("Sita") + "<br>";
+            output.innerHTML += "Short arrow: " + greet3("Hari") + "<br><br>";
+
+            // No parameters = empty parentheses
+            const sayHello = () => "Hello!";
+            output.innerHTML += "No params: " + sayHello() + "<br>";
+
+            // Multiple parameters
+            const add = (a, b) => a + b;
+            output.innerHTML += "Add(5, 3) = " + add(5, 3) + "<br>";
+
+            // Multiple lines need braces and return
+            const getInfo = (name, age) => {
+                const message = name + " is " + age + " years old";
+                return message;
+            };
+            output.innerHTML += getInfo("Ram", 20) + "<br>";
+        }
+
+        // Example 2: Arrow functions with array methods
+        function showWithArrays() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Arrow Functions with Arrays ---<br><br>";
+
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            output.innerHTML += "Numbers: " + numbers.join(", ") + "<br><br>";
+
+            // filter: keep only even numbers
+            const evens = numbers.filter(num => num % 2 === 0);
+            output.innerHTML += "Even numbers: " + evens.join(", ") + "<br>";
+
+            // map: double each number
+            const doubled = numbers.map(num => num * 2);
+            output.innerHTML += "Doubled: " + doubled.join(", ") + "<br>";
+
+            // find: first number greater than 5
+            const found = numbers.find(num => num > 5);
+            output.innerHTML += "First > 5: " + found + "<br>";
+
+            // forEach: loop through
+            const students = ["Ram", "Sita", "Hari"];
+            output.innerHTML += "<br>Students:<br>";
+            students.forEach((name, index) => {
+                output.innerHTML += (index + 1) + ". " + name + "<br>";
+            });
+        }
+
+        // Example 3: Side-by-side comparison
+        function showComparison() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Old vs New ---<br><br>";
+
+            const numbers = [10, 20, 30, 40, 50];
+
+            // OLD way: traditional function
+            const oldDoubled = numbers.map(function(num) {
+                return num * 2;
+            });
+            output.innerHTML += "Old way (map): " + oldDoubled.join(", ") + "<br>";
+
+            // NEW way: arrow function
+            const newDoubled = numbers.map(num => num * 2);
+            output.innerHTML += "New way (map): " + newDoubled.join(", ") + "<br><br>";
+
+            // OLD way: filtering
+            const oldEvens = numbers.filter(function(num) {
+                return num > 25;
+            });
+            output.innerHTML += "Old way (filter > 25): " + oldEvens.join(", ") + "<br>";
+
+            // NEW way: filtering
+            const newEvens = numbers.filter(num => num > 25);
+            output.innerHTML += "New way (filter > 25): " + newEvens.join(", ") + "<br>";
+        }
+    </script>
+</body>
+</html>

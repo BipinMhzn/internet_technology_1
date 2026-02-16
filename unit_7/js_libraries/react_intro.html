@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React.js Introduction Example</title>
+    <!-- React CDN (for learning/demo purposes) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel to use JSX in browser (for demo only, not for production) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <h1>React.js Introduction</h1>
+    <p>React is a JavaScript library for building user interfaces using <b>components</b>.</p>
+    <p>Key concepts: <b>Components</b>, <b>JSX</b>, <b>Props</b>, <b>State</b></p>
+    <hr>
+
+    <!-- React will render inside these divs -->
+    <h3>Example 1: Simple Component</h3>
+    <div id="example1"></div>
+
+    <h3>Example 2: Component with Props</h3>
+    <div id="example2"></div>
+
+    <h3>Example 3: Component with State (Counter)</h3>
+    <div id="example3"></div>
+
+    <!-- type="text/babel" lets us write JSX -->
+    <script type="text/babel">
+
+        // Example 1: Simple functional component
+        // Components are like custom HTML tags that return JSX
+        function Greeting() {
+            const name = "Ram";
+            return (
+                <div>
+                    <p>Hello, {name}! Welcome to React.</p>
+                    <p>This is rendered by React, not plain HTML!</p>
+                </div>
+            );
+        }
+
+        // Render the component into the page
+        const root1 = ReactDOM.createRoot(document.getElementById("example1"));
+        root1.render(<Greeting />);
+
+
+        // Example 2: Props — passing data to components
+        // Props are like function arguments for components
+        function StudentCard(props) {
+            return (
+                <div style={{border: "1px solid gray", padding: "10px", margin: "5px", display: "inline-block"}}>
+                    <h4>{props.name}</h4>
+                    <p>Age: {props.age}</p>
+                    <p>College: {props.college}</p>
+                </div>
+            );
+        }
+
+        const root2 = ReactDOM.createRoot(document.getElementById("example2"));
+        root2.render(
+            <div>
+                <StudentCard name="Ram" age={20} college="Uniglobe" />
+                <StudentCard name="Sita" age={21} college="Uniglobe" />
+                <StudentCard name="Hari" age={22} college="Uniglobe" />
+            </div>
+        );
+
+
+        // Example 3: State — making components interactive
+        // useState hook lets components remember values
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+
+            return (
+                <div>
+                    <p>Count: <b>{count}</b></p>
+                    <button onClick={() => setCount(count + 1)}>Increase</button>
+                    <button onClick={() => setCount(count - 1)}>Decrease</button>
+                    <button onClick={() => setCount(0)}>Reset</button>
+                </div>
+            );
+        }
+
+        const root3 = ReactDOM.createRoot(document.getElementById("example3"));
+        root3.render(<Counter />);
+
+    </script>
+</body>
+</html>

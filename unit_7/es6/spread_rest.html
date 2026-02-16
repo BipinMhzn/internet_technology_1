@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spread and Rest Operator Example</title>
+</head>
+<body>
+    <h1>Spread and Rest Operators (...)</h1>
+    <p>The <b>...</b> syntax serves two purposes: <b>spread</b> (expands) and <b>rest</b> (collects).</p>
+
+    <button onclick="showSpread()">Spread Operator</button>
+    <button onclick="showRest()">Rest Operator</button>
+    <button onclick="showPractical()">Practical Examples</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Spread operator (expands arrays/objects)
+        function showSpread() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Spread Operator ---<br><br>";
+
+            // Spread in arrays: copies/combines arrays
+            const fruits = ["Apple", "Mango"];
+            const veggies = ["Carrot", "Potato"];
+
+            // Combine two arrays
+            const food = [...fruits, ...veggies];
+            output.innerHTML += "Combined: " + food.join(", ") + "<br>";
+
+            // Copy an array
+            const fruitsCopy = [...fruits];
+            fruitsCopy.push("Banana");
+            output.innerHTML += "Original: " + fruits.join(", ") + "<br>";
+            output.innerHTML += "Copy (modified): " + fruitsCopy.join(", ") + "<br><br>";
+
+            // Spread in objects: copies/combines objects
+            const person = { name: "Ram", age: 20 };
+            const student = { ...person, college: "Uniglobe", semester: 1 };
+            output.innerHTML += "Spread object: " + JSON.stringify(student) + "<br>";
+
+            // Override properties
+            const updated = { ...person, age: 21 };
+            output.innerHTML += "Updated age: " + JSON.stringify(updated) + "<br>";
+
+            // Spread with function arguments
+            const numbers = [5, 2, 9, 1, 7];
+            output.innerHTML += "<br>Numbers: " + numbers.join(", ") + "<br>";
+            output.innerHTML += "Max: " + Math.max(...numbers) + "<br>";
+            output.innerHTML += "Min: " + Math.min(...numbers) + "<br>";
+        }
+
+        // Example 2: Rest operator (collects remaining items)
+        function showRest() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Rest Operator ---<br><br>";
+
+            // Rest in function parameters: collects all arguments
+            function sum(...numbers) {
+                let total = 0;
+                for (let num of numbers) {
+                    total += num;
+                }
+                return total;
+            }
+
+            output.innerHTML += "sum(1, 2, 3) = " + sum(1, 2, 3) + "<br>";
+            output.innerHTML += "sum(10, 20, 30, 40) = " + sum(10, 20, 30, 40) + "<br><br>";
+
+            // Rest with other parameters
+            function introduce(greeting, ...names) {
+                output.innerHTML += greeting + " " + names.join(", ") + "<br>";
+            }
+
+            introduce("Hello", "Ram", "Sita", "Hari");
+            introduce("Namaste", "Gita", "Krishna");
+
+            output.innerHTML += "<br>";
+
+            // Rest in array destructuring
+            const [first, second, ...remaining] = [1, 2, 3, 4, 5];
+            output.innerHTML += "First: " + first + "<br>";
+            output.innerHTML += "Second: " + second + "<br>";
+            output.innerHTML += "Remaining: " + remaining.join(", ") + "<br>";
+        }
+
+        // Example 3: Practical examples
+        function showPractical() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Practical Examples ---<br><br>";
+
+            // Merging user settings with defaults
+            const defaults = { theme: "light", fontSize: 14, language: "en" };
+            const userSettings = { theme: "dark", fontSize: 16 };
+
+            const settings = { ...defaults, ...userSettings };
+            output.innerHTML += "Merged settings: " + JSON.stringify(settings, null, 2).replace(/\n/g, "<br>") + "<br><br>";
+
+            // Adding items to array without mutating
+            const todos = ["Study HTML", "Study CSS"];
+            const newTodos = [...todos, "Study JavaScript"];
+            output.innerHTML += "Original: " + todos.join(", ") + "<br>";
+            output.innerHTML += "New: " + newTodos.join(", ") + "<br><br>";
+
+            // Converting string to array
+            const word = "HELLO";
+            const letters = [...word];
+            output.innerHTML += "String to array: " + letters.join(", ") + "<br>";
+        }
+    </script>
+</body>
+</html>

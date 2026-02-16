@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Destructuring Assignment Example</title>
+</head>
+<body>
+    <h1>Destructuring Assignment</h1>
+    <p>Destructuring lets you unpack values from arrays or properties from objects into separate variables.</p>
+
+    <button onclick="showArray()">Array Destructuring</button>
+    <button onclick="showObject()">Object Destructuring</button>
+    <button onclick="showPractical()">Practical Uses</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Array Destructuring
+        function showArray() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Array Destructuring ---<br><br>";
+
+            const fruits = ["Apple", "Mango", "Banana", "Orange"];
+
+            // OLD way
+            const first = fruits[0];
+            const second = fruits[1];
+            output.innerHTML += "Old way: first = " + first + ", second = " + second + "<br><br>";
+
+            // NEW way: destructuring
+            const [a, b, c, d] = fruits;
+            output.innerHTML += "New way: a = " + a + ", b = " + b + ", c = " + c + ", d = " + d + "<br><br>";
+
+            // Skip elements using commas
+            const [one, , three] = fruits;
+            output.innerHTML += "Skip second: one = " + one + ", three = " + three + "<br>";
+
+            // Rest operator: collect remaining items
+            const [head, ...rest] = fruits;
+            output.innerHTML += "Head: " + head + "<br>";
+            output.innerHTML += "Rest: " + rest.join(", ") + "<br><br>";
+
+            // Swap variables (no temp variable needed!)
+            let x = 10;
+            let y = 20;
+            output.innerHTML += "Before swap: x = " + x + ", y = " + y + "<br>";
+            [x, y] = [y, x];
+            output.innerHTML += "After swap: x = " + x + ", y = " + y + "<br>";
+        }
+
+        // Example 2: Object Destructuring
+        function showObject() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Object Destructuring ---<br><br>";
+
+            const student = {
+                name: "Ram",
+                age: 20,
+                college: "Uniglobe",
+                city: "Pokhara"
+            };
+
+            // OLD way
+            const oldName = student.name;
+            const oldAge = student.age;
+            output.innerHTML += "Old way: name = " + oldName + ", age = " + oldAge + "<br><br>";
+
+            // NEW way: destructuring (variable names must match property names)
+            const { name, age, college, city } = student;
+            output.innerHTML += "New way: name = " + name + ", age = " + age + "<br>";
+            output.innerHTML += "college = " + college + ", city = " + city + "<br><br>";
+
+            // Rename variables using colon
+            const { name: studentName, age: studentAge } = student;
+            output.innerHTML += "Renamed: studentName = " + studentName + "<br>";
+
+            // Default values (if property doesn't exist)
+            const { name: n, grade = "N/A" } = student;
+            output.innerHTML += "Default: grade = " + grade + " (not in object)<br><br>";
+
+            // Nested object destructuring
+            const person = {
+                fullName: "Sita",
+                address: {
+                    street: "Lakeside",
+                    district: "Kaski"
+                }
+            };
+            const { fullName, address: { street, district } } = person;
+            output.innerHTML += "Nested: " + fullName + " lives in " + street + ", " + district + "<br>";
+        }
+
+        // Example 3: Practical uses
+        function showPractical() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Practical Uses ---<br><br>";
+
+            // Function with destructured parameter
+            function displayStudent({ name, age, college }) {
+                output.innerHTML += `Name: ${name}, Age: ${age}, College: ${college}<br>`;
+            }
+
+            displayStudent({ name: "Ram", age: 20, college: "Uniglobe" });
+            displayStudent({ name: "Sita", age: 21, college: "Uniglobe" });
+
+            output.innerHTML += "<br>";
+
+            // Function returning multiple values
+            function getMinMax(numbers) {
+                return {
+                    min: Math.min(...numbers),
+                    max: Math.max(...numbers)
+                };
+            }
+
+            const { min, max } = getMinMax([5, 2, 9, 1, 7]);
+            output.innerHTML += "Min: " + min + ", Max: " + max + "<br><br>";
+
+            // Destructuring in forEach
+            const students = [
+                { name: "Ram", grade: "A" },
+                { name: "Sita", grade: "A+" },
+                { name: "Hari", grade: "B" }
+            ];
+
+            output.innerHTML += "Student Grades:<br>";
+            students.forEach(({ name, grade }) => {
+                output.innerHTML += `${name}: ${grade}<br>`;
+            });
+        }
+    </script>
+</body>
+</html>

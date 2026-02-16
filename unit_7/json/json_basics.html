@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Basics Example</title>
+</head>
+<body>
+    <h1>JSON Basics</h1>
+    <p>JSON (JavaScript Object Notation) is a lightweight format for storing and exchanging data.</p>
+    <p>JSON is <b>text</b>, written in key/value pairs, and easy for humans to read.</p>
+
+    <button onclick="showStudent()">Show Student Data</button>
+    <button onclick="showArray()">Show Student List</button>
+    <button onclick="showNested()">Show Nested JSON</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // JSON is just a string that looks like a JavaScript object
+        // JSON string (notice the double quotes around keys)
+        var jsonString = '{"name": "Ram", "age": 20, "passed": true}';
+
+        // Parse JSON string into a JavaScript object
+        var student = JSON.parse(jsonString);
+
+        // Display on page load
+        output.innerHTML = "JSON string: " + jsonString + "<br>";
+        output.innerHTML += "Parsed name: " + student.name + "<br>";
+        output.innerHTML += "Parsed age: " + student.age + "<br><br>";
+
+        // Example 1: Working with a JSON object
+        function showStudent() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Student Data ---<br>";
+
+            // Create a JavaScript object
+            var student = {
+                name: "Sita",
+                age: 21,
+                semester: 1,
+                college: "Uniglobe College",
+                passed: true
+            };
+
+            // Convert object to JSON string using JSON.stringify()
+            var jsonStr = JSON.stringify(student);
+            output.innerHTML += "JSON string: " + jsonStr + "<br><br>";
+
+            // Parse it back to an object using JSON.parse()
+            var parsed = JSON.parse(jsonStr);
+            output.innerHTML += "Name: " + parsed.name + "<br>";
+            output.innerHTML += "College: " + parsed.college + "<br>";
+            output.innerHTML += "Semester: " + parsed.semester + "<br>";
+            output.innerHTML += "Passed: " + parsed.passed + "<br>";
+        }
+
+        // Example 2: JSON array
+        function showArray() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Student List (JSON Array) ---<br><br>";
+
+            // JSON can contain arrays
+            var jsonStr = '[{"name": "Ram", "age": 20}, {"name": "Sita", "age": 21}, {"name": "Hari", "age": 22}]';
+
+            // Parse the JSON array
+            var students = JSON.parse(jsonStr);
+
+            // Loop through the array
+            for (var i = 0; i < students.length; i++) {
+                output.innerHTML += (i + 1) + ". " + students[i].name + " (Age: " + students[i].age + ")<br>";
+            }
+
+            output.innerHTML += "<br>Total students: " + students.length + "<br>";
+        }
+
+        // Example 3: Nested JSON
+        function showNested() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Nested JSON ---<br><br>";
+
+            var student = {
+                name: "Ram",
+                age: 20,
+                address: {
+                    city: "Pokhara",
+                    district: "Kaski"
+                },
+                subjects: ["Internet Technology", "Programming", "Mathematics"]
+            };
+
+            var jsonStr = JSON.stringify(student, null, 2);
+            output.innerHTML += "Formatted JSON:<br>";
+            output.innerHTML += "<pre>" + jsonStr + "</pre>";
+
+            output.innerHTML += "City: " + student.address.city + "<br>";
+            output.innerHTML += "First subject: " + student.subjects[0] + "<br>";
+        }
+    </script>
+</body>
+</html>

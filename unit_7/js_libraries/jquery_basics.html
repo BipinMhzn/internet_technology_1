@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Basics Example</title>
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .highlight { background-color: yellow; padding: 5px; }
+        .big { font-size: 24px; color: blue; }
+        #box { width: 200px; height: 100px; background: lightblue; padding: 20px; margin: 10px 0; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>jQuery Basics</h1>
+    <p>jQuery is a fast JavaScript library that simplifies DOM manipulation, events, and AJAX.</p>
+    <p>jQuery uses the <b>$()</b> selector — write less, do more!</p>
+
+    <button id="btnSelect">Selectors</button>
+    <button id="btnModify">Modify Content</button>
+    <button id="btnCSS">Change CSS</button>
+    <p id="output"></p>
+    <div id="box">I am a box</div>
+    <ul id="fruitList">
+        <li>Apple</li>
+        <li>Mango</li>
+        <li>Banana</li>
+    </ul>
+
+    <script>
+        // $(document).ready() — runs code after page is fully loaded
+        $(document).ready(function () {
+
+            // Example 1: jQuery Selectors
+            $("#btnSelect").click(function () {
+                $("#output").html("");
+                $("#output").append("--- jQuery Selectors ---<br><br>");
+
+                // Select by ID: $("#id")
+                var boxText = $("#box").text();
+                $("#output").append("By ID (#box): " + boxText + "<br>");
+
+                // Select by tag: $("tag")
+                var listItems = $("li").length;
+                $("#output").append("By tag (li): found " + listItems + " items<br>");
+
+                // Select by class — adding class first
+                $("#box").addClass("highlight");
+                $("#output").append("Added 'highlight' class to #box<br><br>");
+
+                // Get all list items
+                $("#output").append("List items:<br>");
+                $("li").each(function (index) {
+                    $("#output").append((index + 1) + ". " + $(this).text() + "<br>");
+                });
+            });
+
+            // Example 2: Modify content
+            $("#btnModify").click(function () {
+                $("#output").html("");
+                $("#output").append("--- Modify Content ---<br><br>");
+
+                // .html() — set/get HTML content
+                $("#box").html("<b>New bold content!</b>");
+                $("#output").append("Changed #box HTML<br>");
+
+                // .text() — set/get text content
+                $("#output").append("Box text: " + $("#box").text() + "<br>");
+
+                // .append() — add content at the end
+                $("#fruitList").append("<li>Orange (added!)</li>");
+                $("#output").append("Appended 'Orange' to list<br>");
+
+                // .prepend() — add content at the beginning
+                $("#fruitList").prepend("<li>Guava (prepended!)</li>");
+                $("#output").append("Prepended 'Guava' to list<br>");
+
+                // .attr() — set/get attributes
+                $("#box").attr("title", "This is a box");
+                $("#output").append("Added title attribute to #box<br>");
+            });
+
+            // Example 3: Change CSS
+            $("#btnCSS").click(function () {
+                $("#output").html("");
+                $("#output").append("--- Change CSS ---<br><br>");
+
+                // .css() — get/set CSS properties
+                $("#box").css("background-color", "lightgreen");
+                $("#box").css("border", "2px solid green");
+                $("#output").append("Changed box background and border<br>");
+
+                // Multiple CSS properties at once
+                $("#box").css({
+                    "font-size": "18px",
+                    "text-align": "center",
+                    "border-radius": "10px"
+                });
+                $("#output").append("Applied multiple CSS properties<br>");
+
+                // .addClass(), .removeClass(), .toggleClass()
+                $("li").addClass("big");
+                $("#output").append("Added 'big' class to all list items<br>");
+            });
+        });
+    </script>
+</body>
+</html>

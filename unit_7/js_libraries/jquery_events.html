@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Events Example</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        #hoverBox { width: 200px; height: 100px; background: lightcoral; padding: 20px; margin: 10px 0; text-align: center; cursor: pointer; }
+        #clickBox { width: 200px; height: 100px; background: lightblue; padding: 20px; margin: 10px 0; text-align: center; cursor: pointer; }
+        input { padding: 8px; margin: 5px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>jQuery Events</h1>
+    <p>jQuery makes event handling simple with methods like <b>.click()</b>, <b>.hover()</b>, <b>.on()</b>, etc.</p>
+
+    <div id="clickBox">Click Me!</div>
+    <div id="hoverBox">Hover Over Me!</div>
+    <br>
+    <input type="text" id="nameInput" placeholder="Type your name...">
+    <br>
+    <button id="btnHide">Hide/Show Box</button>
+    <button id="btnFade">Fade Effect</button>
+    <button id="btnSlide">Slide Effect</button>
+    <p id="output"></p>
+
+    <script>
+        $(document).ready(function () {
+
+            // Click event
+            var clickCount = 0;
+            $("#clickBox").click(function () {
+                clickCount++;
+                $(this).text("Clicked " + clickCount + " times!");
+                $(this).css("background", clickCount % 2 === 0 ? "lightblue" : "lightgreen");
+            });
+
+            // Hover event (mouseenter and mouseleave)
+            $("#hoverBox").hover(
+                function () {
+                    // Mouse enters
+                    $(this).css("background", "gold");
+                    $(this).text("Mouse is inside!");
+                },
+                function () {
+                    // Mouse leaves
+                    $(this).css("background", "lightcoral");
+                    $(this).text("Hover Over Me!");
+                }
+            );
+
+            // Keyup event — runs every time a key is released
+            $("#nameInput").keyup(function () {
+                var name = $(this).val();
+                if (name.length > 0) {
+                    $("#output").html("Hello, <b>" + name + "</b>! (length: " + name.length + ")");
+                } else {
+                    $("#output").html("");
+                }
+            });
+
+            // Focus and blur events
+            $("#nameInput").focus(function () {
+                $(this).css("border", "2px solid blue");
+            });
+
+            $("#nameInput").blur(function () {
+                $(this).css("border", "1px solid gray");
+            });
+
+            // Hide/Show toggle
+            $("#btnHide").click(function () {
+                $("#clickBox").toggle(300); // 300ms animation
+            });
+
+            // Fade effect
+            $("#btnFade").click(function () {
+                $("#hoverBox").fadeToggle(500); // 500ms fade
+            });
+
+            // Slide effect
+            $("#btnSlide").click(function () {
+                $("#clickBox").slideToggle(400); // 400ms slide
+            });
+        });
+    </script>
+</body>
+</html>

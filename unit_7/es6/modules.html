@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 Modules Example</title>
+</head>
+<body>
+    <h1>ES6 Modules (import/export)</h1>
+    <p>Modules let you split code into separate files and <b>export</b>/<b>import</b> between them.</p>
+    <p><b>Note:</b> Modules require a server to run (won't work by just opening the file). This page shows the concept with code examples.</p>
+
+    <button onclick="showExport()">Export Syntax</button>
+    <button onclick="showImport()">Import Syntax</button>
+    <button onclick="showDemo()">Live Demo (without modules)</button>
+    <p id="output"></p>
+
+    <script>
+        var output = document.getElementById("output");
+
+        // Example 1: Export syntax explanation
+        function showExport() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Export Syntax ---<br><br>";
+
+            output.innerHTML += "<b>File: math.js</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// Named exports\n";
+            output.innerHTML += "export function add(a, b) {\n";
+            output.innerHTML += "    return a + b;\n";
+            output.innerHTML += "}\n\n";
+            output.innerHTML += "export function subtract(a, b) {\n";
+            output.innerHTML += "    return a - b;\n";
+            output.innerHTML += "}\n\n";
+            output.innerHTML += "export const PI = 3.14159;\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>File: student.js</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// Default export (one per file)\n";
+            output.innerHTML += "export default class Student {\n";
+            output.innerHTML += "    constructor(name, age) {\n";
+            output.innerHTML += "        this.name = name;\n";
+            output.innerHTML += "        this.age = age;\n";
+            output.innerHTML += "    }\n\n";
+            output.innerHTML += "    greet() {\n";
+            output.innerHTML += "        return `Hello, I am ${this.name}`;\n";
+            output.innerHTML += "    }\n";
+            output.innerHTML += "}\n";
+            output.innerHTML += "</pre>";
+        }
+
+        // Example 2: Import syntax explanation
+        function showImport() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Import Syntax ---<br><br>";
+
+            output.innerHTML += "<b>File: app.js</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += "// Import named exports (use curly braces)\n";
+            output.innerHTML += 'import { add, subtract, PI } from "./math.js";\n\n';
+            output.innerHTML += "console.log(add(5, 3));        // 8\n";
+            output.innerHTML += "console.log(subtract(10, 4));  // 6\n";
+            output.innerHTML += "console.log(PI);               // 3.14159\n\n";
+            output.innerHTML += "// Import with rename\n";
+            output.innerHTML += 'import { add as sum } from "./math.js";\n';
+            output.innerHTML += "console.log(sum(5, 3));        // 8\n\n";
+            output.innerHTML += "// Import default export (no curly braces)\n";
+            output.innerHTML += 'import Student from "./student.js";\n\n';
+            output.innerHTML += 'const s = new Student("Ram", 20);\n';
+            output.innerHTML += "console.log(s.greet());  // Hello, I am Ram\n\n";
+            output.innerHTML += "// Import everything as an object\n";
+            output.innerHTML += 'import * as MathUtils from "./math.js";\n';
+            output.innerHTML += "console.log(MathUtils.add(2, 3));  // 5\n";
+            output.innerHTML += "</pre><br>";
+
+            output.innerHTML += "<b>In HTML (use type='module'):</b><br>";
+            output.innerHTML += "<pre>";
+            output.innerHTML += '&lt;script type="module" src="app.js"&gt;&lt;/script&gt;\n';
+            output.innerHTML += "</pre>";
+        }
+
+        // Example 3: Live demo simulating module behavior
+        function showDemo() {
+            output.innerHTML = "";
+            output.innerHTML += "--- Live Demo (simulating modules) ---<br><br>";
+
+            // Simulating what a math module would do
+            const MathModule = {
+                add: (a, b) => a + b,
+                subtract: (a, b) => a - b,
+                multiply: (a, b) => a * b,
+                PI: 3.14159
+            };
+
+            // Simulating: import { add, subtract, PI } from "./math.js"
+            const { add, subtract, multiply, PI } = MathModule;
+
+            output.innerHTML += "Using destructuring to simulate imports:<br><br>";
+            output.innerHTML += `add(10, 5) = ${add(10, 5)}<br>`;
+            output.innerHTML += `subtract(10, 5) = ${subtract(10, 5)}<br>`;
+            output.innerHTML += `multiply(10, 5) = ${multiply(10, 5)}<br>`;
+            output.innerHTML += `PI = ${PI}<br><br>`;
+
+            // Simulating a Student class from a module
+            class Student {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                greet() {
+                    return `Hello, I am ${this.name}, age ${this.age}`;
+                }
+            }
+
+            const ram = new Student("Ram", 20);
+            const sita = new Student("Sita", 21);
+            output.innerHTML += ram.greet() + "<br>";
+            output.innerHTML += sita.greet() + "<br>";
+        }
+    </script>
+</body>
+</html>
