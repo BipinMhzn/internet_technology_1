@@ -356,34 +356,34 @@ Contains all visible content of the web page.
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Website Title</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <h1>Website Title</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <article>
-            <h2>Article Title</h2>
-            <p>Article content goes here...</p>
-        </article>
-    </main>
+<main>
+    <article>
+        <h2>Article Title</h2>
+        <p>Article content goes here...</p>
+    </article>
+</main>
 
-    <aside>
-        <h3>Sidebar</h3>
-        <p>Related content...</p>
-    </aside>
+<aside>
+    <h3>Sidebar</h3>
+    <p>Related content...</p>
+</aside>
 
-    <footer>
-        <p>&copy; 2024 Website Name. All rights reserved.</p>
-    </footer>
+<footer>
+    <p>&copy; 2024 Website Name. All rights reserved.</p>
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
 ```

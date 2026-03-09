@@ -929,6 +929,7 @@ Semantic HTML uses elements that clearly describe their meaning to both the brow
 **Semantic (Meaningful):**
 
 ```html
+
 <header>
     <nav><a href="/">Home</a></nav>
 </header>
