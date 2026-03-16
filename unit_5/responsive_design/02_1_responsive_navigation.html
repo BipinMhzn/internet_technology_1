@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navigation</title>
+  <style>
+    * {
+      /*box-sizing: border-box;*/
+      margin: 0;
+      padding: 0;
+    }
+    /* ---- NAVBAR ---- */
+    nav {
+      background-color: #432d2d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 15px 0;
+    }
+
+    /*!* Hamburger menu icon (hidden on desktop) *!*/
+    .menu-toggle {
+      display: none;
+    }
+
+    /*!* Nav links *!*/
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      padding: 18px 16px;
+    }
+
+    .nav-links li a:hover {
+      background-color: #555;
+      color: white;
+    }
+
+    /*!* ---- MOBILE VIEW ---- *!*/
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block; /* show hamburger */
+        font-size: 1.8rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 15px 0;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        display: none;         /* hidden by default on mobile */
+      }
+
+      .nav-links.open {
+        display: flex;         /* shown when menu is toggled */
+      }
+
+      .nav-links li a {
+        text-align: center;
+        padding: 14px;
+        border-top: 1px solid #555;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">DesignX</div>
+  <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Feedback</a></li>
+  </ul>
+</nav>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("navMenu");
+    menu.classList.toggle("open");
+  }
+</script>
+
+</body>
+</html>
